@@ -48,6 +48,21 @@ Hooks.once("init", async function() {
     return a > b;
   });
 
+  Handlebars.registerHelper('capitalize', function(str) {
+    if (typeof str !== 'string') return '';
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  });
+
+  Handlebars.registerHelper('concat', function() {
+    let outStr = '';
+    for (let arg in arguments) {
+      if (typeof arguments[arg] !== 'object') {
+        outStr += arguments[arg];
+      }
+    }
+    return outStr;
+  });
+
   Handlebars.registerHelper('skillLevelLabel', function(level) {
     return game.i18n.localize(`TRILHAMARGA.SkillLevels.${level}`);
   });
