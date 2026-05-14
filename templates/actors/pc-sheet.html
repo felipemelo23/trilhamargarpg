@@ -138,7 +138,7 @@
         </div>
         
         <h3>{{localize "TRILHAMARGA.Body"}}</h3>
-        <ol class="items-list" data-location="body">
+        <ol class="items-list">
           {{#each inventory.body as |item id|}}
           <li class="item flexrow" data-item-id="{{item._id}}">
             <div class="item-image {{#if (ne item.type 'armor')}}item-clickable{{/if}}">
@@ -180,7 +180,7 @@
         {{/if}}
 
         <h3>{{localize "TRILHAMARGA.Backpack"}}</h3>
-        <ol class="items-list" data-location="backpack">
+        <ol class="items-list">
           {{#each inventory.backpack as |item id|}}
           <li class="item flexrow" data-item-id="{{item._id}}">
             <div class="item-image {{#if (ne item.type 'armor')}}item-clickable{{/if}}">
@@ -209,7 +209,7 @@
 
       <div class="inventory-section">
         <h3>{{localize "TRILHAMARGA.Other"}}</h3>
-        <ol class="items-list" data-location="other">
+        <ol class="items-list">
           {{#each inventory.other as |item id|}}
           <li class="item flexrow" data-item-id="{{item._id}}">
             <div class="item-image {{#if (ne item.type 'armor')}}item-clickable{{/if}}">

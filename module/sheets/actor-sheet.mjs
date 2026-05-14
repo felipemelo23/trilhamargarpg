@@ -105,33 +105,6 @@ export class TrilhamargaActorSheet extends ActorSheet {
   }
 
   /** @override */
-  async _onDrop(event) {
-    const data = TextEditor.decodeDraggableData(event);
-    const actor = this.actor;
-    if (data.type !== "Item") return super._onDrop(event);
-
-    // Get the drop target location
-    const target = event.target.closest(".items-list[data-location]");
-    const newLocation = target?.dataset.location;
-
-    // Handle internal moves
-    if (data.uuid) {
-      const item = await Item.fromDropData(data);
-      if (item && item.actor?.id === actor.id) {
-        if (newLocation && ['weapon', 'armor', 'shield', 'gear'].includes(item.type)) {
-          if (item.system.location !== newLocation) {
-            await item.update({ "system.location": newLocation });
-            // If the drop was specifically on the list (not an item), we stop here to avoid sorting errors
-            if (!event.target.closest(".item[data-item-id]")) return;
-          }
-        }
-      }
-    }
-
-    return super._onDrop(event);
-  }
-
-  /** @override */
   _onSortItem(event, itemData) {
     const target = event.target.closest(".item[data-item-id]");
     const targetId = target?.dataset.itemId;
