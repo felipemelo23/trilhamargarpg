@@ -104,10 +104,6 @@ export class TrilhamargaActor extends Actor {
     
     let flavor = `
       <div class="trilhamarga chat-card">
-        <header class="card-header flexrow">
-          <img src="${this.img}" title="${this.name}" width="30" height="30"/>
-          <h3>${this.name}</h3>
-        </header>
         <div class="card-content">
           <strong>${game.i18n.localize("TRILHAMARGA.Roll")}: ${weapon.name}</strong>
         </div>
@@ -147,10 +143,6 @@ export class TrilhamargaActor extends Actor {
     
     let flavor = `
       <div class="trilhamarga chat-card">
-        <header class="card-header flexrow">
-          <img src="${this.img}" title="${this.name}" width="30" height="30"/>
-          <h3>${this.name}</h3>
-        </header>
         <div class="card-content">
           <strong>${game.i18n.localize("TRILHAMARGA.Roll")} (${game.i18n.localize("TRILHAMARGA.Difficulty")}: ${difficulty})</strong>
         </div>
@@ -203,10 +195,6 @@ export class TrilhamargaActor extends Actor {
     const skillCheckText = game.i18n.format("TRILHAMARGA.SkillCheck", {skill: skill.name});
     let flavor = `
       <div class="trilhamarga chat-card">
-        <header class="card-header flexrow">
-          <img src="${this.img}" title="${this.name}" width="30" height="30"/>
-          <h3>${this.name}</h3>
-        </header>
         <div class="card-content">
           <strong>${skillCheckText}</strong>
         </div>
@@ -257,10 +245,6 @@ export class TrilhamargaActor extends Actor {
     const roll = new Roll(formula);
     let flavor = `
       <div class="trilhamarga chat-card">
-        <header class="card-header flexrow">
-          <img src="${this.img}" title="${this.name}" width="30" height="30"/>
-          <h3>${this.name}</h3>
-        </header>
         <div class="card-content">
           <strong>${game.i18n.localize("TRILHAMARGA.Cast")}: ${spell.name}</strong>
         </div>

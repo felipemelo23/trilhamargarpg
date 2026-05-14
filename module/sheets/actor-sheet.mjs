@@ -171,10 +171,6 @@ export class TrilhamargaActorSheet extends ActorSheet {
   async _shareItemToChat(item) {
     let content = `
       <div class="trilhamarga chat-card">
-        <header class="card-header flexrow">
-          <img src="${this.actor.img}" title="${this.actor.name}" width="30" height="30"/>
-          <h3>${this.actor.name}</h3>
-        </header>
         <div class="card-content">
           <strong>${item.name}</strong>
           ${item.system.description ? `<br/><hr/>${item.system.description}` : ''}
