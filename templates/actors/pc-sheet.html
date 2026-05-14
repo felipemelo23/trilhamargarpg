@@ -257,13 +257,9 @@
           <span class="max">{{system.favor.max}}</span>
         </div>
       </div>
+
+      <h3>{{localize "TRILHAMARGA.DivineDomain"}}</h3>
       <ol class="items-list">
-        <li class="item flexrow item-header">
-          <div class="item-name">{{localize "TRILHAMARGA.DivineDomain"}}</div>
-          <div class="item-controls">
-            <a class="item-control item-create" data-type="divine_domain"><i class="fas fa-plus"></i></a>
-          </div>
-        </li>
         {{#each divineDomains as |item id|}}
         <li class="item flexcol" data-item-id="{{item._id}}">
           <div class="flexrow">
@@ -289,6 +285,7 @@
         </li>
         {{/each}}
       </ol>
+      <a class="item-control item-create" data-type="divine_domain"><i class="fas fa-plus"></i> {{localize "TRILHAMARGA.DivineDomain"}}</a>
 
       <h3 style="margin-top: 20px;">{{localize "TRILHAMARGA.DivineTenet"}}</h3>
       <ol class="items-list">
