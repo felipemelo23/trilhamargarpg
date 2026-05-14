@@ -102,10 +102,22 @@ export class TrilhamargaActor extends Actor {
     const formula = bonus === 0 ? "1d12" : `1d12 + ${bonus}`;
     const roll = new Roll(formula);
     
+    let flavor = `
+      <div class="trilhamarga chat-card">
+        <header class="card-header flexrow">
+          <img src="${this.img}" title="${this.name}" width="30" height="30"/>
+          <h3>${this.name}</h3>
+        </header>
+        <div class="card-content">
+          <strong>${game.i18n.localize("TRILHAMARGA.Roll")}: ${weapon.name}</strong>
+        </div>
+      </div>
+    `;
+
     // Create the message first to allow DSN to handle evaluation/animation
     const message = await roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this }),
-      flavor: `${game.i18n.localize("TRILHAMARGA.Roll")}: ${weapon.name}`
+      flavor: flavor
     });
     
     // Update the message with crit info after evaluation
@@ -113,12 +125,11 @@ export class TrilhamargaActor extends Actor {
     const dieValue = evaluatedRoll.dice[0].total;
     if (dieValue === 12 || dieValue === 1) {
       const critLabel = dieValue === 12 ? 
-        ` (${game.i18n.localize("TRILHAMARGA.CriticalSuccess")})` : 
-        ` (${game.i18n.localize("TRILHAMARGA.CriticalFailure")})`;
+        game.i18n.localize("TRILHAMARGA.CriticalSuccess") : 
+        game.i18n.localize("TRILHAMARGA.CriticalFailure");
       
-      await message.update({
-        flavor: `${game.i18n.localize("TRILHAMARGA.Roll")}: ${weapon.name}${critLabel}`
-      });
+      flavor = flavor.replace('</div>\n      </div>', `</div><div class="card-footer"><strong>${critLabel}</strong></div></div>`);
+      await message.update({ flavor });
     }
 
     return evaluatedRoll;
@@ -134,10 +145,22 @@ export class TrilhamargaActor extends Actor {
 
     const roll = new Roll(formula);
     
+    let flavor = `
+      <div class="trilhamarga chat-card">
+        <header class="card-header flexrow">
+          <img src="${this.img}" title="${this.name}" width="30" height="30"/>
+          <h3>${this.name}</h3>
+        </header>
+        <div class="card-content">
+          <strong>${game.i18n.localize("TRILHAMARGA.Roll")} (${game.i18n.localize("TRILHAMARGA.Difficulty")}: ${difficulty})</strong>
+        </div>
+      </div>
+    `;
+
     // Create message with initial flavor
     const message = await roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this }),
-      flavor: `${game.i18n.localize("TRILHAMARGA.Roll")} (${game.i18n.localize("TRILHAMARGA.Difficulty")}: ${difficulty})`
+      flavor: flavor
     });
 
     const evaluatedRoll = message.rolls[0];
@@ -151,9 +174,8 @@ export class TrilhamargaActor extends Actor {
     else result = "TRILHAMARGA.Failure";
 
     // Update message with final result
-    await message.update({
-      flavor: `${game.i18n.localize(result)} (${game.i18n.localize("TRILHAMARGA.Difficulty")}: ${difficulty})`
-    });
+    flavor = flavor.replace('</div>\n      </div>', `</div><div class="card-footer"><strong>${game.i18n.localize(result)}</strong></div></div>`);
+    await message.update({ flavor });
 
     return evaluatedRoll;
   }
@@ -178,9 +200,22 @@ export class TrilhamargaActor extends Actor {
     }
 
     const roll = new Roll(formula);
+    const skillCheckText = game.i18n.format("TRILHAMARGA.SkillCheck", {skill: skill.name});
+    let flavor = `
+      <div class="trilhamarga chat-card">
+        <header class="card-header flexrow">
+          <img src="${this.img}" title="${this.name}" width="30" height="30"/>
+          <h3>${this.name}</h3>
+        </header>
+        <div class="card-content">
+          <strong>${skillCheckText}</strong>
+        </div>
+      </div>
+    `;
+
     const message = await roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this }),
-      flavor: `${game.i18n.localize("TRILHAMARGA.Roll")}: ${skill.name}`
+      flavor: flavor
     });
 
     const evaluatedRoll = message.rolls[0];
@@ -191,9 +226,8 @@ export class TrilhamargaActor extends Actor {
     else if (dieValue === 1) resultKey = "TRILHAMARGA.CriticalFailure";
 
     if (resultKey) {
-      await message.update({
-        flavor: `${game.i18n.localize(resultKey)}: ${skill.name}`
-      });
+      flavor = flavor.replace('</div>\n      </div>', `</div><div class="card-footer"><strong>${game.i18n.localize(resultKey)}</strong></div></div>`);
+      await message.update({ flavor });
     }
 
     return evaluatedRoll;
@@ -221,9 +255,21 @@ export class TrilhamargaActor extends Actor {
     }
 
     const roll = new Roll(formula);
+    let flavor = `
+      <div class="trilhamarga chat-card">
+        <header class="card-header flexrow">
+          <img src="${this.img}" title="${this.name}" width="30" height="30"/>
+          <h3>${this.name}</h3>
+        </header>
+        <div class="card-content">
+          <strong>${game.i18n.localize("TRILHAMARGA.Cast")}: ${spell.name}</strong>
+        </div>
+      </div>
+    `;
+
     const message = await roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this }),
-      flavor: `${game.i18n.localize("TRILHAMARGA.Cast")}: ${spell.name}`
+      flavor: flavor
     });
 
     const evaluatedRoll = message.rolls[0];
@@ -246,17 +292,18 @@ export class TrilhamargaActor extends Actor {
       success = false;
     }
 
-    let flavor = `${game.i18n.localize(result)}: ${spell.name}`;
+    let resultHtml = `<strong>${game.i18n.localize(result)}</strong>`;
     
     if (success) {
       const powerLevel = resultValue - 7;
-      flavor += `<br/><strong>${game.i18n.localize("TRILHAMARGA.PowerLevel")}:</strong> ${powerLevel}`;
+      resultHtml += `<br/><strong>${game.i18n.localize("TRILHAMARGA.PowerLevel")}:</strong> ${powerLevel}`;
     }
 
     if (spell.system.description) {
-      flavor += `<br/><hr/>${spell.system.description}`;
+      resultHtml += `<br/><hr/>${spell.system.description}`;
     }
 
+    flavor = flavor.replace('</div>\n      </div>', `</div><div class="card-footer">${resultHtml}</div></div>`);
     await message.update({ flavor });
 
     return evaluatedRoll;

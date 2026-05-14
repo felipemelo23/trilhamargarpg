@@ -339,3 +339,38 @@
 #destiny-tracker label {
   color: #ddd;
 }
+
+/* Chat Cards */
+.trilhamarga.chat-card {
+  font-family: "Signika", sans-serif;
+}
+
+.trilhamarga.chat-card .card-header {
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #777;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+
+.trilhamarga.chat-card .card-header img {
+  border: 1px solid #444;
+  border-radius: 4px;
+}
+
+.trilhamarga.chat-card .card-header h3 {
+  margin: 0;
+  border: none;
+  font-weight: bold;
+}
+
+.trilhamarga.chat-card .card-content {
+  font-size: 13px;
+}
+
+.trilhamarga.chat-card .card-footer {
+  margin-top: 5px;
+  border-top: 1px solid #ccc;
+  padding-top: 5px;
+  font-size: 12px;
+}

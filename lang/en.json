@@ -73,6 +73,7 @@
     "Cast": "Cast",
     "PowerLevel": "Power Level",
     "Cancel": "Cancel",
-    "Variation": "Variation"
+    "Variation": "Variation",
+    "SkillCheck": "{skill} check"
   }
 }

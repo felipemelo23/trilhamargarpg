@@ -73,6 +73,7 @@
     "Cast": "Conjurar",
     "PowerLevel": "Nível de Poder",
     "Cancel": "Cancelar",
-    "Variation": "Variação"
+    "Variation": "Variação",
+    "SkillCheck": "Teste de {skill}"
   }
 }
