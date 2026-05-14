@@ -148,11 +148,14 @@ export class TrilhamargaActorSheet extends ActorSheet {
         return this.actor.rollSkill(item);
       case 'shield':
       case 'gear':
+      case 'npc_ability':
         return this._shareItemToChat(item);
       case 'spell':
         return this.actor.castSpell(item);
       case 'weapon':
         return this.actor.rollAttack(item);
+      case 'npc_attack':
+        return this.actor.rollNpcAttack(item);
       default:
         return;
     }

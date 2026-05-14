@@ -164,6 +164,57 @@ export class TrilhamargaActor extends Actor {
   }
 
   /**
+   * Custom NPC Attack Roll implementation
+   */
+  async rollNpcAttack(attack) {
+    const bonus = attack.system.bonus || 0;
+    const modifier = await this._getModifierPrompt();
+    if (modifier === null) return;
+
+    // Attack Roll Formula
+    let atkFormula = "1d12";
+    if (modifier > 0) atkFormula = `${modifier + 1}d12kh`;
+    else if (modifier < 0) atkFormula = `${Math.abs(modifier) + 1}d12kl`;
+    if (bonus !== 0) {
+      atkFormula += bonus > 0 ? ` + ${bonus}` : ` - ${Math.abs(bonus)}`;
+    }
+
+    // Damage Roll Formula
+    const dmgFormula = attack.system.damage || "1d2";
+
+    const atkRoll = new Roll(atkFormula);
+    const dmgRoll = new Roll(dmgFormula);
+
+    let flavor = `
+      <div class="trilhamarga chat-card">
+        <div class="card-content">
+          <strong>${game.i18n.localize("TRILHAMARGA.Roll")}: ${attack.name}</strong>
+          ${attack.system.description ? `<br/>${attack.system.description}` : ''}
+        </div>
+      </div>
+    `;
+
+    await atkRoll.evaluate({async: true});
+    await dmgRoll.evaluate({async: true});
+
+    const dieValue = atkRoll.dice[0].total;
+    let critLabel = "";
+    if (dieValue === 12) critLabel = game.i18n.localize("TRILHAMARGA.CriticalSuccess");
+    else if (dieValue === 1) critLabel = game.i18n.localize("TRILHAMARGA.CriticalFailure");
+
+    if (critLabel) {
+      flavor = flavor.replace('</div>\n      </div>', `</div><div class="card-footer"><strong>${critLabel}</strong></div></div>`);
+    }
+
+    return ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: this }),
+      flavor: flavor,
+      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+      rolls: [atkRoll, dmgRoll]
+    });
+  }
+
+  /**
    * Custom Roll implementation
    */
   async roll(difficulty = 6, modifier = 0) {

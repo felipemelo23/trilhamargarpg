@@ -2,42 +2,52 @@
 
   {{!-- Sheet Header --}}
   <header class="sheet-header">
-    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
-    <div class="header-fields">
-      <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'TRILHAMARGA.Name'}}"/></h1>
-      <div class="resources grid grid-3col">
+    <div class="header-content flexrow">
+      <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="120" width="120"/>
+      <div class="header-fields">
+        <h1 class="charname">
+          <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'TRILHAMARGA.Name'}}"/>
+        </h1>
         <div class="resource">
-          <label class="resource-label">{{localize "TRILHAMARGA.Vitality"}}</label>
-          <div class="resource-content">
-            <input type="number" name="system.vitality.value" value="{{system.vitality.value}}" /> / <span>{{system.vitality.max}}</span>
-          </div>
-        </div>
-        <div class="resource">
-          <label class="resource-label">{{localize "TRILHAMARGA.Protection"}}</label>
-          <div class="resource-content">
-            <input type="number" name="system.protection.value" value="{{system.protection.value}}" /> / <span>{{system.protection.max}}</span>
-          </div>
-        </div>
-        <div class="resource">
-          <label class="resource-label">{{localize "TRILHAMARGA.Movement"}}</label>
+          <label>{{localize "TRILHAMARGA.Movement"}}</label>
           <input type="text" name="system.movement" value="{{system.movement}}" />
         </div>
       </div>
     </div>
   </header>
 
-  <section class="sheet-body">
-    <div class="grid grid-2col">
-      <div class="resource">
-        <label>{{localize "TRILHAMARGA.Defense"}}</label>
+  <section class="body-top grid grid-4col">
+    <div class="counter-large vitality">
+      <label>{{localize "TRILHAMARGA.Vitality"}}</label>
+      <div class="value-group">
+        <input type="number" name="system.vitality.value" value="{{system.vitality.value}}" />
+        <span class="sep">/</span>
+        <span class="max">{{system.vitality.max}}</span>
+      </div>
+    </div>
+    <div class="counter-large protection">
+      <label>{{localize "TRILHAMARGA.Protection"}}</label>
+      <div class="value-group">
+        <input type="number" name="system.protection.value" value="{{system.protection.value}}" />
+        <span class="sep">/</span>
+        <span class="max">{{system.protection.max}}</span>
+      </div>
+    </div>
+    <div class="counter-large defense">
+      <label>{{localize "TRILHAMARGA.Defense"}}</label>
+      <div class="value-group">
         <input type="number" name="system.defense" value="{{system.defense}}" />
       </div>
-      <div class="resource">
-        <label>{{localize "TRILHAMARGA.Resistance"}}</label>
+    </div>
+    <div class="counter-large resistance">
+      <label>{{localize "TRILHAMARGA.Resistance"}}</label>
+      <div class="value-group">
         <input type="number" name="system.resistance" value="{{system.resistance}}" />
       </div>
     </div>
+  </section>
 
+  <section class="sheet-body">
     <h3>{{localize "TRILHAMARGA.Attacks"}}</h3>
     <ol class="items-list">
       <li class="item flexrow item-header">
@@ -50,11 +60,15 @@
       </li>
       {{#each attacks as |item id|}}
       <li class="item flexrow" data-item-id="{{item._id}}">
-        <div class="item-image">
-          <img src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
+        <div class="item-image item-clickable">
+          <img class="item-icon" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
+          <i class="fas fa-dice-d20 weapon-roll-icon"></i>
         </div>
-        <div class="item-name">
-           <span class="rollable" data-roll="attack">{{item.name}}</span>
+        <div class="item-name item-clickable">
+           {{item.name}}
+           {{#if item.system.description}}
+           <span class="item-description"> - {{{item.system.description}}}</span>
+           {{/if}}
         </div>
         <div class="item-prop">{{item.system.bonus}}</div>
         <div class="item-prop">{{item.system.damage}}</div>
@@ -77,11 +91,14 @@
       </li>
       {{#each abilities as |item id|}}
       <li class="item flexrow" data-item-id="{{item._id}}">
-        <div class="item-image">
-          <img src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
+        <div class="item-image item-clickable">
+          <img class="item-icon" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
         </div>
-        <div class="item-name">
-           <span class="rollable" data-roll="ability">{{item.name}}</span>
+        <div class="item-name item-clickable">
+           {{item.name}}
+           {{#if item.system.description}}
+           <span class="item-description"> - {{{item.system.description}}}</span>
+           {{/if}}
         </div>
         <div class="item-prop">{{item.system.bonus}}</div>
         <div class="item-controls">
