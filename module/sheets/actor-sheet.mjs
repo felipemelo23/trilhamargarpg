@@ -199,7 +199,11 @@ export class TrilhamargaActorSheet extends ActorSheet {
 
     if (dataset.roll) {
       const difficulty = await this._getDifficulty();
+      if (difficulty === null) return;
+      
       const variation = await this._getVariation();
+      if (variation === null) return;
+      
       await this.actor.roll(difficulty, variation);
     }
   }
@@ -214,6 +218,10 @@ export class TrilhamargaActorSheet extends ActorSheet {
           roll: {
             label: game.i18n.localize("TRILHAMARGA.Roll"),
             callback: (html) => resolve(parseInt(html.find("#difficulty").val()))
+          },
+          cancel: {
+            label: game.i18n.localize("TRILHAMARGA.Cancel"),
+            callback: () => resolve(null)
           }
         },
         default: "roll"
@@ -226,18 +234,26 @@ export class TrilhamargaActorSheet extends ActorSheet {
      // Simple prompt for variation for now
      const varVal = await new Promise(resolve => {
       new Dialog({
-        title: "Variação",
+        title: game.i18n.localize("TRILHAMARGA.Variation"),
         content: `
-          <select id="variation">
-            <option value="0">Normal (1d12)</option>
-            <option value="1">Positivo (+1d12kh)</option>
-            <option value="-1">Negativo (+1d12kl)</option>
+          <select id="variation" style="width: 100%; margin-bottom: 10px;">
+            <option value="3">3 chances positivas (4d12kh)</option>
+            <option value="2">2 chances positivas (3d12kh)</option>
+            <option value="1">1 chance positiva (2d12kh)</option>
+            <option value="0" selected>Regular (1d12)</option>
+            <option value="-1">1 chance negativa (2d12kl)</option>
+            <option value="-2">2 chances negativas (3d12kl)</option>
+            <option value="-3">3 chances negativas (4d12kl)</option>
           </select>
         `,
         buttons: {
           roll: {
             label: "Ok",
             callback: (html) => resolve(parseInt(html.find("#variation").val()))
+          },
+          cancel: {
+            label: game.i18n.localize("TRILHAMARGA.Cancel"),
+            callback: () => resolve(null)
           }
         },
         default: "roll"

@@ -129,8 +129,8 @@ export class TrilhamargaActor extends Actor {
    */
   async roll(difficulty = 6, variation = 0) {
     let formula = "1d12";
-    if (variation > 0) formula = "2d12kh";
-    else if (variation < 0) formula = "2d12kl";
+    if (variation > 0) formula = `${variation + 1}d12kh`;
+    else if (variation < 0) formula = `${Math.abs(variation) + 1}d12kl`;
 
     const roll = new Roll(formula);
     
@@ -166,14 +166,12 @@ export class TrilhamargaActor extends Actor {
     const woundPenalty = this.system.woundPenalty || 0;
     const totalBonus = bonus - woundPenalty;
     
-    const difficulty = await this._getDifficultyPrompt();
-    if (difficulty === null) return;
-
     const variation = await this._getVariationPrompt();
+    if (variation === null) return;
     
     let formula = "1d12";
-    if (variation > 0) formula = "2d12kh";
-    else if (variation < 0) formula = "2d12kl";
+    if (variation > 0) formula = `${variation + 1}d12kh`;
+    else if (variation < 0) formula = `${Math.abs(variation) + 1}d12kl`;
 
     if (totalBonus !== 0) {
       formula += totalBonus > 0 ? ` + ${totalBonus}` : ` - ${Math.abs(totalBonus)}`;
@@ -182,22 +180,21 @@ export class TrilhamargaActor extends Actor {
     const roll = new Roll(formula);
     const message = await roll.toMessage({
       speaker: ChatMessage.getSpeaker({ actor: this }),
-      flavor: `${game.i18n.localize("TRILHAMARGA.Roll")}: ${skill.name} (${game.i18n.localize("TRILHAMARGA.Difficulty")}: ${difficulty})`
+      flavor: `${game.i18n.localize("TRILHAMARGA.Roll")}: ${skill.name}`
     });
 
     const evaluatedRoll = message.rolls[0];
-    const resultValue = evaluatedRoll.total;
     const dieValue = evaluatedRoll.dice[0].total; 
 
-    let result = "";
-    if (dieValue === 12) result = "TRILHAMARGA.CriticalSuccess";
-    else if (dieValue === 1) result = "TRILHAMARGA.CriticalFailure";
-    else if (resultValue >= difficulty) result = "TRILHAMARGA.Success";
-    else result = "TRILHAMARGA.Failure";
+    let resultKey = "";
+    if (dieValue === 12) resultKey = "TRILHAMARGA.CriticalSuccess";
+    else if (dieValue === 1) resultKey = "TRILHAMARGA.CriticalFailure";
 
-    await message.update({
-      flavor: `${game.i18n.localize(result)}: ${skill.name} (${game.i18n.localize("TRILHAMARGA.Difficulty")}: ${difficulty})`
-    });
+    if (resultKey) {
+      await message.update({
+        flavor: `${game.i18n.localize(resultKey)}: ${skill.name}`
+      });
+    }
 
     return evaluatedRoll;
   }
@@ -213,10 +210,11 @@ export class TrilhamargaActor extends Actor {
     const difficulty = 8;
 
     const variation = await this._getVariationPrompt();
+    if (variation === null) return;
     
     let formula = "1d12";
-    if (variation > 0) formula = "2d12kh";
-    else if (variation < 0) formula = "2d12kl";
+    if (variation > 0) formula = `${variation + 1}d12kh`;
+    else if (variation < 0) formula = `${Math.abs(variation) + 1}d12kl`;
 
     if (totalBonus !== 0) {
       formula += totalBonus > 0 ? ` + ${totalBonus}` : ` - ${Math.abs(totalBonus)}`;
@@ -287,18 +285,26 @@ export class TrilhamargaActor extends Actor {
   async _getVariationPrompt() {
     return new Promise(resolve => {
       new Dialog({
-        title: "Variação",
+        title: game.i18n.localize("TRILHAMARGA.Variation"),
         content: `
-          <select id="variation">
-            <option value="0">Normal (1d12)</option>
-            <option value="1">Positivo (+1d12kh)</option>
-            <option value="-1">Negativo (+1d12kl)</option>
+          <select id="variation" style="width: 100%; margin-bottom: 10px;">
+            <option value="3">3 chances positivas (4d12kh)</option>
+            <option value="2">2 chances positivas (3d12kh)</option>
+            <option value="1">1 chance positiva (2d12kh)</option>
+            <option value="0" selected>Regular (1d12)</option>
+            <option value="-1">1 chance negativa (2d12kl)</option>
+            <option value="-2">2 chances negativas (3d12kl)</option>
+            <option value="-3">3 chances negativas (4d12kl)</option>
           </select>
         `,
         buttons: {
           roll: {
             label: "Ok",
             callback: (html) => resolve(parseInt(html.find("#variation").val()))
+          },
+          cancel: {
+            label: game.i18n.localize("TRILHAMARGA.Cancel"),
+            callback: () => resolve(null)
           }
         },
         default: "roll"
