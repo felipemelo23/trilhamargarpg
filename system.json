@@ -1,0 +1,37 @@
+{
+  "id": "trilhamarga",
+  "title": "Trilhamarga RPG",
+  "version": "1.0.0",
+  "library": false,
+  "manifest": "",
+  "download": "",
+  "authors": [
+    {
+      "name": "Gemini CLI"
+    }
+  ],
+  "scripts": [],
+  "esmodules": [
+    "module/trilhamarga.mjs"
+  ],
+  "styles": [
+    "css/trilhamarga.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "pt-BR",
+      "name": "Português (Brasil)",
+      "path": "lang/pt-BR.json"
+    }
+  ],
+  "initiative": "1d12",
+  "gridDistance": 1,
+  "gridUnits": "m",
+  "primaryTokenAttribute": "life",
+  "secondaryTokenAttribute": "stamina"
+}

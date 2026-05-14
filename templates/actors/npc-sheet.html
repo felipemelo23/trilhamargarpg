@@ -1,0 +1,89 @@
+<form class="{{cssClass}}" autocomplete="off">
+
+  {{!-- Sheet Header --}}
+  <header class="sheet-header">
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
+    <div class="header-fields">
+      <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'TRILHAMARGA.Name'}}"/></h1>
+      <div class="resources grid grid-3col">
+        <div class="resource">
+          <label class="resource-label">{{localize "TRILHAMARGA.Vitality"}}</label>
+          <div class="resource-content">
+            <input type="number" name="system.vitality.value" value="{{system.vitality.value}}" /> / <span>{{system.vitality.max}}</span>
+          </div>
+        </div>
+        <div class="resource">
+          <label class="resource-label">{{localize "TRILHAMARGA.Protection"}}</label>
+          <div class="resource-content">
+            <input type="number" name="system.protection.value" value="{{system.protection.value}}" /> / <span>{{system.protection.max}}</span>
+          </div>
+        </div>
+        <div class="resource">
+          <label class="resource-label">{{localize "TRILHAMARGA.Movement"}}</label>
+          <input type="text" name="system.movement" value="{{system.movement}}" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="sheet-body">
+    <div class="grid grid-2col">
+      <div class="resource">
+        <label>{{localize "TRILHAMARGA.Defense"}}</label>
+        <input type="number" name="system.defense" value="{{system.defense}}" />
+      </div>
+      <div class="resource">
+        <label>{{localize "TRILHAMARGA.Resistance"}}</label>
+        <input type="number" name="system.resistance" value="{{system.resistance}}" />
+      </div>
+    </div>
+
+    <h3>{{localize "TRILHAMARGA.Attacks"}}</h3>
+    <ol class="items-list">
+      <li class="item flexrow item-header">
+        <div class="item-name">{{localize "TRILHAMARGA.Name"}}</div>
+        <div class="item-prop">Bônus</div>
+        <div class="item-prop">Dano</div>
+        <div class="item-controls">
+          <a class="item-control item-create" data-type="npc_attack"><i class="fas fa-plus"></i></a>
+        </div>
+      </li>
+      {{#each attacks as |item id|}}
+      <li class="item flexrow" data-item-id="{{item._id}}">
+        <div class="item-name">
+           <span class="rollable" data-roll="attack">{{item.name}}</span>
+        </div>
+        <div class="item-prop">{{item.system.bonus}}</div>
+        <div class="item-prop">{{item.system.damage}}</div>
+        <div class="item-controls">
+          <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+          <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+        </div>
+      </li>
+      {{/each}}
+    </ol>
+
+    <h3>{{localize "TRILHAMARGA.Abilities"}}</h3>
+    <ol class="items-list">
+      <li class="item flexrow item-header">
+        <div class="item-name">{{localize "TRILHAMARGA.Name"}}</div>
+        <div class="item-prop">Bônus</div>
+        <div class="item-controls">
+          <a class="item-control item-create" data-type="npc_ability"><i class="fas fa-plus"></i></a>
+        </div>
+      </li>
+      {{#each abilities as |item id|}}
+      <li class="item flexrow" data-item-id="{{item._id}}">
+        <div class="item-name">
+           <span class="rollable" data-roll="ability">{{item.name}}</span>
+        </div>
+        <div class="item-prop">{{item.system.bonus}}</div>
+        <div class="item-controls">
+          <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+          <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+        </div>
+      </li>
+      {{/each}}
+    </ol>
+  </section>
+</form>

@@ -1,0 +1,106 @@
+{
+  "Actor": {
+    "types": ["pc", "npc"],
+    "pc": {
+      "xp": 0,
+      "speed": 6,
+      "vocation": "",
+      "goal": "",
+      "motivation": "",
+      "complication": "",
+      "bonds": "",
+      "life": {
+        "value": 6,
+        "max": 6
+      },
+      "stamina": {
+        "value": 6,
+        "max": 6
+      },
+      "protection": {
+        "value": 0,
+        "max": 0
+      },
+      "favor": {
+        "value": 0,
+        "max": 0
+      },
+      "arcane_fatigue": {
+        "value": 0,
+        "max": 0
+      }
+    },
+    "npc": {
+      "vitality": {
+        "value": 0,
+        "max": 0
+      },
+      "protection": {
+        "value": 0,
+        "max": 0
+      },
+      "defense": 0,
+      "resistance": 0,
+      "movement": ""
+    }
+  },
+  "Item": {
+    "types": ["skill", "weapon", "armor", "shield", "gear", "wound", "divine_domain", "spell", "recipe", "npc_attack", "npc_ability"],
+    "templates": {
+      "base": {
+        "description": ""
+      },
+      "physical": {
+        "slots": 1,
+        "stackable": false,
+        "quantity": 1,
+        "location": "body"
+      }
+    },
+    "skill": {
+      "templates": ["base"],
+      "level": 0
+    },
+    "weapon": {
+      "templates": ["base", "physical"],
+      "damage": "",
+      "bonus": 0,
+      "associated_skill": "",
+      "enchantment": ""
+    },
+    "armor": {
+      "templates": ["base", "physical"],
+      "protection": 0,
+      "enchantment": ""
+    },
+    "shield": {
+      "templates": ["base", "physical"],
+      "protection": 0
+    },
+    "gear": {
+      "templates": ["base", "physical"]
+    },
+    "wound": {
+      "templates": ["base"],
+      "severity": 1
+    },
+    "divine_domain": {
+      "templates": ["base"]
+    },
+    "spell": {
+      "templates": ["base"]
+    },
+    "recipe": {
+      "templates": ["base"]
+    },
+    "npc_attack": {
+      "templates": ["base"],
+      "bonus": 0,
+      "damage": ""
+    },
+    "npc_ability": {
+      "templates": ["base"],
+      "bonus": 0
+    }
+  }
+}

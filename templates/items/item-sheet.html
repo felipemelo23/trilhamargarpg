@@ -1,0 +1,165 @@
+<form class="{{cssClass}}" autocomplete="off">
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+    <div class="header-fields">
+      <h1 class="charname"><input name="name" type="text" value="{{item.name}}" placeholder="Name"/></h1>
+    </div>
+  </header>
+
+  {{!-- Sheet Body --}}
+  <section class="sheet-body">
+
+    {{!-- Weapon --}}
+    {{#if (eq item.type "weapon")}}
+    <div class="form-group">
+      <label>{{localize "TRILHAMARGA.Description"}}</label>
+      <input type="text" name="system.description" value="{{system.description}}" />
+    </div>
+    <div class="form-group">
+      <label>{{localize "TRILHAMARGA.Damage"}}</label>
+      <select name="system.damage">
+        {{#select system.damage}}
+        {{#each damageOptions}}
+        <option value="{{this}}">{{this}}</option>
+        {{/each}}
+        {{/select}}
+      </select>
+    </div>
+    <div class="form-group">
+      <label>{{localize "TRILHAMARGA.Skill"}}</label>
+      <select name="system.associated_skill">
+        {{#select system.associated_skill}}
+        <option value=""></option>
+        {{#each actorSkills}}
+        <option value="{{this}}">{{this}}</option>
+        {{/each}}
+        {{/select}}
+      </select>
+    </div>
+    <div class="form-group">
+      <label>{{localize "TRILHAMARGA.Enchantment"}}</label>
+      <input type="text" name="system.enchantment" value="{{system.enchantment}}" />
+    </div>
+    <div class="form-group">
+      <label>{{localize "TRILHAMARGA.Slots"}}</label>
+      <input type="number" name="system.slots" value="{{system.slots}}" />
+    </div>
+    <div class="form-group">
+      <label>Localização</label>
+      <select name="system.location">
+        <option value="body" {{#if (eq system.location "body")}}selected{{/if}}>{{localize "TRILHAMARGA.Body"}}</option>
+        <option value="backpack" {{#if (eq system.location "backpack")}}selected{{/if}}>{{localize "TRILHAMARGA.Backpack"}}</option>
+        <option value="other" {{#if (eq system.location "other")}}selected{{/if}}>{{localize "TRILHAMARGA.Other"}}</option>
+      </select>
+    </div>
+    {{/if}}
+
+    {{!-- Armor --}}
+    {{#if (eq item.type "armor")}}
+    <div class="form-group">
+      <label>{{localize "TRILHAMARGA.Protection"}}</label>
+      <input type="number" name="system.protection" value="{{system.protection}}" />
+    </div>
+    <div class="form-group">
+      <label>{{localize "TRILHAMARGA.Enchantment"}}</label>
+      <input type="text" name="system.enchantment" value="{{system.enchantment}}" />
+    </div>
+    <div class="form-group">
+      <label>{{localize "TRILHAMARGA.Slots"}}</label>
+      <input type="number" name="system.slots" value="{{system.slots}}" />
+    </div>
+    <div class="form-group">
+      <label>Localização</label>
+      <select name="system.location">
+        <option value="body" {{#if (eq system.location "body")}}selected{{/if}}>{{localize "TRILHAMARGA.Body"}}</option>
+        <option value="backpack" {{#if (eq system.location "backpack")}}selected{{/if}}>{{localize "TRILHAMARGA.Backpack"}}</option>
+        <option value="other" {{#if (eq system.location "other")}}selected{{/if}}>{{localize "TRILHAMARGA.Other"}}</option>
+      </select>
+    </div>
+    {{/if}}
+
+    {{!-- Shield --}}
+    {{#if (eq item.type "shield")}}
+    <div class="form-group">
+      <label>{{localize "TRILHAMARGA.Description"}}</label>
+      <input type="text" name="system.description" value="{{system.description}}" />
+    </div>
+    <div class="form-group">
+      <label>{{localize "TRILHAMARGA.Slots"}}</label>
+      <input type="number" name="system.slots" value="{{system.slots}}" />
+    </div>
+    <div class="form-group">
+      <label>Localização</label>
+      <select name="system.location">
+        <option value="body" {{#if (eq system.location "body")}}selected{{/if}}>{{localize "TRILHAMARGA.Body"}}</option>
+        <option value="backpack" {{#if (eq system.location "backpack")}}selected{{/if}}>{{localize "TRILHAMARGA.Backpack"}}</option>
+        <option value="other" {{#if (eq system.location "other")}}selected{{/if}}>{{localize "TRILHAMARGA.Other"}}</option>
+      </select>
+    </div>
+    {{/if}}
+
+    {{!-- Gear --}}
+    {{#if (eq item.type "gear")}}
+    <div class="form-group">
+      <label>{{localize "TRILHAMARGA.Description"}}</label>
+      <input type="text" name="system.description" value="{{system.description}}" />
+    </div>
+    <div class="form-group">
+      <label>{{localize "TRILHAMARGA.Slots"}}</label>
+      <input type="number" name="system.slots" value="{{system.slots}}" />
+    </div>
+    <div class="form-group">
+      <label>Localização</label>
+      <select name="system.location">
+        <option value="body" {{#if (eq system.location "body")}}selected{{/if}}>{{localize "TRILHAMARGA.Body"}}</option>
+        <option value="backpack" {{#if (eq system.location "backpack")}}selected{{/if}}>{{localize "TRILHAMARGA.Backpack"}}</option>
+        <option value="other" {{#if (eq system.location "other")}}selected{{/if}}>{{localize "TRILHAMARGA.Other"}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Empilhável</label>
+      <input type="checkbox" name="system.stackable" {{checked system.stackable}} />
+    </div>
+    {{#if system.stackable}}
+    <div class="form-group">
+      <label>Quantidade</label>
+      <input type="number" name="system.quantity" value="{{system.quantity}}" />
+    </div>
+    {{/if}}
+    {{/if}}
+
+    {{!-- Other types (skill, wound, npc) --}}
+    {{#if (eq item.type "skill")}}
+    <div class="form-group">
+      <label>Nível</label>
+      <input type="number" name="system.level" value="{{system.level}}" />
+    </div>
+    {{/if}}
+
+    {{#if (eq item.type "wound")}}
+    <div class="form-group">
+      <label>{{localize "TRILHAMARGA.Severity"}}</label>
+      <input type="number" name="system.severity" value="{{system.severity}}" />
+    </div>
+    {{/if}}
+
+    {{#if (eq item.type "npc_attack")}}
+    <div class="form-group">
+      <label>Bônus</label>
+      <input type="number" name="system.bonus" value="{{system.bonus}}" />
+    </div>
+    <div class="form-group">
+      <label>Dano</label>
+      <input type="text" name="system.damage" value="{{system.damage}}" />
+    </div>
+    {{/if}}
+
+    {{#if (eq item.type "npc_ability")}}
+    <div class="form-group">
+      <label>Bônus</label>
+      <input type="number" name="system.bonus" value="{{system.bonus}}" />
+    </div>
+    {{/if}}
+
+  </section>
+</form>

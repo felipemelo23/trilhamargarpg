@@ -1,0 +1,316 @@
+<form class="{{cssClass}}" autocomplete="off">
+
+  {{!-- Header Area --}}
+  <header class="sheet-header">
+    <div class="header-content flexrow">
+      <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="120" width="120"/>
+      <div class="header-fields">
+        <h1 class="charname">
+          <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'TRILHAMARGA.Name'}}"/>
+        </h1>
+        <div class="header-basics grid grid-3col">
+          <div class="resource">
+            <label>{{localize "TRILHAMARGA.XP"}}</label>
+            <input type="number" name="system.xp" value="{{system.xp}}" />
+          </div>
+          <div class="resource">
+            <label>{{localize "TRILHAMARGA.Ancestry"}}</label>
+            <input type="text" name="system.ancestry" value="{{system.ancestry}}" />
+          </div>
+          <div class="resource">
+            <label>{{localize "TRILHAMARGA.Speed"}}</label>
+            <input type="number" name="system.speed" value="{{system.speed}}" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  {{!-- Body Top Area: Primary Counters --}}
+  <section class="body-top grid grid-3col">
+    <div class="counter-large life">
+      <label>{{localize "TRILHAMARGA.Life"}}</label>
+      <div class="value-group">
+        <span class="current">{{system.life.value}}</span>
+        <span class="sep">/</span>
+        <span class="max">{{system.life.max}}</span>
+      </div>
+      <div class="footer">{{localize "TRILHAMARGA.WoundPenalty"}}: {{system.woundPenalty}}</div>
+    </div>
+    <div class="counter-large stamina">
+      <label>{{localize "TRILHAMARGA.Stamina"}}</label>
+      <div class="value-group">
+        <input type="number" name="system.stamina.value" value="{{system.stamina.value}}" />
+        <span class="sep">/</span>
+        <span class="max">{{system.stamina.max}}</span>
+      </div>
+    </div>
+    <div class="counter-large protection">
+      <label>{{localize "TRILHAMARGA.Protection"}}</label>
+      <div class="value-group">
+        <input type="number" name="system.protection.value" value="{{system.protection.value}}" />
+        <span class="sep">/</span>
+        <span class="max">{{system.protection.max}}</span>
+      </div>
+    </div>
+  </section>
+
+  {{!-- Body Mid Area: Tabbed Panel --}}
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="skills">{{localize "TRILHAMARGA.Skills"}}</a>
+    <a class="item" data-tab="inventory">{{localize "TRILHAMARGA.Inventory"}}</a>
+    <a class="item" data-tab="wounds">{{localize "TRILHAMARGA.Wounds"}}</a>
+    <a class="item" data-tab="divine_domains">{{localize "TRILHAMARGA.DivineDomain"}}</a>
+    <a class="item" data-tab="spells">{{localize "TRILHAMARGA.Spells"}}</a>
+    <a class="item" data-tab="concoctions">{{localize "TRILHAMARGA.Recipes"}}</a>
+    <a class="item" data-tab="descriptors">{{localize "TRILHAMARGA.Descriptors"}}</a>
+  </nav>
+
+  <section class="sheet-body">
+
+    {{!-- Skills Tab --}}
+    <div class="tab skills" data-group="primary" data-tab="skills">
+      <ol class="items-list">
+        <li class="item flexrow item-header">
+          <div class="item-name">{{localize "TRILHAMARGA.Name"}}</div>
+          <div class="item-prop">Nível</div>
+          <div class="item-controls">
+            <a class="item-control item-create" title="Create Item" data-type="skill"><i class="fas fa-plus"></i></a>
+          </div>
+        </li>
+        {{#each skills as |item id|}}
+        <li class="item flexrow" data-item-id="{{item._id}}">
+          <div class="item-name">
+             <span class="rollable" data-roll="skill">{{item.name}}</span>
+          </div>
+          <div class="item-prop">{{item.system.level}}</div>
+          <div class="item-controls">
+            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+          </div>
+        </li>
+        {{/each}}
+      </ol>
+    </div>
+
+    {{!-- Inventory Tab --}}
+    <div class="tab inventory" data-group="primary" data-tab="inventory">
+      <div class="load-capacity">
+        {{localize "TRILHAMARGA.LoadCapacity"}}: {{system.loadCapacity.current}} / {{system.loadCapacity.base}} (Max: {{system.loadCapacity.max}})
+      </div>
+      
+      <h3>{{localize "TRILHAMARGA.Body"}}</h3>
+      <ol class="items-list">
+        {{#each inventory.body as |item id|}}
+        <li class="item flexrow" data-item-id="{{item._id}}">
+          <div class="item-image">
+            <img class="item-icon {{#if (eq item.type 'weapon')}}rollable-weapon{{/if}}" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
+            {{#if (eq item.type 'weapon')}}
+            <i class="fas fa-dice-d20 weapon-roll-icon"></i>
+            {{/if}}
+          </div>
+          <div class="item-name">
+            {{item.name}}{{#if (and item.system.stackable (gt item.system.quantity 1))}} ({{item.system.quantity}}){{/if}}
+            {{#if item.system.description}}
+            <span class="item-description"> - {{item.system.description}}</span>
+            {{/if}}
+            {{#if item.slotDisplay}}
+            <span class="item-slots"> {{item.slotDisplay}}</span>
+            {{/if}}
+          </div>
+          <div class="item-controls">
+            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+          </div>
+        </li>
+        {{/each}}
+      </ol>
+
+      <h3>{{localize "TRILHAMARGA.Backpack"}}</h3>
+      <ol class="items-list">
+        {{#each inventory.backpack as |item id|}}
+        <li class="item flexrow" data-item-id="{{item._id}}">
+          <div class="item-image">
+            <img class="item-icon {{#if (eq item.type 'weapon')}}rollable-weapon{{/if}}" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
+            {{#if (eq item.type 'weapon')}}
+            <i class="fas fa-dice-d20 weapon-roll-icon"></i>
+            {{/if}}
+          </div>
+          <div class="item-name">
+            {{item.name}}{{#if (and item.system.stackable (gt item.system.quantity 1))}} ({{item.system.quantity}}){{/if}}
+            {{#if item.system.description}}
+            <span class="item-description"> - {{item.system.description}}</span>
+            {{/if}}
+            {{#if item.slotDisplay}}
+            <span class="item-slots"> {{item.slotDisplay}}</span>
+            {{/if}}
+          </div>
+          <div class="item-controls">
+            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+          </div>
+        </li>
+        {{/each}}
+      </ol>
+
+      <h3>{{localize "TRILHAMARGA.Other"}}</h3>
+      <ol class="items-list">
+        {{#each inventory.other as |item id|}}
+        <li class="item flexrow" data-item-id="{{item._id}}">
+          <div class="item-image">
+            <img class="item-icon {{#if (eq item.type 'weapon')}}rollable-weapon{{/if}}" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
+            {{#if (eq item.type 'weapon')}}
+            <i class="fas fa-dice-d20 weapon-roll-icon"></i>
+            {{/if}}
+          </div>
+          <div class="item-name">
+            {{item.name}}{{#if (and item.system.stackable (gt item.system.quantity 1))}} ({{item.system.quantity}}){{/if}}
+          </div>
+          <div class="item-controls">
+            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+          </div>
+        </li>
+        {{/each}}
+      </ol>
+      <div class="inventory-controls">
+        <a class="item-control item-create" data-type="weapon"><i class="fas fa-plus"></i> {{localize "TRILHAMARGA.Weapon"}}</a>
+        <a class="item-control item-create" data-type="armor"><i class="fas fa-plus"></i> {{localize "TRILHAMARGA.Armor"}}</a>
+        <a class="item-control item-create" data-type="shield"><i class="fas fa-plus"></i> {{localize "TRILHAMARGA.Shield"}}</a>
+        <a class="item-control item-create" data-type="gear"><i class="fas fa-plus"></i> {{localize "TRILHAMARGA.Gear"}}</a>
+      </div>
+    </div>
+
+    {{!-- Wounds Tab --}}
+    <div class="tab wounds" data-group="primary" data-tab="wounds">
+      <ol class="items-list">
+        <li class="item flexrow item-header">
+          <div class="item-name">{{localize "TRILHAMARGA.Name"}}</div>
+          <div class="item-prop">{{localize "TRILHAMARGA.Severity"}}</div>
+          <div class="item-controls">
+            <a class="item-control item-create" title="Create Item" data-type="wound"><i class="fas fa-plus"></i></a>
+          </div>
+        </li>
+        {{#each wounds as |item id|}}
+        <li class="item flexrow" data-item-id="{{item._id}}">
+          <div class="item-image">
+            <img class="item-icon {{#if (eq item.type 'weapon')}}rollable-weapon{{/if}}" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
+            {{#if (eq item.type 'weapon')}}
+            <i class="fas fa-dice-d20 weapon-roll-icon"></i>
+            {{/if}}
+          </div>
+          <div class="item-name">{{item.name}}</div>
+          <div class="item-prop">{{item.system.severity}}</div>
+          <div class="item-controls">
+            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+          </div>
+        </li>
+        {{/each}}
+      </ol>
+    </div>
+
+    {{!-- Divine Domains Tab --}}
+    <div class="tab divine_domains" data-group="primary" data-tab="divine_domains">
+      <div class="counter favor">
+        <label>{{localize "TRILHAMARGA.Favor"}}</label>
+        <div class="counter-values">
+          <input type="number" name="system.favor.value" value="{{system.favor.value}}" /> / <span>{{system.favor.max}}</span>
+        </div>
+      </div>
+      <ol class="items-list">
+        {{#each divineDomains as |item id|}}
+        <li class="item flexrow" data-item-id="{{item._id}}">
+          <div class="item-image">
+            <img class="item-icon {{#if (eq item.type 'weapon')}}rollable-weapon{{/if}}" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
+            {{#if (eq item.type 'weapon')}}
+            <i class="fas fa-dice-d20 weapon-roll-icon"></i>
+            {{/if}}
+          </div>
+          <div class="item-name">{{item.name}}</div>
+          <div class="item-controls">
+            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+          </div>
+        </li>
+        {{/each}}
+      </ol>
+      <a class="item-control item-create" data-type="divine_domain"><i class="fas fa-plus"></i> {{localize "TRILHAMARGA.DivineDomain"}}</a>
+    </div>
+
+    {{!-- Spells Tab --}}
+    <div class="tab spells" data-group="primary" data-tab="spells">
+      <div class="counter arcane_fatigue">
+        <label>{{localize "TRILHAMARGA.ArcaneFatigue"}}</label>
+        <div class="counter-values">
+          <input type="number" name="system.arcane_fatigue.value" value="{{system.arcane_fatigue.value}}" />
+        </div>
+      </div>
+      <ol class="items-list">
+        {{#each spells as |item id|}}
+        <li class="item flexrow" data-item-id="{{item._id}}">
+          <div class="item-image">
+            <img class="item-icon {{#if (eq item.type 'weapon')}}rollable-weapon{{/if}}" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
+            {{#if (eq item.type 'weapon')}}
+            <i class="fas fa-dice-d20 weapon-roll-icon"></i>
+            {{/if}}
+          </div>
+          <div class="item-name">{{item.name}}</div>
+          <div class="item-controls">
+            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+          </div>
+        </li>
+        {{/each}}
+      </ol>
+      <a class="item-control item-create" data-type="spell"><i class="fas fa-plus"></i> {{localize "TRILHAMARGA.Spells"}}</a>
+    </div>
+
+    {{!-- Concoctions Tab --}}
+    <div class="tab concoctions" data-group="primary" data-tab="concoctions">
+      <ol class="items-list">
+        {{#each recipes as |item id|}}
+        <li class="item flexrow" data-item-id="{{item._id}}">
+          <div class="item-image">
+            <img class="item-icon {{#if (eq item.type 'weapon')}}rollable-weapon{{/if}}" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
+            {{#if (eq item.type 'weapon')}}
+            <i class="fas fa-dice-d20 weapon-roll-icon"></i>
+            {{/if}}
+          </div>
+          <div class="item-name">{{item.name}}</div>
+          <div class="item-controls">
+            <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+            <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+          </div>
+        </li>
+        {{/each}}
+      </ol>
+      <a class="item-control item-create" data-type="recipe"><i class="fas fa-plus"></i> {{localize "TRILHAMARGA.Recipes"}}</a>
+    </div>
+
+    {{!-- Descriptors Tab --}}
+    <div class="tab descriptors" data-group="primary" data-tab="descriptors">
+      <div class="descriptor-field">
+        <label>{{localize "TRILHAMARGA.Vocation"}}</label>
+        <textarea name="system.vocation">{{system.vocation}}</textarea>
+      </div>
+      <div class="descriptor-field">
+        <label>{{localize "TRILHAMARGA.Goal"}}</label>
+        <textarea name="system.goal">{{system.goal}}</textarea>
+      </div>
+      <div class="descriptor-field">
+        <label>{{localize "TRILHAMARGA.Motivation"}}</label>
+        <textarea name="system.motivation">{{system.motivation}}</textarea>
+      </div>
+      <div class="descriptor-field">
+        <label>{{localize "TRILHAMARGA.Complication"}}</label>
+        <textarea name="system.complication">{{system.complication}}</textarea>
+      </div>
+      <div class="descriptor-field">
+        <label>{{localize "TRILHAMARGA.Bonds"}}</label>
+        <textarea name="system.bonds">{{system.bonds}}</textarea>
+      </div>
+    </div>
+
+  </section>
+</form>

@@ -1,0 +1,248 @@
+/* Global Styles */
+.trilhamarga .grid {
+  display: grid;
+  gap: 15px;
+}
+.trilhamarga .grid-2col { grid-template-columns: repeat(2, 1fr); }
+.trilhamarga .grid-3col { grid-template-columns: repeat(3, 1fr); }
+.trilhamarga .grid-4col { grid-template-columns: repeat(4, 1fr); }
+
+.trilhamarga .flexrow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+/* Sheet Styles */
+.trilhamarga.sheet {
+  min-height: 500px;
+}
+
+/* Header Area */
+.trilhamarga .sheet-header {
+  border-bottom: 2px solid #444;
+  padding-bottom: 15px;
+  margin-bottom: 15px;
+}
+
+.trilhamarga .profile-img {
+  border: 2px solid #222;
+  border-radius: 8px;
+  margin-right: 15px;
+  object-fit: cover;
+}
+
+.trilhamarga .charname {
+  margin: 0 0 10px 0;
+  border: none;
+}
+
+.trilhamarga .charname input {
+  height: 45px;
+  font-size: 28px;
+  border: none;
+  border-bottom: 1px solid #aaa;
+}
+
+.trilhamarga .header-basics {
+  margin-top: 5px;
+}
+
+.trilhamarga .header-basics label {
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #555;
+  display: block;
+}
+
+/* Body Top Area */
+.trilhamarga .body-top {
+  margin-bottom: 20px;
+}
+
+.trilhamarga .counter-large {
+  background: #f4f4f4;
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.trilhamarga .counter-large label {
+  display: block;
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #ccc;
+}
+
+.trilhamarga .counter-large .value-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.trilhamarga .counter-large .value-group input {
+  width: 60px;
+  font-size: 24px;
+  text-align: center;
+  background: none;
+  border: none;
+}
+
+.trilhamarga .counter-large .sep {
+  margin: 0 5px;
+}
+
+.trilhamarga .counter-large .footer {
+  font-size: 11px;
+  margin-top: 5px;
+  color: #666;
+}
+
+/* Tabs */
+.trilhamarga .sheet-tabs {
+  border-top: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
+  margin-bottom: 10px;
+}
+
+.trilhamarga .sheet-tabs .item {
+  padding: 8px;
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.trilhamarga .sheet-tabs .item.active {
+  background: #333;
+  color: #fff;
+  border-radius: 4px;
+  text-shadow: none;
+}
+
+.trilhamarga .sheet-body .tab {
+  display: none;
+}
+
+.trilhamarga .sheet-body .tab.active {
+  display: block;
+}
+
+/* Item Lists */
+.trilhamarga .items-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.trilhamarga .item-header {
+  background: #eee;
+  padding: 5px;
+  font-weight: bold;
+  border-bottom: 1px solid #777;
+}
+
+.trilhamarga .item {
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+}
+
+.trilhamarga .item .item-image {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  flex: 0 0 30px;
+}
+
+.trilhamarga .item img {
+  border: none;
+  border-radius: 0;
+  margin-right: 0;
+  background: none;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.trilhamarga .weapon-roll-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  color: #fff;
+  text-shadow: 0 0 5px #000;
+  display: none;
+  pointer-events: none;
+}
+
+.trilhamarga .item-image:hover .weapon-roll-icon {
+  display: block;
+}
+
+.trilhamarga .item-image:hover .rollable-weapon {
+  filter: brightness(0.5);
+  cursor: pointer;
+}
+
+.trilhamarga .item-name {
+  flex: 3;
+}
+
+.trilhamarga .item-description,
+.trilhamarga .item-slots {
+  font-style: italic;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.trilhamarga .item-prop {
+  flex: 1;
+  text-align: center;
+}
+
+.trilhamarga .item-controls {
+  flex: 0 0 60px;
+  text-align: right;
+}
+
+/* Descriptors */
+.trilhamarga .descriptor-field {
+  margin-bottom: 15px;
+}
+
+.trilhamarga .descriptor-field label {
+  font-weight: bold;
+  display: block;
+  background: #eee;
+  padding: 3px 8px;
+  border-radius: 4px 4px 0 0;
+}
+
+.trilhamarga .descriptor-field textarea {
+  width: 100%;
+  height: 80px;
+  resize: vertical;
+  border: 1px solid #ccc;
+  border-top: none;
+  padding: 8px;
+}
+
+/* Tracker styling */
+#destiny-tracker {
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  border: 2px solid #555;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+#destiny-tracker label {
+  color: #ddd;
+}
