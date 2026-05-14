@@ -72,6 +72,7 @@
     "Failure": "Failure",
     "CriticalFailure": "Critical Failure",
     "Cast": "Cast",
+    "Casting": "Casting {spell}",
     "PowerLevel": "Power Level",
     "Cancel": "Cancel",
     "Modifier": "Modifier",

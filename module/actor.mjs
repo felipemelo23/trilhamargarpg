@@ -285,7 +285,7 @@ export class TrilhamargaActor extends Actor {
     }
 
     const roll = new Roll(formula);
-    const skillCheckParts = [game.i18n.localize("TRILHAMARGA.Cast") + ": " + spell.name];
+    const skillCheckParts = [game.i18n.format("TRILHAMARGA.Casting", {spell: spell.name})];
     
     if (woundPenalty > 0) skillCheckParts.push(`(${game.i18n.localize("TRILHAMARGA.WoundPenalty")}: ${woundPenalty})`);
     if (protectionPenalty > 0) skillCheckParts.push(`(${game.i18n.localize("TRILHAMARGA.ProtectionPenalty")}: ${protectionPenalty})`);
