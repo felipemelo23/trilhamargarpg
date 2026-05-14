@@ -18,8 +18,8 @@ export class TrilhamargaItemSheet extends ItemSheet {
   }
 
   /** @override */
-  async getData() {
-    const data = await super.getData();
+  getData() {
+    const data = super.getData();
     data.system = data.item.system;
 
     // Damage options for weapons
@@ -47,12 +47,6 @@ export class TrilhamargaItemSheet extends ItemSheet {
       "5": game.i18n.localize("TRILHAMARGA.SkillLevels.5"),
       "6": game.i18n.localize("TRILHAMARGA.SkillLevels.6")
     };
-
-    data.enrichedDescription = await TextEditor.enrichHTML(this.item.system.description, {
-      async: true,
-      secrets: this.item.isOwner,
-      relativeTo: this.item
-    });
 
     return data;
   }
