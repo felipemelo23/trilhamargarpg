@@ -279,6 +279,7 @@
 .trilhamarga .form-group.stacked {
   flex-direction: column;
   align-items: flex-start;
+  margin-bottom: 20px;
 }
 
 .trilhamarga .form-group.stacked label {
@@ -291,6 +292,7 @@
   padding: 5px;
   border: 1px solid #aaa;
   border-radius: 3px;
+  min-height: 80px;
 }
 
 .trilhamarga .editor {
@@ -331,17 +333,17 @@
 /* Tracker styling */
 #destiny-tracker {
   position: fixed;
-  bottom: 80px;
-  left: 10px;
+  bottom: 81px;
+  left: 5px;
   right: auto;
   z-index: 60;
   background: rgba(0, 0, 0, 0.85);
   color: #fff;
-  border: 2px solid #555;
+  border: 1px solid #555;
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
   padding: 8px 12px;
   border-radius: 4px;
-  min-width: 150px;
+  min-width: 180px;
   display: flex;
   flex-direction: column;
   gap: 8px;
