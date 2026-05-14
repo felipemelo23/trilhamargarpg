@@ -136,6 +136,9 @@ export class TrilhamargaActorSheet extends ActorSheet {
 
     // Rollable weapons
     html.find('.rollable-weapon').click(this._onWeaponRoll.bind(this));
+
+    // Item clicks (Icon or Name)
+    html.find('.item-clickable').click(this._onItemClick.bind(this));
   }
 
   async _onWeaponRoll(event) {
@@ -143,6 +146,38 @@ export class TrilhamargaActorSheet extends ActorSheet {
     const li = $(event.currentTarget).parents(".item");
     const item = this.actor.items.get(li.data("itemId"));
     return this.actor.rollAttack(item);
+  }
+
+  async _onItemClick(event) {
+    event.preventDefault();
+    const li = $(event.currentTarget).parents(".item");
+    const item = this.actor.items.get(li.data("itemId"));
+
+    switch (item.type) {
+      case 'skill':
+        return this.actor.rollSkill(item);
+      case 'shield':
+      case 'gear':
+        return this._shareItemToChat(item);
+      case 'spell':
+        return this.actor.castSpell(item);
+      case 'weapon':
+        return this.actor.rollAttack(item);
+      default:
+        return;
+    }
+  }
+
+  async _shareItemToChat(item) {
+    let content = `<h3>${item.name}</h3>`;
+    if (item.system.description) {
+      content += `<div>${item.system.description}</div>`;
+    }
+    
+    return ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      content: content
+    });
   }
 
   async _onItemCreate(event) {

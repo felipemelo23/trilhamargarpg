@@ -240,9 +240,19 @@
   display: block;
 }
 
-.trilhamarga .item-image:hover .rollable-weapon {
+.trilhamarga .item-image:hover .item-icon {
   filter: brightness(0.5);
   cursor: pointer;
+}
+
+.trilhamarga .item-clickable:hover {
+  text-shadow: 0 0 5px #000;
+  cursor: pointer;
+}
+
+.trilhamarga .item-name.item-clickable:hover {
+  color: #444;
+  text-decoration: underline;
 }
 
 .trilhamarga .item-name {
