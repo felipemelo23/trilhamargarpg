@@ -144,6 +144,22 @@
     </div>
     {{/if}}
 
+    {{!-- Recipe --}}
+    {{#if (eq item.type "recipe")}}
+    <div class="form-group stacked">
+      <label>{{localize "TRILHAMARGA.Description"}}</label>
+      <textarea name="system.description">{{system.description}}</textarea>
+    </div>
+    <div class="form-group stacked">
+      <label>{{localize "TRILHAMARGA.RegularEffect"}}</label>
+      <textarea name="system.regular_effect">{{system.regular_effect}}</textarea>
+    </div>
+    <div class="form-group stacked">
+      <label>{{localize "TRILHAMARGA.SideEffect"}}</label>
+      <textarea name="system.side_effect">{{system.side_effect}}</textarea>
+    </div>
+    {{/if}}
+
     {{!-- Other types (skill, wound, npc) --}}
     {{#if (eq item.type "skill")}}
     <div class="form-group">

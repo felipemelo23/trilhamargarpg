@@ -103,7 +103,9 @@
       "sustained": false
     },
     "recipe": {
-      "templates": ["base"]
+      "templates": ["base"],
+      "regular_effect": "",
+      "side_effect": ""
     },
     "npc_attack": {
       "templates": ["base"],
