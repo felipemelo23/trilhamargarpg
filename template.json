@@ -104,7 +104,8 @@
     },
     "recipe": {
       "regular_effect": "",
-      "side_effect": ""
+      "side_effect": "",
+      "complexity": "simple"
     },
     "npc_attack": {
       "templates": ["base"],

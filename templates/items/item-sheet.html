@@ -154,6 +154,16 @@
       <label>{{localize "TRILHAMARGA.SideEffect"}}</label>
       <textarea name="system.side_effect">{{system.side_effect}}</textarea>
     </div>
+    <div class="form-group">
+      <label>{{localize "TRILHAMARGA.Complexity"}}</label>
+      <select name="system.complexity">
+        {{#select system.complexity}}
+        <option value="simple">{{localize "TRILHAMARGA.ComplexitySimple"}}</option>
+        <option value="advanced">{{localize "TRILHAMARGA.ComplexityAdvanced"}}</option>
+        <option value="superior">{{localize "TRILHAMARGA.ComplexitySuperior"}}</option>
+        {{/select}}
+      </select>
+    </div>
     {{/if}}
 
     {{!-- Other types (skill, wound, npc) --}}
