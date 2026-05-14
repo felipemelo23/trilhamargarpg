@@ -118,7 +118,13 @@ export class TrilhamargaActor extends Actor {
     }
 
     // Damage Roll Formula
-    const dmgFormula = weapon.system.damage || "1d2";
+    let dmgFormula = weapon.system.damage || "1d2";
+    if (weapon.system.addPhysiqueToDamage) {
+      const physique = this.items.find(i => i.type === 'skill' && (i.name.toLowerCase() === 'physique' || i.name.toLowerCase() === 'físico'))?.system.level || 0;
+      if (physique !== 0) {
+        dmgFormula += physique > 0 ? ` + ${physique}` : ` - ${Math.abs(physique)}`;
+      }
+    }
 
     const atkRoll = new Roll(atkFormula);
     const dmgRoll = new Roll(dmgFormula);

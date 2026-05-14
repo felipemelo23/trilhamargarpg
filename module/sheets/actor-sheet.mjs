@@ -38,6 +38,9 @@ export class TrilhamargaActorSheet extends ActorSheet {
     // Sort items by sort property
     const items = this.actor.items.contents.sort((a, b) => (a.sort || 0) - (b.sort || 0));
 
+    // Find Physique level
+    const physique = items.find(i => i.type === 'skill' && (i.name.toLowerCase() === 'physique' || i.name.toLowerCase() === 'físico'))?.system.level || 0;
+
     const skills = [];
     const inventory = {
       body: [],
@@ -49,10 +52,20 @@ export class TrilhamargaActorSheet extends ActorSheet {
     const spells = [];
     const recipes = [];
     const divineTenets = [];
+    const notes = [];
 
     for (let i of items) {
       if (i.type === 'skill') skills.push(i);
       else if (['weapon', 'armor', 'shield', 'gear'].includes(i.type)) {
+        // Calculate display damage for weapons
+        if (i.type === 'weapon') {
+          let displayDamage = i.system.damage || "1d2";
+          if (i.system.addPhysiqueToDamage && physique !== 0) {
+            displayDamage += physique > 0 ? ` + ${physique}` : ` - ${Math.abs(physique)}`;
+          }
+          i.displayDamage = displayDamage;
+        }
+
         const loc = i.system.location || 'body';
         if (inventory[loc]) inventory[loc].push(i);
         else inventory.body.push(i);
@@ -62,6 +75,7 @@ export class TrilhamargaActorSheet extends ActorSheet {
       else if (i.type === 'divine_tenet') divineTenets.push(i);
       else if (i.type === 'spell') spells.push(i);
       else if (i.type === 'recipe') recipes.push(i);
+      else if (i.type === 'note') notes.push(i);
     }
 
     data.skills = skills;
@@ -71,6 +85,7 @@ export class TrilhamargaActorSheet extends ActorSheet {
     data.divineTenets = divineTenets;
     data.spells = spells;
     data.recipes = recipes;
+    data.notes = notes;
   }
 
   _prepareNpcItems(data) {
@@ -208,11 +223,36 @@ export class TrilhamargaActorSheet extends ActorSheet {
     event.preventDefault();
     const header = event.currentTarget;
     const type = header.dataset.type;
+    
+    // Map item type to localization key
+    const typeKeys = {
+      'skill': 'Skill',
+      'weapon': 'Weapon',
+      'armor': 'Armor',
+      'shield': 'Shield',
+      'gear': 'Gear',
+      'wound': 'Wound',
+      'divine_domain': 'DivineDomain',
+      'divine_tenet': 'DivineTenet',
+      'spell': 'Spell',
+      'recipe': 'Recipe',
+      'note': 'Note',
+      'npc_attack': 'NPCAttack',
+      'npc_ability': 'NPCAbility'
+    };
+
+    const typeLabel = game.i18n.localize(`TRILHAMARGA.${typeKeys[type] || type.capitalize()}`);
+    const itemName = game.i18n.format("TRILHAMARGA.NewItem", {item: typeLabel});
+
     const itemData = {
-      name: `Novo ${type}`,
+      name: itemName,
       type: type,
       system: {}
     };
+
+    // Default icons
+    if (type === 'wound') itemData.img = 'icons/skills/wounds/injury-triple-slash-bleed.webp';
+
     return await this.actor.createEmbeddedDocuments("Item", [itemData]);
   }
 

@@ -41,6 +41,10 @@
       <input type="text" name="system.enchantment" value="{{system.enchantment}}" />
     </div>
     <div class="form-group">
+      <label>{{localize "TRILHAMARGA.AddPhysiqueToDamage"}}</label>
+      <input type="checkbox" name="system.addPhysiqueToDamage" {{checked system.addPhysiqueToDamage}} />
+    </div>
+    <div class="form-group">
       <label>{{localize "TRILHAMARGA.Slots"}}</label>
       <input type="number" name="system.slots" value="{{system.slots}}" />
     </div>
@@ -51,6 +55,10 @@
         <option value="backpack" {{#if (eq system.location "backpack")}}selected{{/if}}>{{localize "TRILHAMARGA.Backpack"}}</option>
         <option value="other" {{#if (eq system.location "other")}}selected{{/if}}>{{localize "TRILHAMARGA.Other"}}</option>
       </select>
+    </div>
+    <div class="form-group">
+      <label>{{localize "TRILHAMARGA.Price"}}</label>
+      <input type="number" name="system.price" value="{{system.price}}" />
     </div>
     {{/if}}
 
@@ -80,6 +88,10 @@
         <option value="other" {{#if (eq system.location "other")}}selected{{/if}}>{{localize "TRILHAMARGA.Other"}}</option>
       </select>
     </div>
+    <div class="form-group">
+      <label>{{localize "TRILHAMARGA.Price"}}</label>
+      <input type="number" name="system.price" value="{{system.price}}" />
+    </div>
     {{/if}}
 
     {{!-- Shield --}}
@@ -99,6 +111,10 @@
         <option value="backpack" {{#if (eq system.location "backpack")}}selected{{/if}}>{{localize "TRILHAMARGA.Backpack"}}</option>
         <option value="other" {{#if (eq system.location "other")}}selected{{/if}}>{{localize "TRILHAMARGA.Other"}}</option>
       </select>
+    </div>
+    <div class="form-group">
+      <label>{{localize "TRILHAMARGA.Price"}}</label>
+      <input type="number" name="system.price" value="{{system.price}}" />
     </div>
     {{/if}}
 
@@ -130,13 +146,19 @@
       <input type="number" name="system.quantity" value="{{system.quantity}}" />
     </div>
     {{/if}}
+    <div class="form-group">
+      <label>{{localize "TRILHAMARGA.Price"}}</label>
+      <input type="number" name="system.price" value="{{system.price}}" />
+    </div>
     {{/if}}
 
     {{!-- Spells --}}
     {{#if (eq item.type "spell")}}
     <div class="form-group stacked">
       <label>{{localize "TRILHAMARGA.Description"}}</label>
-      <textarea name="system.description">{{system.description}}</textarea>
+      <div class="editor-container">
+        {{editor system.description target="system.description" button=true owner=owner editable=editable height=300}}
+      </div>
     </div>
     <div class="form-group">
       <label>{{localize "TRILHAMARGA.Sustained"}}</label>
@@ -163,6 +185,10 @@
     <div class="form-group stacked">
       <label>{{localize "TRILHAMARGA.SideEffect"}}</label>
       <textarea name="system.side_effect">{{system.side_effect}}</textarea>
+    </div>
+    <div class="form-group">
+      <label>{{localize "TRILHAMARGA.Price"}}</label>
+      <input type="number" name="system.price" value="{{system.price}}" />
     </div>
     {{/if}}
 
@@ -262,6 +288,16 @@
     <div class="form-group">
       <label>Bônus</label>
       <input type="number" name="system.bonus" value="{{system.bonus}}" />
+    </div>
+    {{/if}}
+
+    {{!-- Note --}}
+    {{#if (eq item.type "note")}}
+    <div class="form-group stacked">
+      <label>{{localize "TRILHAMARGA.Content"}}</label>
+      <div class="editor-container">
+        {{editor system.content target="system.content" button=true owner=owner editable=editable height=500}}
+      </div>
     </div>
     {{/if}}
 

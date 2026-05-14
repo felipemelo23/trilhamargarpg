@@ -20,6 +20,10 @@
   min-height: 500px;
 }
 
+.trilhamarga .sheet-body {
+  overflow: auto;
+}
+
 /* Header Area */
 .trilhamarga .sheet-header {
   border-bottom: 2px solid #444;
@@ -296,8 +300,19 @@
 }
 
 .trilhamarga .editor {
-  min-height: 120px;
+  min-height: 500px;
   width: 100%;
+  display: block;
+}
+
+.trilhamarga .editor .tox-tinymce {
+  min-height: 500px;
+}
+
+.trilhamarga .editor-container {
+  min-height: 500px;
+  width: 100%;
+  display: block;
 }
 
 /* Descriptors */

@@ -61,6 +61,7 @@
     <a class="item" data-tab="devotion">{{localize "TRILHAMARGA.Devotion"}}</a>
     <a class="item" data-tab="spells">{{localize "TRILHAMARGA.Spells"}}</a>
     <a class="item" data-tab="concoctions">{{localize "TRILHAMARGA.Recipes"}}</a>
+    <a class="item" data-tab="notes">{{localize "TRILHAMARGA.Notes"}}</a>
   </nav>
 
   <section class="sheet-body">
@@ -144,7 +145,7 @@
             {{/if}}
           </div>
           <div class="item-name">
-            {{item.name}}{{#if (and item.system.stackable (gt item.system.quantity 1))}} ({{item.system.quantity}}){{/if}}
+            {{item.name}}{{#if (and item.system.stackable (gt item.system.quantity 1))}} ({{item.system.quantity}}){{/if}}{{#if (eq item.type 'weapon')}} ({{item.displayDamage}}){{/if}}
             {{#if item.system.description}}
             <span class="item-description"> - {{{item.system.description}}}</span>
             {{/if}}
@@ -171,7 +172,7 @@
             {{/if}}
           </div>
           <div class="item-name">
-            {{item.name}}{{#if (and item.system.stackable (gt item.system.quantity 1))}} ({{item.system.quantity}}){{/if}}
+            {{item.name}}{{#if (and item.system.stackable (gt item.system.quantity 1))}} ({{item.system.quantity}}){{/if}}{{#if (eq item.type 'weapon')}} ({{item.displayDamage}}){{/if}}
             {{#if item.system.description}}
             <span class="item-description"> - {{{item.system.description}}}</span>
             {{/if}}
@@ -198,7 +199,7 @@
             {{/if}}
           </div>
           <div class="item-name">
-             {{item.name}}{{#if (and item.system.stackable (gt item.system.quantity 1))}} ({{item.system.quantity}}){{/if}}
+             {{item.name}}{{#if (and item.system.stackable (gt item.system.quantity 1))}} ({{item.system.quantity}}){{/if}}{{#if (eq item.type 'weapon')}} ({{item.displayDamage}}){{/if}}
           </div>          <div class="item-controls">
             <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
             <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -384,6 +385,31 @@
         {{/each}}
       </ol>
       <a class="item-control item-create" data-type="recipe"><i class="fas fa-plus"></i> {{localize "TRILHAMARGA.Recipes"}}</a>
+    </div>
+
+    {{!-- Notes Tab --}}
+    <div class="tab notes" data-group="primary" data-tab="notes">
+      <ol class="items-list">
+        {{#each notes as |item id|}}
+        <li class="item flexcol" data-item-id="{{item._id}}">
+          <div class="flexrow">
+            <div class="item-name">
+              {{item.name}}
+            </div>
+            <div class="item-controls">
+              <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
+              <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
+            </div>
+          </div>
+          {{#if item.system.content}}
+          <div class="item-tenets">
+            {{{item.system.content}}}
+          </div>
+          {{/if}}
+        </li>
+        {{/each}}
+      </ol>
+      <a class="item-control item-create" data-type="note"><i class="fas fa-plus"></i> {{localize "TRILHAMARGA.Note"}}</a>
     </div>
 
   </section>

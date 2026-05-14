@@ -8,7 +8,7 @@ export class TrilhamargaItemSheet extends ItemSheet {
     return mergeObject(super.defaultOptions, {
       classes: ["trilhamarga", "sheet", "item"],
       width: 520,
-      height: 480
+      height: 650
     });
   }
 

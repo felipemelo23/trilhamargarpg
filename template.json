@@ -46,16 +46,18 @@
     }
   },
   "Item": {
-    "types": ["skill", "weapon", "armor", "shield", "gear", "wound", "divine_domain", "divine_tenet", "spell", "recipe", "npc_attack", "npc_ability"],
+    "types": ["skill", "weapon", "armor", "shield", "gear", "wound", "divine_domain", "divine_tenet", "spell", "recipe", "note", "npc_attack", "npc_ability"],
     "templates": {
       "base": {
-        "description": ""
+        "description": "",
+        "price": 0
       },
       "physical": {
         "slots": 1,
         "stackable": false,
         "quantity": 1,
-        "location": "body"
+        "location": "body",
+        "price": 0
       }
     },
     "skill": {
@@ -67,7 +69,8 @@
       "damage": "",
       "bonus": 0,
       "associated_skill": "",
-      "enchantment": ""
+      "enchantment": "",
+      "addPhysiqueToDamage": false
     },
     "armor": {
       "templates": ["base", "physical"],
@@ -105,7 +108,11 @@
     "recipe": {
       "regular_effect": "",
       "side_effect": "",
-      "complexity": "simple"
+      "complexity": "simple",
+      "price": 0
+    },
+    "note": {
+      "content": ""
     },
     "npc_attack": {
       "templates": ["base"],
