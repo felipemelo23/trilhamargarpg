@@ -281,10 +281,9 @@
               <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
             </div>
           </div>
-          {{#if (or item.system.tenet1 item.system.tenet2)}}
+          {{#if item.system.taboo}}
           <div class="item-tenets">
-            {{#if item.system.tenet1}}<div><strong>{{localize "TRILHAMARGA.Tenet1"}}:</strong> {{item.system.tenet1}}</div>{{/if}}
-            {{#if item.system.tenet2}}<div><strong>{{localize "TRILHAMARGA.Tenet2"}}:</strong> {{item.system.tenet2}}</div>{{/if}}
+            <div><strong>{{localize "TRILHAMARGA.Taboo"}}:</strong> {{item.system.taboo}}</div>
           </div>
           {{/if}}
         </li>
