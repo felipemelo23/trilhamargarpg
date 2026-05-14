@@ -39,6 +39,10 @@ Hooks.once("init", async function() {
     }
   });
 
+  // Default Token settings
+  CONFIG.Token.objectClass.DEFAULT_CONFIG.displayBars = CONST.TOKEN_DISPLAY_MODES.HOVER;
+  CONFIG.Token.objectClass.DEFAULT_CONFIG.displayName = CONST.TOKEN_DISPLAY_MODES.HOVER;
+
   // Handlebars Helpers
   Handlebars.registerHelper('and', function() {
     return Array.prototype.slice.call(arguments, 0, -1).every(Boolean);
@@ -80,6 +84,27 @@ Hooks.on("ready", async function() {
   if (!ui.destinyTracker) {
     ui.destinyTracker = new DestinyTracker().render(true);
   }
+});
+
+Hooks.on("preCreateToken", (token, data, options, userId) => {
+  const actor = token.actor;
+  if (!actor) return;
+
+  const updates = {
+    displayBars: CONST.TOKEN_DISPLAY_MODES.HOVER,
+    displayName: CONST.TOKEN_DISPLAY_MODES.HOVER
+  };
+
+  // Link bar1 to Life for PCs or Vitality for NPCs if not already linked
+  if (!data.bar1?.attribute) {
+    if (actor.type === "pc") {
+      updates["bar1.attribute"] = "life";
+    } else if (actor.type === "npc") {
+      updates["bar1.attribute"] = "vitality";
+    }
+  }
+
+  token.updateSource(updates);
 });
 
 /**
