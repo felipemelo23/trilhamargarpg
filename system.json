@@ -3,8 +3,8 @@
   "title": "Trilhamarga RPG",
   "version": "1.0.0",
   "library": false,
-  "manifest": "",
-  "download": "",
+  "manifest": "https://raw.githubusercontent.com/felipemelo23/trilhamargarpg/develop/system.json",
+  "download": "https://github.com/felipemelo23/trilhamargarpg/archive/refs/heads/develop.zip",
   "authors": [
     {
       "name": "Gemini CLI"
