@@ -269,7 +269,8 @@ export class TrilhamargaActor extends Actor {
     const bonus = occultSkill ? (occultSkill.system.level || 0) : 0;
     const woundPenalty = this.system.woundPenalty || 0;
     const protectionPenalty = occultSkill?.system.protectionPenalty ? (this.system.protectionPenalty || 0) : 0;
-    const baseModifier = -(woundPenalty + protectionPenalty);
+    const arcaneFatigue = this.system.arcane_fatigue?.value || 0;
+    const baseModifier = -(woundPenalty + protectionPenalty + arcaneFatigue);
     const totalBonus = bonus;
     const difficulty = 8;
 
@@ -289,6 +290,7 @@ export class TrilhamargaActor extends Actor {
     
     if (woundPenalty > 0) skillCheckParts.push(`(${game.i18n.localize("TRILHAMARGA.WoundPenalty")}: ${woundPenalty})`);
     if (protectionPenalty > 0) skillCheckParts.push(`(${game.i18n.localize("TRILHAMARGA.ProtectionPenalty")}: ${protectionPenalty})`);
+    if (arcaneFatigue > 0) skillCheckParts.push(`(${game.i18n.localize("TRILHAMARGA.ArcaneFatigue")}: ${arcaneFatigue})`);
     
     const skillCheckText = skillCheckParts.join(" ");
 
