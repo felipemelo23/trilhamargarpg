@@ -95,13 +95,13 @@ Hooks.on("preCreateToken", (token, data, options, userId) => {
     displayName: CONST.TOKEN_DISPLAY_MODES.HOVER
   };
 
-  // Link bar1 to Life for PCs or Vitality for NPCs if not already linked
-  if (!data.bar1?.attribute) {
-    if (actor.type === "pc") {
-      updates["bar1.attribute"] = "life";
-    } else if (actor.type === "npc") {
-      updates["bar1.attribute"] = "vitality";
-    }
+  // Set default bar assignments if not already set
+  if (actor.type === "pc") {
+    if (!data.bar1?.attribute) updates["bar1.attribute"] = "stamina";
+    if (!data.bar2?.attribute) updates["bar2.attribute"] = "protection";
+  } else if (actor.type === "npc") {
+    if (!data.bar1?.attribute) updates["bar1.attribute"] = "vitality";
+    if (!data.bar2?.attribute) updates["bar2.attribute"] = "protection";
   }
 
   token.updateSource(updates);
