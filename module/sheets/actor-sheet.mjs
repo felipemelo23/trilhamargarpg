@@ -9,7 +9,7 @@ export class TrilhamargaActorSheet extends ActorSheet {
       classes: ["trilhamarga", "sheet", "actor"],
       width: 700,
       height: 800,
-      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "skills" }]
+      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "descriptors" }]
     });
   }
 
@@ -19,8 +19,8 @@ export class TrilhamargaActorSheet extends ActorSheet {
   }
 
   /** @override */
-  getData() {
-    const data = super.getData();
+  async getData() {
+    const data = await super.getData();
     data.system = data.actor.system;
 
     // Prepare items

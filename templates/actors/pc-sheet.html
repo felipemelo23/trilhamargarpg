@@ -53,16 +53,40 @@
 
   {{!-- Body Mid Area: Tabbed Panel --}}
   <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="descriptors">{{localize "TRILHAMARGA.Descriptors"}}</a>
     <a class="item" data-tab="skills">{{localize "TRILHAMARGA.Skills"}}</a>
     <a class="item" data-tab="inventory">{{localize "TRILHAMARGA.Inventory"}}</a>
     <a class="item" data-tab="wounds">{{localize "TRILHAMARGA.Wounds"}}</a>
     <a class="item" data-tab="divine_domains">{{localize "TRILHAMARGA.DivineDomain"}}</a>
     <a class="item" data-tab="spells">{{localize "TRILHAMARGA.Spells"}}</a>
     <a class="item" data-tab="concoctions">{{localize "TRILHAMARGA.Recipes"}}</a>
-    <a class="item" data-tab="descriptors">{{localize "TRILHAMARGA.Descriptors"}}</a>
   </nav>
 
   <section class="sheet-body">
+
+    {{!-- Descriptors Tab --}}
+    <div class="tab descriptors" data-group="primary" data-tab="descriptors">
+      <div class="descriptor-field">
+        <label>{{localize "TRILHAMARGA.Vocation"}}</label>
+        <input type="text" name="system.vocation" value="{{system.vocation}}" />
+      </div>
+      <div class="descriptor-field">
+        <label>{{localize "TRILHAMARGA.Goal"}}</label>
+        <input type="text" name="system.goal" value="{{system.goal}}" />
+      </div>
+      <div class="descriptor-field">
+        <label>{{localize "TRILHAMARGA.Motivation"}}</label>
+        <input type="text" name="system.motivation" value="{{system.motivation}}" />
+      </div>
+      <div class="descriptor-field">
+        <label>{{localize "TRILHAMARGA.Complication"}}</label>
+        <input type="text" name="system.complication" value="{{system.complication}}" />
+      </div>
+      <div class="descriptor-field">
+        <label>{{localize "TRILHAMARGA.Bonds"}}</label>
+        <input type="text" name="system.bonds" value="{{system.bonds}}" />
+      </div>
+    </div>
 
     {{!-- Skills Tab --}}
     <div class="tab skills" data-group="primary" data-tab="skills">
@@ -76,8 +100,14 @@
         </li>
         {{#each skills as |item id|}}
         <li class="item flexrow" data-item-id="{{item._id}}">
+          <div class="item-image">
+            <img src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
+          </div>
           <div class="item-name">
              <span class="rollable" data-roll="skill">{{item.name}}</span>
+             {{#if item.system.description}}
+             <span class="item-description"> - {{{item.system.description}}}</span>
+             {{/if}}
           </div>
           <div class="item-prop">{{skillLevelLabel item.system.level}}</div>
           <div class="item-controls">
@@ -331,30 +361,6 @@
         {{/each}}
       </ol>
       <a class="item-control item-create" data-type="recipe"><i class="fas fa-plus"></i> {{localize "TRILHAMARGA.Recipes"}}</a>
-    </div>
-
-    {{!-- Descriptors Tab --}}
-    <div class="tab descriptors" data-group="primary" data-tab="descriptors">
-      <div class="descriptor-field">
-        <label>{{localize "TRILHAMARGA.Vocation"}}</label>
-        <input type="text" name="system.vocation" value="{{system.vocation}}" />
-      </div>
-      <div class="descriptor-field">
-        <label>{{localize "TRILHAMARGA.Goal"}}</label>
-        <input type="text" name="system.goal" value="{{system.goal}}" />
-      </div>
-      <div class="descriptor-field">
-        <label>{{localize "TRILHAMARGA.Motivation"}}</label>
-        <input type="text" name="system.motivation" value="{{system.motivation}}" />
-      </div>
-      <div class="descriptor-field">
-        <label>{{localize "TRILHAMARGA.Complication"}}</label>
-        <input type="text" name="system.complication" value="{{system.complication}}" />
-      </div>
-      <div class="descriptor-field">
-        <label>{{localize "TRILHAMARGA.Bonds"}}</label>
-        <input type="text" name="system.bonds" value="{{system.bonds}}" />
-      </div>
     </div>
 
   </section>

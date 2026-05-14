@@ -18,8 +18,8 @@ export class TrilhamargaItemSheet extends ItemSheet {
   }
 
   /** @override */
-  getData() {
-    const data = super.getData();
+  async getData() {
+    const data = await super.getData();
     data.system = data.item.system;
 
     // Damage options for weapons
