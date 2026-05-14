@@ -79,6 +79,13 @@ class DestinyTracker extends Application {
     });
   }
 
+  /** @override */
+  _injectHTML(html) {
+    if ( !document.getElementById("destiny-tracker") ) {
+      $("#interface").append(html);
+    }
+  }
+
   getData() {
     return {
       destiny: game.settings.get("trilhamarga", "destiny"),

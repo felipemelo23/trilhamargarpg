@@ -333,6 +333,7 @@
   position: fixed;
   bottom: 80px;
   left: 10px;
+  right: auto;
   z-index: 60;
   background: rgba(0, 0, 0, 0.85);
   color: #fff;
@@ -341,9 +342,6 @@
   padding: 8px 12px;
   border-radius: 4px;
   min-width: 150px;
-}
-
-#destiny-tracker-container {
   display: flex;
   flex-direction: column;
   gap: 8px;
