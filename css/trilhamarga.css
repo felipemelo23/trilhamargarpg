@@ -323,11 +323,13 @@
   border-radius: 4px 4px 0 0;
 }
 
-.trilhamarga .descriptor-field input {
+.trilhamarga .descriptor-field input,
+.trilhamarga .descriptor-field textarea {
   width: 100%;
   border: 1px solid #ccc;
   border-top: none;
   padding: 8px;
+  display: block;
 }
 
 /* Tracker styling */

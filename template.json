@@ -3,6 +3,8 @@
     "types": ["pc", "npc"],
     "pc": {
       "xp": 0,
+      "ancestry": "",
+      "ancestry_ability": "",
       "vocation": "",
       "goal": "",
       "motivation": "",
