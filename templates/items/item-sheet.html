@@ -180,6 +180,18 @@
       <label>{{localize "TRILHAMARGA.Description"}}</label>
       <textarea name="system.description">{{system.description}}</textarea>
     </div>
+    <div class="form-group stacked">
+      <label>{{localize "TRILHAMARGA.MiracleMinor"}}</label>
+      <textarea name="system.miracles.minor">{{system.miracles.minor}}</textarea>
+    </div>
+    <div class="form-group stacked">
+      <label>{{localize "TRILHAMARGA.MiracleMid"}}</label>
+      <textarea name="system.miracles.mid">{{system.miracles.mid}}</textarea>
+    </div>
+    <div class="form-group stacked">
+      <label>{{localize "TRILHAMARGA.MiracleMajor"}}</label>
+      <textarea name="system.miracles.major">{{system.miracles.major}}</textarea>
+    </div>
     {{/if}}
 
     {{#if (eq item.type "wound")}}
@@ -190,6 +202,16 @@
     <div class="form-group">
       <label>{{localize "TRILHAMARGA.Severity"}}</label>
       <input type="number" name="system.severity" value="{{system.severity}}" />
+    </div>
+    <div class="form-group">
+      <label>{{localize "TRILHAMARGA.Category"}}</label>
+      <select name="system.category">
+        {{#select system.category}}
+        <option value="mild">{{localize "TRILHAMARGA.Mild"}}</option>
+        <option value="moderate">{{localize "TRILHAMARGA.Moderate"}}</option>
+        <option value="severe">{{localize "TRILHAMARGA.Severe"}}</option>
+        {{/select}}
+      </select>
     </div>
     {{/if}}
 

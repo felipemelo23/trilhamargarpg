@@ -81,7 +81,8 @@
     },
     "wound": {
       "templates": ["base"],
-      "severity": 1
+      "severity": 1,
+      "category": "mild"
     },
     "divine_domain": {
       "templates": ["base"],
@@ -89,7 +90,12 @@
       "tenet2": ""
     },
     "divine_tenet": {
-      "templates": ["base"]
+      "templates": ["base"],
+      "miracles": {
+        "minor": "",
+        "mid": "",
+        "major": ""
+      }
     },
     "spell": {
       "templates": ["base"]
