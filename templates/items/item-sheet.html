@@ -218,7 +218,13 @@
     </div>
     <div class="form-group">
       <label>Dano</label>
-      <input type="text" name="system.damage" value="{{system.damage}}" />
+      <select name="system.damage">
+        {{#select system.damage}}
+        {{#each damageOptions}}
+        <option value="{{this}}">{{this}}</option>
+        {{/each}}
+        {{/select}}
+      </select>
     </div>
     {{/if}}
 
