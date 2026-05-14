@@ -15,6 +15,18 @@
   align-items: center;
 }
 
+.trilhamarga .flexcol {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
+.trilhamarga .item .flexrow {
+  width: 100%;
+  align-items: flex-start;
+}
+
 /* Sheet Styles */
 .trilhamarga.sheet {
   min-height: 500px;
