@@ -99,7 +99,8 @@ export class TrilhamargaActor extends Actor {
     const skill = this.items.find(i => i.type === 'skill' && i.name === skillName);
     const bonus = skill ? (skill.system.level || 0) : 0;
     const woundPenalty = this.system.woundPenalty || 0;
-    const totalBonus = bonus - woundPenalty;
+    const protectionPenalty = (skill?.system.protectionPenalty) ? (this.system.protection.value || 0) : 0;
+    const totalBonus = bonus - woundPenalty - protectionPenalty;
 
     const modifier = await this._getModifierPrompt();
     if (modifier === null) return;
@@ -118,7 +119,10 @@ export class TrilhamargaActor extends Actor {
     const atkRoll = new Roll(atkFormula);
     const dmgRoll = new Roll(dmgFormula);
 
-    const skillCheckText = skill ? game.i18n.format("TRILHAMARGA.SkillCheck", {skill: skill.name}) : "";
+    const skillCheckParts = [];
+    if (skill) skillCheckParts.push(game.i18n.format("TRILHAMARGA.SkillCheck", {skill: skill.name}));
+    if (protectionPenalty > 0) skillCheckParts.push(`(${game.i18n.localize("TRILHAMARGA.ProtectionPenalty")}: ${protectionPenalty})`);
+    const skillCheckText = skillCheckParts.join(" ");
     
     let flavor = `
       <div class="trilhamarga chat-card">
@@ -198,7 +202,8 @@ export class TrilhamargaActor extends Actor {
   async rollSkill(skill) {
     const bonus = skill.system.level || 0;
     const woundPenalty = this.system.woundPenalty || 0;
-    const totalBonus = bonus - woundPenalty;
+    const protectionPenalty = skill.system.protectionPenalty ? (this.system.protection.value || 0) : 0;
+    const totalBonus = bonus - woundPenalty - protectionPenalty;
     
     const modifier = await this._getModifierPrompt();
     if (modifier === null) return;
@@ -212,7 +217,10 @@ export class TrilhamargaActor extends Actor {
     }
 
     const roll = new Roll(formula);
-    const skillCheckText = game.i18n.format("TRILHAMARGA.SkillCheck", {skill: skill.name});
+    const skillCheckParts = [game.i18n.format("TRILHAMARGA.SkillCheck", {skill: skill.name})];
+    if (protectionPenalty > 0) skillCheckParts.push(`(${game.i18n.localize("TRILHAMARGA.ProtectionPenalty")}: ${protectionPenalty})`);
+    const skillCheckText = skillCheckParts.join(" ");
+
     let flavor = `
       <div class="trilhamarga chat-card">
         <div class="card-content">

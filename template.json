@@ -57,7 +57,8 @@
       }
     },
     "skill": {
-      "level": 0
+      "level": 0,
+      "protectionPenalty": false
     },
     "weapon": {
       "templates": ["base", "physical"],
