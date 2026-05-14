@@ -32,11 +32,14 @@
   border-radius: 8px;
   margin-right: 15px;
   object-fit: cover;
+  width: 120px;
+  height: 120px;
 }
 
 .trilhamarga .charname {
   margin: 0 0 10px 0;
   border: none;
+  width: 100%;
 }
 
 .trilhamarga .charname input {
@@ -44,10 +47,21 @@
   font-size: 28px;
   border: none;
   border-bottom: 1px solid #aaa;
+  width: 100%;
+  padding: 0 0 0 5px;
+  margin: 0;
+}
+
+.trilhamarga .header-content {
+  align-items: flex-start;
 }
 
 .trilhamarga .header-basics {
   margin-top: 5px;
+}
+
+.trilhamarga .header-basics input {
+  padding-left: 5px;
 }
 
 .trilhamarga .header-basics label {
@@ -106,6 +120,12 @@
   color: #666;
 }
 
+.trilhamarga .counter-large.favor,
+.trilhamarga .counter-large.arcane_fatigue {
+  max-width: 32%;
+  margin: 0 auto 20px auto;
+}
+
 /* Tabs */
 .trilhamarga .sheet-tabs {
   border-top: 1px solid #aaa;
@@ -135,6 +155,39 @@
 }
 
 /* Item Lists */
+/* Inventory and Load Bar */
+.trilhamarga .load-capacity-container {
+  margin-bottom: 10px;
+}
+
+.trilhamarga .load-capacity-label {
+  font-weight: bold;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.trilhamarga .load-bar {
+  height: 18px;
+  background: #eee;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.trilhamarga .load-bar-fill {
+  height: 100%;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.trilhamarga .load-bar-fill.green { background-color: #4CAF50; }
+.trilhamarga .load-bar-fill.yellow { background-color: #FFEB3B; }
+.trilhamarga .load-bar-fill.red { background-color: #F44336; }
+
+.trilhamarga .tab h3 {
+  margin: 10px 0 5px 0;
+  border-bottom: 1px solid #ccc;
+}
+
 .trilhamarga .items-list {
   list-style: none;
   margin: 0;
@@ -213,7 +266,39 @@
   text-align: right;
 }
 
+.trilhamarga .form-group.stacked {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.trilhamarga .form-group.stacked label {
+  margin-bottom: 5px;
+}
+
+.trilhamarga .sheet-body textarea {
+  width: 100%;
+  resize: vertical;
+  padding: 5px;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+}
+
+.trilhamarga .editor {
+  min-height: 120px;
+  width: 100%;
+}
+
 /* Descriptors */
+.trilhamarga .item-tenets {
+  margin-left: 45px;
+  font-size: 12px;
+  color: #444;
+  border-left: 2px solid #ccc;
+  padding-left: 10px;
+  margin-top: 2px;
+  margin-bottom: 5px;
+}
+
 .trilhamarga .descriptor-field {
   margin-bottom: 15px;
 }
@@ -226,10 +311,8 @@
   border-radius: 4px 4px 0 0;
 }
 
-.trilhamarga .descriptor-field textarea {
+.trilhamarga .descriptor-field input {
   width: 100%;
-  height: 80px;
-  resize: vertical;
   border: 1px solid #ccc;
   border-top: none;
   padding: 8px;

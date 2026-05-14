@@ -48,6 +48,10 @@ Hooks.once("init", async function() {
     return a > b;
   });
 
+  Handlebars.registerHelper('skillLevelLabel', function(level) {
+    return game.i18n.localize(`TRILHAMARGA.SkillLevels.${level}`);
+  });
+
   // Preload Handlebars templates
   return loadTemplates([
     "systems/trilhamarga/templates/actors/pc-sheet.html",

@@ -11,9 +11,9 @@
 
     {{!-- Weapon --}}
     {{#if (eq item.type "weapon")}}
-    <div class="form-group">
+    <div class="form-group stacked">
       <label>{{localize "TRILHAMARGA.Description"}}</label>
-      <input type="text" name="system.description" value="{{system.description}}" />
+      {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable}}
     </div>
     <div class="form-group">
       <label>{{localize "TRILHAMARGA.Damage"}}</label>
@@ -56,6 +56,10 @@
 
     {{!-- Armor --}}
     {{#if (eq item.type "armor")}}
+    <div class="form-group stacked">
+      <label>{{localize "TRILHAMARGA.Description"}}</label>
+      {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable}}
+    </div>
     <div class="form-group">
       <label>{{localize "TRILHAMARGA.Protection"}}</label>
       <input type="number" name="system.protection" value="{{system.protection}}" />
@@ -80,9 +84,9 @@
 
     {{!-- Shield --}}
     {{#if (eq item.type "shield")}}
-    <div class="form-group">
+    <div class="form-group stacked">
       <label>{{localize "TRILHAMARGA.Description"}}</label>
-      <input type="text" name="system.description" value="{{system.description}}" />
+      {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable}}
     </div>
     <div class="form-group">
       <label>{{localize "TRILHAMARGA.Slots"}}</label>
@@ -100,9 +104,9 @@
 
     {{!-- Gear --}}
     {{#if (eq item.type "gear")}}
-    <div class="form-group">
+    <div class="form-group stacked">
       <label>{{localize "TRILHAMARGA.Description"}}</label>
-      <input type="text" name="system.description" value="{{system.description}}" />
+      {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable}}
     </div>
     <div class="form-group">
       <label>{{localize "TRILHAMARGA.Slots"}}</label>
@@ -128,15 +132,61 @@
     {{/if}}
     {{/if}}
 
+    {{!-- Spells --}}
+    {{#if (eq item.type "spell")}}
+    <div class="form-group stacked">
+      <label>{{localize "TRILHAMARGA.Description"}}</label>
+      {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable}}
+    </div>
+    {{/if}}
+
     {{!-- Other types (skill, wound, npc) --}}
     {{#if (eq item.type "skill")}}
     <div class="form-group">
       <label>Nível</label>
-      <input type="number" name="system.level" value="{{system.level}}" />
+      <select name="system.level" data-type="Number">
+        {{#select system.level}}
+        {{#each skillLevelOptions as |label val|}}
+        <option value="{{val}}">{{label}}</option>
+        {{/each}}
+        {{/select}}
+      </select>
+    </div>
+    <div class="form-group stacked">
+      <label>{{localize "TRILHAMARGA.Description"}}</label>
+      {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable}}
+    </div>
+    {{/if}}
+
+    {{!-- Divine Domain --}}
+    {{#if (eq item.type "divine_domain")}}
+    <div class="form-group stacked">
+      <label>{{localize "TRILHAMARGA.Description"}}</label>
+      {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable}}
+    </div>
+    <div class="form-group">
+      <label>{{localize "TRILHAMARGA.Tenet1"}}</label>
+      <input type="text" name="system.tenet1" value="{{system.tenet1}}" />
+    </div>
+    <div class="form-group">
+      <label>{{localize "TRILHAMARGA.Tenet2"}}</label>
+      <input type="text" name="system.tenet2" value="{{system.tenet2}}" />
+    </div>
+    {{/if}}
+
+    {{!-- Divine Tenet --}}
+    {{#if (eq item.type "divine_tenet")}}
+    <div class="form-group stacked">
+      <label>{{localize "TRILHAMARGA.Description"}}</label>
+      {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable}}
     </div>
     {{/if}}
 
     {{#if (eq item.type "wound")}}
+    <div class="form-group stacked">
+      <label>{{localize "TRILHAMARGA.Description"}}</label>
+      {{editor enrichedDescription target="system.description" button=true owner=owner editable=editable}}
+    </div>
     <div class="form-group">
       <label>{{localize "TRILHAMARGA.Severity"}}</label>
       <input type="number" name="system.severity" value="{{system.severity}}" />

@@ -36,6 +36,24 @@ export class TrilhamargaItemSheet extends ItemSheet {
         .sort();
     }
 
+    // Skill level options
+    data.skillLevelOptions = {
+      "-1": game.i18n.localize("TRILHAMARGA.SkillLevels.-1"),
+      "0": game.i18n.localize("TRILHAMARGA.SkillLevels.0"),
+      "1": game.i18n.localize("TRILHAMARGA.SkillLevels.1"),
+      "2": game.i18n.localize("TRILHAMARGA.SkillLevels.2"),
+      "3": game.i18n.localize("TRILHAMARGA.SkillLevels.3"),
+      "4": game.i18n.localize("TRILHAMARGA.SkillLevels.4"),
+      "5": game.i18n.localize("TRILHAMARGA.SkillLevels.5"),
+      "6": game.i18n.localize("TRILHAMARGA.SkillLevels.6")
+    };
+
+    data.enrichedDescription = await TextEditor.enrichHTML(this.item.system.description, {
+      async: true,
+      secrets: this.item.isOwner,
+      relativeTo: this.item
+    });
+
     return data;
   }
 

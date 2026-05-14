@@ -54,9 +54,9 @@ export class TrilhamargaActor extends Actor {
     );
     const backpackBonus = hasBackpack ? 6 : 0;
 
+    const baseCap = 6 + Number(physique) + backpackBonus;
     system.loadCapacity = {
-      base: 6 + physique + backpackBonus,
-      max: 12 + physique + backpackBonus,
+      base: Math.floor(baseCap * 100) / 100,
       current: 0
     };
 
@@ -77,6 +77,14 @@ export class TrilhamargaActor extends Actor {
       return acc + totalSlots;
     }, 0);
     system.loadCapacity.current = Math.floor(currentLoad * 100) / 100;
+    
+    // Calculate percentage and color for load bar
+    const pct = (system.loadCapacity.current / system.loadCapacity.base) * 100;
+    system.loadCapacity.pct = Math.min(pct, 100);
+    
+    if (pct <= 50) system.loadCapacity.color = "green";
+    else if (pct <= 75) system.loadCapacity.color = "yellow";
+    else system.loadCapacity.color = "red";
   }
 
   _prepareNpcData(actorData) {

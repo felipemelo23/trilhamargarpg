@@ -3,7 +3,6 @@
     "types": ["pc", "npc"],
     "pc": {
       "xp": 0,
-      "speed": 6,
       "vocation": "",
       "goal": "",
       "motivation": "",
@@ -45,7 +44,7 @@
     }
   },
   "Item": {
-    "types": ["skill", "weapon", "armor", "shield", "gear", "wound", "divine_domain", "spell", "recipe", "npc_attack", "npc_ability"],
+    "types": ["skill", "weapon", "armor", "shield", "gear", "wound", "divine_domain", "divine_tenet", "spell", "recipe", "npc_attack", "npc_ability"],
     "templates": {
       "base": {
         "description": ""
@@ -85,6 +84,11 @@
       "severity": 1
     },
     "divine_domain": {
+      "templates": ["base"],
+      "tenet1": "",
+      "tenet2": ""
+    },
+    "divine_tenet": {
       "templates": ["base"]
     },
     "spell": {

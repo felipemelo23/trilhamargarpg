@@ -46,6 +46,7 @@ export class TrilhamargaActorSheet extends ActorSheet {
     const divineDomains = [];
     const spells = [];
     const recipes = [];
+    const divineTenets = [];
 
     for (let i of actorData.items) {
       if (i.type === 'skill') skills.push(i);
@@ -56,6 +57,7 @@ export class TrilhamargaActorSheet extends ActorSheet {
       }
       else if (i.type === 'wound') wounds.push(i);
       else if (i.type === 'divine_domain') divineDomains.push(i);
+      else if (i.type === 'divine_tenet') divineTenets.push(i);
       else if (i.type === 'spell') spells.push(i);
       else if (i.type === 'recipe') recipes.push(i);
     }
@@ -64,6 +66,7 @@ export class TrilhamargaActorSheet extends ActorSheet {
     data.inventory = inventory;
     data.wounds = wounds;
     data.divineDomains = divineDomains;
+    data.divineTenets = divineTenets;
     data.spells = spells;
     data.recipes = recipes;
   }
