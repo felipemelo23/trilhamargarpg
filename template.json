@@ -103,7 +103,6 @@
       "sustained": false
     },
     "recipe": {
-      "templates": ["base"],
       "regular_effect": "",
       "side_effect": ""
     },
