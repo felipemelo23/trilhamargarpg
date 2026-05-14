@@ -110,7 +110,7 @@
             <i class="fas fa-dice-d20 weapon-roll-icon"></i>
           </div>
           <div class="item-name">
-             <span class="rollable item-clickable" data-roll="skill">{{item.name}}</span>
+             <span>{{item.name}}</span>
           </div>
           <div class="item-prop">{{skillLevelLabel item.system.level}}</div>
           <div class="item-controls">
@@ -143,7 +143,7 @@
             <i class="fas fa-dice-d20 weapon-roll-icon"></i>
             {{/if}}
           </div>
-          <div class="item-name {{#if (ne item.type 'armor')}}item-clickable{{/if}}">
+          <div class="item-name">
             {{item.name}}{{#if (and item.system.stackable (gt item.system.quantity 1))}} ({{item.system.quantity}}){{/if}}
             {{#if item.system.description}}
             <span class="item-description"> - {{{item.system.description}}}</span>
@@ -170,7 +170,7 @@
             <i class="fas fa-dice-d20 weapon-roll-icon"></i>
             {{/if}}
           </div>
-          <div class="item-name {{#if (ne item.type 'armor')}}item-clickable{{/if}}">
+          <div class="item-name">
             {{item.name}}{{#if (and item.system.stackable (gt item.system.quantity 1))}} ({{item.system.quantity}}){{/if}}
             {{#if item.system.description}}
             <span class="item-description"> - {{{item.system.description}}}</span>
@@ -197,10 +197,9 @@
             <i class="fas fa-dice-d20 weapon-roll-icon"></i>
             {{/if}}
           </div>
-          <div class="item-name {{#if (ne item.type 'armor')}}item-clickable{{/if}}">
-            {{item.name}}{{#if (and item.system.stackable (gt item.system.quantity 1))}} ({{item.system.quantity}}){{/if}}
-          </div>
-          <div class="item-controls">
+          <div class="item-name">
+             {{item.name}}{{#if (and item.system.stackable (gt item.system.quantity 1))}} ({{item.system.quantity}}){{/if}}
+          </div>          <div class="item-controls">
             <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
             <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
           </div>
@@ -338,7 +337,7 @@
             <img class="item-icon" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
             <i class="fas fa-dice-d20 weapon-roll-icon"></i>
           </div>
-          <div class="item-name item-clickable">
+          <div class="item-name">
             {{item.name}}
             {{#if item.system.sustained}}
             <span class="item-description"> ({{localize "TRILHAMARGA.Sustained"}})</span>
@@ -367,7 +366,7 @@
               <img class="item-icon" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
               <i class="fas fa-dice-d20 weapon-roll-icon"></i>
             </div>
-            <div class="item-name item-clickable">
+            <div class="item-name">
               {{item.name}} [{{localize (concat "TRILHAMARGA.Complexity" (capitalize item.system.complexity))}}]
             </div>
             <div class="item-controls">

@@ -9,7 +9,8 @@ export class TrilhamargaActorSheet extends ActorSheet {
       classes: ["trilhamarga", "sheet", "actor"],
       width: 700,
       height: 800,
-      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "descriptors" }]
+      tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "descriptors" }],
+      dragDrop: [{dragSelector: ".item[data-item-id]", dropSelector: null}]
     });
   }
 
@@ -34,8 +35,9 @@ export class TrilhamargaActorSheet extends ActorSheet {
   }
 
   _preparePcItems(data) {
-    const actorData = data.actor;
-    
+    // Sort items by sort property
+    const items = this.actor.items.contents.sort((a, b) => (a.sort || 0) - (b.sort || 0));
+
     const skills = [];
     const inventory = {
       body: [],
@@ -48,7 +50,7 @@ export class TrilhamargaActorSheet extends ActorSheet {
     const recipes = [];
     const divineTenets = [];
 
-    for (let i of actorData.items) {
+    for (let i of items) {
       if (i.type === 'skill') skills.push(i);
       else if (['weapon', 'armor', 'shield', 'gear'].includes(i.type)) {
         const loc = i.system.location || 'body';
@@ -62,39 +64,52 @@ export class TrilhamargaActorSheet extends ActorSheet {
       else if (i.type === 'recipe') recipes.push(i);
     }
 
-    data.skills = skills.sort((a, b) => a.name.localeCompare(b.name));
+    data.skills = skills;
     data.inventory = inventory;
     data.wounds = wounds;
     data.divineDomains = divineDomains;
     data.divineTenets = divineTenets;
     data.spells = spells;
-    
-    const complexityRank = {
-      'simple': 0,
-      'advanced': 1,
-      'superior': 2
-    };
-
-    data.recipes = recipes.sort((a, b) => {
-      const rankA = complexityRank[a.system.complexity] ?? 99;
-      const rankB = complexityRank[b.system.complexity] ?? 99;
-      if (rankA !== rankB) return rankA - rankB;
-      return a.name.localeCompare(b.name);
-    });
+    data.recipes = recipes;
   }
 
   _prepareNpcItems(data) {
-    const actorData = data.actor;
+    // Sort items by sort property
+    const items = this.actor.items.contents.sort((a, b) => (a.sort || 0) - (b.sort || 0));
+
     const attacks = [];
     const abilities = [];
 
-    for (let i of actorData.items) {
+    for (let i of items) {
       if (i.type === 'npc_attack') attacks.push(i);
       else if (i.type === 'npc_ability') abilities.push(i);
     }
 
     data.attacks = attacks;
     data.abilities = abilities;
+  }
+
+  /** @override */
+  _onSortItem(event, itemData) {
+    const target = event.target.closest(".item[data-item-id]");
+    const targetId = target?.dataset.itemId;
+    if (!targetId) return super._onSortItem(event, itemData);
+
+    const item = this.actor.items.get(itemData.uuid?.split('.').pop() || itemData.id);
+    const targetItem = this.actor.items.get(targetId);
+    if (!item || !targetItem || item.id === targetItem.id) return super._onSortItem(event, itemData);
+
+    // Only sort if item types match
+    if (item.type !== targetItem.type) return super._onSortItem(event, itemData);
+
+    // Filter siblings to only those of the same type
+    const siblings = this.actor.items.filter(i => i.type === item.type && i.id !== item.id);
+    
+    // Perform the sort
+    const sortUpdates = SortingHelpers.performIntegerSort(item, {target: targetItem, siblings});
+    const updateData = sortUpdates.map(u => ({_id: u.target.id, sort: u.update.sort}));
+    
+    return this.actor.updateEmbeddedDocuments("Item", updateData);
   }
 
   /** @override */
