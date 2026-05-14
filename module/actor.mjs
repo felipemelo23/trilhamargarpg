@@ -372,8 +372,13 @@ export class TrilhamargaActor extends Actor {
       for (let opt of options) {
         const selected = opt === defaultValue ? "selected" : "";
         let label = "";
-        if (opt > 0) label = game.i18n.format("TRILHAMARGA.PositiveChances", {n: opt});
-        else if (opt < 0) label = game.i18n.format("TRILHAMARGA.NegativeChances", {n: Math.abs(opt)});
+        if (opt > 0) {
+          label = opt === 1 ? game.i18n.localize("TRILHAMARGA.PositiveChance") : game.i18n.format("TRILHAMARGA.PositiveChances", {n: opt});
+        }
+        else if (opt < 0) {
+          const absOpt = Math.abs(opt);
+          label = absOpt === 1 ? game.i18n.localize("TRILHAMARGA.NegativeChance") : game.i18n.format("TRILHAMARGA.NegativeChances", {n: absOpt});
+        }
         else label = game.i18n.localize("TRILHAMARGA.Regular");
         optionsHtml += `<option value="${opt}" ${selected}>${label}</option>`;
       }
