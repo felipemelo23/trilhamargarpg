@@ -333,7 +333,7 @@ export class TrilhamargaActor extends Actor {
     }
 
     if (spell.system.description) {
-      resultHtml += `<br/><hr/>${spell.system.description}`;
+      resultHtml += `<br/>${spell.system.description}`;
     }
 
     flavor = flavor.replace('</div>\n      </div>', `</div><div class="card-footer">${resultHtml}</div></div>`);
