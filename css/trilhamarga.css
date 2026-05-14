@@ -334,7 +334,7 @@
 #destiny-tracker {
   position: fixed;
   bottom: 81px;
-  left: 10px;
+  left: 15px;
   right: auto;
   z-index: 60;
   background: rgba(0, 0, 0, 0.85);
@@ -343,7 +343,7 @@
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
   padding: 8px 12px;
   border-radius: 4px;
-  min-width: 140px;
+  min-width: 160px;
   display: flex;
   flex-direction: column;
   gap: 8px;
