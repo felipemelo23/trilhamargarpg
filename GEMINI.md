@@ -9,8 +9,8 @@ The system uses a custom 1d12-based resolution:
 - **Base Roll**: `1d12` vs. **Difficulty**.
 - **Critical Success**: Natural 12.
 - **Critical Failure**: Natural 1.
-- **Positive Variation**: `2d12kh` (Keep Higher).
-- **Negative Variation**: `2d12kl` (Keep Lower).
+- **Positive Modifier**: `2d12kh` (Keep Higher).
+- **Negative Modifier**: `2d12kl` (Keep Lower).
 
 Rolls are triggered via the `.rollable` class on character sheets or through the `actor.roll()` method.
 

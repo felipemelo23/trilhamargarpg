@@ -101,13 +101,13 @@ export class TrilhamargaActor extends Actor {
     const woundPenalty = this.system.woundPenalty || 0;
     const totalBonus = bonus - woundPenalty;
 
-    const variation = await this._getVariationPrompt();
-    if (variation === null) return;
+    const modifier = await this._getModifierPrompt();
+    if (modifier === null) return;
 
     // Attack Roll Formula
     let atkFormula = "1d12";
-    if (variation > 0) atkFormula = `${variation + 1}d12kh`;
-    else if (variation < 0) atkFormula = `${Math.abs(variation) + 1}d12kl`;
+    if (modifier > 0) atkFormula = `${modifier + 1}d12kh`;
+    else if (modifier < 0) atkFormula = `${Math.abs(modifier) + 1}d12kl`;
     if (totalBonus !== 0) {
       atkFormula += totalBonus > 0 ? ` + ${totalBonus}` : ` - ${Math.abs(totalBonus)}`;
     }
@@ -154,10 +154,10 @@ export class TrilhamargaActor extends Actor {
   /**
    * Custom Roll implementation
    */
-  async roll(difficulty = 6, variation = 0) {
+  async roll(difficulty = 6, modifier = 0) {
     let formula = "1d12";
-    if (variation > 0) formula = `${variation + 1}d12kh`;
-    else if (variation < 0) formula = `${Math.abs(variation) + 1}d12kl`;
+    if (modifier > 0) formula = `${modifier + 1}d12kh`;
+    else if (modifier < 0) formula = `${Math.abs(modifier) + 1}d12kl`;
 
     const roll = new Roll(formula);
     
@@ -200,12 +200,12 @@ export class TrilhamargaActor extends Actor {
     const woundPenalty = this.system.woundPenalty || 0;
     const totalBonus = bonus - woundPenalty;
     
-    const variation = await this._getVariationPrompt();
-    if (variation === null) return;
+    const modifier = await this._getModifierPrompt();
+    if (modifier === null) return;
     
     let formula = "1d12";
-    if (variation > 0) formula = `${variation + 1}d12kh`;
-    else if (variation < 0) formula = `${Math.abs(variation) + 1}d12kl`;
+    if (modifier > 0) formula = `${modifier + 1}d12kh`;
+    else if (modifier < 0) formula = `${Math.abs(modifier) + 1}d12kl`;
 
     if (totalBonus !== 0) {
       formula += totalBonus > 0 ? ` + ${totalBonus}` : ` - ${Math.abs(totalBonus)}`;
@@ -251,12 +251,12 @@ export class TrilhamargaActor extends Actor {
     const totalBonus = bonus - woundPenalty;
     const difficulty = 8;
 
-    const variation = await this._getVariationPrompt();
-    if (variation === null) return;
+    const modifier = await this._getModifierPrompt();
+    if (modifier === null) return;
     
     let formula = "1d12";
-    if (variation > 0) formula = `${variation + 1}d12kh`;
-    else if (variation < 0) formula = `${Math.abs(variation) + 1}d12kl`;
+    if (modifier > 0) formula = `${modifier + 1}d12kh`;
+    else if (modifier < 0) formula = `${Math.abs(modifier) + 1}d12kl`;
 
     if (totalBonus !== 0) {
       formula += totalBonus > 0 ? ` + ${totalBonus}` : ` - ${Math.abs(totalBonus)}`;
@@ -333,12 +333,12 @@ export class TrilhamargaActor extends Actor {
     });
   }
 
-  async _getVariationPrompt() {
+  async _getModifierPrompt() {
     return new Promise(resolve => {
       new Dialog({
-        title: game.i18n.localize("TRILHAMARGA.Variation"),
+        title: game.i18n.localize("TRILHAMARGA.Modifier"),
         content: `
-          <select id="variation" style="width: 100%; margin-bottom: 10px;">
+          <select id="modifier" style="width: 100%; margin-bottom: 10px;">
             <option value="3">3 chances positivas</option>
             <option value="2">2 chances positivas</option>
             <option value="1">1 chance positiva</option>
@@ -351,7 +351,7 @@ export class TrilhamargaActor extends Actor {
         buttons: {
           roll: {
             label: "Ok",
-            callback: (html) => resolve(parseInt(html.find("#variation").val()))
+            callback: (html) => resolve(parseInt(html.find("#modifier").val()))
           },
           cancel: {
             label: game.i18n.localize("TRILHAMARGA.Cancel"),

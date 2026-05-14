@@ -195,10 +195,10 @@ export class TrilhamargaActorSheet extends ActorSheet {
       const difficulty = await this._getDifficulty();
       if (difficulty === null) return;
       
-      const variation = await this._getVariation();
-      if (variation === null) return;
+      const modifier = await this._getModifier();
+      if (modifier === null) return;
       
-      await this.actor.roll(difficulty, variation);
+      await this.actor.roll(difficulty, modifier);
     }
   }
 
@@ -224,13 +224,13 @@ export class TrilhamargaActorSheet extends ActorSheet {
     return diff;
   }
 
-  async _getVariation() {
-     // Simple prompt for variation for now
-     const varVal = await new Promise(resolve => {
+  async _getModifier() {
+     // Simple prompt for modifier for now
+     const modVal = await new Promise(resolve => {
       new Dialog({
-        title: game.i18n.localize("TRILHAMARGA.Variation"),
+        title: game.i18n.localize("TRILHAMARGA.Modifier"),
         content: `
-          <select id="variation" style="width: 100%; margin-bottom: 10px;">
+          <select id="modifier" style="width: 100%; margin-bottom: 10px;">
             <option value="3">3 chances positivas</option>
             <option value="2">2 chances positivas</option>
             <option value="1">1 chance positiva</option>
@@ -243,7 +243,7 @@ export class TrilhamargaActorSheet extends ActorSheet {
         buttons: {
           roll: {
             label: "Ok",
-            callback: (html) => resolve(parseInt(html.find("#variation").val()))
+            callback: (html) => resolve(parseInt(html.find("#modifier").val()))
           },
           cancel: {
             label: game.i18n.localize("TRILHAMARGA.Cancel"),
@@ -253,6 +253,6 @@ export class TrilhamargaActorSheet extends ActorSheet {
         default: "roll"
       }, { width: 250 }).render(true);
     });
-    return varVal;
+    return modVal;
   }
 }
