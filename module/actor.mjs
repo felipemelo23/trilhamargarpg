@@ -43,6 +43,9 @@ export class TrilhamargaActor extends Actor {
     system.protection.max = protectionItems.reduce((acc, a) => acc + (a.system.protection || 0), 0);
     system.protection.value = Math.min(system.protection.value, system.protection.max);
 
+    // Protection Penalty (1 for every 4 points of max protection)
+    system.protectionPenalty = Math.floor(system.protection.max / 4);
+
     // Favor
     system.favor.max = will;
 
@@ -99,10 +102,11 @@ export class TrilhamargaActor extends Actor {
     const skill = this.items.find(i => i.type === 'skill' && i.name === skillName);
     const bonus = skill ? (skill.system.level || 0) : 0;
     const woundPenalty = this.system.woundPenalty || 0;
-    const protectionPenalty = (skill?.system.protectionPenalty) ? (this.system.protection.value || 0) : 0;
-    const totalBonus = bonus - woundPenalty - protectionPenalty;
+    const protectionPenalty = (skill?.system.protectionPenalty) ? (this.system.protectionPenalty || 0) : 0;
+    const baseModifier = -(woundPenalty + protectionPenalty);
+    const totalBonus = bonus;
 
-    const modifier = await this._getModifierPrompt();
+    const modifier = await this._getModifierPrompt(baseModifier);
     if (modifier === null) return;
 
     // Attack Roll Formula
@@ -121,7 +125,11 @@ export class TrilhamargaActor extends Actor {
 
     const skillCheckParts = [];
     if (skill) skillCheckParts.push(game.i18n.format("TRILHAMARGA.SkillCheck", {skill: skill.name}));
+    
+    // Always show penalties in flavor if they exist, regardless of final modifier
+    if (woundPenalty > 0) skillCheckParts.push(`(${game.i18n.localize("TRILHAMARGA.WoundPenalty")}: ${woundPenalty})`);
     if (protectionPenalty > 0) skillCheckParts.push(`(${game.i18n.localize("TRILHAMARGA.ProtectionPenalty")}: ${protectionPenalty})`);
+    
     const skillCheckText = skillCheckParts.join(" ");
     
     let flavor = `
@@ -202,10 +210,11 @@ export class TrilhamargaActor extends Actor {
   async rollSkill(skill) {
     const bonus = skill.system.level || 0;
     const woundPenalty = this.system.woundPenalty || 0;
-    const protectionPenalty = skill.system.protectionPenalty ? (this.system.protection.value || 0) : 0;
-    const totalBonus = bonus - woundPenalty - protectionPenalty;
+    const protectionPenalty = skill.system.protectionPenalty ? (this.system.protectionPenalty || 0) : 0;
+    const baseModifier = -(woundPenalty + protectionPenalty);
+    const totalBonus = bonus;
     
-    const modifier = await this._getModifierPrompt();
+    const modifier = await this._getModifierPrompt(baseModifier);
     if (modifier === null) return;
     
     let formula = "1d12";
@@ -218,7 +227,10 @@ export class TrilhamargaActor extends Actor {
 
     const roll = new Roll(formula);
     const skillCheckParts = [game.i18n.format("TRILHAMARGA.SkillCheck", {skill: skill.name})];
+    
+    if (woundPenalty > 0) skillCheckParts.push(`(${game.i18n.localize("TRILHAMARGA.WoundPenalty")}: ${woundPenalty})`);
     if (protectionPenalty > 0) skillCheckParts.push(`(${game.i18n.localize("TRILHAMARGA.ProtectionPenalty")}: ${protectionPenalty})`);
+    
     const skillCheckText = skillCheckParts.join(" ");
 
     let flavor = `
@@ -256,10 +268,12 @@ export class TrilhamargaActor extends Actor {
     const occultSkill = this.items.find(i => i.type === 'skill' && (i.name.toLowerCase() === 'occult' || i.name.toLowerCase() === 'ocultismo'));
     const bonus = occultSkill ? (occultSkill.system.level || 0) : 0;
     const woundPenalty = this.system.woundPenalty || 0;
-    const totalBonus = bonus - woundPenalty;
+    const protectionPenalty = occultSkill?.system.protectionPenalty ? (this.system.protectionPenalty || 0) : 0;
+    const baseModifier = -(woundPenalty + protectionPenalty);
+    const totalBonus = bonus;
     const difficulty = 8;
 
-    const modifier = await this._getModifierPrompt();
+    const modifier = await this._getModifierPrompt(baseModifier);
     if (modifier === null) return;
     
     let formula = "1d12";
@@ -271,10 +285,17 @@ export class TrilhamargaActor extends Actor {
     }
 
     const roll = new Roll(formula);
+    const skillCheckParts = [game.i18n.localize("TRILHAMARGA.Cast") + ": " + spell.name];
+    
+    if (woundPenalty > 0) skillCheckParts.push(`(${game.i18n.localize("TRILHAMARGA.WoundPenalty")}: ${woundPenalty})`);
+    if (protectionPenalty > 0) skillCheckParts.push(`(${game.i18n.localize("TRILHAMARGA.ProtectionPenalty")}: ${protectionPenalty})`);
+    
+    const skillCheckText = skillCheckParts.join(" ");
+
     let flavor = `
       <div class="trilhamarga chat-card">
         <div class="card-content">
-          <strong>${game.i18n.localize("TRILHAMARGA.Cast")}: ${spell.name}</strong>
+          <strong>${skillCheckText}</strong>
         </div>
       </div>
     `;
@@ -341,19 +362,27 @@ export class TrilhamargaActor extends Actor {
     });
   }
 
-  async _getModifierPrompt() {
+  async _getModifierPrompt(defaultValue = 0) {
     return new Promise(resolve => {
+      const options = [3, 2, 1, 0, -1, -2, -3];
+      if (!options.includes(defaultValue)) options.push(defaultValue);
+      options.sort((a, b) => b - a);
+
+      let optionsHtml = "";
+      for (let opt of options) {
+        const selected = opt === defaultValue ? "selected" : "";
+        let label = "";
+        if (opt > 0) label = game.i18n.format("TRILHAMARGA.PositiveChances", {n: opt});
+        else if (opt < 0) label = game.i18n.format("TRILHAMARGA.NegativeChances", {n: Math.abs(opt)});
+        else label = game.i18n.localize("TRILHAMARGA.Regular");
+        optionsHtml += `<option value="${opt}" ${selected}>${label}</option>`;
+      }
+
       new Dialog({
         title: game.i18n.localize("TRILHAMARGA.Modifier"),
         content: `
           <select id="modifier" style="width: 100%; margin-bottom: 10px;">
-            <option value="3">3 chances positivas</option>
-            <option value="2">2 chances positivas</option>
-            <option value="1">1 chance positiva</option>
-            <option value="0" selected>Regular</option>
-            <option value="-1">1 chance negativa</option>
-            <option value="-2">2 chances negativas</option>
-            <option value="-3">3 chances negativas</option>
+            ${optionsHtml}
           </select>
         `,
         buttons: {

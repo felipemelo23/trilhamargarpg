@@ -75,6 +75,9 @@
     "PowerLevel": "Power Level",
     "Cancel": "Cancel",
     "Modifier": "Modifier",
+    "PositiveChances": "{n} positive chances",
+    "NegativeChances": "{n} negative chances",
+    "Regular": "Regular",
     "SkillCheck": "{skill} check"
   }
 }

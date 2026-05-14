@@ -75,6 +75,9 @@
     "PowerLevel": "Nível de Poder",
     "Cancel": "Cancelar",
     "Modifier": "Modificador",
+    "PositiveChances": "{n} chances positivas",
+    "NegativeChances": "{n} chances negativas",
+    "Regular": "Regular",
     "SkillCheck": "Teste de {skill}"
   }
 }
