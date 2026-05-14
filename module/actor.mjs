@@ -309,7 +309,7 @@ export class TrilhamargaActor extends Actor {
           }
         },
         default: "roll"
-      }).render(true);
+      }, { width: 250 }).render(true);
     });
   }
 
@@ -339,7 +339,7 @@ export class TrilhamargaActor extends Actor {
           }
         },
         default: "roll"
-      }).render(true);
+      }, { width: 250 }).render(true);
     });
   }
 }

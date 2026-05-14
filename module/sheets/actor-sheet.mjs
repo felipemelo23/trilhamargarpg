@@ -229,7 +229,7 @@ export class TrilhamargaActorSheet extends ActorSheet {
           }
         },
         default: "roll"
-      }).render(true);
+      }, { width: 250 }).render(true);
     });
     return diff;
   }
@@ -261,7 +261,7 @@ export class TrilhamargaActorSheet extends ActorSheet {
           }
         },
         default: "roll"
-      }).render(true);
+      }, { width: 250 }).render(true);
     });
     return varVal;
   }
