@@ -214,6 +214,15 @@
   border-bottom: 1px solid #ddd;
 }
 
+.trilhamarga .item.flexcol {
+  display: flex;
+  flex-direction: column;
+}
+
+.trilhamarga .item.flexcol .flexrow {
+  width: 100%;
+}
+
 .trilhamarga .item .item-image {
   position: relative;
   width: 30px;
