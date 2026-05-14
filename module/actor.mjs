@@ -288,13 +288,13 @@ export class TrilhamargaActor extends Actor {
         title: game.i18n.localize("TRILHAMARGA.Variation"),
         content: `
           <select id="variation" style="width: 100%; margin-bottom: 10px;">
-            <option value="3">3 chances positivas (4d12kh)</option>
-            <option value="2">2 chances positivas (3d12kh)</option>
-            <option value="1">1 chance positiva (2d12kh)</option>
-            <option value="0" selected>Regular (1d12)</option>
-            <option value="-1">1 chance negativa (2d12kl)</option>
-            <option value="-2">2 chances negativas (3d12kl)</option>
-            <option value="-3">3 chances negativas (4d12kl)</option>
+            <option value="3">3 chances positivas</option>
+            <option value="2">2 chances positivas</option>
+            <option value="1">1 chance positiva</option>
+            <option value="0" selected>Regular</option>
+            <option value="-1">1 chance negativa</option>
+            <option value="-2">2 chances negativas</option>
+            <option value="-3">3 chances negativas</option>
           </select>
         `,
         buttons: {
