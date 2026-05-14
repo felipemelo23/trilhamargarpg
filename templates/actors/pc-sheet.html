@@ -125,13 +125,25 @@
 
     {{!-- Inventory Tab --}}
     <div class="tab inventory" data-group="primary" data-tab="inventory">
-      <div class="load-capacity-container">
-        <div class="load-capacity-label">
-          {{localize "TRILHAMARGA.LoadCapacity"}}: {{system.loadCapacity.current}} / {{system.loadCapacity.base}}
+      <div class="load-capacity-container flexrow">
+        <div class="load-capacity-item">
+          <div class="load-capacity-label">
+            {{localize "TRILHAMARGA.Body"}}: {{system.loadCapacity.body.current}} / {{system.loadCapacity.body.max}}
+          </div>
+          <div class="load-bar">
+            <div class="load-bar-fill {{system.loadCapacity.body.color}}" style="width: {{system.loadCapacity.body.pct}}%"></div>
+          </div>
         </div>
-        <div class="load-bar">
-          <div class="load-bar-fill {{system.loadCapacity.color}}" style="width: {{system.loadCapacity.pct}}%"></div>
+        {{#if (gt system.loadCapacity.backpack.max 0)}}
+        <div class="load-capacity-item">
+          <div class="load-capacity-label">
+            {{localize "TRILHAMARGA.Backpack"}}: {{system.loadCapacity.backpack.current}} / {{system.loadCapacity.backpack.max}}
+          </div>
+          <div class="load-bar">
+            <div class="load-bar-fill {{system.loadCapacity.backpack.color}}" style="width: {{system.loadCapacity.backpack.pct}}%"></div>
+          </div>
         </div>
+        {{/if}}
       </div>
       
       <h3>{{localize "TRILHAMARGA.Body"}}</h3>

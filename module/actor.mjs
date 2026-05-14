@@ -55,16 +55,23 @@ export class TrilhamargaActor extends Actor {
       (i.name.toLowerCase() === 'backpack' || i.name.toLowerCase() === 'mochila') &&
       i.system.location === 'body'
     );
-    const backpackBonus = hasBackpack ? 6 : 0;
+    
+    const bodyMax = 6 + Number(physique);
+    const backpackMax = hasBackpack ? 6 : 0;
 
-    const baseCap = 6 + Number(physique) + backpackBonus;
     system.loadCapacity = {
-      base: Math.floor(baseCap * 100) / 100,
-      current: 0
+      body: {
+        max: bodyMax,
+        current: 0
+      },
+      backpack: {
+        max: backpackMax,
+        current: 0
+      }
     };
 
     const physicalItems = actorData.items.filter(i => ['weapon', 'armor', 'shield', 'gear'].includes(i.type));
-    const currentLoad = physicalItems.reduce((acc, i) => {
+    for (let i of physicalItems) {
       const qty = i.system.quantity || 1;
       const rawTotalSlots = (i.system.slots || 0) * qty;
       const totalSlots = Math.floor(rawTotalSlots * 100) / 100;
@@ -76,18 +83,29 @@ export class TrilhamargaActor extends Actor {
         i.slotDisplay = "";
       }
 
-      if (i.system.location === 'other') return acc;
-      return acc + totalSlots;
-    }, 0);
-    system.loadCapacity.current = Math.floor(currentLoad * 100) / 100;
-    
-    // Calculate percentage and color for load bar
-    const pct = (system.loadCapacity.current / system.loadCapacity.base) * 100;
-    system.loadCapacity.pct = Math.min(pct, 100);
-    
-    if (pct <= 50) system.loadCapacity.color = "green";
-    else if (pct <= 75) system.loadCapacity.color = "yellow";
-    else system.loadCapacity.color = "red";
+      const loc = i.system.location || 'body';
+      if (loc === 'body' || loc === 'backpack') {
+        system.loadCapacity[loc].current += totalSlots;
+      }
+    }
+
+    // Round current values and calculate pct/color
+    for (let type of ['body', 'backpack']) {
+      const cap = system.loadCapacity[type];
+      cap.current = Math.floor(cap.current * 100) / 100;
+      
+      if (cap.max > 0) {
+        const pct = (cap.current / cap.max) * 100;
+        cap.pct = Math.min(pct, 100);
+        
+        if (pct <= 50) cap.color = "green";
+        else if (pct <= 75) cap.color = "yellow";
+        else cap.color = "red";
+      } else {
+        cap.pct = 0;
+        cap.color = "";
+      }
+    }
   }
 
   _prepareNpcData(actorData) {

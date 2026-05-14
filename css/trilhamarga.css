@@ -162,6 +162,12 @@
 /* Inventory and Load Bar */
 .trilhamarga .load-capacity-container {
   margin-bottom: 10px;
+  gap: 15px;
+  align-items: flex-end;
+}
+
+.trilhamarga .load-capacity-item {
+  flex: 1;
 }
 
 .trilhamarga .load-capacity-label {
