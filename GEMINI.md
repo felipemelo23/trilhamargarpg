@@ -17,7 +17,7 @@ Rolls are triggered via the `.rollable` class on character sheets or through the
 ### 2. Meta-currency (Destiny & Doom)
 - **Destiny (Group)**: Visible to all; GM can grant/spend; Players can spend.
 - **Doom (GM)**: Visible to all; Only GM can grant/spend.
-- **Tracker**: A persistent UI element (`DestinyTracker`) is anchored to the top-left of the screen.
+- **Tracker**: A persistent UI element (`DestinyTracker`) is anchored to the bottom-left of the screen, just above the players panel.
 
 ### 3. Data Architecture (`template.json`)
 - **Actors**: 
