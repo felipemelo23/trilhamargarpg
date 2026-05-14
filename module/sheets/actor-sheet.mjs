@@ -134,18 +134,8 @@ export class TrilhamargaActorSheet extends ActorSheet {
     // Rollable abilities
     html.find('.rollable').click(this._onRoll.bind(this));
 
-    // Rollable weapons
-    html.find('.rollable-weapon').click(this._onWeaponRoll.bind(this));
-
     // Item clicks (Icon or Name)
     html.find('.item-clickable').click(this._onItemClick.bind(this));
-  }
-
-  async _onWeaponRoll(event) {
-    event.preventDefault();
-    const li = $(event.currentTarget).parents(".item");
-    const item = this.actor.items.get(li.data("itemId"));
-    return this.actor.rollAttack(item);
   }
 
   async _onItemClick(event) {

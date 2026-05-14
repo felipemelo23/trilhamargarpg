@@ -98,37 +98,57 @@ export class TrilhamargaActor extends Actor {
     const skillName = weapon.system.associated_skill;
     const skill = this.items.find(i => i.type === 'skill' && i.name === skillName);
     const bonus = skill ? (skill.system.level || 0) : 0;
-    
-    const formula = bonus === 0 ? "1d12" : `1d12 + ${bonus}`;
-    const roll = new Roll(formula);
+    const woundPenalty = this.system.woundPenalty || 0;
+    const totalBonus = bonus - woundPenalty;
+
+    const variation = await this._getVariationPrompt();
+    if (variation === null) return;
+
+    // Attack Roll Formula
+    let atkFormula = "1d12";
+    if (variation > 0) atkFormula = `${variation + 1}d12kh`;
+    else if (variation < 0) atkFormula = `${Math.abs(variation) + 1}d12kl`;
+    if (totalBonus !== 0) {
+      atkFormula += totalBonus > 0 ? ` + ${totalBonus}` : ` - ${Math.abs(totalBonus)}`;
+    }
+
+    // Damage Roll Formula
+    const dmgFormula = weapon.system.damage || "1d2";
+
+    const atkRoll = new Roll(atkFormula);
+    const dmgRoll = new Roll(dmgFormula);
+
+    const skillCheckText = skill ? game.i18n.format("TRILHAMARGA.SkillCheck", {skill: skill.name}) : "";
     
     let flavor = `
       <div class="trilhamarga chat-card">
         <div class="card-content">
           <strong>${game.i18n.localize("TRILHAMARGA.Roll")}: ${weapon.name}</strong>
+          ${skillCheckText ? `<br/>${skillCheckText}` : ''}
         </div>
       </div>
     `;
 
-    // Create the message first to allow DSN to handle evaluation/animation
-    const message = await roll.toMessage({
-      speaker: ChatMessage.getSpeaker({ actor: this }),
-      flavor: flavor
-    });
-    
-    // Update the message with crit info after evaluation
-    const evaluatedRoll = message.rolls[0];
-    const dieValue = evaluatedRoll.dice[0].total;
-    if (dieValue === 12 || dieValue === 1) {
-      const critLabel = dieValue === 12 ? 
-        game.i18n.localize("TRILHAMARGA.CriticalSuccess") : 
-        game.i18n.localize("TRILHAMARGA.CriticalFailure");
-      
+    // Create message with both rolls
+    // We evaluate both before creating the message to handle crit logic
+    await atkRoll.evaluate({async: true});
+    await dmgRoll.evaluate({async: true});
+
+    const dieValue = atkRoll.dice[0].total;
+    let critLabel = "";
+    if (dieValue === 12) critLabel = game.i18n.localize("TRILHAMARGA.CriticalSuccess");
+    else if (dieValue === 1) critLabel = game.i18n.localize("TRILHAMARGA.CriticalFailure");
+
+    if (critLabel) {
       flavor = flavor.replace('</div>\n      </div>', `</div><div class="card-footer"><strong>${critLabel}</strong></div></div>`);
-      await message.update({ flavor });
     }
 
-    return evaluatedRoll;
+    return ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: this }),
+      flavor: flavor,
+      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+      rolls: [atkRoll, dmgRoll]
+    });
   }
 
   /**
