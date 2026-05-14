@@ -68,7 +68,19 @@ export class TrilhamargaActorSheet extends ActorSheet {
     data.divineDomains = divineDomains;
     data.divineTenets = divineTenets;
     data.spells = spells;
-    data.recipes = recipes;
+    
+    const complexityRank = {
+      'simple': 0,
+      'advanced': 1,
+      'superior': 2
+    };
+
+    data.recipes = recipes.sort((a, b) => {
+      const rankA = complexityRank[a.system.complexity] ?? 99;
+      const rankB = complexityRank[b.system.complexity] ?? 99;
+      if (rankA !== rankB) return rankA - rankB;
+      return a.name.localeCompare(b.name);
+    });
   }
 
   _prepareNpcItems(data) {
