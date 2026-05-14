@@ -242,10 +242,14 @@ export class TrilhamargaActor extends Actor {
       </div>
     `;
 
-    // Create message with initial flavor
-    const message = await roll.toMessage({
+    await roll.evaluate({async: true});
+    
+    // Create message
+    const message = await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this }),
-      flavor: flavor
+      flavor: flavor,
+      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+      rolls: [roll]
     });
 
     const evaluatedRoll = message.rolls[0];
@@ -302,9 +306,12 @@ export class TrilhamargaActor extends Actor {
       </div>
     `;
 
-    const message = await roll.toMessage({
+    await roll.evaluate({async: true});
+    const message = await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this }),
-      flavor: flavor
+      flavor: flavor,
+      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+      rolls: [roll]
     });
 
     const evaluatedRoll = message.rolls[0];
@@ -363,9 +370,12 @@ export class TrilhamargaActor extends Actor {
       </div>
     `;
 
-    const message = await roll.toMessage({
+    await roll.evaluate({async: true});
+    const message = await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this }),
-      flavor: flavor
+      flavor: flavor,
+      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+      rolls: [roll]
     });
 
     const evaluatedRoll = message.rolls[0];
