@@ -149,7 +149,7 @@ export class TrilhamargaActor extends Actor {
 
     // Create message with both rolls
     // We evaluate both before creating the message to handle crit logic
-    await atkRoll.evaluate({async: true});
+    await atkRoll.evaluate();
     
     // Check for critical success/failure
     const dieValue = atkRoll.dice[0].total;
@@ -157,7 +157,7 @@ export class TrilhamargaActor extends Actor {
     if (dieValue === 12) critLabel = game.i18n.localize("TRILHAMARGA.CriticalSuccess");
     else if (dieValue === 1) critLabel = game.i18n.localize("TRILHAMARGA.CriticalFailure");
 
-    await dmgRoll.evaluate({async: true});
+    await dmgRoll.evaluate();
 
     if (critLabel) {
       flavor = flavor.replace('</div>\n      </div>', `</div><div class="card-footer"><strong>${critLabel}</strong></div></div>`);
@@ -202,7 +202,7 @@ export class TrilhamargaActor extends Actor {
       </div>
     `;
 
-    await atkRoll.evaluate({async: true});
+    await atkRoll.evaluate();
     
     // Check for critical success/failure
     const dieValue = atkRoll.dice[0].total;
@@ -210,7 +210,7 @@ export class TrilhamargaActor extends Actor {
     if (dieValue === 12) critLabel = game.i18n.localize("TRILHAMARGA.CriticalSuccess");
     else if (dieValue === 1) critLabel = game.i18n.localize("TRILHAMARGA.CriticalFailure");
 
-    await dmgRoll.evaluate({async: true});
+    await dmgRoll.evaluate();
 
     if (critLabel) {
       flavor = flavor.replace('</div>\n      </div>', `</div><div class="card-footer"><strong>${critLabel}</strong></div></div>`);
@@ -242,7 +242,7 @@ export class TrilhamargaActor extends Actor {
       </div>
     `;
 
-    await roll.evaluate({async: true});
+    await roll.evaluate();
     
     // Create message
     const message = await ChatMessage.create({
@@ -306,7 +306,7 @@ export class TrilhamargaActor extends Actor {
       </div>
     `;
 
-    await roll.evaluate({async: true});
+    await roll.evaluate();
     const message = await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this }),
       flavor: flavor,
@@ -370,7 +370,7 @@ export class TrilhamargaActor extends Actor {
       </div>
     `;
 
-    await roll.evaluate({async: true});
+    await roll.evaluate();
     const message = await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this }),
       flavor: flavor,
