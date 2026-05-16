@@ -121,7 +121,8 @@ body.game .sheet.app header.sheet-header {
 }
 
 .trilhamarga .counter-large .value-group input {
-  width: 3ch;
+  width: auto;
+  min-width: 1ch;
   field-sizing: content;
   padding: 0;
   font-size: 24px;
