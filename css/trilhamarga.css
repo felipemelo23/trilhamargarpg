@@ -1,4 +1,12 @@
 /* Global Styles */
+.trilhamarga, .mce-content-body {
+  font-family: "Signika", sans-serif;
+}
+
+.mce-content-body {
+  padding: 12px !important;
+}
+
 .trilhamarga .grid {
   display: grid;
   gap: 15px;

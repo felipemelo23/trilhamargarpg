@@ -44,6 +44,9 @@ Hooks.once("init", async function() {
   Items.unregisterSheet("core", ItemSheet);
   Items.registerSheet("trilhamarga", TrilhamargaItemSheet, { makeDefault: true });
 
+  // Add system styles to TinyMCE editor
+  CONFIG.TinyMCE.content_css.push("systems/trilhamarga/css/trilhamarga.css");
+
   // Register system settings
   game.settings.register("trilhamarga", "destiny", {
     name: "TRILHAMARGA.Destiny",
