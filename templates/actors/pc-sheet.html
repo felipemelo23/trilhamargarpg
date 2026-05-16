@@ -305,8 +305,17 @@
           {{#if (or item.system.taboo item.system.first_tenet item.system.second_tenet)}}
           <div class="item-tenets">
             {{#if item.system.taboo}}<div><strong>{{localize "TRILHAMARGA.Taboo"}}:</strong> {{item.system.taboo}}</div>{{/if}}
-            {{#if item.system.first_tenet}}<div><strong>{{localize "TRILHAMARGA.FirstDivineTenet"}}:</strong> {{item.system.first_tenet}}</div>{{/if}}
-            {{#if item.system.second_tenet}}<div><strong>{{localize "TRILHAMARGA.SecondDivineTenet"}}:</strong> {{item.system.second_tenet}}</div>{{/if}}
+            {{#if (or item.system.first_tenet item.system.second_tenet)}}
+            <div>
+              <strong>{{localize "TRILHAMARGA.Tenets"}}:</strong> 
+              {{#if (and item.system.first_tenet item.system.second_tenet)}}
+                {{item.system.first_tenet}} {{localize "TRILHAMARGA.And"}} {{item.system.second_tenet}}.
+              {{else}}
+                {{#if item.system.first_tenet}}{{item.system.first_tenet}}.{{/if}}
+                {{#if item.system.second_tenet}}{{item.system.second_tenet}}.{{/if}}
+              {{/if}}
+            </div>
+            {{/if}}
           </div>
           {{/if}}
         </li>
