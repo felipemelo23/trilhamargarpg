@@ -252,6 +252,7 @@ export class TrilhamargaActorSheet extends ActorSheet {
 
     // Default icons
     if (type === 'wound') itemData.img = 'icons/skills/wounds/injury-triple-slash-bleed.webp';
+    else if (type === 'note') itemData.img = 'icons/sundries/scrolls/scroll-writing-white.webp';
 
     return await this.actor.createEmbeddedDocuments("Item", [itemData]);
   }
