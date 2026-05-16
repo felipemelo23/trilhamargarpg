@@ -373,6 +373,13 @@
   border-top: none;
   padding: 8px;
   display: block;
+  font-family: "Signika", sans-serif;
+}
+
+.trilhamarga input:focus,
+.trilhamarga textarea:focus,
+.trilhamarga select:focus {
+  box-shadow: none !important;
 }
 
 /* Tracker styling */
