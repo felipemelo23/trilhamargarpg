@@ -35,6 +35,10 @@
 }
 
 /* Header Area */
+body.game .sheet.app header.sheet-header {
+  display: block;
+}
+
 .trilhamarga .sheet-header {
   border-bottom: 2px solid #444;
   padding-bottom: 15px;
