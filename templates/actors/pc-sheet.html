@@ -302,9 +302,11 @@
               <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
             </div>
           </div>
-          {{#if item.system.taboo}}
+          {{#if (or item.system.taboo item.system.first_tenet item.system.second_tenet)}}
           <div class="item-tenets">
-            <div><strong>{{localize "TRILHAMARGA.Taboo"}}:</strong> {{item.system.taboo}}</div>
+            {{#if item.system.taboo}}<div><strong>{{localize "TRILHAMARGA.Taboo"}}:</strong> {{item.system.taboo}}</div>{{/if}}
+            {{#if item.system.first_tenet}}<div><strong>{{localize "TRILHAMARGA.FirstDivineTenet"}}:</strong> {{item.system.first_tenet}}</div>{{/if}}
+            {{#if item.system.second_tenet}}<div><strong>{{localize "TRILHAMARGA.SecondDivineTenet"}}:</strong> {{item.system.second_tenet}}</div>{{/if}}
           </div>
           {{/if}}
         </li>

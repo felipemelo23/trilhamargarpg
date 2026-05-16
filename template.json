@@ -91,7 +91,9 @@
     },
     "divine_domain": {
       "templates": ["base"],
-      "taboo": ""
+      "taboo": "",
+      "first_tenet": "",
+      "second_tenet": ""
     },
     "divine_tenet": {
       "templates": ["base"],
