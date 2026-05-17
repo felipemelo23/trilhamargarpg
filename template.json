@@ -105,7 +105,8 @@
     },
     "spell": {
       "templates": ["base"],
-      "sustained": false
+      "sustained": false,
+      "associated_ability": ""
     },
     "recipe": {
       "regular_effect": "",

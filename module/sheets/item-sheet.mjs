@@ -36,6 +36,14 @@ export class TrilhamargaItemSheet extends ItemSheet {
         .sort();
     }
 
+    // Get actor abilities for NPC spells
+    if (this.item.actor && this.item.actor.type === "npc") {
+      data.actorAbilities = this.item.actor.items
+        .filter(i => i.type === "npc_ability")
+        .map(i => i.name)
+        .sort();
+    }
+
     // Skill level options
     data.skillLevelOptions = {
       "-1": game.i18n.localize("TRILHAMARGA.SkillLevels.-1"),

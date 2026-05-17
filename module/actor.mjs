@@ -487,10 +487,24 @@ export class TrilhamargaActor extends Actor {
    * Custom Spell Casting implementation
    */
   async castSpell(spell) {
-    const occultSkill = this.items.find(i => i.type === 'skill' && (i.name.toLowerCase() === 'occult' || i.name.toLowerCase() === 'ocultismo'));
-    const bonus = occultSkill ? (occultSkill.system.level || 0) : 0;
+    let bonus = 0;
+    let skillName = game.i18n.localize("TRILHAMARGA.Normal");
+    let protectionPenaltySource = null;
+
+    if (this.type === 'pc') {
+      const occultSkill = this.items.find(i => i.type === 'skill' && (i.name.toLowerCase() === 'occult' || i.name.toLowerCase() === 'ocultismo'));
+      bonus = occultSkill ? (occultSkill.system.level || 0) : 0;
+      skillName = occultSkill ? occultSkill.name : game.i18n.localize("TRILHAMARGA.Normal");
+      protectionPenaltySource = occultSkill;
+    } else if (this.type === 'npc') {
+      const abilityName = spell.system.associated_ability;
+      const ability = this.items.find(i => i.type === 'npc_ability' && i.name === abilityName);
+      bonus = ability ? (ability.system.bonus || 0) : 0;
+      skillName = ability ? ability.name : game.i18n.localize("TRILHAMARGA.Normal");
+    }
+
     const woundPenalty = Number(this.system.woundPenalty || 0);
-    const protectionPenalty = occultSkill?.system.protectionPenalty ? Number(this.system.protectionPenalty || 0) : 0;
+    const protectionPenalty = (protectionPenaltySource?.system.protectionPenalty) ? Number(this.system.protectionPenalty || 0) : 0;
     const arcaneFatigue = Number(this.system.arcane_fatigue?.value || 0);
     const baseModifier = -(woundPenalty + protectionPenalty + arcaneFatigue);
     const totalBonus = bonus;
@@ -543,7 +557,7 @@ export class TrilhamargaActor extends Actor {
     const chatData = {
       actor: this,
       spell: spell,
-      skillName: occultSkill ? occultSkill.name : game.i18n.localize("TRILHAMARGA.Normal"),
+      skillName: skillName,
       flavorText: flavorText,
       rollHtml: await roll.render(),
       resultLabel: resultLabel,

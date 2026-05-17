@@ -164,6 +164,19 @@
       <label>{{localize "TRILHAMARGA.Sustained"}}</label>
       <input type="checkbox" name="system.sustained" {{checked system.sustained}} />
     </div>
+    {{#if (eq item.actor.type "npc")}}
+    <div class="form-group">
+      <label>{{localize "TRILHAMARGA.Skill"}}</label>
+      <select name="system.associated_ability">
+        {{#select system.associated_ability}}
+        <option value=""></option>
+        {{#each actorAbilities}}
+        <option value="{{this}}">{{this}}</option>
+        {{/each}}
+        {{/select}}
+      </select>
+    </div>
+    {{/if}}
     {{/if}}
 
     {{!-- Recipe --}}
