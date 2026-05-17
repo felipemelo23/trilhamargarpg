@@ -333,6 +333,7 @@ export class TrilhamargaActor extends Actor {
 
     return ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this }),
+      alias: game.user.name,
       content: content,
       type: CONST.CHAT_MESSAGE_TYPES.ROLL,
       rolls: [roll]
