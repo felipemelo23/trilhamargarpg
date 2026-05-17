@@ -27,7 +27,7 @@ export class TrilhamargaActor extends Actor {
     system.life.max = 6 + (2 * physique);
     
     const wounds = actorData.items.filter(i => i.type === 'wound');
-    const totalSeverity = wounds.reduce((acc, w) => acc + (w.system.severity || 0), 0);
+    const totalSeverity = wounds.reduce((acc, w) => acc + Number(w.system.severity || 0), 0);
     
     system.life.value = Math.max(0, system.life.max - totalSeverity);
 
@@ -40,7 +40,7 @@ export class TrilhamargaActor extends Actor {
 
     // Protection
     const protectionItems = actorData.items.filter(i => ['armor', 'shield'].includes(i.type) && i.system.location === 'body');
-    system.protection.max = protectionItems.reduce((acc, a) => acc + (a.system.protection || 0), 0);
+    system.protection.max = protectionItems.reduce((acc, a) => acc + Number(a.system.protection || 0), 0);
     system.protection.value = Math.min(system.protection.value, system.protection.max);
 
     // Protection Penalty (1 for every 4 points of max protection)
@@ -72,8 +72,8 @@ export class TrilhamargaActor extends Actor {
 
     const physicalItems = actorData.items.filter(i => ['weapon', 'armor', 'shield', 'gear'].includes(i.type));
     for (let i of physicalItems) {
-      const qty = i.system.quantity || 1;
-      const rawTotalSlots = (i.system.slots || 0) * qty;
+      const qty = Number(i.system.quantity || 1);
+      const rawTotalSlots = Number(i.system.slots || 0) * qty;
       const totalSlots = Math.floor(rawTotalSlots * 100) / 100;
 
       // Prepare display string for slots if total > 1
@@ -119,8 +119,8 @@ export class TrilhamargaActor extends Actor {
     const skillName = weapon.system.associated_skill;
     const skill = this.items.find(i => i.type === 'skill' && i.name === skillName);
     const bonus = skill ? (skill.system.level || 0) : 0;
-    const woundPenalty = this.system.woundPenalty || 0;
-    const protectionPenalty = (skill?.system.protectionPenalty) ? (this.system.protectionPenalty || 0) : 0;
+    const woundPenalty = Number(this.system.woundPenalty || 0);
+    const protectionPenalty = (skill?.system.protectionPenalty) ? Number(this.system.protectionPenalty || 0) : 0;
     const baseModifier = -(woundPenalty + protectionPenalty);
     const totalBonus = bonus;
 
@@ -285,8 +285,8 @@ export class TrilhamargaActor extends Actor {
    */
   async rollSkill(skill) {
     const bonus = skill.system.level || 0;
-    const woundPenalty = this.system.woundPenalty || 0;
-    const protectionPenalty = skill.system.protectionPenalty ? (this.system.protectionPenalty || 0) : 0;
+    const woundPenalty = Number(this.system.woundPenalty || 0);
+    const protectionPenalty = skill.system.protectionPenalty ? Number(this.system.protectionPenalty || 0) : 0;
     const baseModifier = -(woundPenalty + protectionPenalty);
     const totalBonus = bonus;
     
@@ -337,9 +337,9 @@ return ChatMessage.create({
   async castSpell(spell) {
     const occultSkill = this.items.find(i => i.type === 'skill' && (i.name.toLowerCase() === 'occult' || i.name.toLowerCase() === 'ocultismo'));
     const bonus = occultSkill ? (occultSkill.system.level || 0) : 0;
-    const woundPenalty = this.system.woundPenalty || 0;
-    const protectionPenalty = occultSkill?.system.protectionPenalty ? (this.system.protectionPenalty || 0) : 0;
-    const arcaneFatigue = this.system.arcane_fatigue?.value || 0;
+    const woundPenalty = Number(this.system.woundPenalty || 0);
+    const protectionPenalty = occultSkill?.system.protectionPenalty ? Number(this.system.protectionPenalty || 0) : 0;
+    const arcaneFatigue = Number(this.system.arcane_fatigue?.value || 0);
     const baseModifier = -(woundPenalty + protectionPenalty + arcaneFatigue);
     const totalBonus = bonus;
     const difficulty = 8;

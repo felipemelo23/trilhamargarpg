@@ -17,7 +17,7 @@
             <label>{{localize "TRILHAMARGA.XP"}}</label>
             <div class="xp-controls flexrow">
               <a class="xp-control xp-minus" title="-1"><i class="fas fa-minus"></i></a>
-              <input type="text" name="system.xp" value="{{system.xp}}" />
+              <input type="number" name="system.xp" value="{{system.xp}}" />
               <a class="xp-control xp-plus" title="+1"><i class="fas fa-plus"></i></a>
             </div>
           </div>
@@ -40,7 +40,7 @@
     <div class="counter-large stamina">
       <label>{{localize "TRILHAMARGA.Stamina"}}</label>
       <div class="value-group">
-        <input type="text" name="system.stamina.value" value="{{system.stamina.value}}" min="0" />
+        <input type="number" name="system.stamina.value" value="{{system.stamina.value}}" min="0" />
         <span class="sep">/</span>
         <span class="max">{{system.stamina.max}}</span>
       </div>
@@ -48,7 +48,7 @@
     <div class="counter-large protection">
       <label>{{localize "TRILHAMARGA.Protection"}}</label>
       <div class="value-group">
-        <input type="text" name="system.protection.value" value="{{system.protection.value}}" min="0" />
+        <input type="number" name="system.protection.value" value="{{system.protection.value}}" min="0" />
         <span class="sep">/</span>
         <span class="max">{{system.protection.max}}</span>
       </div>
@@ -281,7 +281,7 @@
       <div class="counter-large favor">
         <label>{{localize "TRILHAMARGA.Favor"}}</label>
         <div class="value-group">
-          <input type="text" name="system.favor.value" value="{{system.favor.value}}" min="0" />
+          <input type="number" name="system.favor.value" value="{{system.favor.value}}" min="0" />
           <span class="sep">/</span>
           <span class="max">{{system.favor.max}}</span>
         </div>
@@ -364,7 +364,7 @@
       <div class="counter-large arcane_fatigue">
         <label>{{localize "TRILHAMARGA.ArcaneFatigue"}}</label>
         <div class="value-group">
-          <input type="text" name="system.arcane_fatigue.value" value="{{system.arcane_fatigue.value}}" min="0" />
+          <input type="number" name="system.arcane_fatigue.value" value="{{system.arcane_fatigue.value}}" min="0" />
         </div>
       </div>
       <ol class="items-list">
