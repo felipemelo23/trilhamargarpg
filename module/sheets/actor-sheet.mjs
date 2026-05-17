@@ -84,7 +84,7 @@ export class TrilhamargaActorSheet extends ActorSheet {
       return a.name.localeCompare(b.name);
     });
     data.inventory = inventory;
-    data.wounds = wounds;
+    data.wounds = wounds.sort((a, b) => (b.system.severity || 0) - (a.system.severity || 0));
     data.divineDomains = divineDomains;
     data.divineTenets = divineTenets;
     data.spells = spells;
