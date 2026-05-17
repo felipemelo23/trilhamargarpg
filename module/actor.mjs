@@ -144,7 +144,7 @@ export class TrilhamargaActor extends Actor {
       }
     }
 
-    const roll = new Roll(formula);
+    const roll = new Roll(atkFormula);
     const dmgRoll = new Roll(dmgFormula);
 
     await roll.evaluate();
@@ -155,7 +155,7 @@ export class TrilhamargaActor extends Actor {
     if (protectionPenalty > 0) flavorParts.push(`(${game.i18n.localize("TRILHAMARGA.ProtectionPenalty")}: ${protectionPenalty})`);
     const flavorText = flavorParts.join(" ");
 
-    const dieValue = atkRoll.dice[0].total;
+    const dieValue = roll.dice[0].total;
     let atkResultLabel = "";
     let resultClass = "";
     if (dieValue === 12) {
@@ -300,9 +300,6 @@ export class TrilhamargaActor extends Actor {
     
     const modifier = await this._getModifierPrompt(baseModifier);
     if (modifier === null) return;
-
-    const difficulty = await this._getDifficultyPrompt();
-    if (difficulty === null) return;
     
     let formula = "1d12";
     if (modifier > 0) formula = `${modifier + 1}d12kh`;
@@ -320,7 +317,6 @@ export class TrilhamargaActor extends Actor {
     if (protectionPenalty > 0) flavorParts.push(`(${game.i18n.localize("TRILHAMARGA.ProtectionPenalty")}: ${protectionPenalty})`);
     const flavorText = flavorParts.join(" ");
 
-    const resultValue = roll.total;
     const dieValue = roll.dice[0].total; 
     let resultLabel = "";
     let resultClass = "";
@@ -331,12 +327,6 @@ export class TrilhamargaActor extends Actor {
     } else if (dieValue === 1) {
       resultLabel = "TRILHAMARGA.CriticalFailure";
       resultClass = "critical-failure";
-    } else if (resultValue >= difficulty) {
-      resultLabel = "TRILHAMARGA.Success";
-      resultClass = "success";
-    } else {
-      resultLabel = "TRILHAMARGA.Failure";
-      resultClass = "failure";
     }
 
     const chatData = {
