@@ -2,18 +2,18 @@
   <div class="currency-item destiny">
     <label>{{localize "TRILHAMARGA.Destiny"}}</label>
     <div class="controls">
-      {{#if isGM}}<a class="destiny-up"><i class="fas fa-plus"></i></a>{{/if}}
-      <span>{{destiny}}</span>
       <a class="destiny-down"><i class="fas fa-minus"></i></a>
+      <span>{{destiny}}</span>
+      {{#if isGM}}<a class="destiny-up"><i class="fas fa-plus"></i></a>{{/if}}
     </div>
   </div>
   <div class="currency-item doom">
     <label>{{localize "TRILHAMARGA.Doom"}}</label>
     <div class="controls">
       {{#if isGM}}
-      <a class="doom-up"><i class="fas fa-plus"></i></a>
-      <span>{{doom}}</span>
       <a class="doom-down"><i class="fas fa-minus"></i></a>
+      <span>{{doom}}</span>
+      <a class="doom-up"><i class="fas fa-plus"></i></a>
       {{else}}
       <span>{{doom}}</span>
       {{/if}}
