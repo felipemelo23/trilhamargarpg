@@ -76,8 +76,8 @@ export class TrilhamargaActor extends Actor {
       const rawTotalSlots = Number(i.system.slots || 0) * qty;
       const totalSlots = Math.floor(rawTotalSlots * 100) / 100;
 
-      // Prepare display string for slots if total > 1
-      if (totalSlots > 1) {
+      // Prepare display string for slots if total >= 2
+      if (totalSlots >= 2) {
         i.slotDisplay = game.i18n.format("TRILHAMARGA.OccupiesSlots", {slots: totalSlots});
       } else {
         i.slotDisplay = "";
