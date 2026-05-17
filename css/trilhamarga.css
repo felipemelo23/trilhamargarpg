@@ -25,6 +25,26 @@
   align-items: center;
 }
 
+/* Chat Message Header Customization */
+.chat-log .message .message-header .message-sender {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chat-log .message .message-header .message-sender .player-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  object-fit: cover;
+  flex: none;
+}
+
+.chat-log .message .message-header .message-sender .player-name {
+  font-weight: bold;
+}
+
 /* Sheet Styles */
 .trilhamarga.sheet {
   min-height: 500px;

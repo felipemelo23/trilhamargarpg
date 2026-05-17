@@ -183,6 +183,7 @@ export class TrilhamargaActor extends Actor {
 
     return ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this }),
+      alias: game.user.name,
       flavor: flavor,
       type: CONST.CHAT_MESSAGE_TYPES.ROLL,
       rolls: [atkRoll, dmgRoll]
@@ -236,6 +237,7 @@ export class TrilhamargaActor extends Actor {
 
     return ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this }),
+      alias: game.user.name,
       flavor: flavor,
       type: CONST.CHAT_MESSAGE_TYPES.ROLL,
       rolls: [atkRoll, dmgRoll]
@@ -265,6 +267,7 @@ export class TrilhamargaActor extends Actor {
     // Create message
     const message = await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this }),
+      alias: game.user.name,
       flavor: flavor,
       type: CONST.CHAT_MESSAGE_TYPES.ROLL,
       rolls: [roll]
@@ -320,24 +323,22 @@ export class TrilhamargaActor extends Actor {
     let resultKey = "";
     if (dieValue === 12) resultKey = "TRILHAMARGA.CriticalSuccess";
     else if (dieValue === 1) resultKey = "TRILHAMARGA.CriticalFailure";
+const chatData = {
+  actor: this,
+  skillName: skill.name,
+  flavorText: flavorText,
+  rollHtml: await roll.render(),
+  resultLabel: resultKey
+};
 
-    const chatData = {
-      actor: this,
-      skillName: skill.name,
-      flavorText: flavorText,
-      rollHtml: await roll.render(),
-      resultLabel: resultKey
-    };
+const content = await renderTemplate("systems/trilhamarga/templates/chat/skill-roll.hbs", chatData);
 
-    const content = await renderTemplate("systems/trilhamarga/templates/chat/skill-roll.hbs", chatData);
-
-    return ChatMessage.create({
-      speaker: ChatMessage.getSpeaker({ actor: this }),
-      alias: game.user.name,
-      content: content,
-      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-      rolls: [roll]
-    });
+return ChatMessage.create({
+  speaker: ChatMessage.getSpeaker({ actor: this }),
+  content: content,
+  type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+  rolls: [roll]
+});
   }
 
   /**
@@ -384,6 +385,7 @@ export class TrilhamargaActor extends Actor {
     await roll.evaluate();
     const message = await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this }),
+      alias: game.user.name,
       flavor: flavor,
       type: CONST.CHAT_MESSAGE_TYPES.ROLL,
       rolls: [roll]
