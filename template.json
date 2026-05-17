@@ -87,7 +87,7 @@
     "wound": {
       "templates": ["base"],
       "severity": 1,
-      "category": "mild"
+      "category": "scar"
     },
     "divine_domain": {
       "templates": ["base"],

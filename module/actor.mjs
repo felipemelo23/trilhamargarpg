@@ -26,7 +26,7 @@ export class TrilhamargaActor extends Actor {
     // Calculate Life
     system.life.max = 6 + (2 * physique);
     
-    const wounds = actorData.items.filter(i => i.type === 'wound');
+    const wounds = actorData.items.filter(i => i.type === 'wound' && i.system.category !== 'scar');
     const totalSeverity = wounds.reduce((acc, w) => acc + Number(w.system.severity || 0), 0);
     
     system.life.value = Math.max(0, system.life.max - totalSeverity);
