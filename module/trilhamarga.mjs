@@ -87,18 +87,7 @@ Hooks.on("renderChatMessage", (message, html, data) => {
   const sender = html.find(".message-sender")[0];
   if ( !sender ) return;
 
-  // Create avatar
-  const avatar = document.createElement("img");
-  avatar.src = message.author.avatar;
-  avatar.classList.add("player-avatar");
-
-  // Create name element
-  const name = document.createElement("span");
-  name.classList.add("player-name");
-  name.innerText = message.author.name;
-
-  // Replace children
-  sender.replaceChildren(avatar, name);
+  sender.innerText = message.author.name;
 });
 
 Hooks.on("ready", async function() {
