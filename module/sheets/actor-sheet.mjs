@@ -140,7 +140,13 @@ export class TrilhamargaActorSheet extends ActorSheet {
 
   /** @override */
   async _onDrop(event) {
-    const data = TextEditor.decodeDataTransfer(event.dataTransfer);
+    let data;
+    try {
+      data = JSON.parse(event.dataTransfer.getData("text/plain"));
+    } catch (err) {
+      return false;
+    }
+
     const targetLocation = event.target.closest(".inventory-section")?.dataset.location;
     
     // If we're dropping an item onto a specific inventory section
