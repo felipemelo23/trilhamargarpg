@@ -98,7 +98,8 @@ export class TrilhamargaActor extends Actor {
         const pct = (cap.current / cap.max) * 100;
         cap.pct = Math.min(pct, 100);
         
-        if (pct <= 50) cap.color = "green";
+        if (pct > 100) cap.color = "black";
+        else if (pct <= 50) cap.color = "green";
         else if (pct <= 75) cap.color = "yellow";
         else cap.color = "red";
       } else {

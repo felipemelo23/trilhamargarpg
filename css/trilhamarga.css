@@ -261,6 +261,7 @@ body.game .sheet.app header.sheet-header {
 .trilhamarga .load-bar-fill.green { background-color: #4CAF50; }
 .trilhamarga .load-bar-fill.yellow { background-color: #FFEB3B; }
 .trilhamarga .load-bar-fill.red { background-color: #F44336; }
+.trilhamarga .load-bar-fill.black { background-color: #000000; }
 
 .trilhamarga .tab h3 {
   margin: 10px 0 5px 0;
