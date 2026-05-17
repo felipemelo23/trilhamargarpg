@@ -163,28 +163,27 @@ export class TrilhamargaActor extends Actor {
   async rollAttack(weapon) {
     // Ammunition tracking
     const weaponName = weapon.name.toLowerCase();
-    let ammoName = "";
-    let localizedAmmo = "";
+    let ammoRegex = null;
+    let ammoLabel = "";
     
     if (weaponName.includes("bow") || weaponName.includes("arco")) {
-      ammoName = "arrow";
-      localizedAmmo = "flecha";
+      ammoRegex = /^(arrow|flecha)s?$/i;
+      ammoLabel = game.i18n.lang === "pt-BR" ? "flechas" : "arrows";
     } else if (weaponName.includes("crossbow") || weaponName.includes("besta")) {
-      ammoName = "bolt";
-      localizedAmmo = "virete";
+      ammoRegex = /^(bolt|virote)s?$/i;
+      ammoLabel = game.i18n.lang === "pt-BR" ? "virotes" : "bolts";
     }
 
-    if (ammoName) {
+    if (ammoRegex) {
       const ammoItem = this.items.find(i => 
-        (i.name.toLowerCase() === ammoName || i.name.toLowerCase() === localizedAmmo) && 
+        ammoRegex.test(i.name) && 
         i.system.location === "body"
       );
 
       if (!ammoItem || (ammoItem.system.quantity || 0) <= 0) {
-        const ammoToDisplay = game.i18n.lang === "pt-BR" ? localizedAmmo : ammoName;
         ChatMessage.create({
           speaker: ChatMessage.getSpeaker({ actor: this }),
-          content: game.i18n.format("TRILHAMARGA.RunOutOfAmmo", {ammo: ammoToDisplay})
+          content: game.i18n.format("TRILHAMARGA.RunOutOfAmmo", {ammo: ammoLabel})
         });
         return;
       }
