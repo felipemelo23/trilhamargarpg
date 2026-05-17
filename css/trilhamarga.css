@@ -548,29 +548,44 @@ body.game .sheet.app header.sheet-header {
   margin-bottom: 5px;
 }
 
-.trilhamarga.chat-card .weapon-name {
+.trilhamarga.chat-card .weapon-name,
+.trilhamarga.chat-card .spell-name {
   font-weight: bold;
   font-size: 20px;
   margin: 5px 0;
   border: none;
 }
 
-.trilhamarga.chat-card .atk-result {
+.trilhamarga.chat-card .spell-description {
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.trilhamarga.chat-card .atk-result,
+.trilhamarga.chat-card .cast-result {
   margin-top: 5px;
   margin-bottom: 8px;
   text-align: center;
 }
 
-.trilhamarga.chat-card .damage-section {
+.trilhamarga.chat-card .damage-section,
+.trilhamarga.chat-card .power-level-section {
   margin-top: 15px;
   border-top: 1px solid #ccc;
   padding-top: 10px;
 }
 
-.trilhamarga.chat-card .damage-header {
+.trilhamarga.chat-card .damage-header,
+.trilhamarga.chat-card .power-level-header {
   font-size: 16px;
   margin-bottom: 5px;
   text-align: left;
+}
+
+.trilhamarga.chat-card .power-level-value {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .trilhamarga.chat-card .dice-roll .dice-formula,

@@ -356,66 +356,52 @@ return ChatMessage.create({
     }
 
     const roll = new Roll(formula);
-    const skillCheckParts = [game.i18n.format("TRILHAMARGA.Casting", {spell: spell.name})];
-    
-    if (woundPenalty > 0) skillCheckParts.push(`(${game.i18n.localize("TRILHAMARGA.WoundPenalty")}: ${woundPenalty})`);
-    if (protectionPenalty > 0) skillCheckParts.push(`(${game.i18n.localize("TRILHAMARGA.ProtectionPenalty")}: ${protectionPenalty})`);
-    if (arcaneFatigue > 0) skillCheckParts.push(`(${game.i18n.localize("TRILHAMARGA.ArcaneFatigue")}: ${arcaneFatigue})`);
-    
-    const skillCheckText = skillCheckParts.join(" ");
-
-    let flavor = `
-      <div class="trilhamarga chat-card">
-        <div class="card-content">
-          <strong>${skillCheckText}</strong>
-        </div>
-      </div>
-    `;
-
     await roll.evaluate();
-    const message = await ChatMessage.create({
+
+    const flavorParts = [];
+    if (woundPenalty > 0) flavorParts.push(`(${game.i18n.localize("TRILHAMARGA.WoundPenalty")}: ${woundPenalty})`);
+    if (protectionPenalty > 0) flavorParts.push(`(${game.i18n.localize("TRILHAMARGA.ProtectionPenalty")}: ${protectionPenalty})`);
+    if (arcaneFatigue > 0) flavorParts.push(`(${game.i18n.localize("TRILHAMARGA.ArcaneFatigue")}: ${arcaneFatigue})`);
+    const flavorText = flavorParts.join(" ");
+
+    const resultValue = roll.total;
+    const dieValue = roll.dice[0].total;
+
+    let resultLabel = "";
+    let success = false;
+    if (dieValue === 12) {
+      resultLabel = "TRILHAMARGA.CriticalSuccess";
+      success = true;
+    } else if (dieValue === 1) {
+      resultLabel = "TRILHAMARGA.CriticalFailure";
+      success = false;
+    } else if (resultValue >= difficulty) {
+      resultLabel = "TRILHAMARGA.Success";
+      success = true;
+    } else {
+      resultLabel = "TRILHAMARGA.Failure";
+      success = false;
+    }
+
+    const chatData = {
+      actor: this,
+      spell: spell,
+      skillName: occultSkill ? occultSkill.name : game.i18n.localize("TRILHAMARGA.Regular"),
+      flavorText: flavorText,
+      rollHtml: await roll.render(),
+      resultLabel: resultLabel,
+      success: success,
+      powerLevel: success ? (resultValue - 7) : 0
+    };
+
+    const content = await renderTemplate("systems/trilhamarga/templates/chat/spell-cast.hbs", chatData);
+
+    return ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this }),
-      alias: game.user.name,
-      flavor: flavor,
+      content: content,
       type: CONST.CHAT_MESSAGE_TYPES.ROLL,
       rolls: [roll]
     });
-
-    const evaluatedRoll = message.rolls[0];
-    const resultValue = evaluatedRoll.total;
-    const dieValue = evaluatedRoll.dice[0].total;
-
-    let result = "";
-    let success = false;
-    if (dieValue === 12) {
-      result = "TRILHAMARGA.CriticalSuccess";
-      success = true;
-    } else if (dieValue === 1) {
-      result = "TRILHAMARGA.CriticalFailure";
-      success = false;
-    } else if (resultValue >= difficulty) {
-      result = "TRILHAMARGA.Success";
-      success = true;
-    } else {
-      result = "TRILHAMARGA.Failure";
-      success = false;
-    }
-
-    let resultHtml = `<strong>${game.i18n.localize(result)}</strong>`;
-    
-    if (success) {
-      const powerLevel = resultValue - 7;
-      resultHtml += `<br/><strong>${game.i18n.localize("TRILHAMARGA.PowerLevel")}:</strong> ${powerLevel}`;
-    }
-
-    if (spell.system.description) {
-      resultHtml += `<br/>${spell.system.description}`;
-    }
-
-    flavor = flavor.replace('</div>\n      </div>', `</div><div class="card-footer">${resultHtml}</div></div>`);
-    await message.update({ flavor });
-
-    return evaluatedRoll;
   }
 
   async _getDifficultyPrompt() {
