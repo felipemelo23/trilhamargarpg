@@ -78,7 +78,11 @@ export class TrilhamargaActorSheet extends ActorSheet {
       else if (i.type === 'note') notes.push(i);
     }
 
-    data.skills = skills;
+    data.skills = skills.sort((a, b) => {
+      const levelDiff = (b.system.level || 0) - (a.system.level || 0);
+      if (levelDiff !== 0) return levelDiff;
+      return a.name.localeCompare(b.name);
+    });
     data.inventory = inventory;
     data.wounds = wounds;
     data.divineDomains = divineDomains;
