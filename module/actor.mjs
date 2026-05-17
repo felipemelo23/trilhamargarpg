@@ -211,7 +211,12 @@ export class TrilhamargaActor extends Actor {
 
     // Consume ammo only after roll is confirmed
     if (ammoItem) {
-      await ammoItem.update({ "system.quantity": ammoItem.system.quantity - 1 });
+      const newQty = Number(ammoItem.system.quantity || 0) - 1;
+      if (newQty <= 0) {
+        await ammoItem.delete();
+      } else {
+        await ammoItem.update({ "system.quantity": newQty });
+      }
     }
 
     // Attack Roll Formula
