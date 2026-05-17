@@ -225,6 +225,7 @@ export class TrilhamargaActorSheet extends ActorSheet {
     switch (item.type) {
       case 'skill':
         return this.actor.rollSkill(item);
+      case 'armor':
       case 'shield':
       case 'gear':
       case 'npc_ability':
@@ -239,20 +240,18 @@ export class TrilhamargaActorSheet extends ActorSheet {
         return;
     }
   }
-
   async _shareItemToChat(item) {
-    let content = `
-      <div class="trilhamarga chat-card">
-        <div class="card-content">
-          <strong>${item.name}</strong>
-          ${item.system.description ? `<br/><hr/>${item.system.description}` : ''}
-        </div>
-      </div>
-    `;
-    
+    const chatData = {
+      actor: this.actor,
+      item: item
+    };
+
+    const content = await renderTemplate("systems/trilhamarga/templates/chat/item-card.hbs", chatData);
+
     return ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-      content: content
+      content: content,
+      type: CONST.CHAT_MESSAGE_TYPES.OTHER
     });
   }
 
