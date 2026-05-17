@@ -111,6 +111,26 @@
     </ol>
 
     <h3>{{localize "TRILHAMARGA.Spells"}}</h3>
+    <div class="flexrow" style="gap: 20px; margin-bottom: 10px; align-items: flex-end;">
+      <div class="form-group" style="flex: 1;">
+        <label>{{localize "TRILHAMARGA.CastingAbility"}}</label>
+        <select name="system.castingAbility">
+          {{#select system.castingAbility}}
+          <option value=""></option>
+          {{#each actorAbilities}}
+          <option value="{{this}}">{{this}}</option>
+          {{/each}}
+          {{/select}}
+        </select>
+      </div>
+      <div class="counter-large arcane_fatigue" style="flex: 0 0 120px;">
+        <label>{{localize "TRILHAMARGA.ArcaneFatigue"}}</label>
+        <div class="value-group">
+          <input type="number" name="system.arcane_fatigue.value" value="{{system.arcane_fatigue.value}}" min="0" />
+        </div>
+      </div>
+    </div>
+
     <ol class="items-list npc-spells">
       <li class="item flexrow item-header">
         <div class="item-name">{{localize "TRILHAMARGA.Name"}}</div>

@@ -497,7 +497,10 @@ export class TrilhamargaActor extends Actor {
       skillName = occultSkill ? occultSkill.name : game.i18n.localize("TRILHAMARGA.Normal");
       protectionPenaltySource = occultSkill;
     } else if (this.type === 'npc') {
-      const abilityName = spell.system.associated_ability;
+      const spellAbilityName = spell.system.associated_ability;
+      const globalAbilityName = this.system.castingAbility;
+      const abilityName = spellAbilityName || globalAbilityName;
+      
       const ability = this.items.find(i => i.type === 'npc_ability' && i.name === abilityName);
       bonus = ability ? (ability.system.bonus || 0) : 0;
       skillName = ability ? ability.name : game.i18n.localize("TRILHAMARGA.Normal");

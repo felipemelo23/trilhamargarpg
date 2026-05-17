@@ -29,6 +29,10 @@ export class TrilhamargaActorSheet extends ActorSheet {
       this._preparePcItems(data);
     } else if (this.actor.type === 'npc') {
       this._prepareNpcItems(data);
+      data.actorAbilities = this.actor.items
+        .filter(i => i.type === "npc_ability")
+        .map(i => i.name)
+        .sort();
     }
 
     return data;
