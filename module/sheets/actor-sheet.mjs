@@ -139,11 +139,39 @@ export class TrilhamargaActorSheet extends ActorSheet {
   }
 
   /** @override */
+  async _onDrop(event) {
+    const data = TextEditor.decodeDataTransfer(event.dataTransfer);
+    const targetLocation = event.target.closest(".inventory-section")?.dataset.location;
+    
+    // If we're dropping an item onto a specific inventory section
+    if (data.type === "Item" && targetLocation) {
+      // Handle existing items on the same actor
+      const item = await Item.fromDropData(data);
+      if (item && item.actor?.id === this.actor.id && ["weapon", "armor", "shield", "gear"].includes(item.type)) {
+        await item.update({"system.location": targetLocation});
+        // If dropped on the section (not an item), prevent default to avoid redundant sorting logic
+        if (!event.target.closest(".item")) return;
+      }
+      // Store location for _onDropItemCreate
+      this._dropLocation = targetLocation;
+    } else {
+      this._dropLocation = null;
+    }
+
+    return super._onDrop(event);
+  }
+
+  /** @override */
   async _onDropItemCreate(itemData) {
     itemData = itemData instanceof Array ? itemData : [itemData];
     const itemsToCreate = [];
 
-    for (const item of itemData) {
+    for (let item of itemData) {
+      // Apply drop location if available
+      if (this._dropLocation && ["weapon", "armor", "shield", "gear"].includes(item.type)) {
+        item = foundry.utils.mergeObject(item, {"system.location": this._dropLocation}, {inplace: false});
+      }
+
       // Check if item is stackable and already exists
       const isStackable = item.system?.stackable;
       const existingItem = isStackable ? this.actor.items.find(i => i.name === item.name && i.type === item.type) : null;
