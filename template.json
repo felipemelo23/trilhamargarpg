@@ -43,11 +43,7 @@
       "defense": 0,
       "resistance": 0,
       "movement": "",
-      "castingAbility": "",
-      "arcane_fatigue": {
-        "value": 0,
-        "max": 0
-      }
+      "castingAbility": ""
     }
   },
   "Item": {

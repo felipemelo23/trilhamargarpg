@@ -508,7 +508,7 @@ export class TrilhamargaActor extends Actor {
 
     const woundPenalty = Number(this.system.woundPenalty || 0);
     const protectionPenalty = (protectionPenaltySource?.system.protectionPenalty) ? Number(this.system.protectionPenalty || 0) : 0;
-    const arcaneFatigue = Number(this.system.arcane_fatigue?.value || 0);
+    const arcaneFatigue = this.type === 'pc' ? Number(this.system.arcane_fatigue?.value || 0) : 0;
     const baseModifier = -(woundPenalty + protectionPenalty + arcaneFatigue);
     const totalBonus = bonus;
     const difficulty = 8;
