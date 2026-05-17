@@ -49,6 +49,14 @@ Hooks.once("init", async function() {
 
   // Dice Tray compatibility
   CONFIG.Dice.types = ["d4", "d6", "d8", "d10", "d12", "d20", "d100"];
+  CONFIG.Dice.rolls = [Roll];
+  CONFIG.Dice.terms.d4 = Die;
+  CONFIG.Dice.terms.d6 = Die;
+  CONFIG.Dice.terms.d8 = Die;
+  CONFIG.Dice.terms.d10 = Die;
+  CONFIG.Dice.terms.d12 = Die;
+  CONFIG.Dice.terms.d20 = Die;
+  CONFIG.Dice.terms.d100 = Die;
 
   // Register system settings
   game.settings.register("trilhamarga", "destiny", {
@@ -85,6 +93,26 @@ Hooks.once("init", async function() {
     "systems/trilhamarga/templates/chat/skill-roll.hbs",
     "systems/trilhamarga/templates/chat/weapon-attack.hbs"
   ]);
+});
+
+Hooks.on('dcCalcWhitelist', (whitelist, actor) => {
+  whitelist.trilhamarga = {
+    flags: {
+      adv: false
+    },
+    abilities: [],
+    attributes: ['life.value', 'stamina.value', 'protection.value', 'vitality.value', 'woundPenalty', 'protectionPenalty']
+  };
+});
+
+Hooks.on('diceCalculator', (app, html, data) => {
+  // If dcCalcWhitelist didn't pick it up, we try to inject it here
+  if (data && !data.trilhamarga) {
+    data.trilhamarga = {
+      abilities: [],
+      attributes: ['life.value', 'stamina.value', 'protection.value', 'vitality.value']
+    };
+  }
 });
 
 Hooks.on("renderChatMessage", (message, html, data) => {
