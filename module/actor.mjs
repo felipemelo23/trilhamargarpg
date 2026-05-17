@@ -323,7 +323,6 @@ export class TrilhamargaActor extends Actor {
 
     const chatData = {
       actor: this,
-      user: game.user,
       skillName: skill.name,
       flavorText: flavorText,
       rollHtml: await roll.render(),
