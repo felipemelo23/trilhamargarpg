@@ -98,14 +98,17 @@ export class TrilhamargaActorSheet extends ActorSheet {
 
     const attacks = [];
     const abilities = [];
+    const spells = [];
 
     for (let i of items) {
       if (i.type === 'npc_attack') attacks.push(i);
       else if (i.type === 'npc_ability') abilities.push(i);
+      else if (i.type === 'spell') spells.push(i);
     }
 
     data.attacks = attacks;
     data.abilities = abilities;
+    data.spells = spells;
   }
 
   /** @override */
