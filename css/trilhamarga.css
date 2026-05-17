@@ -76,6 +76,15 @@ body.game .sheet.app header.sheet-header {
 
 .trilhamarga .header-basics {
   margin-top: 5px;
+  gap: 10px;
+}
+
+.trilhamarga .header-basics .resource {
+  flex: 1;
+}
+
+.trilhamarga .header-basics .resource-xp {
+  flex: 0 0 90px;
 }
 
 .trilhamarga .header-basics input {

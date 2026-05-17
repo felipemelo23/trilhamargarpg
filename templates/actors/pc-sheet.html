@@ -8,12 +8,12 @@
         <h1 class="charname">
           <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'TRILHAMARGA.Name'}}"/>
         </h1>
-        <div class="header-basics grid grid-2col">
+        <div class="header-basics flexrow">
           <div class="resource">
             <label>{{localize "TRILHAMARGA.Ancestry"}}</label>
             <input type="text" name="system.ancestry" value="{{system.ancestry}}" />
           </div>
-          <div class="resource">
+          <div class="resource resource-xp">
             <label>{{localize "TRILHAMARGA.XP"}}</label>
             <input type="number" name="system.xp" value="{{system.xp}}" />
           </div>
