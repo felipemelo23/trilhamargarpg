@@ -228,8 +228,9 @@ export class TrilhamargaActorSheet extends ActorSheet {
       case 'armor':
       case 'shield':
       case 'gear':
-      case 'npc_ability':
         return this._shareItemToChat(item);
+      case 'npc_ability':
+        return this.actor.useNpcAbility(item);
       case 'spell':
         return this.actor.castSpell(item);
       case 'divine_tenet':

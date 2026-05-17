@@ -291,6 +291,25 @@ export class TrilhamargaActor extends Actor {
   }
 
   /**
+   * Use an NPC Ability
+   */
+  async useNpcAbility(ability) {
+    const chatData = {
+      actor: this,
+      abilityName: ability.name,
+      description: ability.system.description
+    };
+
+    const content = await renderTemplate("systems/trilhamarga/templates/chat/npc-ability.hbs", chatData);
+
+    return ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: this }),
+      content: content,
+      style: CONST.CHAT_MESSAGE_STYLES.OTHER
+    });
+  }
+
+  /**
    * Custom Roll implementation
    */
   async roll(difficulty = 6, modifier = 0) {
