@@ -39,7 +39,7 @@ export class TrilhamargaActor extends Actor {
     system.stamina.value = Math.min(system.stamina.value, system.stamina.max);
 
     // Protection
-    const protectionItems = actorData.items.filter(i => ['armor', 'shield'].includes(i.type));
+    const protectionItems = actorData.items.filter(i => ['armor', 'shield'].includes(i.type) && i.system.location === 'body');
     system.protection.max = protectionItems.reduce((acc, a) => acc + (a.system.protection || 0), 0);
     system.protection.value = Math.min(system.protection.value, system.protection.max);
 
