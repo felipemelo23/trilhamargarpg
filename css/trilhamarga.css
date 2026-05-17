@@ -382,7 +382,7 @@ body.game .sheet.app header.sheet-header {
   padding: 5px;
   border: 1px solid #aaa;
   border-radius: 3px;
-  min-height: 80px;
+  min-height: auto;
   font-family: "Signika", sans-serif;
 }
 
