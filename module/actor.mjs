@@ -112,6 +112,26 @@ export class TrilhamargaActor extends Actor {
     // NPCs have less derived logic in this system so far
   }
 
+  /** @override */
+  async _preUpdate(changed, options, user) {
+    await super._preUpdate(changed, options, user);
+
+    // For NPCs, if max vitality or protection changes, update the current value to match
+    if (this.type === 'npc') {
+      const vMax = getProperty(changed, "system.vitality.max");
+      const vVal = getProperty(changed, "system.vitality.value");
+      if (vMax !== undefined && vVal === undefined) {
+        changed["system.vitality.value"] = vMax;
+      }
+
+      const pMax = getProperty(changed, "system.protection.max");
+      const pVal = getProperty(changed, "system.protection.value");
+      if (pMax !== undefined && pVal === undefined) {
+        changed["system.protection.value"] = pMax;
+      }
+    }
+  }
+
   /**
    * Custom Attack Roll implementation
    */
