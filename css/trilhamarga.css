@@ -87,6 +87,10 @@ body.game .sheet.app header.sheet-header {
   flex: 0 0 90px;
 }
 
+.trilhamarga .header-basics .resource-xp input {
+  text-align: center;
+}
+
 .trilhamarga .header-basics input {
   padding-left: 5px;
 }
