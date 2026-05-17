@@ -89,7 +89,7 @@
           <i class="fas fa-dice-d12 weapon-roll-icon"></i>
         </div>
         <div class="item-name">
-           {{item.name}} ({{#if (gt item.system.bonus 0)}}+{{/if}}{{item.system.bonus}})
+           {{item.name}}{{#if (ne item.system.bonus 0)}} ({{#if (gt item.system.bonus 0)}}+{{/if}}{{item.system.bonus}}){{/if}}
            {{#if item.system.description}}
            <span class="item-description">{{{item.system.description}}}</span>
            {{/if}}
