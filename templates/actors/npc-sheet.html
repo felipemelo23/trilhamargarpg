@@ -111,13 +111,13 @@
     </ol>
 
     <h3>{{localize "TRILHAMARGA.Spells"}}</h3>
-    <div class="counter-large arcane_fatigue" style="max-width: 150px; margin-bottom: 10px;">
-      <label>{{localize "TRILHAMARGA.ArcaneFatigue"}}</label>
-      <div class="value-group">
-        <input type="number" name="system.arcane_fatigue.value" value="{{system.arcane_fatigue.value}}" min="0" />
-      </div>
-    </div>
     <ol class="items-list">
+      <li class="item flexrow item-header">
+        <div class="item-name">{{localize "TRILHAMARGA.Name"}}</div>
+        <div class="item-controls">
+          <a class="item-control item-create" data-type="spell"><i class="fas fa-plus"></i></a>
+        </div>
+      </li>
       {{#each spells as |item id|}}
       <li class="item flexrow" data-item-id="{{item._id}}">
         <div class="item-image item-clickable">
@@ -126,11 +126,8 @@
         </div>
         <div class="item-name item-clickable">
            {{item.name}}
-           {{#if item.system.sustained}}
-           <span class="item-description"> ({{localize "TRILHAMARGA.Sustained"}})</span>
-           {{/if}}
            {{#if item.system.description}}
-           <span class="item-description">{{{item.system.description}}}</span>
+           <span class="item-description"> - {{{item.system.description}}}</span>
            {{/if}}
         </div>
         <div class="item-controls">
@@ -140,6 +137,5 @@
       </li>
       {{/each}}
     </ol>
-    <a class="item-control item-create" data-type="spell"><i class="fas fa-plus"></i> {{localize "TRILHAMARGA.Spells"}}</a>
   </section>
 </form>
