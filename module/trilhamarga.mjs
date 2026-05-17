@@ -99,7 +99,8 @@ Hooks.once("init", async function() {
     "systems/trilhamarga/templates/chat/skill-roll.hbs",
     "systems/trilhamarga/templates/chat/weapon-attack.hbs",
     "systems/trilhamarga/templates/chat/npc-attack.hbs",
-    "systems/trilhamarga/templates/chat/npc-ability.hbs"
+    "systems/trilhamarga/templates/chat/npc-ability.hbs",
+    "systems/trilhamarga/templates/chat/out-of-ammo.hbs"
   ]);
 });
 
