@@ -152,7 +152,7 @@ Hooks.on("preCreateToken", (token, data, options, userId) => {
  */
 class DestinyTracker extends Application {
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       id: "destiny-tracker",
       template: "systems/trilhamarga/templates/ui/destiny-tracker.html",
       popOut: false

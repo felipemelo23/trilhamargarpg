@@ -118,14 +118,14 @@ export class TrilhamargaActor extends Actor {
 
     // For NPCs, if max vitality or protection changes, update the current value to match
     if (this.type === 'npc') {
-      const vMax = getProperty(changed, "system.vitality.max");
-      if (vMax !== undefined && getProperty(changed, "system.vitality.value") === undefined) {
-        setProperty(changed, "system.vitality.value", Number(vMax));
+      const vMax = foundry.utils.getProperty(changed, "system.vitality.max");
+      if (vMax !== undefined && foundry.utils.getProperty(changed, "system.vitality.value") === undefined) {
+        foundry.utils.setProperty(changed, "system.vitality.value", Number(vMax));
       }
 
-      const pMax = getProperty(changed, "system.protection.max");
-      if (pMax !== undefined && getProperty(changed, "system.protection.value") === undefined) {
-        setProperty(changed, "system.protection.value", Number(pMax));
+      const pMax = foundry.utils.getProperty(changed, "system.protection.max");
+      if (pMax !== undefined && foundry.utils.getProperty(changed, "system.protection.value") === undefined) {
+        foundry.utils.setProperty(changed, "system.protection.value", Number(pMax));
       }
     }
   }

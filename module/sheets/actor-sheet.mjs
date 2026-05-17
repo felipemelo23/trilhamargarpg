@@ -5,7 +5,7 @@ export class TrilhamargaActorSheet extends ActorSheet {
 
   /** @override */
   static get defaultOptions() {
-    return mergeObject(super.defaultOptions, {
+    return foundry.utils.mergeObject(super.defaultOptions, {
       classes: ["trilhamarga", "sheet", "actor"],
       width: 700,
       height: 800,
@@ -163,7 +163,7 @@ export class TrilhamargaActorSheet extends ActorSheet {
       const delta = parseInt(value);
       if (!isNaN(delta)) {
         const name = el.name;
-        const current = getProperty(this.actor, name);
+        const current = foundry.utils.getProperty(this.actor, name);
         const newValue = Math.max(0, (Number(current) || 0) + delta);
         el.value = newValue;
       }
