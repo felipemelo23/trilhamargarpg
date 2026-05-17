@@ -236,6 +236,8 @@ export class TrilhamargaActorSheet extends ActorSheet {
         return this._promptMiracle(item);
       case 'weapon':
         return this.actor.rollAttack(item);
+      case 'wound':
+        return this.actor.rollWound(item);
       case 'npc_attack':
         return this.actor.rollNpcAttack(item);
       default:

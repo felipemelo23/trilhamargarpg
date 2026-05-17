@@ -106,6 +106,7 @@
     "Cast": "Cast",
     "Casting": "Casting {spell}",
     "PowerLevel": "Power Level",
+    "WoundRecoveryCheck": "Physique check vs {wound}",
     "Cancel": "Cancel",
     "Modifier": "Modifier",
     "PositiveChance": "1 positive chance",

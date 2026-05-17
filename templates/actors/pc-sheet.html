@@ -247,11 +247,9 @@
         </li>
         {{#each wounds as |item id|}}
         <li class="item flexrow" data-item-id="{{item._id}}">
-          <div class="item-image">
-            <img class="item-icon {{#if (eq item.type 'weapon')}}rollable-weapon{{/if}}" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
-            {{#if (eq item.type 'weapon')}}
+          <div class="item-image item-clickable">
+            <img class="item-icon" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
             <i class="fas fa-dice-d20 weapon-roll-icon"></i>
-            {{/if}}
           </div>
           <div class="item-name">
             {{item.name}}

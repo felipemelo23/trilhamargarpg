@@ -334,6 +334,73 @@ export class TrilhamargaActor extends Actor {
   }
 
   /**
+   * Custom Wound Roll implementation
+   */
+  async rollWound(wound) {
+    const physiqueSkill = this.items.find(i => i.type === 'skill' && (i.name.toLowerCase() === 'physique' || i.name.toLowerCase() === 'físico'));
+    const bonus = physiqueSkill ? (physiqueSkill.system.level || 0) : 0;
+    const woundPenalty = Number(this.system.woundPenalty || 0);
+    const baseModifier = -woundPenalty;
+    const totalBonus = bonus;
+    const severity = Number(wound.system.severity || 0);
+    const difficulty = 7 + severity;
+
+    const modifier = await this._getModifierPrompt(baseModifier);
+    if (modifier === null) return;
+    
+    let formula = "1d12";
+    if (modifier > 0) formula = `${modifier + 1}d12kh`;
+    else if (modifier < 0) formula = `${Math.abs(modifier) + 1}d12kl`;
+
+    if (totalBonus !== 0) {
+      formula += totalBonus > 0 ? ` + ${totalBonus}` : ` - ${Math.abs(totalBonus)}`;
+    }
+
+    const roll = new Roll(formula);
+    await roll.evaluate();
+
+    const flavorParts = [game.i18n.format("TRILHAMARGA.WoundRecoveryCheck", {wound: wound.name})];
+    if (woundPenalty > 0) flavorParts.push(`(${game.i18n.localize("TRILHAMARGA.WoundPenalty")}: ${woundPenalty})`);
+    const flavorText = flavorParts.join(" ");
+
+    const resultValue = roll.total;
+    const dieValue = roll.dice[0].total;
+
+    let resultLabel = "";
+    let success = false;
+    if (dieValue === 12) {
+      resultLabel = "TRILHAMARGA.CriticalSuccess";
+      success = true;
+    } else if (dieValue === 1) {
+      resultLabel = "TRILHAMARGA.CriticalFailure";
+      success = false;
+    } else if (resultValue >= difficulty) {
+      resultLabel = "TRILHAMARGA.Success";
+      success = true;
+    } else {
+      resultLabel = "TRILHAMARGA.Failure";
+      success = false;
+    }
+
+    const chatData = {
+      actor: this,
+      skillName: physiqueSkill ? physiqueSkill.name : game.i18n.localize("TRILHAMARGA.Regular"),
+      flavorText: flavorText,
+      rollHtml: await roll.render(),
+      resultLabel: resultLabel
+    };
+
+    const content = await renderTemplate("systems/trilhamarga/templates/chat/skill-roll.hbs", chatData);
+
+    return ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: this }),
+      content: content,
+      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+      rolls: [roll]
+    });
+  }
+
+  /**
    * Custom Spell Casting implementation
    */
   async castSpell(spell) {

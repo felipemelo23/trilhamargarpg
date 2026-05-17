@@ -106,6 +106,7 @@
     "Cast": "Conjurar",
     "Casting": "Conjurando {spell}",
     "PowerLevel": "Nível de Poder",
+    "WoundRecoveryCheck": "Teste de Físico vs {wound}",
     "Cancel": "Cancelar",
     "Modifier": "Modificador",
     "PositiveChance": "1 chance positiva",
