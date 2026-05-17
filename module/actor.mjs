@@ -161,6 +161,38 @@ export class TrilhamargaActor extends Actor {
    * Custom Attack Roll implementation
    */
   async rollAttack(weapon) {
+    // Ammunition tracking
+    const weaponName = weapon.name.toLowerCase();
+    let ammoName = "";
+    let localizedAmmo = "";
+    
+    if (weaponName.includes("bow") || weaponName.includes("arco")) {
+      ammoName = "arrow";
+      localizedAmmo = "flecha";
+    } else if (weaponName.includes("crossbow") || weaponName.includes("besta")) {
+      ammoName = "bolt";
+      localizedAmmo = "virete";
+    }
+
+    if (ammoName) {
+      const ammoItem = this.items.find(i => 
+        (i.name.toLowerCase() === ammoName || i.name.toLowerCase() === localizedAmmo) && 
+        i.system.location === "body"
+      );
+
+      if (!ammoItem || (ammoItem.system.quantity || 0) <= 0) {
+        const ammoToDisplay = game.i18n.lang === "pt-BR" ? localizedAmmo : ammoName;
+        ChatMessage.create({
+          speaker: ChatMessage.getSpeaker({ actor: this }),
+          content: game.i18n.format("TRILHAMARGA.RunOutOfAmmo", {ammo: ammoToDisplay})
+        });
+        return;
+      }
+
+      // Consume ammo
+      await ammoItem.update({ "system.quantity": ammoItem.system.quantity - 1 });
+    }
+
     const skillName = weapon.system.associated_skill;
     const skill = this.items.find(i => i.type === 'skill' && i.name === skillName);
     const bonus = skill ? (skill.system.level || 0) : 0;

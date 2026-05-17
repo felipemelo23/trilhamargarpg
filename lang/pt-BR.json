@@ -118,6 +118,7 @@
     "NegativeChances": "{n} chances negativas",
     "Normal": "Normal",
     "SkillCheck": "Teste de {skill}",
-    "FightingWithWeaponCheck": "Teste de Lutar com {weapon}"
+    "FightingWithWeaponCheck": "Teste de Lutar com {weapon}",
+    "RunOutOfAmmo": "Você ficou sem {ammo}."
   }
 }
