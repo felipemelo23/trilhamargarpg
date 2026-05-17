@@ -178,6 +178,20 @@ export class TrilhamargaActorSheet extends ActorSheet {
 
     // Item clicks (Icon or Name)
     html.find('.item-clickable').click(this._onItemClick.bind(this));
+
+    // XP Adjustment
+    html.find('.xp-control').click(this._onXpAdjust.bind(this));
+  }
+
+  async _onXpAdjust(event) {
+    event.preventDefault();
+    const button = event.currentTarget;
+    const isPlus = button.classList.contains('xp-plus');
+    const amount = isPlus ? 1 : -1;
+    const currentXp = this.actor.system.xp || 0;
+    const newXp = Math.max(0, currentXp + amount);
+    
+    await this.actor.update({ "system.xp": newXp });
   }
 
   async _onItemClick(event) {

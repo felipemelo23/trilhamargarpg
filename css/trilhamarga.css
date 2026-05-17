@@ -87,8 +87,41 @@ body.game .sheet.app header.sheet-header {
   flex: 0 0 90px;
 }
 
+.trilhamarga .xp-controls {
+  position: relative;
+  align-items: center;
+}
+
+.trilhamarga .xp-controls .xp-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.2s;
+  cursor: pointer;
+  font-size: 10px;
+  color: #333;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+.trilhamarga .xp-controls:hover .xp-control {
+  opacity: 1;
+}
+
+.trilhamarga .xp-controls .xp-minus {
+  left: 2px;
+}
+
+.trilhamarga .xp-controls .xp-plus {
+  right: 2px;
+}
+
 .trilhamarga .header-basics .resource-xp input {
   text-align: center;
+  padding: 0 15px; /* Add space for buttons */
 }
 
 .trilhamarga .header-basics input {
