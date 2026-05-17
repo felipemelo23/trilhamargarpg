@@ -1,2 +1,4 @@
 .DS_Store
 *.log
+!packs/**/*.log
+packs/**/LOCK
