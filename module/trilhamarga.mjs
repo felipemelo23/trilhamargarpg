@@ -34,6 +34,12 @@ Hooks.once("init", async function() {
     return game.i18n.localize(`TRILHAMARGA.SkillLevels.${level}`);
   });
 
+  Handlebars.registerHelper('formatBonus', function(value) {
+    const num = Number(value) || 0;
+    if (num > 0) return `+${num}`;
+    return num.toString();
+  });
+
   // Define custom Entity classes
   CONFIG.Actor.documentClass = TrilhamargaActor;
   CONFIG.Item.documentClass = TrilhamargaItem;
