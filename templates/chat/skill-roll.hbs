@@ -1,0 +1,20 @@
+<div class="trilhamarga chat-card skill-roll">
+    <header class="card-header flexrow">
+        <img src="{{actor.img}}" title="{{actor.name}}" width="36" height="36"/>
+        <h3 class="actor-name">{{actor.name}}</h3>
+    </header>
+
+    <div class="card-content">
+        <div class="skill-name">{{localize "TRILHAMARGA.SkillCheck" skill=skillName}}</div>
+        {{#if flavorText}}<div class="flavor-text">{{flavorText}}</div>{{/if}}
+        <div class="dice-roll">
+            {{{rollHtml}}}
+        </div>
+    </div>
+
+    {{#if resultLabel}}
+    <footer class="card-footer">
+        <strong>{{localize resultLabel}}</strong>
+    </footer>
+    {{/if}}
+</div>

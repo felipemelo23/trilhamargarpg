@@ -309,42 +309,34 @@ export class TrilhamargaActor extends Actor {
     }
 
     const roll = new Roll(formula);
-    const skillCheckParts = [game.i18n.format("TRILHAMARGA.SkillCheck", {skill: skill.name})];
-    
-    if (woundPenalty > 0) skillCheckParts.push(`(${game.i18n.localize("TRILHAMARGA.WoundPenalty")}: ${woundPenalty})`);
-    if (protectionPenalty > 0) skillCheckParts.push(`(${game.i18n.localize("TRILHAMARGA.ProtectionPenalty")}: ${protectionPenalty})`);
-    
-    const skillCheckText = skillCheckParts.join(" ");
-
-    let flavor = `
-      <div class="trilhamarga chat-card">
-        <div class="card-content">
-          <strong>${skillCheckText}</strong>
-        </div>
-      </div>
-    `;
-
     await roll.evaluate();
-    const message = await ChatMessage.create({
-      speaker: ChatMessage.getSpeaker({ actor: this }),
-      flavor: flavor,
-      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-      rolls: [roll]
-    });
 
-    const evaluatedRoll = message.rolls[0];
-    const dieValue = evaluatedRoll.dice[0].total; 
+    const flavorParts = [];
+    if (woundPenalty > 0) flavorParts.push(`(${game.i18n.localize("TRILHAMARGA.WoundPenalty")}: ${woundPenalty})`);
+    if (protectionPenalty > 0) flavorParts.push(`(${game.i18n.localize("TRILHAMARGA.ProtectionPenalty")}: ${protectionPenalty})`);
+    const flavorText = flavorParts.join(" ");
 
+    const dieValue = roll.dice[0].total; 
     let resultKey = "";
     if (dieValue === 12) resultKey = "TRILHAMARGA.CriticalSuccess";
     else if (dieValue === 1) resultKey = "TRILHAMARGA.CriticalFailure";
 
-    if (resultKey) {
-      flavor = flavor.replace('</div>\n      </div>', `</div><div class="card-footer"><strong>${game.i18n.localize(resultKey)}</strong></div></div>`);
-      await message.update({ flavor });
-    }
+    const chatData = {
+      actor: this,
+      skillName: skill.name,
+      flavorText: flavorText,
+      rollHtml: await roll.render(),
+      resultLabel: resultKey
+    };
 
-    return evaluatedRoll;
+    const content = await renderTemplate("systems/trilhamarga/templates/chat/skill-roll.hbs", chatData);
+
+    return ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: this }),
+      content: content,
+      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+      rolls: [roll]
+    });
   }
 
   /**
