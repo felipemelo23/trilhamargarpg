@@ -145,11 +145,9 @@
         <ol class="items-list">
           {{#each inventory.body as |item id|}}
           <li class="item flexrow" data-item-id="{{item._id}}">
-            <div class="item-image {{#if (ne item.type 'armor')}}item-clickable{{/if}}">
+            <div class="item-image item-clickable">
               <img class="item-icon {{#if (eq item.type 'weapon')}}rollable-weapon{{/if}}" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
-              {{#if (ne item.type 'armor')}}
               <i class="fas fa-dice-d20 weapon-roll-icon"></i>
-              {{/if}}
             </div>
             <div class="item-name">
               {{item.name}}{{#if (and item.system.stackable (gt item.system.quantity 1))}} ({{item.system.quantity}}){{/if}}{{#if (eq item.type 'weapon')}} ({{item.displayDamage}}){{/if}}
@@ -187,11 +185,9 @@
         <ol class="items-list">
           {{#each inventory.backpack as |item id|}}
           <li class="item flexrow" data-item-id="{{item._id}}">
-            <div class="item-image {{#if (ne item.type 'armor')}}item-clickable{{/if}}">
+            <div class="item-image item-clickable">
               <img class="item-icon {{#if (eq item.type 'weapon')}}rollable-weapon{{/if}}" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
-              {{#if (ne item.type 'armor')}}
               <i class="fas fa-dice-d20 weapon-roll-icon"></i>
-              {{/if}}
             </div>
             <div class="item-name">
               {{item.name}}{{#if (and item.system.stackable (gt item.system.quantity 1))}} ({{item.system.quantity}}){{/if}}{{#if (eq item.type 'weapon')}} ({{item.displayDamage}}){{/if}}
@@ -216,11 +212,9 @@
         <ol class="items-list">
           {{#each inventory.other as |item id|}}
           <li class="item flexrow" data-item-id="{{item._id}}">
-            <div class="item-image {{#if (ne item.type 'armor')}}item-clickable{{/if}}">
+            <div class="item-image item-clickable">
               <img class="item-icon {{#if (eq item.type 'weapon')}}rollable-weapon{{/if}}" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
-              {{#if (ne item.type 'armor')}}
               <i class="fas fa-dice-d20 weapon-roll-icon"></i>
-              {{/if}}
             </div>
             <div class="item-name">
                {{item.name}}{{#if (and item.system.stackable (gt item.system.quantity 1))}} ({{item.system.quantity}}){{/if}}{{#if (eq item.type 'weapon')}} ({{item.displayDamage}}){{/if}}
