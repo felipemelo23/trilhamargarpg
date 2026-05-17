@@ -116,16 +116,30 @@ export class TrilhamargaActor extends Actor {
   async _preUpdate(changed, options, user) {
     await super._preUpdate(changed, options, user);
 
-    // For NPCs, if max vitality or protection changes, update the current value to match
+    // For NPCs, enforce that current vitality and protection do not exceed their max
     if (this.type === 'npc') {
+      // Vitality
       const vMax = foundry.utils.getProperty(changed, "system.vitality.max");
-      if (vMax !== undefined && foundry.utils.getProperty(changed, "system.vitality.value") === undefined) {
-        foundry.utils.setProperty(changed, "system.vitality.value", Number(vMax));
+      const vVal = foundry.utils.getProperty(changed, "system.vitality.value");
+      
+      if (vMax !== undefined) {
+        // If max changed, either match value to it or cap new value
+        const newVVal = vVal !== undefined ? vVal : vMax; 
+        foundry.utils.setProperty(changed, "system.vitality.value", Math.min(Number(newVVal), Number(vMax)));
+      } else if (vVal !== undefined) {
+        // If only value changed, cap it at existing max
+        foundry.utils.setProperty(changed, "system.vitality.value", Math.min(Number(vVal), Number(this.system.vitality.max)));
       }
 
+      // Protection
       const pMax = foundry.utils.getProperty(changed, "system.protection.max");
-      if (pMax !== undefined && foundry.utils.getProperty(changed, "system.protection.value") === undefined) {
-        foundry.utils.setProperty(changed, "system.protection.value", Number(pMax));
+      const pVal = foundry.utils.getProperty(changed, "system.protection.value");
+      
+      if (pMax !== undefined) {
+        const newPVal = pVal !== undefined ? pVal : pMax;
+        foundry.utils.setProperty(changed, "system.protection.value", Math.min(Number(newPVal), Number(pMax)));
+      } else if (pVal !== undefined) {
+        foundry.utils.setProperty(changed, "system.protection.value", Math.min(Number(pVal), Number(this.system.protection.max)));
       }
     }
   }
