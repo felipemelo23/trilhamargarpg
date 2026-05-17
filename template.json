@@ -42,7 +42,11 @@
       },
       "defense": 0,
       "resistance": 0,
-      "movement": ""
+      "movement": "",
+      "arcane_fatigue": {
+        "value": 0,
+        "max": 0
+      }
     }
   },
   "Item": {
