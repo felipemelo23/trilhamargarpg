@@ -311,25 +311,26 @@ export class TrilhamargaActor extends Actor {
     const flavorText = flavorParts.join(" ");
 
     const dieValue = roll.dice[0].total; 
-    let resultKey = "";
-    if (dieValue === 12) resultKey = "TRILHAMARGA.CriticalSuccess";
-    else if (dieValue === 1) resultKey = "TRILHAMARGA.CriticalFailure";
-const chatData = {
-  actor: this,
-  skillName: skill.name,
-  flavorText: flavorText,
-  rollHtml: await roll.render(),
-  resultLabel: resultKey
-};
+    let resultLabel = "";
+    if (dieValue === 12) resultLabel = "TRILHAMARGA.CriticalSuccess";
+    else if (dieValue === 1) resultLabel = "TRILHAMARGA.CriticalFailure";
 
-const content = await renderTemplate("systems/trilhamarga/templates/chat/skill-roll.hbs", chatData);
+    const chatData = {
+      actor: this,
+      skillName: skill.name,
+      flavorText: flavorText,
+      rollHtml: await roll.render(),
+      resultLabel: resultLabel
+    };
 
-return ChatMessage.create({
-  speaker: ChatMessage.getSpeaker({ actor: this }),
-  content: content,
-  type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-  rolls: [roll]
-});
+    const content = await renderTemplate("systems/trilhamarga/templates/chat/skill-roll.hbs", chatData);
+
+    return ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: this }),
+      content: content,
+      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+      rolls: [roll]
+    });
   }
 
   /**

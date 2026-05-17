@@ -563,7 +563,8 @@ body.game .sheet.app header.sheet-header {
 }
 
 .trilhamarga.chat-card .atk-result,
-.trilhamarga.chat-card .cast-result {
+.trilhamarga.chat-card .cast-result,
+.trilhamarga.chat-card .skill-result {
   margin-top: 5px;
   margin-bottom: 8px;
   text-align: center;
