@@ -1,0 +1,29 @@
+<div class="trilhamarga chat-card weapon-attack">
+    <header class="card-header flexrow">
+        <img src="{{actor.img}}" title="{{actor.name}}" width="36" height="36"/>
+        <h3 class="actor-name">{{actor.name}}</h3>
+    </header>
+
+    <div class="card-content">
+        <div class="weapon-name">{{weaponName}}</div>
+        
+        <div class="skill-name">{{localize "TRILHAMARGA.SkillCheck" skill=skillName}}</div>
+        {{#if flavorText}}<div class="flavor-text">{{flavorText}}</div>{{/if}}
+        
+        <div class="dice-roll">
+            {{{atkRollHtml}}}
+        </div>
+
+        {{#if atkResultLabel}}
+        <div class="atk-result">
+            <strong>{{localize atkResultLabel}}</strong>
+        </div>
+        {{/if}}
+
+        <div class="damage-header">{{localize "TRILHAMARGA.Damage"}}</div>
+        
+        <div class="dice-roll">
+            {{{dmgRollHtml}}}
+        </div>
+    </div>
+</div>

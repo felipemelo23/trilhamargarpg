@@ -548,6 +548,26 @@ body.game .sheet.app header.sheet-header {
   margin-bottom: 5px;
 }
 
+.trilhamarga.chat-card .weapon-name {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.trilhamarga.chat-card .atk-result {
+  margin-top: 5px;
+  margin-bottom: 8px;
+}
+
+.trilhamarga.chat-card .damage-header {
+  font-weight: bold;
+  font-size: 13px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  border-top: 1px solid #ccc;
+  padding-top: 5px;
+}
+
 .trilhamarga.chat-card .dice-roll .dice-formula,
 .trilhamarga.chat-card .dice-roll .dice-total {
   margin: 0;

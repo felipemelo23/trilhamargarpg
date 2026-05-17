@@ -147,44 +147,34 @@ export class TrilhamargaActor extends Actor {
     const atkRoll = new Roll(atkFormula);
     const dmgRoll = new Roll(dmgFormula);
 
-    const skillCheckParts = [];
-    if (skill) skillCheckParts.push(game.i18n.format("TRILHAMARGA.SkillCheck", {skill: skill.name}));
-    
-    // Always show penalties in flavor if they exist, regardless of final modifier
-    if (woundPenalty > 0) skillCheckParts.push(`(${game.i18n.localize("TRILHAMARGA.WoundPenalty")}: ${woundPenalty})`);
-    if (protectionPenalty > 0) skillCheckParts.push(`(${game.i18n.localize("TRILHAMARGA.ProtectionPenalty")}: ${protectionPenalty})`);
-    
-    const skillCheckText = skillCheckParts.join(" ");
-    
-    let flavor = `
-      <div class="trilhamarga chat-card">
-        <div class="card-content">
-          <strong>${game.i18n.localize("TRILHAMARGA.Roll")}: ${weapon.name}</strong>
-          ${skillCheckText ? `<br/>${skillCheckText}` : ''}
-        </div>
-      </div>
-    `;
-
-    // Create message with both rolls
-    // We evaluate both before creating the message to handle crit logic
     await atkRoll.evaluate();
-    
-    // Check for critical success/failure
-    const dieValue = atkRoll.dice[0].total;
-    let critLabel = "";
-    if (dieValue === 12) critLabel = game.i18n.localize("TRILHAMARGA.CriticalSuccess");
-    else if (dieValue === 1) critLabel = game.i18n.localize("TRILHAMARGA.CriticalFailure");
-
     await dmgRoll.evaluate();
 
-    if (critLabel) {
-      flavor = flavor.replace('</div>\n      </div>', `</div><div class="card-footer"><strong>${critLabel}</strong></div></div>`);
-    }
+    const flavorParts = [];
+    if (woundPenalty > 0) flavorParts.push(`(${game.i18n.localize("TRILHAMARGA.WoundPenalty")}: ${woundPenalty})`);
+    if (protectionPenalty > 0) flavorParts.push(`(${game.i18n.localize("TRILHAMARGA.ProtectionPenalty")}: ${protectionPenalty})`);
+    const flavorText = flavorParts.join(" ");
+
+    const dieValue = atkRoll.dice[0].total;
+    let atkResultLabel = "";
+    if (dieValue === 12) atkResultLabel = "TRILHAMARGA.CriticalSuccess";
+    else if (dieValue === 1) atkResultLabel = "TRILHAMARGA.CriticalFailure";
+
+    const chatData = {
+      actor: this,
+      weaponName: weapon.name,
+      skillName: skill ? skill.name : game.i18n.localize("TRILHAMARGA.Regular"),
+      flavorText: flavorText,
+      atkRollHtml: await atkRoll.render(),
+      atkResultLabel: atkResultLabel,
+      dmgRollHtml: await dmgRoll.render()
+    };
+
+    const content = await renderTemplate("systems/trilhamarga/templates/chat/weapon-attack.hbs", chatData);
 
     return ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this }),
-      alias: game.user.name,
-      flavor: flavor,
+      content: content,
       type: CONST.CHAT_MESSAGE_TYPES.ROLL,
       rolls: [atkRoll, dmgRoll]
     });
