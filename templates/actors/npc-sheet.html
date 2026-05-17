@@ -10,7 +10,7 @@
         </h1>
         <div class="npc-description" style="margin-bottom: 10px;">
            <label style="font-weight: bold; font-size: 12px; display: block; margin-bottom: 2px;">{{localize "TRILHAMARGA.Description"}}</label>
-           {{editor system.description target="system.description" button=true owner=owner editable=editable height=80}}
+           <textarea name="system.description" rows="2" style="width: 100%; resize: vertical; padding: 5px; font-family: inherit;">{{system.description}}</textarea>
         </div>
         <div class="resource">
           <label>{{localize "TRILHAMARGA.Movement"}}</label>
