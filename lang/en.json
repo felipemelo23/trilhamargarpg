@@ -119,6 +119,6 @@
     "Normal": "Normal",
     "SkillCheck": "{skill} check",
     "FightingWithWeaponCheck": "Fight with {weapon} check",
-    "RunOutOfAmmo": "You run out of {ammo}."
+    "RunOutOfAmmo": "You don't have {ammo} to shot"
   }
 }
