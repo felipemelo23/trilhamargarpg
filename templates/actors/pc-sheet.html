@@ -112,7 +112,7 @@
         <li class="item flexrow" data-item-id="{{item._id}}">
           <div class="item-image item-clickable">
             <img src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
-            <i class="fas fa-dice-d20 weapon-roll-icon"></i>
+            <i class="fas fa-dice-d12 weapon-roll-icon"></i>
           </div>
           <div class="item-name">
              <span>{{item.name}}</span>
@@ -147,7 +147,7 @@
           <li class="item flexrow" data-item-id="{{item._id}}">
             <div class="item-image item-clickable">
               <img class="item-icon {{#if (eq item.type 'weapon')}}rollable-weapon{{/if}}" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
-              <i class="fas fa-dice-d20 weapon-roll-icon"></i>
+              <i class="fas fa-dice-d12 weapon-roll-icon"></i>
             </div>
             <div class="item-name">
               {{item.name}}{{#if (and item.system.stackable (gt item.system.quantity 1))}} ({{item.system.quantity}}){{/if}}{{#if (eq item.type 'weapon')}} ({{item.displayDamage}}){{/if}}
@@ -187,7 +187,7 @@
           <li class="item flexrow" data-item-id="{{item._id}}">
             <div class="item-image item-clickable">
               <img class="item-icon {{#if (eq item.type 'weapon')}}rollable-weapon{{/if}}" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
-              <i class="fas fa-dice-d20 weapon-roll-icon"></i>
+              <i class="fas fa-dice-d12 weapon-roll-icon"></i>
             </div>
             <div class="item-name">
               {{item.name}}{{#if (and item.system.stackable (gt item.system.quantity 1))}} ({{item.system.quantity}}){{/if}}{{#if (eq item.type 'weapon')}} ({{item.displayDamage}}){{/if}}
@@ -214,7 +214,7 @@
           <li class="item flexrow" data-item-id="{{item._id}}">
             <div class="item-image item-clickable">
               <img class="item-icon {{#if (eq item.type 'weapon')}}rollable-weapon{{/if}}" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
-              <i class="fas fa-dice-d20 weapon-roll-icon"></i>
+              <i class="fas fa-dice-d12 weapon-roll-icon"></i>
             </div>
             <div class="item-name">
                {{item.name}}{{#if (and item.system.stackable (gt item.system.quantity 1))}} ({{item.system.quantity}}){{/if}}{{#if (eq item.type 'weapon')}} ({{item.displayDamage}}){{/if}}
@@ -249,7 +249,7 @@
         <li class="item flexrow" data-item-id="{{item._id}}">
           <div class="item-image item-clickable">
             <img class="item-icon" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
-            <i class="fas fa-dice-d20 weapon-roll-icon"></i>
+            <i class="fas fa-dice-d12 weapon-roll-icon"></i>
           </div>
           <div class="item-name">
             {{item.name}}
@@ -286,7 +286,7 @@
           <div class="flexrow">
             <div class="item-image item-clickable">
               <img class="item-icon" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
-              <i class="fas fa-dice-d20 weapon-roll-icon"></i>
+              <i class="fas fa-dice-d12 weapon-roll-icon"></i>
             </div>
             <div class="item-name">
               {{item.name}}
@@ -327,7 +327,7 @@
           <div class="flexrow">
             <div class="item-image item-clickable">
               <img class="item-icon" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
-              <i class="fas fa-dice-d20 weapon-roll-icon"></i>
+              <i class="fas fa-dice-d12 weapon-roll-icon"></i>
             </div>
             <div class="item-name">
               {{item.name}}
@@ -366,7 +366,7 @@
         <li class="item flexrow" data-item-id="{{item._id}}">
           <div class="item-image item-clickable">
             <img class="item-icon" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
-            <i class="fas fa-dice-d20 weapon-roll-icon"></i>
+            <i class="fas fa-dice-d12 weapon-roll-icon"></i>
           </div>
           <div class="item-name">
             {{item.name}}
@@ -395,7 +395,7 @@
           <div class="flexrow">
             <div class="item-image item-clickable">
               <img class="item-icon" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
-              <i class="fas fa-dice-d20 weapon-roll-icon"></i>
+              <i class="fas fa-dice-d12 weapon-roll-icon"></i>
             </div>
             <div class="item-name">
               {{item.name}} [{{localize (concat "TRILHAMARGA.Complexity" (capitalize item.system.complexity))}}]
