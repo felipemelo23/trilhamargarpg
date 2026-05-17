@@ -47,6 +47,9 @@ Hooks.once("init", async function() {
   // Add system styles to TinyMCE editor
   CONFIG.TinyMCE.content_css.push("systems/trilhamarga/css/trilhamarga.css");
 
+  // Dice Tray compatibility
+  CONFIG.Dice.types = ["d4", "d6", "d8", "d10", "d12", "d20", "d100"];
+
   // Register system settings
   game.settings.register("trilhamarga", "destiny", {
     name: "TRILHAMARGA.Destiny",
