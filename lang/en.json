@@ -112,6 +112,7 @@
     "NegativeChance": "1 negative chance",
     "NegativeChances": "{n} negative chances",
     "Regular": "Regular",
-    "SkillCheck": "{skill} check"
+    "SkillCheck": "{skill} check",
+    "FightingWithWeaponCheck": "Fight with {weapon} check"
   }
 }

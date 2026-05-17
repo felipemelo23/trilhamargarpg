@@ -10,7 +10,15 @@
         <div class="weapon-description">{{{weapon.system.description}}}</div>
         {{/if}}
         
-        <div class="skill-label"><em>{{localize "TRILHAMARGA.SkillCheck" skill=skillName}}</em></div>
+        <div class="skill-label">
+            <em>
+            {{#if skillName}}
+                {{localize "TRILHAMARGA.SkillCheck" skill=skillName}}
+            {{else}}
+                {{localize "TRILHAMARGA.FightingWithWeaponCheck" weapon=weaponName}}
+            {{/if}}
+            </em>
+        </div>
         {{#if flavorText}}<div class="flavor-text">{{flavorText}}</div>{{/if}}
         
         <div class="dice-roll">

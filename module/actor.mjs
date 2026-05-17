@@ -164,7 +164,7 @@ export class TrilhamargaActor extends Actor {
       actor: this,
       weapon: weapon,
       weaponName: weapon.name,
-      skillName: skill ? skill.name : game.i18n.localize("TRILHAMARGA.Regular"),
+      skillName: skill ? skill.name : null,
       flavorText: flavorText,
       atkRollHtml: await atkRoll.render(),
       atkResultLabel: atkResultLabel,
