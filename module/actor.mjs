@@ -184,7 +184,7 @@ export class TrilhamargaActor extends Actor {
       speaker: ChatMessage.getSpeaker({ actor: this }),
       content: content,
       type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-      rolls: [atkRoll, dmgRoll]
+      rolls: [roll, dmgRoll]
     });
   }
 
