@@ -123,9 +123,15 @@ export class TrilhamargaActor extends Actor {
       const vVal = foundry.utils.getProperty(changed, "system.vitality.value");
       
       if (vMax !== undefined) {
-        // If max changed, either match value to it or cap new value
-        const newVVal = vVal !== undefined ? vVal : vMax; 
-        foundry.utils.setProperty(changed, "system.vitality.value", Math.min(Number(newVVal), Number(vMax)));
+        // If max changed, reset to full UNLESS the value is also changed to something different from its current state
+        const currentV = Number(this.system.vitality.value);
+        const changedV = vVal !== undefined ? Number(vVal) : undefined;
+        
+        if (changedV === undefined || changedV === currentV) {
+          foundry.utils.setProperty(changed, "system.vitality.value", Number(vMax));
+        } else {
+          foundry.utils.setProperty(changed, "system.vitality.value", Math.min(changedV, Number(vMax)));
+        }
       } else if (vVal !== undefined) {
         // If only value changed, cap it at existing max
         foundry.utils.setProperty(changed, "system.vitality.value", Math.min(Number(vVal), Number(this.system.vitality.max)));
@@ -136,8 +142,15 @@ export class TrilhamargaActor extends Actor {
       const pVal = foundry.utils.getProperty(changed, "system.protection.value");
       
       if (pMax !== undefined) {
-        const newPVal = pVal !== undefined ? pVal : pMax;
-        foundry.utils.setProperty(changed, "system.protection.value", Math.min(Number(newPVal), Number(pMax)));
+        // If max changed, reset to full UNLESS the value is also changed to something different from its current state
+        const currentP = Number(this.system.protection.value);
+        const changedP = pVal !== undefined ? Number(pVal) : undefined;
+        
+        if (changedP === undefined || changedP === currentP) {
+          foundry.utils.setProperty(changed, "system.protection.value", Number(pMax));
+        } else {
+          foundry.utils.setProperty(changed, "system.protection.value", Math.min(changedP, Number(pMax)));
+        }
       } else if (pVal !== undefined) {
         foundry.utils.setProperty(changed, "system.protection.value", Math.min(Number(pVal), Number(this.system.protection.max)));
       }
