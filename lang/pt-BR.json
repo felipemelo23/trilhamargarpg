@@ -116,6 +116,8 @@
     "NegativeChances": "{n} chances negativas",
     "Regular": "Regular",
     "SkillCheck": "Teste de {skill}",
-    "FightingWithWeaponCheck": "Teste de Lutar com {weapon}"
+    "SkillCheckWithChances": "Teste de {skill} ({chances})",
+    "FightingWithWeaponCheck": "Teste de Lutar com {weapon}",
+    "FightingWithWeaponCheckWithChances": "Teste de Lutar com {weapon} ({chances})"
   }
 }

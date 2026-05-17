@@ -5,7 +5,15 @@
     </header>
 
     <div class="card-content">
-        <div class="skill-label"><em>{{localize "TRILHAMARGA.SkillCheck" skill=skillName}}</em></div>
+        <div class="skill-label">
+            <em>
+            {{#if chancesLabel}}
+                {{localize "TRILHAMARGA.SkillCheckWithChances" skill=skillName chances=chancesLabel}}
+            {{else}}
+                {{localize "TRILHAMARGA.SkillCheck" skill=skillName}}
+            {{/if}}
+            </em>
+        </div>
         {{#if flavorText}}<div class="flavor-text">{{flavorText}}</div>{{/if}}
         
         <div class="dice-roll">

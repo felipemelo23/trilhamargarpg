@@ -144,11 +144,21 @@ export class TrilhamargaActor extends Actor {
       }
     }
 
-    const atkRoll = new Roll(atkFormula);
+    const roll = new Roll(formula);
     const dmgRoll = new Roll(dmgFormula);
 
-    await atkRoll.evaluate();
+    await roll.evaluate();
     await dmgRoll.evaluate();
+
+    let chancesLabel = "";
+    if (modifier > 0) {
+      chancesLabel = modifier === 1 ? game.i18n.localize("TRILHAMARGA.PositiveChance") : game.i18n.format("TRILHAMARGA.PositiveChances", {n: modifier});
+      chancesLabel = `+${chancesLabel}`;
+    } else if (modifier < 0) {
+      const absMod = Math.abs(modifier);
+      chancesLabel = absMod === 1 ? game.i18n.localize("TRILHAMARGA.NegativeChance") : game.i18n.format("TRILHAMARGA.NegativeChances", {n: absMod});
+      chancesLabel = `-${chancesLabel}`;
+    }
 
     const flavorParts = [];
     if (woundPenalty > 0) flavorParts.push(`(${game.i18n.localize("TRILHAMARGA.WoundPenalty")}: ${woundPenalty})`);
@@ -171,8 +181,9 @@ export class TrilhamargaActor extends Actor {
       weapon: weapon,
       weaponName: weapon.name,
       skillName: skill ? skill.name : null,
+      chancesLabel: chancesLabel,
       flavorText: flavorText,
-      atkRollHtml: await atkRoll.render(),
+      atkRollHtml: await roll.render(),
       atkResultLabel: atkResultLabel,
       resultClass: resultClass,
       dmgRollHtml: await dmgRoll.render()
@@ -315,6 +326,16 @@ export class TrilhamargaActor extends Actor {
     const roll = new Roll(formula);
     await roll.evaluate();
 
+    let chancesLabel = "";
+    if (modifier > 0) {
+      chancesLabel = modifier === 1 ? game.i18n.localize("TRILHAMARGA.PositiveChance") : game.i18n.format("TRILHAMARGA.PositiveChances", {n: modifier});
+      chancesLabel = `+${chancesLabel}`;
+    } else if (modifier < 0) {
+      const absMod = Math.abs(modifier);
+      chancesLabel = absMod === 1 ? game.i18n.localize("TRILHAMARGA.NegativeChance") : game.i18n.format("TRILHAMARGA.NegativeChances", {n: absMod});
+      chancesLabel = `-${chancesLabel}`;
+    }
+
     const flavorParts = [];
     if (woundPenalty > 0) flavorParts.push(`(${game.i18n.localize("TRILHAMARGA.WoundPenalty")}: ${woundPenalty})`);
     if (protectionPenalty > 0) flavorParts.push(`(${game.i18n.localize("TRILHAMARGA.ProtectionPenalty")}: ${protectionPenalty})`);
@@ -342,6 +363,7 @@ export class TrilhamargaActor extends Actor {
     const chatData = {
       actor: this,
       skillName: skill.name,
+      chancesLabel: chancesLabel,
       flavorText: flavorText,
       rollHtml: await roll.render(),
       resultLabel: resultLabel,
@@ -411,6 +433,7 @@ export class TrilhamargaActor extends Actor {
     const chatData = {
       actor: this,
       skillName: physiqueSkill ? physiqueSkill.name : game.i18n.localize("TRILHAMARGA.Regular"),
+      chancesLabel: chancesLabel,
       flavorText: flavorText,
       rollHtml: await roll.render(),
       resultLabel: resultLabel,
@@ -454,6 +477,16 @@ export class TrilhamargaActor extends Actor {
     const roll = new Roll(formula);
     await roll.evaluate();
 
+    let chancesLabel = "";
+    if (modifier > 0) {
+      chancesLabel = modifier === 1 ? game.i18n.localize("TRILHAMARGA.PositiveChance") : game.i18n.format("TRILHAMARGA.PositiveChances", {n: modifier});
+      chancesLabel = `+${chancesLabel}`;
+    } else if (modifier < 0) {
+      const absMod = Math.abs(modifier);
+      chancesLabel = absMod === 1 ? game.i18n.localize("TRILHAMARGA.NegativeChance") : game.i18n.format("TRILHAMARGA.NegativeChances", {n: absMod});
+      chancesLabel = `-${chancesLabel}`;
+    }
+
     const flavorParts = [];
     if (woundPenalty > 0) flavorParts.push(`(${game.i18n.localize("TRILHAMARGA.WoundPenalty")}: ${woundPenalty})`);
     if (protectionPenalty > 0) flavorParts.push(`(${game.i18n.localize("TRILHAMARGA.ProtectionPenalty")}: ${protectionPenalty})`);
@@ -488,6 +521,7 @@ export class TrilhamargaActor extends Actor {
       actor: this,
       spell: spell,
       skillName: occultSkill ? occultSkill.name : game.i18n.localize("TRILHAMARGA.Regular"),
+      chancesLabel: chancesLabel,
       flavorText: flavorText,
       rollHtml: await roll.render(),
       resultLabel: resultLabel,
