@@ -104,17 +104,13 @@ Hooks.on("preCreateToken", (token, data, options, userId) => {
 
   const updates = {
     displayBars: CONST.TOKEN_DISPLAY_MODES.HOVER,
-    displayName: CONST.TOKEN_DISPLAY_MODES.HOVER
+    displayName: CONST.TOKEN_DISPLAY_MODES.HOVER,
+    bar1: { attribute: actor.type === "pc" ? "stamina" : "vitality" },
+    bar2: { attribute: "protection" }
   };
 
-  // Set default bar assignments and disposition if not already set
   if (actor.type === "pc") {
-    if (!data.bar1?.attribute) updates["bar1.attribute"] = "stamina";
-    if (!data.bar2?.attribute) updates["bar2.attribute"] = "protection";
-    updates["disposition"] = CONST.TOKEN_DISPOSITIONS.FRIENDLY;
-  } else if (actor.type === "npc") {
-    if (!data.bar1?.attribute) updates["bar1.attribute"] = "vitality";
-    if (!data.bar2?.attribute) updates["bar2.attribute"] = "protection";
+    updates.disposition = CONST.TOKEN_DISPOSITIONS.FRIENDLY;
   }
 
   token.updateSource(updates);
