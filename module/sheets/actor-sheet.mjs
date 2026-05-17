@@ -232,6 +232,8 @@ export class TrilhamargaActorSheet extends ActorSheet {
         return this._shareItemToChat(item);
       case 'spell':
         return this.actor.castSpell(item);
+      case 'divine_tenet':
+        return this._promptMiracle(item);
       case 'weapon':
         return this.actor.rollAttack(item);
       case 'npc_attack':
@@ -247,6 +249,55 @@ export class TrilhamargaActorSheet extends ActorSheet {
     };
 
     const content = await renderTemplate("systems/trilhamarga/templates/chat/item-card.hbs", chatData);
+
+    return ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+      content: content,
+      type: CONST.CHAT_MESSAGE_TYPES.OTHER
+    });
+  }
+
+  async _promptMiracle(item) {
+    const buttons = {};
+    const miracles = item.system.miracles || {};
+
+    if (miracles.minor) {
+      buttons.minor = {
+        label: game.i18n.localize("TRILHAMARGA.MiracleMinor"),
+        callback: () => this._shareMiracleToChat(item, miracles.minor)
+      };
+    }
+    if (miracles.mid) {
+      buttons.mid = {
+        label: game.i18n.localize("TRILHAMARGA.MiracleMid"),
+        callback: () => this._shareMiracleToChat(item, miracles.mid)
+      };
+    }
+    if (miracles.major) {
+      buttons.major = {
+        label: game.i18n.localize("TRILHAMARGA.MiracleMajor"),
+        callback: () => this._shareMiracleToChat(item, miracles.major)
+      };
+    }
+
+    if (Object.keys(buttons).length === 0) return;
+
+    new Dialog({
+      title: game.i18n.localize("TRILHAMARGA.ChooseMiracle"),
+      content: `<p>${game.i18n.localize("TRILHAMARGA.ChooseMiracle")}</p>`,
+      buttons: buttons,
+      default: "minor"
+    }).render(true);
+  }
+
+  async _shareMiracleToChat(item, description) {
+    const chatData = {
+      actor: this.actor,
+      item: item,
+      description: description
+    };
+
+    const content = await renderTemplate("systems/trilhamarga/templates/chat/miracle-card.hbs", chatData);
 
     return ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this.actor }),

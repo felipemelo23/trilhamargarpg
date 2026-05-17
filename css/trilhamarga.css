@@ -559,7 +559,8 @@ body.game .sheet.app header.sheet-header {
 
 .trilhamarga.chat-card .spell-description,
 .trilhamarga.chat-card .weapon-description,
-.trilhamarga.chat-card .item-description {
+.trilhamarga.chat-card .item-description,
+.trilhamarga.chat-card .miracle-description {
   font-size: 13px;
   margin-bottom: 10px;
 }

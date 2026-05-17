@@ -286,8 +286,9 @@
         {{#each divineDomains as |item id|}}
         <li class="item flexcol" data-item-id="{{item._id}}">
           <div class="flexrow">
-            <div class="item-image">
+            <div class="item-image item-clickable">
               <img class="item-icon" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
+              <i class="fas fa-dice-d20 weapon-roll-icon"></i>
             </div>
             <div class="item-name">
               {{item.name}}
@@ -326,8 +327,9 @@
         {{#each divineTenets as |item id|}}
         <li class="item flexcol" data-item-id="{{item._id}}">
           <div class="flexrow">
-            <div class="item-image">
+            <div class="item-image item-clickable">
               <img class="item-icon" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
+              <i class="fas fa-dice-d20 weapon-roll-icon"></i>
             </div>
             <div class="item-name">
               {{item.name}}
