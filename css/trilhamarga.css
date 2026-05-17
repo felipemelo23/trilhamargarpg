@@ -526,7 +526,6 @@ body.game .sheet.app header.sheet-header {
 
 .trilhamarga.chat-card .card-content {
   font-size: 13px;
-  white-space: pre-wrap;
 }
 
 .trilhamarga.chat-card .skill-name {
@@ -540,10 +539,14 @@ body.game .sheet.app header.sheet-header {
   margin-bottom: 5px;
 }
 
+.trilhamarga.chat-card .dice-roll .dice-formula,
+.trilhamarga.chat-card .dice-roll .dice-total {
+  margin: 0;
+}
+
 .trilhamarga.chat-card .card-footer {
   margin-top: 5px;
   border-top: 1px solid #ccc;
   padding-top: 5px;
   font-size: 12px;
-  white-space: pre-wrap;
 }
