@@ -571,6 +571,27 @@ body.game .sheet.app header.sheet-header {
   margin-top: 5px;
   margin-bottom: 8px;
   text-align: center;
+  font-size: 16px;
+}
+
+.trilhamarga.chat-card .success {
+  color: #1a7d1a;
+}
+
+.trilhamarga.chat-card .failure {
+  color: #b31b1b;
+}
+
+.trilhamarga.chat-card .critical-success {
+  color: #b38f00;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.trilhamarga.chat-card .critical-failure {
+  color: #7b0000;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .trilhamarga.chat-card .damage-section,
