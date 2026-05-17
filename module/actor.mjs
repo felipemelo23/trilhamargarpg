@@ -183,7 +183,7 @@ export class TrilhamargaActor extends Actor {
     return ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this }),
       content: content,
-      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+      style: CONST.CHAT_MESSAGE_STYLES.ROLL,
       rolls: [roll, dmgRoll]
     });
   }
@@ -235,9 +235,8 @@ export class TrilhamargaActor extends Actor {
 
     return ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this }),
-      alias: game.user.name,
-      flavor: flavor,
-      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+      content: flavor, // Actually the content
+      style: CONST.CHAT_MESSAGE_STYLES.ROLL,
       rolls: [atkRoll, dmgRoll]
     });
   }
@@ -265,9 +264,8 @@ export class TrilhamargaActor extends Actor {
     // Create message
     const message = await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this }),
-      alias: game.user.name,
-      flavor: flavor,
-      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+      content: flavor,
+      style: CONST.CHAT_MESSAGE_STYLES.ROLL,
       rolls: [roll]
     });
 
@@ -343,7 +341,7 @@ export class TrilhamargaActor extends Actor {
     return ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this }),
       content: content,
-      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+      style: CONST.CHAT_MESSAGE_STYLES.ROLL,
       rolls: [roll]
     });
   }
@@ -412,7 +410,7 @@ export class TrilhamargaActor extends Actor {
     return ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this }),
       content: content,
-      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+      style: CONST.CHAT_MESSAGE_STYLES.ROLL,
       rolls: [roll]
     });
   }
@@ -491,7 +489,7 @@ export class TrilhamargaActor extends Actor {
     return ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this }),
       content: content,
-      type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+      style: CONST.CHAT_MESSAGE_STYLES.ROLL,
       rolls: [roll]
     });
   }
