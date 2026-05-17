@@ -29,6 +29,7 @@
 .chat-log .message .message-header .message-sender {
   display: flex;
   align-items: center;
+  font-size: var(--font-size-12);
 }
 
 /* Sheet Styles */
