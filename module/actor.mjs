@@ -400,7 +400,7 @@ export class TrilhamargaActor extends Actor {
 
     const chatData = {
       actor: this,
-      skillName: physiqueSkill ? physiqueSkill.name : game.i18n.localize("TRILHAMARGA.Regular"),
+      skillName: physiqueSkill ? physiqueSkill.name : game.i18n.localize("TRILHAMARGA.Normal"),
       flavorText: flavorText,
       rollHtml: await roll.render(),
       resultLabel: resultLabel,
@@ -477,7 +477,7 @@ export class TrilhamargaActor extends Actor {
     const chatData = {
       actor: this,
       spell: spell,
-      skillName: occultSkill ? occultSkill.name : game.i18n.localize("TRILHAMARGA.Regular"),
+      skillName: occultSkill ? occultSkill.name : game.i18n.localize("TRILHAMARGA.Normal"),
       flavorText: flavorText,
       rollHtml: await roll.render(),
       resultLabel: resultLabel,
@@ -533,7 +533,7 @@ export class TrilhamargaActor extends Actor {
           const absOpt = Math.abs(opt);
           label = absOpt === 1 ? game.i18n.localize("TRILHAMARGA.NegativeChance") : game.i18n.format("TRILHAMARGA.NegativeChances", {n: absOpt});
         }
-        else label = game.i18n.localize("TRILHAMARGA.Regular");
+        else label = game.i18n.localize("TRILHAMARGA.Normal");
         optionsHtml += `<option value="${opt}" ${selected}>${label}</option>`;
       }
 
