@@ -174,8 +174,9 @@ export class TrilhamargaActor extends Actor {
       ammoLabel = game.i18n.lang === "pt-BR" ? "virotes" : "bolts";
     }
 
+    let ammoItem = null;
     if (ammoRegex) {
-      const ammoItem = this.items.find(i => 
+      ammoItem = this.items.find(i => 
         ammoRegex.test(i.name) && 
         i.system.location === "body"
       );
@@ -195,9 +196,6 @@ export class TrilhamargaActor extends Actor {
         });
         return;
       }
-
-      // Consume ammo
-      await ammoItem.update({ "system.quantity": ammoItem.system.quantity - 1 });
     }
 
     const skillName = weapon.system.associated_skill;
@@ -210,6 +208,11 @@ export class TrilhamargaActor extends Actor {
 
     const modifier = await this._getModifierPrompt(baseModifier);
     if (modifier === null) return;
+
+    // Consume ammo only after roll is confirmed
+    if (ammoItem) {
+      await ammoItem.update({ "system.quantity": ammoItem.system.quantity - 1 });
+    }
 
     // Attack Roll Formula
     let atkFormula = "1d12";
