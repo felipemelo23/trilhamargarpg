@@ -381,9 +381,14 @@ export class TrilhamargaActorSheet extends ActorSheet {
       system: {}
     };
 
-    // Default icons
-    if (type === 'wound') itemData.img = 'icons/skills/wounds/injury-triple-slash-bleed.webp';
-    else if (type === 'note') itemData.img = 'icons/sundries/scrolls/scroll-writing-white.webp';
+    // Default values and icons
+    if (type === 'wound') {
+      itemData.img = 'icons/skills/wounds/injury-triple-slash-bleed.webp';
+      itemData.system.category = 'mild';
+      itemData.system.severity = 1;
+    } else if (type === 'note') {
+      itemData.img = 'icons/sundries/scrolls/scroll-writing-white.webp';
+    }
 
     return await this.actor.createEmbeddedDocuments("Item", [itemData]);
   }
