@@ -150,6 +150,25 @@ export class TrilhamargaActorSheet extends ActorSheet {
   }
 
   /** @override */
+  _onChangeInput(event) {
+    const el = event.target;
+    const value = el.value;
+    
+    // Handle relative changes (+/-)
+    if (value.startsWith('+') || value.startsWith('-')) {
+      const delta = parseInt(value);
+      if (!isNaN(delta)) {
+        const name = el.name;
+        const current = getProperty(this.actor, name);
+        const newValue = Math.max(0, (Number(current) || 0) + delta);
+        el.value = newValue;
+      }
+    }
+    
+    return super._onChangeInput(event);
+  }
+
+  /** @override */
   activateListeners(html) {
     super.activateListeners(html);
 
