@@ -531,6 +531,7 @@ body.game .sheet.app header.sheet-header {
 .trilhamarga.chat-card .skill-name {
   font-weight: bold;
   font-size: 14px;
+  margin-bottom: 8px;
 }
 
 .trilhamarga.chat-card .flavor-text {
@@ -542,6 +543,7 @@ body.game .sheet.app header.sheet-header {
 .trilhamarga.chat-card .dice-roll .dice-formula,
 .trilhamarga.chat-card .dice-roll .dice-total {
   margin: 0;
+  margin-bottom: 10px;
 }
 
 .trilhamarga.chat-card .card-footer {
