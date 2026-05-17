@@ -302,11 +302,13 @@ body.game .sheet.app header.sheet-header {
   flex: 0 0 30px;
 }
 
-.trilhamarga .tab.spells .flexrow {
+.trilhamarga .tab.spells .flexrow,
+.trilhamarga .npc-spells .flexrow {
   align-items: flex-start;
 }
 
-.trilhamarga .tab.spells .item .item-image {
+.trilhamarga .tab.spells .item .item-image,
+.trilhamarga .npc-spells .item .item-image {
   margin-top: 5px;
 }
 
