@@ -22,7 +22,7 @@
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
 }
 
 /* Sheet Styles */
@@ -245,6 +245,7 @@ body.game .sheet.app header.sheet-header {
   width: 30px;
   height: 30px;
   margin-right: 10px;
+  margin-top: 5px;
   flex: 0 0 30px;
 }
 
