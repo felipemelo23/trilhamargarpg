@@ -556,7 +556,8 @@ body.game .sheet.app header.sheet-header {
   border: none;
 }
 
-.trilhamarga.chat-card .spell-description {
+.trilhamarga.chat-card .spell-description,
+.trilhamarga.chat-card .weapon-description {
   font-size: 13px;
   margin-bottom: 10px;
 }

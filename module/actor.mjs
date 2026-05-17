@@ -162,6 +162,7 @@ export class TrilhamargaActor extends Actor {
 
     const chatData = {
       actor: this,
+      weapon: weapon,
       weaponName: weapon.name,
       skillName: skill ? skill.name : game.i18n.localize("TRILHAMARGA.Regular"),
       flavorText: flavorText,
