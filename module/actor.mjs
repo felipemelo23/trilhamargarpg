@@ -359,7 +359,8 @@ export class TrilhamargaActor extends Actor {
     const roll = new Roll(formula);
     await roll.evaluate();
 
-    const flavorParts = [game.i18n.format("TRILHAMARGA.WoundRecoveryCheck", {wound: wound.name})];
+    const difficultyLabel = game.i18n.format("TRILHAMARGA.DifficultyLabel", {difficulty: difficulty});
+    const flavorParts = [difficultyLabel, `(${wound.name})` ];
     if (woundPenalty > 0) flavorParts.push(`(${game.i18n.localize("TRILHAMARGA.WoundPenalty")}: ${woundPenalty})`);
     const flavorText = flavorParts.join(" ");
 
