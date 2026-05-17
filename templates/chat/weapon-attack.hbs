@@ -13,17 +13,9 @@
         <div class="skill-label">
             <em>
             {{#if skillName}}
-                {{#if chancesLabel}}
-                    {{localize "TRILHAMARGA.SkillCheckWithChances" skill=skillName chances=chancesLabel}}
-                {{else}}
-                    {{localize "TRILHAMARGA.SkillCheck" skill=skillName}}
-                {{/if}}
+                {{localize "TRILHAMARGA.SkillCheck" skill=skillName}}
             {{else}}
-                {{#if chancesLabel}}
-                    {{localize "TRILHAMARGA.FightingWithWeaponCheckWithChances" weapon=weaponName chances=chancesLabel}}
-                {{else}}
-                    {{localize "TRILHAMARGA.FightingWithWeaponCheck" weapon=weaponName}}
-                {{/if}}
+                {{localize "TRILHAMARGA.FightingWithWeaponCheck" weapon=weaponName}}
             {{/if}}
             </em>
         </div>
