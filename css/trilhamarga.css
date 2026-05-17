@@ -582,12 +582,6 @@ body.game .sheet.app header.sheet-header {
   text-align: left;
 }
 
-.trilhamarga.chat-card .power-level-value {
-  font-size: 20px;
-  font-weight: bold;
-  text-align: center;
-}
-
 .trilhamarga.chat-card .dice-roll .dice-formula,
 .trilhamarga.chat-card .dice-roll .dice-total {
   margin: 0;
