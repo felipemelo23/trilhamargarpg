@@ -255,32 +255,36 @@ export class TrilhamargaActor extends Actor {
     const atkRoll = new Roll(atkFormula);
     const dmgRoll = new Roll(dmgFormula);
 
-    let flavor = `
-      <div class="trilhamarga chat-card">
-        <div class="card-content">
-          <strong>${game.i18n.localize("TRILHAMARGA.Roll")}: ${attack.name}</strong>
-          ${attack.system.description ? `<br/>${attack.system.description}` : ''}
-        </div>
-      </div>
-    `;
-
     await atkRoll.evaluate();
-    
+    await dmgRoll.evaluate();
+
     // Check for critical success/failure
     const dieValue = atkRoll.dice[0].total;
     let critLabel = "";
-    if (dieValue === 12) critLabel = game.i18n.localize("TRILHAMARGA.CriticalSuccess");
-    else if (dieValue === 1) critLabel = game.i18n.localize("TRILHAMARGA.CriticalFailure");
-
-    await dmgRoll.evaluate();
-
-    if (critLabel) {
-      flavor = flavor.replace('</div>\n      </div>', `</div><div class="card-footer"><strong>${critLabel}</strong></div></div>`);
+    let resultClass = "";
+    if (dieValue === 12) {
+      critLabel = game.i18n.localize("TRILHAMARGA.CriticalSuccess");
+      resultClass = "critical-success";
+    } else if (dieValue === 1) {
+      critLabel = game.i18n.localize("TRILHAMARGA.CriticalFailure");
+      resultClass = "critical-failure";
     }
+
+    const chatData = {
+      actor: this,
+      attackName: attack.name,
+      description: attack.system.description,
+      atkRollHtml: await atkRoll.render(),
+      critLabel: critLabel,
+      resultClass: resultClass,
+      dmgRollHtml: await dmgRoll.render()
+    };
+
+    const content = await renderTemplate("systems/trilhamarga/templates/chat/npc-attack.hbs", chatData);
 
     return ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: this }),
-      content: flavor, // Actually the content
+      content: content,
       style: CONST.CHAT_MESSAGE_STYLES.ROLL,
       rolls: [atkRoll, dmgRoll]
     });

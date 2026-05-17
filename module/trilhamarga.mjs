@@ -91,7 +91,8 @@ Hooks.once("init", async function() {
     "systems/trilhamarga/templates/actors/npc-sheet.html",
     "systems/trilhamarga/templates/items/item-sheet.html",
     "systems/trilhamarga/templates/chat/skill-roll.hbs",
-    "systems/trilhamarga/templates/chat/weapon-attack.hbs"
+    "systems/trilhamarga/templates/chat/weapon-attack.hbs",
+    "systems/trilhamarga/templates/chat/npc-attack.hbs"
   ]);
 });
 

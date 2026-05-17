@@ -549,6 +549,7 @@ body.game .sheet.app header.sheet-header {
 }
 
 .trilhamarga.chat-card .weapon-name,
+.trilhamarga.chat-card .attack-name,
 .trilhamarga.chat-card .spell-name,
 .trilhamarga.chat-card .item-name {
   font-weight: bold;
@@ -559,6 +560,7 @@ body.game .sheet.app header.sheet-header {
 
 .trilhamarga.chat-card .spell-description,
 .trilhamarga.chat-card .weapon-description,
+.trilhamarga.chat-card .attack-description,
 .trilhamarga.chat-card .item-description,
 .trilhamarga.chat-card .miracle-description {
   font-size: 13px;
