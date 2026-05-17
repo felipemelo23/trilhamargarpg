@@ -43,6 +43,7 @@
       "defense": 0,
       "resistance": 0,
       "movement": "",
+      "description": "",
       "castingAbility": ""
     }
   },

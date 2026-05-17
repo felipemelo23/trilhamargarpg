@@ -8,6 +8,10 @@
         <h1 class="charname">
           <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'TRILHAMARGA.Name'}}"/>
         </h1>
+        <div class="npc-description" style="margin-bottom: 10px;">
+           <label style="font-weight: bold; font-size: 12px; display: block; margin-bottom: 2px;">{{localize "TRILHAMARGA.Description"}}</label>
+           {{editor system.description target="system.description" button=true owner=owner editable=editable height=80}}
+        </div>
         <div class="resource">
           <label>{{localize "TRILHAMARGA.Movement"}}</label>
           <input type="text" name="system.movement" value="{{system.movement}}" />
