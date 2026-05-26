@@ -46,9 +46,7 @@
       "description": "",
       "castingAbility": ""
     },
-    "container": {
-      "description": ""
-    }
+    "container": {}
   },
   "Item": {
     "types": ["skill", "weapon", "armor", "shield", "gear", "wound", "divine_domain", "divine_tenet", "spell", "recipe", "note", "npc_attack", "npc_ability"],
