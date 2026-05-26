@@ -121,6 +121,8 @@
     "FightingWithWeaponCheck": "Teste de Lutar com {weapon}",
     "RunOutOfAmmo": "Você não tem {ammo} para atirar",
     "InventoryFull": "Capacidade insuficiente em {location} para adicionar este item.",
-    "CannotMoveItem": "Não é possível mover o item: {reason}"
+    "CannotMoveItem": "Não é possível mover o item: {reason}",
+    "TransferRequested": "Transferência de item solicitada ao Mestre...",
+    "ItemTransferred": "{item} transferido de {source} para {target}."
   }
 }

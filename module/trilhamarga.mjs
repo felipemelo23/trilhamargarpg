@@ -136,6 +136,38 @@ Hooks.on("ready", async function() {
   if (!ui.destinyTracker) {
     ui.destinyTracker = new DestinyTracker().render(true);
   }
+
+  // Socket listener for item transfers
+  game.socket.on("system.trilhamarga", async (data) => {
+    if (data.type === "transferItem" && game.user.isGM) {
+      const { sourceActorId, targetActorId, itemData, targetLocation } = data.payload;
+      const sourceActor = game.actors.get(sourceActorId);
+      const targetActor = game.actors.get(targetActorId);
+
+      if (!sourceActor || !targetActor) return;
+
+      // Re-validate capacity on GM side
+      if (!targetActor.checkCapacity(itemData, targetLocation)) {
+        return ui.notifications.error(game.i18n.format("TRILHAMARGA.InventoryFull", {
+          location: game.i18n.localize(`TRILHAMARGA.${targetLocation.capitalize()}`)
+        }));
+      }
+
+      // Create on target
+      itemData.system.location = targetLocation;
+      await targetActor.createEmbeddedDocuments("Item", [itemData]);
+
+      // Delete from source
+      const item = sourceActor.items.get(itemData._id);
+      if (item) await item.delete();
+
+      ui.notifications.info(game.i18n.format("TRILHAMARGA.ItemTransferred", {
+        item: itemData.name,
+        source: sourceActor.name,
+        target: targetActor.name
+      }));
+    }
+  });
 });
 
 Hooks.on("preCreateToken", (token, data, options, userId) => {

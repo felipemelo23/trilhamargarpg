@@ -167,15 +167,27 @@ export class TrilhamargaActorSheet extends ActorSheet {
           return false;
         }
 
-        // Create on target with new location
-        const itemData = item.toObject();
-        itemData.system.location = targetLocation;
-        await this.actor.createEmbeddedDocuments("Item", [itemData]);
-
-        // Delete from source if user has permission
-        if (item.actor.isOwner) {
+        // Check if we can perform the move directly (user owns both)
+        if (this.actor.isOwner && item.actor.isOwner) {
+          // Create on target with new location
+          const itemData = item.toObject();
+          itemData.system.location = targetLocation;
+          await this.actor.createEmbeddedDocuments("Item", [itemData]);
           await item.delete();
+        } else if (item.actor.isOwner) {
+          // User owns source but not target - request GM to perform transfer via socket
+          game.socket.emit("system.trilhamarga", {
+            type: "transferItem",
+            payload: {
+              sourceActorId: item.actor.id,
+              targetActorId: this.actor.id,
+              itemData: item.toObject(),
+              targetLocation: targetLocation
+            }
+          });
+          ui.notifications.info(game.i18n.localize("TRILHAMARGA.TransferRequested"));
         }
+        
         return false;
       }
 
