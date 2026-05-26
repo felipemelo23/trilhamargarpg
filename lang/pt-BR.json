@@ -119,6 +119,8 @@
     "Normal": "Normal",
     "SkillCheck": "Teste de {skill}",
     "FightingWithWeaponCheck": "Teste de Lutar com {weapon}",
-    "RunOutOfAmmo": "Você não tem {ammo} para atirar"
+    "RunOutOfAmmo": "Você não tem {ammo} para atirar",
+    "InventoryFull": "Capacidade insuficiente em {location} para adicionar este item.",
+    "CannotMoveItem": "Não é possível mover o item: {reason}"
   }
 }

@@ -119,6 +119,8 @@
     "Normal": "Normal",
     "SkillCheck": "{skill} check",
     "FightingWithWeaponCheck": "Fight with {weapon} check",
-    "RunOutOfAmmo": "You don't have {ammo} to shot"
+    "RunOutOfAmmo": "You don't have {ammo} to shot",
+    "InventoryFull": "Not enough capacity in {location} to add this item.",
+    "CannotMoveItem": "Cannot move item: {reason}"
   }
 }

@@ -159,6 +159,45 @@ export class TrilhamargaActor extends Actor {
   }
 
   /**
+   * Check if a set of items can fit into a target location
+   * @param {Array|Object} items - Item data or Item instances to add/move
+   * @param {string} targetLocation - 'body', 'backpack', or 'other'
+   * @param {Object} options
+   * @param {Array} options.excludeItems - Items to ignore in current calculation (useful for moves)
+   * @returns {boolean}
+   */
+  checkCapacity(items, targetLocation, { excludeItems = [] } = {}) {
+    if (this.type !== 'pc') return true;
+    if (!['body', 'backpack'].includes(targetLocation)) return true;
+
+    const cap = this.system.loadCapacity[targetLocation];
+    let incomingSlots = 0;
+
+    const itemsArray = Array.isArray(items) ? items : [items];
+    for (const itemData of itemsArray) {
+      // Handle both Item documents and raw data
+      const system = itemData.system || itemData._source?.system || {};
+      if (['weapon', 'armor', 'shield', 'gear'].includes(itemData.type)) {
+        const qty = Number(system.quantity || 1);
+        const slots = Number(system.slots || 0);
+        incomingSlots += (slots * qty);
+      }
+    }
+
+    let currentSlots = cap.current;
+    for (const item of excludeItems) {
+      if (item.system.location === targetLocation) {
+        const qty = Number(item.system.quantity || 1);
+        const slots = Number(item.system.slots || 0);
+        currentSlots -= (slots * qty);
+      }
+    }
+
+    // Use a small epsilon for floating point comparison
+    return (currentSlots + incomingSlots) <= (cap.max + 0.001);
+  }
+
+  /**
    * Custom Attack Roll implementation
    */
   async rollAttack(weapon) {

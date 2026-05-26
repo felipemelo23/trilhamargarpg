@@ -151,14 +151,50 @@ export class TrilhamargaActorSheet extends ActorSheet {
     
     // If we're dropping an item onto a specific inventory section
     if (data.type === "Item" && targetLocation) {
-      // Handle existing items on the same actor
       const item = await Item.fromDropData(data);
-      if (item && item.actor?.id === this.actor.id && ["weapon", "armor", "shield", "gear"].includes(item.type)) {
+      if (!item) return super._onDrop(event);
+
+      const isPhysical = ["weapon", "armor", "shield", "gear"].includes(item.type);
+
+      // Handle items from a different actor (Move between sheets)
+      if (item.actor && item.actor.id !== this.actor.id) {
+        if (!isPhysical) return super._onDrop(event);
+
+        // Check capacity on target actor
+        if (!this.actor.checkCapacity(item, targetLocation)) {
+          const locLabel = game.i18n.localize(`TRILHAMARGA.${targetLocation.capitalize()}`);
+          ui.notifications.warn(game.i18n.format("TRILHAMARGA.InventoryFull", {location: locLabel}));
+          return false;
+        }
+
+        // Create on target with new location
+        const itemData = item.toObject();
+        itemData.system.location = targetLocation;
+        await this.actor.createEmbeddedDocuments("Item", [itemData]);
+
+        // Delete from source if user has permission
+        if (item.actor.isOwner) {
+          await item.delete();
+        }
+        return false;
+      }
+
+      // Handle existing items on the same actor
+      if (item.actor?.id === this.actor.id && isPhysical) {
+        // Check capacity if changing location
+        if (item.system.location !== targetLocation) {
+          if (!this.actor.checkCapacity(item, targetLocation, {excludeItems: [item]})) {
+            const locLabel = game.i18n.localize(`TRILHAMARGA.${targetLocation.capitalize()}`);
+            ui.notifications.warn(game.i18n.format("TRILHAMARGA.InventoryFull", {location: locLabel}));
+            return false;
+          }
+        }
+        
         await item.update({"system.location": targetLocation});
         // If dropped on the section (not an item), prevent default to avoid redundant sorting logic
         if (!event.target.closest(".item")) return;
       }
-      // Store location for _onDropItemCreate
+      // Store location for _onDropItemCreate (for compendium drops)
       this._dropLocation = targetLocation;
     } else {
       this._dropLocation = null;
@@ -173,9 +209,20 @@ export class TrilhamargaActorSheet extends ActorSheet {
     const itemsToCreate = [];
 
     for (let item of itemData) {
+      const isPhysical = ["weapon", "armor", "shield", "gear"].includes(item.type);
+      
       // Apply drop location if available
-      if (this._dropLocation && ["weapon", "armor", "shield", "gear"].includes(item.type)) {
+      if (this._dropLocation && isPhysical) {
         item = foundry.utils.mergeObject(item, {"system.location": this._dropLocation}, {inplace: false});
+      }
+
+      const targetLoc = item.system?.location || 'body';
+
+      // Check capacity for physical items
+      if (isPhysical && !this.actor.checkCapacity(item, targetLoc)) {
+        const locLabel = game.i18n.localize(`TRILHAMARGA.${targetLoc.capitalize()}`);
+        ui.notifications.warn(game.i18n.format("TRILHAMARGA.InventoryFull", {location: locLabel}));
+        continue;
       }
 
       // Check if item is stackable and already exists
@@ -374,6 +421,15 @@ export class TrilhamargaActorSheet extends ActorSheet {
 
     const typeLabel = game.i18n.localize(`TRILHAMARGA.${typeKeys[type] || type.capitalize()}`);
     const itemName = game.i18n.format("TRILHAMARGA.NewItem", {item: typeLabel});
+
+    // Check capacity for physical items (default to 'body')
+    if (['weapon', 'armor', 'shield', 'gear'].includes(type)) {
+      if (!this.actor.checkCapacity({type, system: {slots: 1, quantity: 1}}, 'body')) {
+        const locLabel = game.i18n.localize("TRILHAMARGA.Body");
+        ui.notifications.warn(game.i18n.format("TRILHAMARGA.InventoryFull", {location: locLabel}));
+        return false;
+      }
+    }
 
     const itemData = {
       name: itemName,
