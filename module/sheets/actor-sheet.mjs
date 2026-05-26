@@ -154,7 +154,12 @@ export class TrilhamargaActorSheet extends ActorSheet {
       return false;
     }
 
-    const targetLocation = event.target.closest(".inventory-section")?.dataset.location;
+    let targetLocation = event.target.closest(".inventory-section")?.dataset.location;
+    
+    // For containers, default to 'body' if not specified
+    if (!targetLocation && this.actor.type === "container") {
+      targetLocation = "body";
+    }
     
     // If we're dropping an item onto a specific inventory section
     if (data.type === "Item" && targetLocation) {

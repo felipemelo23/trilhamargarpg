@@ -197,6 +197,10 @@ export class TrilhamargaActor extends Actor {
   checkCapacity(items, targetLocation, { excludeItems = [] } = {}) {
     if (this.type === 'container') {
       const cap = this.system.capacity;
+      
+      // Max 0 or null means infinite capacity
+      if (!cap.max || cap.max <= 0) return true;
+
       let incomingSlots = 0;
       const itemsArray = Array.isArray(items) ? items : [items];
       for (const itemData of itemsArray) {
