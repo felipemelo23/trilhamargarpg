@@ -138,35 +138,39 @@ Hooks.on("setup", () => {
     console.log("Trilhamarga RPG | Received socket event:", data);
     
     if (data.type === "transferItem" && game.user.isGM) {
-      console.log("Trilhamarga RPG | Processing transferItem as GM");
-      const { sourceActorId, targetActorId, itemData, targetLocation } = data.payload;
-      const sourceActor = game.actors.get(sourceActorId);
-      const targetActor = game.actors.get(targetActorId);
+      const { itemUuid, targetActorUuid, targetLocation } = data.payload;
+      const item = await fromUuid(itemUuid);
+      const targetActor = await fromUuid(targetActorUuid);
 
-      if (!sourceActor || !targetActor) {
-        console.error("Trilhamarga RPG | Transfer failed: source or target actor not found");
+      if (!item || !targetActor) {
+        console.error("Trilhamarga RPG | Transfer failed: item or target actor not found", {itemUuid, targetActorUuid});
         return;
       }
 
+      console.log(`Trilhamarga RPG | GM Processing transfer of ${item.name} to ${targetActor.name}`);
+
       // Re-validate capacity on GM side
-      if (!targetActor.checkCapacity(itemData, targetLocation)) {
+      if (!targetActor.checkCapacity(item, targetLocation)) {
         console.warn("Trilhamarga RPG | Transfer failed: target inventory full");
         return ui.notifications.error(game.i18n.format("TRILHAMARGA.InventoryFull", {
           location: game.i18n.localize(`TRILHAMARGA.${targetLocation.capitalize()}`)
         }));
       }
 
-      // Create on target
+      const sourceActor = item.actor;
+      const itemData = item.toObject();
+      delete itemData._id; // Ensure a new ID is generated on target
       itemData.system.location = targetLocation;
+
+      // Create on target
       await targetActor.createEmbeddedDocuments("Item", [itemData]);
 
       // Delete from source
-      const item = sourceActor.items.get(itemData._id);
-      if (item) await item.delete();
+      await item.delete();
 
       ui.notifications.info(game.i18n.format("TRILHAMARGA.ItemTransferred", {
         item: itemData.name,
-        source: sourceActor.name,
+        source: sourceActor ? sourceActor.name : "Unknown",
         target: targetActor.name
       }));
     }
