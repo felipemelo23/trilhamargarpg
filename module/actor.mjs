@@ -14,6 +14,34 @@ export class TrilhamargaActor extends Actor {
 
     if (actorData.type === 'pc') this._preparePcData(actorData);
     if (actorData.type === 'npc') this._prepareNpcData(actorData);
+    if (actorData.type === 'container') this._prepareContainerData(actorData);
+  }
+
+  _prepareContainerData(actorData) {
+    const system = actorData.system;
+    let currentLoad = 0;
+
+    const physicalItems = actorData.items.filter(i => ['weapon', 'armor', 'shield', 'gear'].includes(i.type));
+    for (let i of physicalItems) {
+      const qty = Number(i.system.quantity || 1);
+      const totalSlots = Number(i.system.slots || 0) * qty;
+      currentLoad += totalSlots;
+    }
+
+    system.capacity.value = Math.floor(currentLoad * 100) / 100;
+    
+    if (system.capacity.max > 0) {
+      const pct = (system.capacity.value / system.capacity.max) * 100;
+      system.capacity.pct = Math.min(pct, 100);
+      
+      if (pct > 100) system.capacity.color = "black";
+      else if (pct <= 50) system.capacity.color = "green";
+      else if (pct <= 75) system.capacity.color = "yellow";
+      else system.capacity.color = "red";
+    } else {
+      system.capacity.pct = 0;
+      system.capacity.color = "";
+    }
   }
 
   _preparePcData(actorData) {
@@ -167,6 +195,28 @@ export class TrilhamargaActor extends Actor {
    * @returns {boolean}
    */
   checkCapacity(items, targetLocation, { excludeItems = [] } = {}) {
+    if (this.type === 'container') {
+      const cap = this.system.capacity;
+      let incomingSlots = 0;
+      const itemsArray = Array.isArray(items) ? items : [items];
+      for (const itemData of itemsArray) {
+        const system = itemData.system || itemData._source?.system || {};
+        if (['weapon', 'armor', 'shield', 'gear'].includes(itemData.type)) {
+          const qty = Number(system.quantity || 1);
+          const slots = Number(system.slots || 0);
+          incomingSlots += (slots * qty);
+        }
+      }
+
+      let currentSlots = cap.value;
+      for (const item of excludeItems) {
+        const qty = Number(item.system.quantity || 1);
+        const slots = Number(item.system.slots || 0);
+        currentSlots -= (slots * qty);
+      }
+      return (currentSlots + incomingSlots) <= (cap.max + 0.001);
+    }
+
     if (this.type !== 'pc') return true;
     if (!['body', 'backpack'].includes(targetLocation)) return true;
 

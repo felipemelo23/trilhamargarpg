@@ -46,7 +46,12 @@
       "description": "",
       "castingAbility": ""
     },
-    "container": {}
+    "container": {
+      "capacity": {
+        "value": 0,
+        "max": 10
+      }
+    }
   },
   "Item": {
     "types": ["skill", "weapon", "armor", "shield", "gear", "wound", "divine_domain", "divine_tenet", "spell", "recipe", "note", "npc_attack", "npc_ability"],
