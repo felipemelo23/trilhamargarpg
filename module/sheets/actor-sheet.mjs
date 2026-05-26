@@ -176,6 +176,7 @@ export class TrilhamargaActorSheet extends ActorSheet {
           await item.delete();
         } else if (item.actor.isOwner) {
           // User owns source but not target - request GM to perform transfer via socket
+          console.log(`Trilhamarga RPG | Emitting transferItem socket for ${item.name} from ${item.actor.id} to ${this.actor.id}`);
           game.socket.emit("system.trilhamarga", {
             type: "transferItem",
             payload: {

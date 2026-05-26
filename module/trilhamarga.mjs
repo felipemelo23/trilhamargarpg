@@ -131,23 +131,25 @@ Hooks.on("renderChatMessage", (message, html, data) => {
   sender.innerText = message.author.name;
 });
 
-Hooks.on("ready", async function() {
-  // Create the Destiny/Doom tracker UI
-  if (!ui.destinyTracker) {
-    ui.destinyTracker = new DestinyTracker().render(true);
-  }
-
+Hooks.on("setup", () => {
   // Socket listener for item transfers
   game.socket.on("system.trilhamarga", async (data) => {
+    console.log("Trilhamarga RPG | Received socket event:", data);
+    
     if (data.type === "transferItem" && game.user.isGM) {
+      console.log("Trilhamarga RPG | Processing transferItem as GM");
       const { sourceActorId, targetActorId, itemData, targetLocation } = data.payload;
       const sourceActor = game.actors.get(sourceActorId);
       const targetActor = game.actors.get(targetActorId);
 
-      if (!sourceActor || !targetActor) return;
+      if (!sourceActor || !targetActor) {
+        console.error("Trilhamarga RPG | Transfer failed: source or target actor not found");
+        return;
+      }
 
       // Re-validate capacity on GM side
       if (!targetActor.checkCapacity(itemData, targetLocation)) {
+        console.warn("Trilhamarga RPG | Transfer failed: target inventory full");
         return ui.notifications.error(game.i18n.format("TRILHAMARGA.InventoryFull", {
           location: game.i18n.localize(`TRILHAMARGA.${targetLocation.capitalize()}`)
         }));
@@ -168,6 +170,13 @@ Hooks.on("ready", async function() {
       }));
     }
   });
+});
+
+Hooks.on("ready", async function() {
+  // Create the Destiny/Doom tracker UI
+  if (!ui.destinyTracker) {
+    ui.destinyTracker = new DestinyTracker().render(true);
+  }
 });
 
 Hooks.on("preCreateToken", (token, data, options, userId) => {
