@@ -95,6 +95,7 @@ Hooks.once("init", async function() {
   return loadTemplates([
     "systems/trilhamarga/templates/actors/pc-sheet.html",
     "systems/trilhamarga/templates/actors/npc-sheet.html",
+    "systems/trilhamarga/templates/actors/container-sheet.html",
     "systems/trilhamarga/templates/items/item-sheet.html",
     "systems/trilhamarga/templates/chat/skill-roll.hbs",
     "systems/trilhamarga/templates/chat/weapon-attack.hbs",

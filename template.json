@@ -45,6 +45,9 @@
       "movement": "",
       "description": "",
       "castingAbility": ""
+    },
+    "container": {
+      "description": ""
     }
   },
   "Item": {

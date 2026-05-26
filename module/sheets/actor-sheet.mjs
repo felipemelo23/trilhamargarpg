@@ -33,9 +33,16 @@ export class TrilhamargaActorSheet extends ActorSheet {
         .filter(i => i.type === "npc_ability")
         .map(i => i.name)
         .sort();
+    } else if (this.actor.type === 'container') {
+      this._prepareContainerItems(data);
     }
 
     return data;
+  }
+
+  _prepareContainerItems(data) {
+    // Containers just list all physical items
+    data.items = this.actor.items.contents.sort((a, b) => (a.sort || 0) - (b.sort || 0));
   }
 
   _preparePcItems(data) {
@@ -174,8 +181,8 @@ export class TrilhamargaActorSheet extends ActorSheet {
           itemData.system.location = targetLocation;
           await this.actor.createEmbeddedDocuments("Item", [itemData]);
           await item.delete();
-        } else if (item.actor.isOwner) {
-          // User owns source but not target - request GM to perform transfer via socket
+        } else if (this.actor.isOwner || item.actor.isOwner) {
+          // User owns one side but not the other - request GM to perform transfer via socket
           console.log(`Trilhamarga RPG | Emitting transferItem socket for ${item.name} from ${item.actor.id} to ${this.actor.id}`);
           game.socket.emit("system.trilhamarga", {
             type: "transferItem",

@@ -2,7 +2,8 @@
   "TRILHAMARGA": {
     "Actor": {
       "PC": "Character",
-      "NPC": "NPC"
+      "NPC": "NPC",
+      "Container": "Container"
     },
     "Basics": "Basics",
     "Name": "Name",
