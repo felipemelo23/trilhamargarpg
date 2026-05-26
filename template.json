@@ -1,6 +1,6 @@
 {
   "Actor": {
-    "types": ["pc", "npc"],
+    "types": ["pc", "npc", "container"],
     "pc": {
       "xp": 0,
       "ancestry": "",
