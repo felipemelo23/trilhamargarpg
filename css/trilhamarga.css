@@ -473,7 +473,6 @@ body.game .sheet.app header.sheet-header {
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
   padding: 8px 12px;
   border-radius: 4px;
-  min-width: 160px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -481,8 +480,9 @@ body.game .sheet.app header.sheet-header {
 
 #destiny-tracker .currency-item {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
+  gap: 15px;
 }
 
 #destiny-tracker label {
@@ -490,6 +490,7 @@ body.game .sheet.app header.sheet-header {
   font-weight: bold;
   font-size: 13px;
   text-transform: uppercase;
+  flex: 0 0 75px;
 }
 
 #destiny-tracker .controls {
