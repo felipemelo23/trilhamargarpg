@@ -19,6 +19,7 @@ export class TrilhamargaActor extends Actor {
 
   _prepareContainerData(actorData) {
     const system = actorData.system;
+    if (!system.capacity) system.capacity = { value: 0, max: 0 };
     let currentLoad = 0;
 
     const physicalItems = actorData.items.filter(i => ['weapon', 'armor', 'shield', 'gear'].includes(i.type));

@@ -23,6 +23,7 @@ export class TrilhamargaActorSheet extends ActorSheet {
   async getData() {
     const data = await super.getData();
     data.system = data.actor.system;
+    data.isGM = game.user.isGM;
 
     // Prepare items
     if (this.actor.type === 'pc') {
