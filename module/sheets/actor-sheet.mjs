@@ -157,12 +157,12 @@ export class TrilhamargaActorSheet extends ActorSheet {
 
     let targetLocation = event.target.closest(".inventory-section")?.dataset.location;
     
-    // For containers, default to 'body' if not specified
-    if (!targetLocation && this.actor.type === "container") {
+    // Default to 'body' for all physical item drops on any of our sheets
+    if (!targetLocation && ["pc", "npc", "container"].includes(this.actor.type)) {
       targetLocation = "body";
     }
     
-    // If we're dropping an item onto a specific inventory section
+    // If we're dropping an item onto our sheet
     if (data.type === "Item" && targetLocation) {
       const item = await Item.fromDropData(data);
       if (!item) return super._onDrop(event);
@@ -174,10 +174,12 @@ export class TrilhamargaActorSheet extends ActorSheet {
         if (!isPhysical) return super._onDrop(event);
         
         // Delegate to the new transferItem method
-        const handled = await this.actor.transferItem(item, targetLocation);
-        if (handled) return false;
-        
-        return false; // Always prevent default for inter-actor moves to avoid duplicate creation
+        try {
+          await this.actor.transferItem(item, targetLocation);
+        } catch (err) {
+          console.error("Trilhamarga RPG | Drop transfer failed", err);
+        }
+        return false; // Always prevent default for inter-actor moves
       }
 
       // Handle existing items on the same actor

@@ -254,7 +254,7 @@ export class TrilhamargaActor extends Actor {
   }
 
   /**
-   * Robust item transfer between actors
+   * Robust item transfer between actors with stacking support
    * @param {string|Item} itemOrUuid - The item instance or its UUID
    * @param {string} targetLocation - 'body', 'backpack', or 'other'
    */
@@ -264,16 +264,11 @@ export class TrilhamargaActor extends Actor {
     const targetActor = this;
 
     if (!item || !sourceActor || !targetActor) {
-      console.error("Trilhamarga RPG | Transfer failed: missing item, source, or target", {item, sourceActor, targetActor});
+      console.error("Trilhamarga RPG | Transfer failed: missing item, source, or target");
       return false;
     }
 
-    if (sourceActor.uuid === targetActor.uuid) {
-      console.log("Trilhamarga RPG | Transfer aborted: source and target are the same");
-      return false;
-    }
-
-    console.log(`Trilhamarga RPG | Transferring ${item.name} from ${sourceActor.name} to ${targetActor.name} (${targetLocation})`);
+    if (sourceActor.uuid === targetActor.uuid) return false;
 
     // 1. Check Capacity on Target
     if (!targetActor.checkCapacity(item, targetLocation)) {
@@ -287,45 +282,47 @@ export class TrilhamargaActor extends Actor {
     const canWriteSource = sourceActor.isOwner;
 
     if (canWriteTarget && canWriteSource) {
-      // Execute directly
-      console.log("Trilhamarga RPG | Executing direct transfer");
+      console.log(`Trilhamarga RPG | Direct transfer: ${item.name} -> ${targetActor.name}`);
       try {
         const itemData = item.toObject();
-        delete itemData._id;
-        delete itemData.folder;
-        itemData.system.location = targetLocation;
+        const qty = Number(itemData.system.quantity || 1);
+        
+        // Stacking Logic
+        const isStackable = itemData.system.stackable;
+        const existingItem = isStackable ? targetActor.items.find(i => 
+          i.name === itemData.name && 
+          i.type === itemData.type && 
+          (i.system.location || "body") === targetLocation
+        ) : null;
 
-        const created = await targetActor.createEmbeddedDocuments("Item", [itemData]);
-        if (created && created.length > 0) {
-          await item.delete();
-          ui.notifications.info(game.i18n.format("TRILHAMARGA.ItemTransferred", {
-            item: itemData.name,
-            source: sourceActor.name,
-            target: targetActor.name
-          }));
-          return true;
+        if (existingItem) {
+          await existingItem.update({ "system.quantity": Number(existingItem.system.quantity || 0) + qty });
+        } else {
+          delete itemData._id;
+          delete itemData.folder;
+          itemData.system.location = targetLocation;
+          await targetActor.createEmbeddedDocuments("Item", [itemData]);
         }
+
+        await item.delete();
+        ui.notifications.info(game.i18n.format("TRILHAMARGA.ItemTransferred", {
+          item: itemData.name, source: sourceActor.name, target: targetActor.name
+        }));
+        return true;
       } catch (err) {
         console.error("Trilhamarga RPG | Transfer execution failed", err);
-        ui.notifications.error("Transfer failed due to an error. See console for details.");
+        return false;
       }
     } else if (canWriteSource || canWriteTarget) {
-      // Emit socket for GM to handle
-      console.log("Trilhamarga RPG | Emitting transfer request to GM");
       game.socket.emit("system.trilhamarga", {
         type: "transferItem",
-        payload: {
-          itemUuid: item.uuid,
-          targetActorUuid: targetActor.uuid,
-          targetLocation: targetLocation
-        }
+        payload: { itemUuid: item.uuid, targetActorUuid: targetActor.uuid, targetLocation: targetLocation }
       });
       ui.notifications.info(game.i18n.localize("TRILHAMARGA.TransferRequested"));
       return true;
     } else {
       ui.notifications.warn("You do not have permission to transfer items from this character.");
     }
-
     return false;
   }
 
