@@ -25,12 +25,12 @@
   "languages": [
     {
       "lang": "en",
-      "name": "English",
+      "name": "English (US)",
       "path": "lang/en.json"
     },
     {
       "lang": "pt-BR",
-      "name": "Português",
+      "name": "Português (BR)",
       "path": "lang/pt-BR.json"
     }
   ],
