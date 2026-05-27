@@ -168,10 +168,6 @@ Hooks.on("ready", async function() {
   }
 });
 
-Hooks.on("renderPlayerList", () => {
-  if (ui.destinyTracker) ui.destinyTracker.setPosition();
-});
-
 Hooks.on("preCreateToken", (token, data, options, userId) => {
   const actor = token.actor;
   if (!actor) return;
@@ -206,8 +202,21 @@ class DestinyTracker extends Application {
   _injectHTML(html) {
     if ( !document.getElementById("destiny-tracker") ) {
       $("#interface").append(html);
-      this.setPosition();
+      this._observePlayers();
     }
+  }
+
+  /**
+   * Watch for player list height changes
+   */
+  _observePlayers() {
+    const players = document.getElementById("players");
+    if (players) {
+      if (this._observer) this._observer.disconnect();
+      this._observer = new ResizeObserver(() => this.setPosition());
+      this._observer.observe(players);
+    }
+    this.setPosition();
   }
 
   /**
@@ -216,10 +225,18 @@ class DestinyTracker extends Application {
   setPosition() {
     const tracker = document.getElementById("destiny-tracker");
     const players = document.getElementById("players");
-    if (tracker && players) {
-      const height = players.offsetHeight;
-      tracker.style.bottom = `${height + 22}px`; // 10px Foundry spacing + 12px gap
+    
+    // If elements are not ready, try again in a moment
+    if (!tracker || !players || players.offsetHeight === 0) {
+      if ((this._retries || 0) < 5) {
+        this._retries = (this._retries || 0) + 1;
+        setTimeout(() => this.setPosition(), 200);
+      }
+      return;
     }
+
+    const height = players.offsetHeight;
+    tracker.style.bottom = `${height + 22}px`; // 10px Foundry base + 12px gap
   }
 
   getData() {
