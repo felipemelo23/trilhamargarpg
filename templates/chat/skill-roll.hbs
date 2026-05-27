@@ -8,7 +8,7 @@
         <div class="skill-label"><em>{{localize "TRILHAMARGA.SkillCheck" skill=skillName}}</em></div>
         {{#if flavorText}}<div class="flavor-text">{{flavorText}}</div>{{/if}}
         
-        <div class="dice-roll">
+        <div class="dice-roll {{parityClass}}">
             {{{rollHtml}}}
         </div>
 

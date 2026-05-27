@@ -623,6 +623,14 @@ body.game .sheet.app header.sheet-header {
   margin-bottom: 10px;
 }
 
+.trilhamarga.chat-card .roll-even .dice-total {
+  color: #0000ff !important;
+}
+
+.trilhamarga.chat-card .roll-odd .dice-total {
+  color: #ff007f !important;
+}
+
 .trilhamarga.chat-card .card-footer {
   margin-top: 5px;
   border-top: 1px solid #ccc;

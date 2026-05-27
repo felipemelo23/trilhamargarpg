@@ -437,6 +437,7 @@ export class TrilhamargaActor extends Actor {
       skillName: skill ? skill.name : null,
       flavorText: flavorText,
       atkRollHtml: await roll.render(),
+      atkParityClass: roll.total % 2 === 0 ? "roll-even" : "roll-odd",
       atkResultLabel: atkResultLabel,
       resultClass: resultClass,
       dmgRollHtml: await dmgRoll.render()
@@ -494,6 +495,7 @@ export class TrilhamargaActor extends Actor {
       attackName: attack.name,
       description: attack.system.description,
       atkRollHtml: await atkRoll.render(),
+      atkParityClass: atkRoll.total % 2 === 0 ? "roll-even" : "roll-odd",
       critLabel: critLabel,
       resultClass: resultClass,
       dmgRollHtml: await dmgRoll.render()
@@ -559,6 +561,7 @@ export class TrilhamargaActor extends Actor {
     const evaluatedRoll = message.rolls[0];
     const resultValue = evaluatedRoll.total;
     const dieValue = evaluatedRoll.dice[0].total; 
+    const parityClass = resultValue % 2 === 0 ? "roll-even" : "roll-odd";
 
     let result = "";
     if (dieValue === 12) result = "TRILHAMARGA.CriticalSuccess";
@@ -566,7 +569,8 @@ export class TrilhamargaActor extends Actor {
     else if (resultValue >= difficulty) result = "TRILHAMARGA.Success";
     else result = "TRILHAMARGA.Failure";
 
-    // Update message with final result
+    // Update message with final result and parity class
+    flavor = flavor.replace('<div class="card-content">', `<div class="card-content ${parityClass}">`);
     flavor = flavor.replace('</div>\n      </div>', `</div><div class="card-footer"><strong>${game.i18n.localize(result)}</strong></div></div>`);
     await message.update({ flavor });
 
@@ -619,6 +623,7 @@ export class TrilhamargaActor extends Actor {
       skillName: skill.name,
       flavorText: flavorText,
       rollHtml: await roll.render(),
+      parityClass: roll.total % 2 === 0 ? "roll-even" : "roll-odd",
       resultLabel: resultLabel,
       resultClass: resultClass
     };
@@ -688,6 +693,7 @@ export class TrilhamargaActor extends Actor {
       skillName: physiqueSkill ? physiqueSkill.name : game.i18n.localize("TRILHAMARGA.Normal"),
       flavorText: flavorText,
       rollHtml: await roll.render(),
+      parityClass: roll.total % 2 === 0 ? "roll-even" : "roll-odd",
       resultLabel: resultLabel,
       resultClass: resultClass
     };
@@ -782,6 +788,7 @@ export class TrilhamargaActor extends Actor {
       skillName: skillName,
       flavorText: flavorText,
       rollHtml: await roll.render(),
+      parityClass: roll.total % 2 === 0 ? "roll-even" : "roll-odd",
       resultLabel: resultLabel,
       resultClass: resultClass,
       success: success,
