@@ -163,25 +163,36 @@ export class TrilhamargaActorSheet extends ActorSheet {
     
     // If we're dropping an item onto a specific inventory section
     if (data.type === "Item" && targetLocation) {
+      console.log(`Trilhamarga RPG | Drop event detected on ${this.actor.name} (${this.actor.type}) at location: ${targetLocation}`);
       const item = await Item.fromDropData(data);
-      if (!item) return super._onDrop(event);
+      if (!item) {
+        console.warn("Trilhamarga RPG | Could not resolve item from drop data", data);
+        return super._onDrop(event);
+      }
 
       const isPhysical = ["weapon", "armor", "shield", "gear"].includes(item.type);
+      console.log(`Trilhamarga RPG | Dropped item: ${item.name} (Type: ${item.type}, Physical: ${isPhysical})`);
 
       // Handle items from a different actor (Move between sheets)
       if (item.actor && item.actor.id !== this.actor.id) {
-        if (!isPhysical) return super._onDrop(event);
+        if (!isPhysical) {
+          console.log("Trilhamarga RPG | Non-physical item move between actors, falling back to default");
+          return super._onDrop(event);
+        }
+
+        console.log(`Trilhamarga RPG | Inter-actor transfer: ${item.actor.name} -> ${this.actor.name}`);
 
         // Check capacity on target actor
         if (!this.actor.checkCapacity(item, targetLocation)) {
-          const locLabel = game.i18n.localize(`TRILHAMARGA.${targetLocation.capitalize()}`);
+          console.warn(`Trilhamarga RPG | Transfer blocked: Not enough capacity in ${targetLocation} on ${this.actor.name}`);
+          const locLabel = game.i18n.localize(`TRILHAMARGA.${targetLocation.charAt(0).toUpperCase() + targetLocation.slice(1)}`);
           ui.notifications.warn(game.i18n.format("TRILHAMARGA.InventoryFull", {location: locLabel}));
           return false;
         }
 
         // Check if we can perform the move directly (user owns both)
         if (this.actor.isOwner && item.actor.isOwner) {
-          // Create on target with new location
+          console.log("Trilhamarga RPG | Direct move (Owner of both)");
           const itemData = item.toObject();
           delete itemData._id;
           itemData.system.location = targetLocation;
@@ -195,7 +206,7 @@ export class TrilhamargaActorSheet extends ActorSheet {
           }));
         } else if (this.actor.isOwner || item.actor.isOwner) {
           // User owns one side but not the other - request GM to perform transfer via socket
-          console.log(`Trilhamarga RPG | Emitting transferItem socket for ${item.name} from ${item.actor.uuid} to ${this.actor.uuid}`);
+          console.log("Trilhamarga RPG | Emitting transferItem socket");
           game.socket.emit("system.trilhamarga", {
             type: "transferItem",
             payload: {
@@ -205,6 +216,8 @@ export class TrilhamargaActorSheet extends ActorSheet {
             }
           });
           ui.notifications.info(game.i18n.localize("TRILHAMARGA.TransferRequested"));
+        } else {
+          console.warn("Trilhamarga RPG | Transfer blocked: Insufficient permissions on both source and target");
         }
         
         return false;
