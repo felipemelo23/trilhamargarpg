@@ -158,6 +158,13 @@ Hooks.on("setup", () => {
         console.error("Trilhamarga RPG | Socket transfer failed", err);
       }
     }
+
+    if (data.type === "updateCurrency" && activeGM && activeGM.id === game.user.id) {
+      console.log(`Trilhamarga RPG | GM Processing currency update: ${data.payload.type} by ${data.payload.delta}`);
+      const { type, delta } = data.payload;
+      const current = game.settings.get("trilhamarga", type);
+      await game.settings.set("trilhamarga", type, Math.max(0, current + delta));
+    }
   });
 });
 
@@ -259,7 +266,15 @@ class DestinyTracker extends Application {
     if (type === "doom" && !game.user.isGM) return;
     if (type === "destiny" && !game.user.isGM && delta > 0) return;
     
-    const current = game.settings.get("trilhamarga", type);
-    await game.settings.set("trilhamarga", type, Math.max(0, current + delta));
+    if (game.user.isGM) {
+      const current = game.settings.get("trilhamarga", type);
+      await game.settings.set("trilhamarga", type, Math.max(0, current + delta));
+    } else {
+      // Players request GM to update world settings via socket
+      game.socket.emit("system.trilhamarga", {
+        type: "updateCurrency",
+        payload: { type, delta }
+      });
+    }
   }
 }
