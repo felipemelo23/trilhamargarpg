@@ -305,9 +305,13 @@ export class TrilhamargaActor extends Actor {
         }
 
         await item.delete();
-        ui.notifications.info(game.i18n.format("TRILHAMARGA.ItemTransferred", {
-          item: itemData.name, source: sourceActor.name, target: targetActor.name
-        }));
+        
+        await ChatMessage.create({
+          speaker: ChatMessage.getSpeaker({ actor: targetActor }),
+          content: game.i18n.format("TRILHAMARGA.ItemTransferred", {
+            item: itemData.name, source: sourceActor.name, target: targetActor.name
+          })
+        });
         return true;
       } catch (err) {
         console.error("Trilhamarga RPG | Transfer execution failed", err);
@@ -318,7 +322,6 @@ export class TrilhamargaActor extends Actor {
         type: "transferItem",
         payload: { itemUuid: item.uuid, targetActorUuid: targetActor.uuid, targetLocation: targetLocation }
       });
-      ui.notifications.info(game.i18n.localize("TRILHAMARGA.TransferRequested"));
       return true;
     } else {
       ui.notifications.warn("You do not have permission to transfer items from this character.");
