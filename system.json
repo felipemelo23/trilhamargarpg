@@ -35,10 +35,10 @@
     }
   ],
   "initiative": "1d12",
-  "gridDistance": 1,
+  "gridDistance": 1.5,
   "gridUnits": "m",
-  "primaryTokenAttribute": "life",
-  "secondaryTokenAttribute": "stamina",
+  "primaryTokenAttribute": "stamina",
+  "secondaryTokenAttribute": "protection",
   "packs": [
     {
       "name": "items",
