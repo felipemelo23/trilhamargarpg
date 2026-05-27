@@ -1,3 +1,5 @@
-2026/05/26-23:05:05.279038 175223000 Recovering log #89
-2026/05/26-23:05:05.279628 175223000 Delete type=0 #89
-2026/05/26-23:05:05.279677 175223000 Delete type=3 #87
+2026/05/27-18:08:53.797580 172287000 Log #95: 0 ops saved to Table #98 OK
+2026/05/27-18:08:53.797702 172287000 Archiving /Users/felipemelo/Library/Application Support/FoundryVTT/Data/systems/trilhamarga/packs/items/000095.log: OK
+2026/05/27-18:08:53.798519 172287000 Table #97: 206 entries OK
+2026/05/27-18:08:53.798702 172287000 Archiving /Users/felipemelo/Library/Application Support/FoundryVTT/Data/systems/trilhamarga/packs/items/MANIFEST-000093: OK
+2026/05/27-18:08:53.799110 172287000 **** Repaired leveldb /Users/felipemelo/Library/Application Support/FoundryVTT/Data/systems/trilhamarga/packs/items; recovered 1 files; 69311 bytes. Some data may have been lost. ****
