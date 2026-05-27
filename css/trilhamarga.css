@@ -463,7 +463,7 @@ body.game .sheet.app header.sheet-header {
 /* Tracker styling */
 #destiny-tracker {
   position: fixed;
-  bottom: 180px;
+  bottom: 120px;
   left: 16px;
   right: auto;
   z-index: 60;

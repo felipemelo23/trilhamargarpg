@@ -168,6 +168,10 @@ Hooks.on("ready", async function() {
   }
 });
 
+Hooks.on("renderPlayerList", () => {
+  if (ui.destinyTracker) ui.destinyTracker.setPosition();
+});
+
 Hooks.on("preCreateToken", (token, data, options, userId) => {
   const actor = token.actor;
   if (!actor) return;
@@ -202,6 +206,19 @@ class DestinyTracker extends Application {
   _injectHTML(html) {
     if ( !document.getElementById("destiny-tracker") ) {
       $("#interface").append(html);
+      this.setPosition();
+    }
+  }
+
+  /**
+   * Dynamically position the tracker above the player list
+   */
+  setPosition() {
+    const tracker = document.getElementById("destiny-tracker");
+    const players = document.getElementById("players");
+    if (tracker && players) {
+      const height = players.offsetHeight;
+      tracker.style.bottom = `${height + 22}px`; // 10px Foundry spacing + 12px gap
     }
   }
 
