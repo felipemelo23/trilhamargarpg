@@ -1,7 +1,7 @@
 {
   "id": "trilhamarga",
   "title": "Trilhamarga RPG",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "author": "greynakk",
   "library": false,
   "manifest": "https://raw.githubusercontent.com/felipemelo23/trilhamargarpg/develop/system.json",
