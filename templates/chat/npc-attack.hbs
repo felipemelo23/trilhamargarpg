@@ -10,8 +10,12 @@
         <div class="attack-description">{{{description}}}</div>
         {{/if}}
         
-        <div class="dice-roll {{atkParityClass}}">
+        <div class="dice-roll">
             {{{atkRollHtml}}}
+        </div>
+
+        <div class="initiative-message">
+            <em>{{localize initiativeMessage}}</em>
         </div>
 
         {{#if critLabel}}

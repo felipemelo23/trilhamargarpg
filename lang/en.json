@@ -124,6 +124,8 @@
     "InventoryFull": "Not enough capacity in {location} to add this item.",
     "CannotMoveItem": "Cannot move item: {reason}",
     "TransferRequested": "Item transfer requested to GM...",
-    "ItemTransferred": "{item} transferred from {source} to {target}."
+    "ItemTransferred": "{item} transferred from {source} to {target}.",
+    "KeepInitiative": "You keep the initiative",
+    "LoseInitiative": "You lose the initiative"
   }
 }

@@ -620,15 +620,15 @@ body.game .sheet.app header.sheet-header {
 .trilhamarga.chat-card .dice-roll .dice-formula,
 .trilhamarga.chat-card .dice-roll .dice-total {
   margin: 0;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
-.trilhamarga.chat-card .roll-even .dice-total {
-  color: #0000ff !important;
-}
-
-.trilhamarga.chat-card .roll-odd .dice-total {
-  color: #ff007f !important;
+.trilhamarga.chat-card .initiative-message {
+  text-align: center;
+  font-size: 11px;
+  font-style: italic;
+  margin-bottom: 8px;
+  color: #666;
 }
 
 .trilhamarga.chat-card .card-footer {

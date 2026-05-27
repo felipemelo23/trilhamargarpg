@@ -124,6 +124,8 @@
     "InventoryFull": "Capacidade insuficiente em {location} para adicionar este item.",
     "CannotMoveItem": "Não é possível mover o item: {reason}",
     "TransferRequested": "Transferência de item solicitada ao Mestre...",
-    "ItemTransferred": "{item} transferido de {source} para {target}."
+    "ItemTransferred": "{item} transferido de {source} para {target}.",
+    "KeepInitiative": "Você mantém a iniciativa",
+    "LoseInitiative": "Você perde a iniciativa"
   }
 }

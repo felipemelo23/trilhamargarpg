@@ -13,8 +13,12 @@
         <div class="skill-label"><em>{{localize "TRILHAMARGA.SkillCheck" skill=skillName}}</em></div>
         {{#if flavorText}}<div class="flavor-text">{{flavorText}}</div>{{/if}}
         
-        <div class="dice-roll {{parityClass}}">
+        <div class="dice-roll">
             {{{rollHtml}}}
+        </div>
+
+        <div class="initiative-message">
+            <em>{{localize initiativeMessage}}</em>
         </div>
 
         <div class="cast-result {{resultClass}}">
