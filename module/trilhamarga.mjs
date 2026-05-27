@@ -137,42 +137,26 @@ Hooks.on("setup", () => {
   game.socket.on("system.trilhamarga", async (data) => {
     console.log("Trilhamarga RPG | Received socket event:", data);
     
-    if (data.type === "transferItem" && game.user.isGM) {
+    // Only the active GM should process the transfer to avoid duplicates
+    const activeGM = game.users.activeGM;
+    if (data.type === "transferItem" && activeGM && activeGM.id === game.user.id) {
+      console.log("Trilhamarga RPG | Processing transferItem as Active GM");
       const { itemUuid, targetActorUuid, targetLocation } = data.payload;
-      const item = await fromUuid(itemUuid);
-      const targetActor = await fromUuid(targetActorUuid);
+      
+      try {
+        const item = await fromUuid(itemUuid);
+        const targetActor = await fromUuid(targetActorUuid);
 
-      if (!item || !targetActor) {
-        console.error("Trilhamarga RPG | Transfer failed: item or target actor not found", {itemUuid, targetActorUuid});
-        return;
+        if (!item || !targetActor) {
+          console.error("Trilhamarga RPG | Transfer failed: item or target actor not found", {itemUuid, targetActorUuid});
+          return;
+        }
+
+        // Execute transfer using the robust method (GM has permissions)
+        await targetActor.transferItem(item, targetLocation);
+      } catch (err) {
+        console.error("Trilhamarga RPG | Socket transfer failed", err);
       }
-
-      console.log(`Trilhamarga RPG | GM Processing transfer of ${item.name} to ${targetActor.name}`);
-
-      // Re-validate capacity on GM side
-      if (!targetActor.checkCapacity(item, targetLocation)) {
-        console.warn("Trilhamarga RPG | Transfer failed: target inventory full");
-        return ui.notifications.error(game.i18n.format("TRILHAMARGA.InventoryFull", {
-          location: game.i18n.localize(`TRILHAMARGA.${targetLocation.capitalize()}`)
-        }));
-      }
-
-      const sourceActor = item.actor;
-      const itemData = item.toObject();
-      delete itemData._id; // Ensure a new ID is generated on target
-      itemData.system.location = targetLocation;
-
-      // Create on target
-      await targetActor.createEmbeddedDocuments("Item", [itemData]);
-
-      // Delete from source
-      await item.delete();
-
-      ui.notifications.info(game.i18n.format("TRILHAMARGA.ItemTransferred", {
-        item: itemData.name,
-        source: sourceActor ? sourceActor.name : "Unknown",
-        target: targetActor.name
-      }));
     }
   });
 });

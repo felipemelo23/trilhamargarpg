@@ -252,6 +252,82 @@ export class TrilhamargaActor extends Actor {
   }
 
   /**
+   * Robust item transfer between actors
+   * @param {string|Item} itemOrUuid - The item instance or its UUID
+   * @param {string} targetLocation - 'body', 'backpack', or 'other'
+   */
+  async transferItem(itemOrUuid, targetLocation = "body") {
+    const item = (typeof itemOrUuid === "string") ? await fromUuid(itemOrUuid) : itemOrUuid;
+    const sourceActor = item?.actor;
+    const targetActor = this;
+
+    if (!item || !sourceActor || !targetActor) {
+      console.error("Trilhamarga RPG | Transfer failed: missing item, source, or target", {item, sourceActor, targetActor});
+      return false;
+    }
+
+    if (sourceActor.uuid === targetActor.uuid) {
+      console.log("Trilhamarga RPG | Transfer aborted: source and target are the same");
+      return false;
+    }
+
+    console.log(`Trilhamarga RPG | Transferring ${item.name} from ${sourceActor.name} to ${targetActor.name} (${targetLocation})`);
+
+    // 1. Check Capacity on Target
+    if (!targetActor.checkCapacity(item, targetLocation)) {
+      const locLabel = game.i18n.localize(`TRILHAMARGA.${targetLocation.charAt(0).toUpperCase() + targetLocation.slice(1)}`);
+      ui.notifications.warn(game.i18n.format("TRILHAMARGA.InventoryFull", {location: locLabel}));
+      return false;
+    }
+
+    // 2. Permission Check & Execution
+    const canWriteTarget = targetActor.isOwner;
+    const canWriteSource = sourceActor.isOwner;
+
+    if (canWriteTarget && canWriteSource) {
+      // Execute directly
+      console.log("Trilhamarga RPG | Executing direct transfer");
+      try {
+        const itemData = item.toObject();
+        delete itemData._id;
+        delete itemData.folder;
+        itemData.system.location = targetLocation;
+
+        const created = await targetActor.createEmbeddedDocuments("Item", [itemData]);
+        if (created && created.length > 0) {
+          await item.delete();
+          ui.notifications.info(game.i18n.format("TRILHAMARGA.ItemTransferred", {
+            item: itemData.name,
+            source: sourceActor.name,
+            target: targetActor.name
+          }));
+          return true;
+        }
+      } catch (err) {
+        console.error("Trilhamarga RPG | Transfer execution failed", err);
+        ui.notifications.error("Transfer failed due to an error. See console for details.");
+      }
+    } else if (canWriteSource || canWriteTarget) {
+      // Emit socket for GM to handle
+      console.log("Trilhamarga RPG | Emitting transfer request to GM");
+      game.socket.emit("system.trilhamarga", {
+        type: "transferItem",
+        payload: {
+          itemUuid: item.uuid,
+          targetActorUuid: targetActor.uuid,
+          targetLocation: targetLocation
+        }
+      });
+      ui.notifications.info(game.i18n.localize("TRILHAMARGA.TransferRequested"));
+      return true;
+    } else {
+      ui.notifications.warn("You do not have permission to transfer items from this character.");
+    }
+
+    return false;
+  }
+
+  /**
    * Custom Attack Roll implementation
    */
   async rollAttack(weapon) {
