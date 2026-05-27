@@ -236,7 +236,7 @@ class DestinyTracker extends Application {
     }
 
     const height = players.offsetHeight;
-    tracker.style.bottom = `${height + 22}px`; // 10px Foundry base + 12px gap
+    tracker.style.bottom = `${height + 12}px`; // 12px gap above players panel
   }
 
   getData() {
