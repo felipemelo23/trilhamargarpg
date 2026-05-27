@@ -198,8 +198,8 @@ export class TrilhamargaActor extends Actor {
     if (this.type === 'container') {
       const cap = this.system.capacity;
       
-      // Max 0 or null means infinite capacity
-      if (!cap.max || cap.max <= 0) return true;
+      // Safety check: missing capacity object or max <= 0 means infinite
+      if (!cap || !cap.max || cap.max <= 0) return true;
 
       let incomingSlots = 0;
       const itemsArray = Array.isArray(items) ? items : [items];
@@ -212,7 +212,7 @@ export class TrilhamargaActor extends Actor {
         }
       }
 
-      let currentSlots = cap.value;
+      let currentSlots = Number(cap.value || 0);
       for (const item of excludeItems) {
         const qty = Number(item.system.quantity || 1);
         const slots = Number(item.system.slots || 0);
@@ -224,9 +224,10 @@ export class TrilhamargaActor extends Actor {
     if (this.type !== 'pc') return true;
     if (!['body', 'backpack'].includes(targetLocation)) return true;
 
-    const cap = this.system.loadCapacity[targetLocation];
-    let incomingSlots = 0;
+    const cap = this.system.loadCapacity?.[targetLocation];
+    if (!cap) return true;
 
+    let incomingSlots = 0;
     const itemsArray = Array.isArray(items) ? items : [items];
     for (const itemData of itemsArray) {
       // Handle both Item documents and raw data
@@ -238,7 +239,7 @@ export class TrilhamargaActor extends Actor {
       }
     }
 
-    let currentSlots = cap.current;
+    let currentSlots = Number(cap.current || 0);
     for (const item of excludeItems) {
       if (item.system.location === targetLocation) {
         const qty = Number(item.system.quantity || 1);
@@ -248,7 +249,7 @@ export class TrilhamargaActor extends Actor {
     }
 
     // Use a small epsilon for floating point comparison
-    return (currentSlots + incomingSlots) <= (cap.max + 0.001);
+    return (currentSlots + incomingSlots) <= (Number(cap.max || 0) + 0.001);
   }
 
   /**
