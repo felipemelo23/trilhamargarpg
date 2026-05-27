@@ -787,6 +787,12 @@ export class TrilhamargaActor extends Actor {
       success = false;
     }
 
+    // Automatic Arcane Fatigue increase on failure for PCs
+    if (!success && this.type === 'pc') {
+      const currentFatigue = Number(this.system.arcane_fatigue?.value || 0);
+      await this.update({ "system.arcane_fatigue.value": currentFatigue + 1 });
+    }
+
     const chatData = {
       actor: this,
       spell: spell,
