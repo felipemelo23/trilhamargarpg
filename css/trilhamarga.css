@@ -450,6 +450,11 @@ body.game .sheet.app header.sheet-header {
   font-family: "Signika", sans-serif;
 }
 
+.trilhamarga .descriptor-field textarea[name="system.ancestry_ability"] {
+  field-sizing: content;
+  min-height: 2em;
+}
+
 .trilhamarga input,
 .trilhamarga textarea,
 .trilhamarga select,
