@@ -24,6 +24,11 @@
   ],
   "languages": [
     {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
       "lang": "pt",
       "name": "Português (BR)",
       "path": "lang/pt-BR.json"
