@@ -2,8 +2,6 @@
   "id": "trilhamarga",
   "title": "Trilhamarga RPG",
   "version": "1.3.0",
-  "author": "greynakk",
-  "library": false,
   "manifest": "https://raw.githubusercontent.com/felipemelo23/trilhamargarpg/main/system.json",
   "download": "https://github.com/felipemelo23/trilhamargarpg/releases/download/v1.3.0/trilhamarga-v1.3.0.zip",
   "authors": [
@@ -35,8 +33,10 @@
     }
   ],
   "initiative": "1d12",
-  "gridDistance": 1.5,
-  "gridUnits": "m",
+  "grid": {
+    "distance": 1.5,
+    "units": "m"
+  },
   "primaryTokenAttribute": "stamina",
   "secondaryTokenAttribute": "protection",
   "packs": [
