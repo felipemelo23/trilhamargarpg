@@ -22,6 +22,10 @@ export class TrilhamargaItemSheet extends ItemSheet {
     const data = super.getData();
     data.system = data.item.system;
 
+    if (this.item.type === "weapon" && data.system.defaultModification === undefined) {
+      data.system.defaultModification = 0;
+    }
+
     // Damage options for weapons
     data.damageOptions = [
       "1d2", "1d4", "1d6", "1d8", "1d10", "1d12",
