@@ -147,13 +147,8 @@ export class TrilhamargaActorSheet extends ActorSheet {
   }
 
   /** @override */
-  async _onDrop(event) {
-    let data;
-    try {
-      data = JSON.parse(event.dataTransfer.getData("text/plain"));
-    } catch (err) {
-      return false;
-    }
+  async _onDropItem(event, data) {
+    if ( !this.actor.isOwner ) return false;
 
     let targetLocation = event.target.closest(".inventory-section")?.dataset.location;
     
@@ -163,15 +158,15 @@ export class TrilhamargaActorSheet extends ActorSheet {
     }
     
     // If we're dropping an item onto our sheet
-    if (data.type === "Item" && targetLocation) {
-      const item = await Item.fromDropData(data);
-      if (!item) return super._onDrop(event);
+    if (targetLocation) {
+      const item = await Item.implementation.fromDropData(data);
+      if (!item) return super._onDropItem(event, data);
 
       const isPhysical = ["weapon", "armor", "shield", "gear"].includes(item.type);
 
       // Handle items from a different actor (Move between sheets)
       if (item.actor && item.actor.uuid !== this.actor.uuid) {
-        if (!isPhysical) return super._onDrop(event);
+        if (!isPhysical) return super._onDropItem(event, data);
         
         // Delegate to the new transferItem method
         try {
@@ -195,7 +190,7 @@ export class TrilhamargaActorSheet extends ActorSheet {
         
         await item.update({"system.location": targetLocation});
         // If dropped on the section (not an item), prevent default to avoid redundant sorting logic
-        if (!event.target.closest(".item")) return;
+        if (!event.target.closest(".item")) return false;
       }
       // Store location for _onDropItemCreate (for compendium drops)
       this._dropLocation = targetLocation;
@@ -203,7 +198,7 @@ export class TrilhamargaActorSheet extends ActorSheet {
       this._dropLocation = null;
     }
 
-    return super._onDrop(event);
+    return super._onDropItem(event, data);
   }
 
   /** @override */
