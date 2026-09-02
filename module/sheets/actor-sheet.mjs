@@ -50,7 +50,7 @@ export class TrilhamargaActorSheet extends ActorSheet {
     // Sort items by sort property
     const items = this.actor.items.contents.sort((a, b) => (a.sort || 0) - (b.sort || 0));
 
-    // Find Physique level
+    // Find Physique level (kept for reference or if used elsewhere, though currently unused here)
     const physique = items.find(i => i.type === 'skill' && (i.name.toLowerCase() === 'physique' || i.name.toLowerCase() === 'físico'))?.system.level || 0;
 
     const skills = [];
@@ -72,8 +72,13 @@ export class TrilhamargaActorSheet extends ActorSheet {
         // Calculate display damage for weapons
         if (i.type === 'weapon') {
           let displayDamage = i.system.damage || "1d2";
-          if (i.system.addPhysiqueToDamage && physique !== 0) {
-            displayDamage += physique > 0 ? ` + ${physique}` : ` - ${Math.abs(physique)}`;
+          const dmgSkillName = i.system.bonusDamageSkill;
+          if (dmgSkillName) {
+            const dmgSkill = items.find(s => s.type === 'skill' && s.name === dmgSkillName);
+            const bonusDamage = dmgSkill?.system.level || 0;
+            if (bonusDamage !== 0) {
+              displayDamage += bonusDamage > 0 ? ` + ${bonusDamage}` : ` - ${Math.abs(bonusDamage)}`;
+            }
           }
           i.displayDamage = displayDamage;
         }
