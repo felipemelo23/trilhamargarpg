@@ -113,6 +113,7 @@
     "WoundRecoveryCheck": "Teste de Físico vs {wound}",
     "Cancel": "Cancelar",
     "Modifier": "Modificador",
+    "DefaultModification": "Modificação Padrão",
     "PositiveChance": "1 chance positiva",
     "PositiveChances": "{n} chances positivas",
     "NegativeChance": "1 chance negativa",

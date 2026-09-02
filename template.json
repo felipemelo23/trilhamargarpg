@@ -78,7 +78,8 @@
       "bonus": 0,
       "associated_skill": "",
       "enchantment": "",
-      "addPhysiqueToDamage": false
+      "addPhysiqueToDamage": false,
+      "defaultModification": 0
     },
     "armor": {
       "templates": ["base", "physical"],

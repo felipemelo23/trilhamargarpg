@@ -56,6 +56,17 @@ export class TrilhamargaItemSheet extends ItemSheet {
       "6": game.i18n.localize("TRILHAMARGA.SkillLevels.6")
     };
 
+    // Modification options
+    data.modificationOptions = [
+      { value: "3", label: game.i18n.format("TRILHAMARGA.PositiveChances", {n: 3}) },
+      { value: "2", label: game.i18n.format("TRILHAMARGA.PositiveChances", {n: 2}) },
+      { value: "1", label: game.i18n.localize("TRILHAMARGA.PositiveChance") },
+      { value: "0", label: game.i18n.localize("TRILHAMARGA.Normal") },
+      { value: "-1", label: game.i18n.localize("TRILHAMARGA.NegativeChance") },
+      { value: "-2", label: game.i18n.format("TRILHAMARGA.NegativeChances", {n: 2}) },
+      { value: "-3", label: game.i18n.format("TRILHAMARGA.NegativeChances", {n: 3}) }
+    ];
+
     return data;
   }
 

@@ -388,7 +388,8 @@ export class TrilhamargaActor extends Actor {
     const bonus = skill ? (skill.system.level || 0) : 0;
     const woundPenalty = Number(this.system.woundPenalty || 0);
     const protectionPenalty = (skill?.system.protectionPenalty) ? Number(this.system.protectionPenalty || 0) : 0;
-    const baseModifier = -(woundPenalty + protectionPenalty);
+    const weaponMod = Number(weapon.system.defaultModification || 0);
+    const baseModifier = -(woundPenalty + protectionPenalty) + weaponMod;
     const totalBonus = bonus;
 
     const modifier = await this._getModifierPrompt(baseModifier);
