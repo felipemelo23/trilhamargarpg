@@ -152,37 +152,50 @@ export class TrilhamargaActor extends Actor {
       const vMax = foundry.utils.getProperty(changed, "system.vitality.max");
       const vVal = foundry.utils.getProperty(changed, "system.vitality.value");
       
-      if (vMax !== undefined) {
+      const currentVMax = Number(this.system.vitality.max || 0);
+      const currentVVal = Number(this.system.vitality.value || 0);
+      
+      const isVMaxChanged = vMax !== undefined && Number(vMax) !== currentVMax;
+      const isVValChanged = vVal !== undefined && Number(vVal) !== currentVVal;
+
+      if (isVMaxChanged) {
         // If max changed, reset to full UNLESS the value is also changed to something different from its current state
-        const currentV = Number(this.system.vitality.value);
-        const changedV = vVal !== undefined ? Number(vVal) : undefined;
-        
-        if (changedV === undefined || changedV === currentV) {
+        if (!isVValChanged) {
           foundry.utils.setProperty(changed, "system.vitality.value", Number(vMax));
         } else {
-          foundry.utils.setProperty(changed, "system.vitality.value", Math.min(changedV, Number(vMax)));
+          foundry.utils.setProperty(changed, "system.vitality.value", Math.min(Number(vVal), Number(vMax)));
         }
-      } else if (vVal !== undefined) {
+      } else if (isVValChanged) {
         // If only value changed, cap it at existing max
-        foundry.utils.setProperty(changed, "system.vitality.value", Math.min(Number(vVal), Number(this.system.vitality.max)));
+        foundry.utils.setProperty(changed, "system.vitality.value", Math.min(Number(vVal), currentVMax));
+      } else if (vVal !== undefined && vMax === undefined) {
+        // Edge case where vVal is in changed but numerically same, just ensure it's capped
+        foundry.utils.setProperty(changed, "system.vitality.value", Math.min(Number(vVal), currentVMax));
       }
 
       // Protection
       const pMax = foundry.utils.getProperty(changed, "system.protection.max");
       const pVal = foundry.utils.getProperty(changed, "system.protection.value");
       
-      if (pMax !== undefined) {
+      const currentPMax = Number(this.system.protection.max || 0);
+      const currentPVal = Number(this.system.protection.value || 0);
+      
+      const isPMaxChanged = pMax !== undefined && Number(pMax) !== currentPMax;
+      const isPValChanged = pVal !== undefined && Number(pVal) !== currentPVal;
+
+      if (isPMaxChanged) {
         // If max changed, reset to full UNLESS the value is also changed to something different from its current state
-        const currentP = Number(this.system.protection.value);
-        const changedP = pVal !== undefined ? Number(pVal) : undefined;
-        
-        if (changedP === undefined || changedP === currentP) {
+        if (!isPValChanged) {
           foundry.utils.setProperty(changed, "system.protection.value", Number(pMax));
         } else {
-          foundry.utils.setProperty(changed, "system.protection.value", Math.min(changedP, Number(pMax)));
+          foundry.utils.setProperty(changed, "system.protection.value", Math.min(Number(pVal), Number(pMax)));
         }
-      } else if (pVal !== undefined) {
-        foundry.utils.setProperty(changed, "system.protection.value", Math.min(Number(pVal), Number(this.system.protection.max)));
+      } else if (isPValChanged) {
+        // If only value changed, cap it at existing max
+        foundry.utils.setProperty(changed, "system.protection.value", Math.min(Number(pVal), currentPMax));
+      } else if (pVal !== undefined && pMax === undefined) {
+        // Edge case where pVal is in changed but numerically same, just ensure it's capped
+        foundry.utils.setProperty(changed, "system.protection.value", Math.min(Number(pVal), currentPMax));
       }
     }
   }
@@ -375,7 +388,8 @@ export class TrilhamargaActor extends Actor {
     const bonus = skill ? (skill.system.level || 0) : 0;
     const woundPenalty = Number(this.system.woundPenalty || 0);
     const protectionPenalty = (skill?.system.protectionPenalty) ? Number(this.system.protectionPenalty || 0) : 0;
-    const baseModifier = -(woundPenalty + protectionPenalty);
+    const weaponMod = Number(weapon.system.defaultModification || 0);
+    const baseModifier = -(woundPenalty + protectionPenalty) + weaponMod;
     const totalBonus = bonus;
 
     const modifier = await this._getModifierPrompt(baseModifier);
@@ -401,10 +415,12 @@ export class TrilhamargaActor extends Actor {
 
     // Damage Roll Formula
     let dmgFormula = weapon.system.damage || "1d2";
-    if (weapon.system.addPhysiqueToDamage) {
-      const physique = this.items.find(i => i.type === 'skill' && (i.name.toLowerCase() === 'physique' || i.name.toLowerCase() === 'físico'))?.system.level || 0;
-      if (physique !== 0) {
-        dmgFormula += physique > 0 ? ` + ${physique}` : ` - ${Math.abs(physique)}`;
+    const dmgSkillName = weapon.system.bonusDamageSkill;
+    if (dmgSkillName) {
+      const dmgSkill = this.items.find(i => i.type === 'skill' && i.name === dmgSkillName);
+      const bonusDamage = dmgSkill?.system.level || 0;
+      if (bonusDamage !== 0) {
+        dmgFormula += bonusDamage > 0 ? ` + ${bonusDamage}` : ` - ${Math.abs(bonusDamage)}`;
       }
     }
 
@@ -458,7 +474,8 @@ export class TrilhamargaActor extends Actor {
    */
   async rollNpcAttack(attack) {
     const bonus = attack.system.bonus || 0;
-    const modifier = await this._getModifierPrompt();
+    const baseModifier = Number(attack.system.defaultModification || 0);
+    const modifier = await this._getModifierPrompt(baseModifier);
     if (modifier === null) return;
 
     // Attack Roll Formula

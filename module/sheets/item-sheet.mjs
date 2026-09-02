@@ -22,6 +22,10 @@ export class TrilhamargaItemSheet extends ItemSheet {
     const data = super.getData();
     data.system = data.item.system;
 
+    if ((this.item.type === "weapon" || this.item.type === "npc_attack") && data.system.defaultModification === undefined) {
+      data.system.defaultModification = 0;
+    }
+
     // Damage options for weapons
     data.damageOptions = [
       "1d2", "1d4", "1d6", "1d8", "1d10", "1d12",
@@ -55,6 +59,17 @@ export class TrilhamargaItemSheet extends ItemSheet {
       "5": game.i18n.localize("TRILHAMARGA.SkillLevels.5"),
       "6": game.i18n.localize("TRILHAMARGA.SkillLevels.6")
     };
+
+    // Modification options
+    data.modificationOptions = [
+      { value: "3", label: game.i18n.format("TRILHAMARGA.PositiveChances", {n: 3}) },
+      { value: "2", label: game.i18n.format("TRILHAMARGA.PositiveChances", {n: 2}) },
+      { value: "1", label: game.i18n.localize("TRILHAMARGA.PositiveChance") },
+      { value: "0", label: game.i18n.localize("TRILHAMARGA.Normal") },
+      { value: "-1", label: game.i18n.localize("TRILHAMARGA.NegativeChance") },
+      { value: "-2", label: game.i18n.format("TRILHAMARGA.NegativeChances", {n: 2}) },
+      { value: "-3", label: game.i18n.format("TRILHAMARGA.NegativeChances", {n: 3}) }
+    ];
 
     return data;
   }

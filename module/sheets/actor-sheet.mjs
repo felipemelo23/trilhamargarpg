@@ -50,7 +50,7 @@ export class TrilhamargaActorSheet extends ActorSheet {
     // Sort items by sort property
     const items = this.actor.items.contents.sort((a, b) => (a.sort || 0) - (b.sort || 0));
 
-    // Find Physique level
+    // Find Physique level (kept for reference or if used elsewhere, though currently unused here)
     const physique = items.find(i => i.type === 'skill' && (i.name.toLowerCase() === 'physique' || i.name.toLowerCase() === 'físico'))?.system.level || 0;
 
     const skills = [];
@@ -72,8 +72,13 @@ export class TrilhamargaActorSheet extends ActorSheet {
         // Calculate display damage for weapons
         if (i.type === 'weapon') {
           let displayDamage = i.system.damage || "1d2";
-          if (i.system.addPhysiqueToDamage && physique !== 0) {
-            displayDamage += physique > 0 ? ` + ${physique}` : ` - ${Math.abs(physique)}`;
+          const dmgSkillName = i.system.bonusDamageSkill;
+          if (dmgSkillName) {
+            const dmgSkill = items.find(s => s.type === 'skill' && s.name === dmgSkillName);
+            const bonusDamage = dmgSkill?.system.level || 0;
+            if (bonusDamage !== 0) {
+              displayDamage += bonusDamage > 0 ? ` + ${bonusDamage}` : ` - ${Math.abs(bonusDamage)}`;
+            }
           }
           i.displayDamage = displayDamage;
         }
@@ -147,13 +152,8 @@ export class TrilhamargaActorSheet extends ActorSheet {
   }
 
   /** @override */
-  async _onDrop(event) {
-    let data;
-    try {
-      data = JSON.parse(event.dataTransfer.getData("text/plain"));
-    } catch (err) {
-      return false;
-    }
+  async _onDropItem(event, data) {
+    if ( !this.actor.isOwner ) return false;
 
     let targetLocation = event.target.closest(".inventory-section")?.dataset.location;
     
@@ -163,15 +163,15 @@ export class TrilhamargaActorSheet extends ActorSheet {
     }
     
     // If we're dropping an item onto our sheet
-    if (data.type === "Item" && targetLocation) {
-      const item = await Item.fromDropData(data);
-      if (!item) return super._onDrop(event);
+    if (targetLocation) {
+      const item = await Item.implementation.fromDropData(data);
+      if (!item) return super._onDropItem(event, data);
 
       const isPhysical = ["weapon", "armor", "shield", "gear"].includes(item.type);
 
       // Handle items from a different actor (Move between sheets)
       if (item.actor && item.actor.uuid !== this.actor.uuid) {
-        if (!isPhysical) return super._onDrop(event);
+        if (!isPhysical) return super._onDropItem(event, data);
         
         // Delegate to the new transferItem method
         try {
@@ -195,7 +195,7 @@ export class TrilhamargaActorSheet extends ActorSheet {
         
         await item.update({"system.location": targetLocation});
         // If dropped on the section (not an item), prevent default to avoid redundant sorting logic
-        if (!event.target.closest(".item")) return;
+        if (!event.target.closest(".item")) return false;
       }
       // Store location for _onDropItemCreate (for compendium drops)
       this._dropLocation = targetLocation;
@@ -203,7 +203,7 @@ export class TrilhamargaActorSheet extends ActorSheet {
       this._dropLocation = null;
     }
 
-    return super._onDrop(event);
+    return super._onDropItem(event, data);
   }
 
   /** @override */

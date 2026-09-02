@@ -37,7 +37,7 @@
       "6": "Heroic (+6)"
     },
     "Enchantment": "Enchantment",
-    "AddPhysiqueToDamage": "Add Physique to Damage",
+    "BonusDamageSkill": "Bonus Damage Skill",
     "Counters": "Counters",
     "Life": "Health",
     "Stamina": "Stamina",
@@ -113,6 +113,7 @@
     "WoundRecoveryCheck": "Physique check vs {wound}",
     "Cancel": "Cancel",
     "Modifier": "Modifier",
+    "DefaultModification": "Default Modification",
     "PositiveChance": "1 positive chance",
     "PositiveChances": "{n} positive chances",
     "NegativeChance": "1 negative chance",
