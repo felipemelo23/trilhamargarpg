@@ -129,7 +129,8 @@
     "npc_attack": {
       "templates": ["base"],
       "bonus": 0,
-      "damage": ""
+      "damage": "",
+      "defaultModification": 0
     },
     "npc_ability": {
       "templates": ["base"],

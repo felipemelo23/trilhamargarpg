@@ -22,7 +22,7 @@ export class TrilhamargaItemSheet extends ItemSheet {
     const data = super.getData();
     data.system = data.item.system;
 
-    if (this.item.type === "weapon" && data.system.defaultModification === undefined) {
+    if ((this.item.type === "weapon" || this.item.type === "npc_attack") && data.system.defaultModification === undefined) {
       data.system.defaultModification = 0;
     }
 

@@ -310,6 +310,16 @@
         {{/select}}
       </select>
     </div>
+    <div class="form-group">
+      <label>{{localize "TRILHAMARGA.DefaultModification"}}</label>
+      <select name="system.defaultModification" data-type="Number">
+        {{#select system.defaultModification}}
+        {{#each modificationOptions as |opt|}}
+        <option value="{{opt.value}}">{{opt.label}}</option>
+        {{/each}}
+        {{/select}}
+      </select>
+    </div>
     {{/if}}
 
     {{#if (eq item.type "npc_ability")}}

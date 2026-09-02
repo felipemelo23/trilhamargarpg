@@ -472,7 +472,8 @@ export class TrilhamargaActor extends Actor {
    */
   async rollNpcAttack(attack) {
     const bonus = attack.system.bonus || 0;
-    const modifier = await this._getModifierPrompt();
+    const baseModifier = Number(attack.system.defaultModification || 0);
+    const modifier = await this._getModifierPrompt(baseModifier);
     if (modifier === null) return;
 
     // Attack Roll Formula
