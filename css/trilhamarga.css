@@ -387,13 +387,13 @@ body.game .sheet.app header.sheet-header {
   margin-bottom: 5px;
 }
 
-.trilhamarga .sheet-body textarea {
+.trilhamarga .sheet-body .form-group textarea {
   width: 100%;
-  resize: vertical;
+  resize: vertical !important;
   padding: 5px;
   border: 1px solid #aaa;
   border-radius: 3px;
-  min-height: auto;
+  min-height: 100px !important;
   font-family: "Signika", sans-serif;
 }
 
