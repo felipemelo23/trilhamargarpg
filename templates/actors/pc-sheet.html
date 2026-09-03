@@ -283,7 +283,13 @@
             {{/if}}
           </div>
           <div class="item-prop">{{localize (concat "TRILHAMARGA." (capitalize item.system.category))}}</div>
-          <div class="item-prop">{{item.system.severity}}</div>
+          <div class="item-prop">
+            <span class="item-quantity-controls" style="margin-right: 0;">
+              <a class="item-qty-adjust" data-action="minus" data-prop="system.severity"><i class="fas fa-minus"></i></a>
+              <span class="qty-number">{{item.system.severity}}</span>
+              <a class="item-qty-adjust" data-action="plus" data-prop="system.severity"><i class="fas fa-plus"></i></a>
+            </span>
+          </div>
           <div class="item-controls">
             <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
             <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>

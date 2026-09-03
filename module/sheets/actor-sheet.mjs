@@ -304,17 +304,18 @@ export class TrilhamargaActorSheet extends ActorSheet {
       if (!item) return;
 
       const action = ev.currentTarget.dataset.action;
-      const currentQty = item.system.quantity || 0;
-      let newQty = currentQty;
+      const propPath = ev.currentTarget.dataset.prop || "system.quantity";
+      const currentVal = foundry.utils.getProperty(item, propPath) || 0;
+      let newVal = currentVal;
 
       if (action === 'plus') {
-        newQty++;
+        newVal++;
       } else if (action === 'minus') {
-        newQty = Math.max(0, currentQty - 1);
+        newVal = Math.max(0, currentVal - 1);
       }
 
-      if (newQty !== currentQty) {
-        await item.update({ "system.quantity": newQty });
+      if (newVal !== currentVal) {
+        await item.update({ [propPath]: newVal });
       }
     });
   }
