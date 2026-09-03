@@ -128,6 +128,8 @@
     "TransferRequested": "Item transfer requested to GM...",
     "ItemTransferred": "{item} transferred from {source} to {target}.",
     "KeepInitiative": "You keep the initiative",
-    "LoseInitiative": "You lose the initiative"
+    "LoseInitiative": "You lose the initiative",
+    "Arrows": "arrows",
+    "Bolts": "bolts"
   }
 }

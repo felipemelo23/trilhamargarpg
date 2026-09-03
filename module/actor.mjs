@@ -354,10 +354,10 @@ export class TrilhamargaActor extends Actor {
     
     if (weaponName.includes("bow") || weaponName.includes("arco")) {
       ammoRegex = /^(arrow|flecha)s?$/i;
-      ammoLabel = game.i18n.lang === "pt-BR" ? "flechas" : "arrows";
+      ammoLabel = game.i18n.localize("TRILHAMARGA.Arrows");
     } else if (weaponName.includes("crossbow") || weaponName.includes("besta")) {
       ammoRegex = /^(bolt|virote)s?$/i;
-      ammoLabel = game.i18n.lang === "pt-BR" ? "virotes" : "bolts";
+      ammoLabel = game.i18n.localize("TRILHAMARGA.Bolts");
     }
 
     let ammoItem = null;

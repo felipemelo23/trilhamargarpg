@@ -128,6 +128,8 @@
     "TransferRequested": "Transferência de item solicitada ao Mestre...",
     "ItemTransferred": "{item} transferido de {source} para {target}.",
     "KeepInitiative": "Você mantém a iniciativa",
-    "LoseInitiative": "Você perde a iniciativa"
+    "LoseInitiative": "Você perde a iniciativa",
+    "Arrows": "flechas",
+    "Bolts": "virotes"
   }
 }
