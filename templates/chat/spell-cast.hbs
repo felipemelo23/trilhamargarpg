@@ -6,9 +6,9 @@
     </header>
 
     <div class="card-content">
-        <h4 class="spell-name">{{spell.name}}</h4>
-        {{#if spell.system.description}}
-        <div class="spell-description">{{{spell.system.description}}}</div>
+        <h4 class="spell-name">{{spellName}}</h4>
+        {{#if item.system.description}}
+        <div class="spell-description">{{{item.system.description}}}</div>
         {{/if}}
         
         <div class="skill-label"><em>{{localize "TRILHAMARGA.SkillCheck" skill=skillName}}</em></div>
