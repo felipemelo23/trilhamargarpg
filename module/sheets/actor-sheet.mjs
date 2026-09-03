@@ -296,6 +296,16 @@ export class TrilhamargaActorSheet extends ActorSheet {
     // Resource Adjustment
     html.find('.resource-control').click(this._onResourceAdjust.bind(this));
 
+    // Resource Reset
+    html.find('.resource-reset').click(async ev => {
+      ev.preventDefault();
+      const resourceBase = ev.currentTarget.dataset.resource;
+      const maxVal = foundry.utils.getProperty(this.actor, `${resourceBase}.max`);
+      if (maxVal !== undefined) {
+        await this.actor.update({ [`${resourceBase}.value`]: maxVal });
+      }
+    });
+
     // Item Quantity Adjustment
     html.find('.item-qty-adjust').click(async ev => {
       ev.preventDefault();

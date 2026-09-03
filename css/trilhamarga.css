@@ -168,12 +168,28 @@ body.game .sheet.app header.sheet-header {
 }
 
 .trilhamarga .counter-large {
+  position: relative;
   background: #f4f4f4;
   border: 2px solid #333;
   border-radius: 10px;
   padding: 10px;
   text-align: center;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.trilhamarga .counter-large .resource-reset {
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  font-size: 12px;
+  color: #777;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.trilhamarga .counter-large .resource-reset:hover {
+  color: #333;
+  transform: rotate(90deg);
 }
 
 .trilhamarga .counter-large label {
