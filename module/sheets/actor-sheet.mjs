@@ -293,19 +293,20 @@ export class TrilhamargaActorSheet extends ActorSheet {
     // Item clicks (Icon or Name)
     html.find('.item-clickable').click(this._onItemClick.bind(this));
 
-    // XP Adjustment
-    html.find('.xp-control').click(this._onXpAdjust.bind(this));
+    // Resource Adjustment
+    html.find('.resource-control').click(this._onResourceAdjust.bind(this));
   }
 
-  async _onXpAdjust(event) {
+  async _onResourceAdjust(event) {
     event.preventDefault();
     const button = event.currentTarget;
-    const isPlus = button.classList.contains('xp-plus');
+    const isPlus = button.dataset.action === 'plus';
     const amount = isPlus ? 1 : -1;
-    const currentXp = this.actor.system.xp || 0;
-    const newXp = Math.max(0, currentXp + amount);
+    const resource = button.dataset.resource;
+    const currentVal = foundry.utils.getProperty(this.actor, resource) || 0;
+    const newVal = Math.max(0, currentVal + amount);
     
-    await this.actor.update({ "system.xp": newXp });
+    await this.actor.update({ [resource]: newVal });
   }
 
   async _onItemClick(event) {

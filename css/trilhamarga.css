@@ -94,12 +94,12 @@ body.game .sheet.app header.sheet-header {
   flex: 0 0 90px;
 }
 
-.trilhamarga .xp-controls {
+.trilhamarga .resource-controls {
   position: relative;
   align-items: center;
 }
 
-.trilhamarga .xp-controls .xp-control {
+.trilhamarga .resource-controls .resource-control {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -115,19 +115,19 @@ body.game .sheet.app header.sheet-header {
   padding: 0 5px;
 }
 
-.trilhamarga .xp-controls:hover .xp-control {
+.trilhamarga .resource-controls:hover .resource-control {
   opacity: 1;
 }
 
-.trilhamarga .xp-controls .xp-minus {
+.trilhamarga .resource-controls .resource-minus {
   left: 2px;
 }
 
-.trilhamarga .xp-controls .xp-plus {
+.trilhamarga .resource-controls .resource-plus {
   right: 2px;
 }
 
-.trilhamarga .header-basics .resource-xp input {
+.trilhamarga .resource-controls input {
   text-align: center;
   padding: 0 15px; /* Add space for buttons */
 }

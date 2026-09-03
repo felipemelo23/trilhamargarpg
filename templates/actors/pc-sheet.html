@@ -14,11 +14,11 @@
             <input type="text" name="system.ancestry" value="{{system.ancestry}}" />
           </div>
           <div class="resource resource-xp">
-            <label>{{localize "TRILHAMARGA.XP"}}</label>
-            <div class="xp-controls flexrow">
-              <a class="xp-control xp-minus" title="-1"><i class="fas fa-minus"></i></a>
+            <label class="resource-label">{{localize "TRILHAMARGA.Xp"}}</label>
+            <div class="resource-controls flexrow">
+              <a class="resource-control resource-minus" data-action="minus" data-resource="system.xp" title="-1"><i class="fas fa-minus"></i></a>
               <input type="number" name="system.xp" value="{{system.xp}}" />
-              <a class="xp-control xp-plus" title="+1"><i class="fas fa-plus"></i></a>
+              <a class="resource-control resource-plus" data-action="plus" data-resource="system.xp" title="+1"><i class="fas fa-plus"></i></a>
             </div>
           </div>
         </div>
@@ -357,8 +357,10 @@
     <div class="tab spells" data-group="primary" data-tab="spells">
       <div class="counter-large arcane_fatigue">
         <label>{{localize "TRILHAMARGA.ArcaneFatigue"}}</label>
-        <div class="value-group">
+        <div class="value-group resource-controls flexrow">
+          <a class="resource-control resource-minus" data-action="minus" data-resource="system.arcane_fatigue.value" title="-1"><i class="fas fa-minus"></i></a>
           <input type="number" name="system.arcane_fatigue.value" value="{{system.arcane_fatigue.value}}" min="0" />
+          <a class="resource-control resource-plus" data-action="plus" data-resource="system.arcane_fatigue.value" title="+1"><i class="fas fa-plus"></i></a>
         </div>
       </div>
       <ol class="items-list">
