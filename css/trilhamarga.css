@@ -393,7 +393,8 @@ body.game .sheet.app header.sheet-header {
   padding: 5px;
   border: 1px solid #aaa;
   border-radius: 3px;
-  min-height: 100px;
+  min-height: 2em;
+  field-sizing: content;
   height: auto;
   max-height: none;
   overflow: auto;
