@@ -129,7 +129,14 @@ body.game .sheet.app header.sheet-header {
 
 .trilhamarga .resource-controls input {
   text-align: center;
-  padding: 0 15px !important; /* Add space for buttons */
+}
+
+.trilhamarga .resource-controls input:first-of-type {
+  padding-left: 15px !important; /* Space for minus button */
+}
+
+.trilhamarga .resource-controls input:last-of-type {
+  padding-right: 15px !important; /* Space for plus button */
 }
 
 .trilhamarga .header-basics input {
