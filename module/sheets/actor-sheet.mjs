@@ -400,19 +400,19 @@ export class TrilhamargaActorSheet extends ActorSheet {
     if (miracles.minor) {
       buttons.minor = {
         label: game.i18n.localize("TRILHAMARGA.MiracleMinor"),
-        callback: () => this._shareMiracleToChat(item, miracles.minor)
+        callback: () => this._shareMiracleToChat(item, miracles.minor, 1)
       };
     }
     if (miracles.mid) {
       buttons.mid = {
         label: game.i18n.localize("TRILHAMARGA.MiracleMid"),
-        callback: () => this._shareMiracleToChat(item, miracles.mid)
+        callback: () => this._shareMiracleToChat(item, miracles.mid, 3)
       };
     }
     if (miracles.major) {
       buttons.major = {
         label: game.i18n.localize("TRILHAMARGA.MiracleMajor"),
-        callback: () => this._shareMiracleToChat(item, miracles.major)
+        callback: () => this._shareMiracleToChat(item, miracles.major, 6)
       };
     }
 
@@ -426,7 +426,16 @@ export class TrilhamargaActorSheet extends ActorSheet {
     }).render(true);
   }
 
-  async _shareMiracleToChat(item, description) {
+  async _shareMiracleToChat(item, description, cost) {
+    const currentFavor = Number(this.actor.system.favor?.value || 0);
+    
+    if (currentFavor < cost) {
+      ui.notifications.warn(game.i18n.localize("TRILHAMARGA.NotEnoughFavor"));
+      return;
+    }
+
+    await this.actor.update({ "system.favor.value": currentFavor - cost });
+
     const chatData = {
       actor: this.actor,
       item: item,

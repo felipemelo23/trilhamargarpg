@@ -72,6 +72,7 @@
     "MiracleMajor": "Milagre Maior",
     "Taboo": "Tabu",
     "Favor": "Favor",
+    "NotEnoughFavor": "Favor insuficiente para realizar este milagre.",
     "Spells": "Feitiços",
     "Spell": "Feitiço",
     "Sustained": "Sustentada",

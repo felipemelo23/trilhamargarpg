@@ -72,6 +72,7 @@
     "MiracleMajor": "Major Miracle",
     "Taboo": "Taboo",
     "Favor": "Favor",
+    "NotEnoughFavor": "Not enough Favor to perform this miracle.",
     "Spells": "Spells",
     "Spell": "Spell",
     "Sustained": "Sustained",
