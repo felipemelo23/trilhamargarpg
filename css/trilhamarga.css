@@ -381,6 +381,7 @@ body.game .sheet.app header.sheet-header {
 .trilhamarga .item-quantity-controls {
   font-size: 1.1em;
   color: #000;
+  font-style: italic;
   white-space: nowrap;
   margin-right: 10px;
 }
