@@ -370,7 +370,6 @@ body.game .sheet.app header.sheet-header {
 .trilhamarga .item-quantity-controls {
   font-size: 1.1em;
   color: #000;
-  font-weight: bold;
   white-space: nowrap;
   margin-right: 10px;
 }
@@ -410,6 +409,7 @@ body.game .sheet.app header.sheet-header {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  gap: 5px;
 }
 
 .trilhamarga .form-group.stacked {
