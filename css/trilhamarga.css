@@ -368,15 +368,23 @@ body.game .sheet.app header.sheet-header {
 }
 
 .trilhamarga .item-quantity-controls {
-  font-size: 0.9em;
-  color: #555;
+  font-size: 1.1em;
+  color: #000;
+  font-weight: bold;
   white-space: nowrap;
+  margin-right: 10px;
 }
 
 .trilhamarga .item-qty-adjust {
   cursor: pointer;
   color: #444;
   padding: 0 2px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.trilhamarga .item:hover .item-qty-adjust {
+  opacity: 1;
 }
 
 .trilhamarga .item-qty-adjust:hover {
@@ -397,8 +405,11 @@ body.game .sheet.app header.sheet-header {
 }
 
 .trilhamarga .item-controls {
-  flex: 0 0 60px;
-  text-align: right;
+  flex: 0 0 auto;
+  min-width: 60px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 }
 
 .trilhamarga .form-group.stacked {
