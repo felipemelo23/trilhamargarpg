@@ -371,6 +371,7 @@ export class TrilhamargaActor extends Actor {
         const message = game.i18n.format("TRILHAMARGA.RunOutOfAmmo", {ammo: ammoLabel});
         const chatData = {
           actor: this,
+          item: weapon,
           message: message
         };
         const content = await renderTemplate("systems/trilhamarga/templates/chat/out-of-ammo.hbs", chatData);
@@ -455,7 +456,7 @@ export class TrilhamargaActor extends Actor {
     const chatData = {
       actor: this,
       weapon: weapon,
-      weaponName: weapon.name,
+      item: weapon, weaponName: weapon.name,
       skillName: skill ? skill.name : null,
       flavorText: flavorText,
       atkRollHtml: await roll.render(),
@@ -520,6 +521,7 @@ export class TrilhamargaActor extends Actor {
 
     const chatData = {
       actor: this,
+      item: attack,
       attackName: attack.name,
       description: attack.system.description,
       atkRollHtml: await atkRoll.render(),
@@ -545,6 +547,7 @@ export class TrilhamargaActor extends Actor {
   async useNpcAbility(ability) {
     const chatData = {
       actor: this,
+      item: ability,
       abilityName: ability.name,
       description: ability.system.description
     };
@@ -653,6 +656,7 @@ export class TrilhamargaActor extends Actor {
 
     const chatData = {
       actor: this,
+      item: skill,
       skillName: skill.name,
       flavorText: flavorText,
       rollHtml: await roll.render(),
@@ -723,6 +727,7 @@ export class TrilhamargaActor extends Actor {
 
     const chatData = {
       actor: this,
+      item: wound,
       skillName: physiqueSkill ? physiqueSkill.name : game.i18n.localize("TRILHAMARGA.Normal"),
       flavorText: flavorText,
       rollHtml: await roll.render(),
@@ -823,7 +828,8 @@ export class TrilhamargaActor extends Actor {
 
     const chatData = {
       actor: this,
-      spell: spell,
+      item: spell,
+      spellName: spell.name,
       skillName: skillName,
       flavorText: flavorText,
       rollHtml: await roll.render(),
