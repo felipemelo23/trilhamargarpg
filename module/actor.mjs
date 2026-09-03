@@ -369,18 +369,7 @@ export class TrilhamargaActor extends Actor {
 
       if (!ammoItem || (ammoItem.system.quantity || 0) <= 0) {
         const message = game.i18n.format("TRILHAMARGA.RunOutOfAmmo", {ammo: ammoLabel});
-        const chatData = {
-          actor: this,
-          item: weapon,
-          message: message
-        };
-        const content = await renderTemplate("systems/trilhamarga/templates/chat/out-of-ammo.hbs", chatData);
-        
-        ChatMessage.create({
-          speaker: ChatMessage.getSpeaker({ actor: this }),
-          content: content,
-          style: CONST.CHAT_MESSAGE_STYLES.OTHER
-        });
+        ui.notifications.warn(message);
         return;
       }
     }
