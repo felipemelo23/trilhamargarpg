@@ -77,6 +77,7 @@ export class TrilhamargaActor extends Actor {
 
     // Favor
     system.favor.max = will;
+    system.favor.value = Math.min(system.favor.value, system.favor.max);
 
     // Load Capacity
     const hasBackpack = actorData.items.some(i => 

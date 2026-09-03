@@ -41,7 +41,7 @@
       <label>{{localize "TRILHAMARGA.Stamina"}}</label>
       <div class="value-group resource-controls">
         <a class="resource-control resource-minus" data-action="minus" data-resource="system.stamina.value" title="-1"><i class="fas fa-minus"></i></a>
-        <input type="number" name="system.stamina.value" value="{{system.stamina.value}}" min="0" />
+        <input type="number" name="system.stamina.value" value="{{system.stamina.value}}" min="0" max="{{system.stamina.max}}" />
         <span class="sep">/</span>
         <span class="max">{{system.stamina.max}}</span>
         <a class="resource-control resource-plus" data-action="plus" data-resource="system.stamina.value" title="+1"><i class="fas fa-plus"></i></a>
@@ -51,7 +51,7 @@
       <label>{{localize "TRILHAMARGA.Protection"}}</label>
       <div class="value-group resource-controls">
         <a class="resource-control resource-minus" data-action="minus" data-resource="system.protection.value" title="-1"><i class="fas fa-minus"></i></a>
-        <input type="number" name="system.protection.value" value="{{system.protection.value}}" min="0" />
+        <input type="number" name="system.protection.value" value="{{system.protection.value}}" min="0" max="{{system.protection.max}}" />
         <span class="sep">/</span>
         <span class="max">{{system.protection.max}}</span>
         <a class="resource-control resource-plus" data-action="plus" data-resource="system.protection.value" title="+1"><i class="fas fa-plus"></i></a>
@@ -278,7 +278,7 @@
         <label>{{localize "TRILHAMARGA.Favor"}}</label>
         <div class="value-group resource-controls">
           <a class="resource-control resource-minus" data-action="minus" data-resource="system.favor.value" title="-1"><i class="fas fa-minus"></i></a>
-          <input type="number" name="system.favor.value" value="{{system.favor.value}}" min="0" />
+          <input type="number" name="system.favor.value" value="{{system.favor.value}}" min="0" max="{{system.favor.max}}" />
           <span class="sep">/</span>
           <span class="max">{{system.favor.max}}</span>
           <a class="resource-control resource-plus" data-action="plus" data-resource="system.favor.value" title="+1"><i class="fas fa-plus"></i></a>

@@ -304,7 +304,15 @@ export class TrilhamargaActorSheet extends ActorSheet {
     const amount = isPlus ? 1 : -1;
     const resource = button.dataset.resource;
     const currentVal = foundry.utils.getProperty(this.actor, resource) || 0;
-    const newVal = Math.max(0, currentVal + amount);
+    let newVal = Math.max(0, currentVal + amount);
+    
+    if (resource.endsWith('.value') && !resource.includes('arcane_fatigue')) {
+      const maxPath = resource.replace('.value', '.max');
+      const maxVal = foundry.utils.getProperty(this.actor, maxPath);
+      if (typeof maxVal === 'number') {
+        newVal = Math.min(newVal, maxVal);
+      }
+    }
     
     await this.actor.update({ [resource]: newVal });
   }
