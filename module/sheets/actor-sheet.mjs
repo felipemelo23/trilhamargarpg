@@ -295,6 +295,28 @@ export class TrilhamargaActorSheet extends ActorSheet {
 
     // Resource Adjustment
     html.find('.resource-control').click(this._onResourceAdjust.bind(this));
+
+    // Item Quantity Adjustment
+    html.find('.item-qty-adjust').click(async ev => {
+      ev.preventDefault();
+      const li = $(ev.currentTarget).parents(".item");
+      const item = this.actor.items.get(li.data("itemId"));
+      if (!item) return;
+
+      const action = ev.currentTarget.dataset.action;
+      const currentQty = item.system.quantity || 0;
+      let newQty = currentQty;
+
+      if (action === 'plus') {
+        newQty++;
+      } else if (action === 'minus') {
+        newQty = Math.max(0, currentQty - 1);
+      }
+
+      if (newQty !== currentQty) {
+        await item.update({ "system.quantity": newQty });
+      }
+    });
   }
 
   async _onResourceAdjust(event) {

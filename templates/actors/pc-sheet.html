@@ -154,7 +154,7 @@
               <i class="fas fa-dice-d12 weapon-roll-icon"></i>
             </div>
             <div class="item-name">
-              {{item.name}}{{#if (and item.system.stackable (gt item.system.quantity 1))}} ({{item.system.quantity}}){{/if}}{{#if (and (eq item.type 'weapon') item.system.enchantment)}} {{item.system.enchantment}}{{/if}}{{#if (eq item.type 'weapon')}} ({{item.displayDamage}}){{/if}}
+              {{item.name}}{{#if item.system.stackable}} <span class="item-quantity-controls"><a class="item-qty-adjust" data-action="minus"><i class="fas fa-minus"></i></a> {{item.system.quantity}} <a class="item-qty-adjust" data-action="plus"><i class="fas fa-plus"></i></a></span>{{/if}}{{#if (and (eq item.type 'weapon') item.system.enchantment)}} {{item.system.enchantment}}{{/if}}{{#if (eq item.type 'weapon')}} ({{item.displayDamage}}){{/if}}
               {{#if item.system.description}}
               <span class="item-description"> - {{{item.system.description}}}</span>
               {{/if}}
@@ -194,7 +194,7 @@
               <i class="fas fa-dice-d12 weapon-roll-icon"></i>
             </div>
             <div class="item-name">
-              {{item.name}}{{#if (and item.system.stackable (gt item.system.quantity 1))}} ({{item.system.quantity}}){{/if}}{{#if (and (eq item.type 'weapon') item.system.enchantment)}} {{item.system.enchantment}}{{/if}}{{#if (eq item.type 'weapon')}} ({{item.displayDamage}}){{/if}}
+              {{item.name}}{{#if item.system.stackable}} <span class="item-quantity-controls"><a class="item-qty-adjust" data-action="minus"><i class="fas fa-minus"></i></a> {{item.system.quantity}} <a class="item-qty-adjust" data-action="plus"><i class="fas fa-plus"></i></a></span>{{/if}}{{#if (and (eq item.type 'weapon') item.system.enchantment)}} {{item.system.enchantment}}{{/if}}{{#if (eq item.type 'weapon')}} ({{item.displayDamage}}){{/if}}
               {{#if item.system.description}}
               <span class="item-description"> - {{{item.system.description}}}</span>
               {{/if}}
@@ -221,7 +221,7 @@
               <i class="fas fa-dice-d12 weapon-roll-icon"></i>
             </div>
             <div class="item-name">
-               {{item.name}}{{#if (and item.system.stackable (gt item.system.quantity 1))}} ({{item.system.quantity}}){{/if}}{{#if (and (eq item.type 'weapon') item.system.enchantment)}} {{item.system.enchantment}}{{/if}}{{#if (eq item.type 'weapon')}} ({{item.displayDamage}}){{/if}}
+               {{item.name}}{{#if item.system.stackable}} <span class="item-quantity-controls"><a class="item-qty-adjust" data-action="minus"><i class="fas fa-minus"></i></a> {{item.system.quantity}} <a class="item-qty-adjust" data-action="plus"><i class="fas fa-plus"></i></a></span>{{/if}}{{#if (and (eq item.type 'weapon') item.system.enchantment)}} {{item.system.enchantment}}{{/if}}{{#if (eq item.type 'weapon')}} ({{item.displayDamage}}){{/if}}
             </div>          <div class="item-controls">
               <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
               <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
