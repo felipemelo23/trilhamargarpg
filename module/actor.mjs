@@ -416,20 +416,25 @@ export class TrilhamargaActor extends Actor {
 
     // Damage Roll Formula
     let dmgFormula = weapon.system.damage || "1d2";
-    const dmgSkillName = weapon.system.bonusDamageSkill;
-    if (dmgSkillName) {
-      const dmgSkill = this.items.find(i => i.type === 'skill' && i.name === dmgSkillName);
-      const bonusDamage = dmgSkill?.system.level || 0;
-      if (bonusDamage !== 0) {
-        dmgFormula += bonusDamage > 0 ? ` + ${bonusDamage}` : ` - ${Math.abs(bonusDamage)}`;
-      }
-    }
-
     const roll = new Roll(atkFormula);
-    const dmgRoll = new Roll(dmgFormula);
-
     await roll.evaluate();
-    await dmgRoll.evaluate();
+    let dmgRollHtml = "";
+    let rolls = [roll];
+
+    if (dmgFormula !== "Nenhum" && dmgFormula !== "none") {
+      const dmgSkillName = weapon.system.bonusDamageSkill;
+      if (dmgSkillName) {
+        const dmgSkill = this.items.find(i => i.type === 'skill' && i.name === dmgSkillName);
+        const bonusDamage = dmgSkill?.system.level || 0;
+        if (bonusDamage !== 0) {
+          dmgFormula += bonusDamage > 0 ? ` + ${bonusDamage}` : ` - ${Math.abs(bonusDamage)}`;
+        }
+      }
+      const dmgRoll = new Roll(dmgFormula);
+      await dmgRoll.evaluate();
+      dmgRollHtml = await dmgRoll.render();
+      rolls.push(dmgRoll);
+    }
 
     const flavorParts = [];
     if (woundPenalty > 0) flavorParts.push(`(${game.i18n.localize("TRILHAMARGA.WoundPenalty")}: ${woundPenalty})`);
@@ -456,7 +461,7 @@ export class TrilhamargaActor extends Actor {
       atkRollHtml: await roll.render(),
       atkResultLabel: atkResultLabel,
       resultClass: resultClass,
-      dmgRollHtml: await dmgRoll.render(),
+      dmgRollHtml: dmgRollHtml,
       initiativeMessage: roll.dice[0].total % 2 === 0 ? "TRILHAMARGA.KeepInitiative" : "TRILHAMARGA.LoseInitiative"
     };
 
@@ -489,12 +494,17 @@ export class TrilhamargaActor extends Actor {
 
     // Damage Roll Formula
     const dmgFormula = attack.system.damage || "1d2";
-
     const atkRoll = new Roll(atkFormula);
-    const dmgRoll = new Roll(dmgFormula);
-
     await atkRoll.evaluate();
-    await dmgRoll.evaluate();
+    let dmgRollHtml = "";
+    let rolls = [atkRoll];
+
+    if (dmgFormula !== "Nenhum" && dmgFormula !== "none") {
+      const dmgRoll = new Roll(dmgFormula);
+      await dmgRoll.evaluate();
+      dmgRollHtml = await dmgRoll.render();
+      rolls.push(dmgRoll);
+    }
 
     // Check for critical success/failure
     const dieValue = atkRoll.dice[0].total;
@@ -515,7 +525,7 @@ export class TrilhamargaActor extends Actor {
       atkRollHtml: await atkRoll.render(),
       critLabel: critLabel,
       resultClass: resultClass,
-      dmgRollHtml: await dmgRoll.render(),
+      dmgRollHtml: dmgRollHtml,
       initiativeMessage: atkRoll.dice[0].total % 2 === 0 ? "TRILHAMARGA.KeepInitiative" : "TRILHAMARGA.LoseInitiative"
     };
 
@@ -525,7 +535,7 @@ export class TrilhamargaActor extends Actor {
       speaker: ChatMessage.getSpeaker({ actor: this }),
       content: content,
       style: CONST.CHAT_MESSAGE_STYLES.ROLL,
-      rolls: [atkRoll, dmgRoll]
+      rolls: rolls
     });
   }
 
