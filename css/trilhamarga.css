@@ -131,12 +131,23 @@ body.game .sheet.app header.sheet-header {
   text-align: center;
 }
 
-.trilhamarga .resource-controls input:first-of-type {
+.trilhamarga .resource-controls > :nth-child(2) {
   padding-left: 15px !important; /* Space for minus button */
 }
 
-.trilhamarga .resource-controls input:last-of-type {
+.trilhamarga .resource-controls > :nth-last-child(2) {
   padding-right: 15px !important; /* Space for plus button */
+}
+
+/* Value groups use field-sizing, so padding affects centering. Use margin instead. */
+.trilhamarga .value-group.resource-controls > :nth-child(2) {
+  padding-left: 0 !important;
+  margin-left: 15px !important;
+}
+
+.trilhamarga .value-group.resource-controls > :nth-last-child(2) {
+  padding-right: 0 !important;
+  margin-right: 15px !important;
 }
 
 .trilhamarga .header-basics input {
