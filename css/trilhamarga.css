@@ -758,14 +758,23 @@ body.game .sheet.app header.sheet-header {
 
 /* 7 & 10. Labels font (Inventory, Divine Domains, etc.) */
 .trilhamarga .tab h3,
+.trilhamarga .sheet-body h3,
 .trilhamarga .load-capacity-label {
   font-family: "Modesto Condensed", "Signika", sans-serif;
 }
 
-.trilhamarga .tab h3 {
+.trilhamarga .tab h3,
+.trilhamarga .sheet-body h3 {
   background: #000;
   color: #fff;
   padding: 4px 8px;
   margin-top: 15px;
   border-bottom: none;
+}
+
+/* NPC Sheet specific fonts */
+.trilhamarga .npc-description textarea,
+.trilhamarga input[name="system.movement"] {
+  font-family: "Amiri", serif !important;
+  font-size: 14px;
 }
