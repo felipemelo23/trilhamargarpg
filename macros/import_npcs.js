@@ -21,7 +21,7 @@ const actorsData = [
       {
         "name": "Feitiçaria",
         "bonus": 2,
-        "description": "Pode lançar os feitiços _**[Imobilizar Criatura](spells.html#spell:holdperson)**_, _**[Invocar Diabretes](spells.html#spell:summoncreature)**_ e _**[Tomar Controle](spells.html#spell:takecontrol)**_."
+        "description": "Pode lançar os feitiços Imobilizar Criatura, Invocar Diabretes e Tomar Controle."
       }
     ]
   },
@@ -50,12 +50,12 @@ const actorsData = [
       {
         "name": "Furtivo",
         "bonus": 4,
-        "description": "_**[Teste de](rules.html#sec:skillcheck)**_ _**[Percepção](skills.html#skill:perception)**_ para notar a aproximação."
+        "description": "Teste de Percepção para notar a aproximação."
       },
       {
         "name": "Veneno",
         "bonus": 3,
-        "description": "Uma criatura atingida por sua adaga sofre efeito de um _**[veneno](combat.html#sec:poison)**_ neurotóxico de potência 3."
+        "description": "Uma criatura atingida por sua adaga sofre efeito de um veneno neurotóxico de potência 3."
       }
     ]
   },
@@ -84,7 +84,7 @@ const actorsData = [
       {
         "name": "Furtivo",
         "bonus": 2,
-        "description": "_**[Teste de](rules.html#sec:skillcheck)**_ _**[Percepção](skills.html#skill:perception)**_ para notar a aproximação em estrada e ambientes selvagens."
+        "description": "Teste de Percepção para notar a aproximação em estrada e ambientes selvagens."
       }
     ]
   },
@@ -142,7 +142,7 @@ const actorsData = [
       {
         "name": "Armadilha",
         "bonus": 4,
-        "description": "Uma criatura a até 9 metros dele cai em uma armadilha aleatória. __**[Agilidade](skills.html#skill:agility)**_ para evitar_:"
+        "description": "Uma criatura a até 9 metros dele cai em uma armadilha aleatória. Agilidade para evitar:"
       }
     ]
   },
@@ -166,7 +166,7 @@ const actorsData = [
       {
         "name": "Marca do Caçador",
         "bonus": 0,
-        "description": "Pode usar uma _**[ação menor](combat.html#sec:minoraction)**_ para marcar um alvo. Ele tem uma _**[chance positiva](rules.html#sec:positivechance)**_ em qualquer teste contra seu alvo e o alvo tem uma _**[chance negativa](rules.html#sec:negativechance)**_ em qualquer teste contra ele."
+        "description": "Pode usar uma ação menor para marcar um alvo. Ele tem uma chance positiva em qualquer teste contra seu alvo e o alvo tem uma chance negativa em qualquer teste contra ele."
       }
     ]
   },
@@ -190,12 +190,12 @@ const actorsData = [
       {
         "name": "Contra-ataque",
         "bonus": 0,
-        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um _**[contra-ataque](combat.html#sec:counterattack)**_."
+        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um contra-ataque."
       },
       {
         "name": "Escudo",
         "bonus": 0,
-        "description": "Possui _**[cobertura parcial](combat.html#sec:halfcover)**_ enquanto estiver carregando um escudo."
+        "description": "Possui cobertura parcial enquanto estiver carregando um escudo."
       }
     ]
   },
@@ -219,7 +219,7 @@ const actorsData = [
       {
         "name": "Feitiçaria",
         "bonus": 4,
-        "description": "Pode lançar os feitiços _**[Imobilizar Criatura](spells.html#spell:holdperson)**_, _**[Invocar Diabretes](spells.html#spell:summoncreature)**_ e _**[Toque Macabro](spells.html#spell:chilltouch)**_."
+        "description": "Pode lançar os feitiços Imobilizar Criatura, Invocar Diabretes e Toque Macabro."
       }
     ]
   },
@@ -266,7 +266,7 @@ const actorsData = [
       {
         "name": "Pungar",
         "bonus": 3,
-        "description": "Com uma _**[ação menor](combat.html#sec:minoraction)**_, rouba um item aleatório que não esteja sendo usado ou vestido de uma criatura em alcance corpo a corpo. _**[Teste de](rules.html#sec:skillcheck)**_ _**[Percepção](skills.html#skill:perception)**_ para evitar."
+        "description": "Com uma ação menor, rouba um item aleatório que não esteja sendo usado ou vestido de uma criatura em alcance corpo a corpo. Teste de Percepção para evitar."
       }
     ]
   },
@@ -326,7 +326,7 @@ const actorsData = [
       {
         "name": "Tática de Combate",
         "bonus": 0,
-        "description": "Oponentes tem uma _**[chance negativa](rules.html#sec:negativechance)**_ para atacar um soldado veterano caso haja outro soldado adjacente a ele."
+        "description": "Oponentes tem uma chance negativa para atacar um soldado veterano caso haja outro soldado adjacente a ele."
       }
     ]
   },
@@ -368,7 +368,7 @@ const actorsData = [
       {
         "name": "Ataque em bando",
         "bonus": 0,
-        "description": "Sempre que acertar um ataque, passa a _**[iniciativa](combat.html#sec:initiative)**_ para outro babuíno, independentemente se o resultado do dado foi _**ímpar**_."
+        "description": "Sempre que acertar um ataque, passa a iniciativa para outro babuíno, independentemente se o resultado do dado foi ímpar."
       }
     ]
   },
@@ -397,7 +397,7 @@ const actorsData = [
       {
         "name": "Contra-ataque",
         "bonus": 0,
-        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um _**[contra-ataque](combat.html#sec:counterattack)**_ de Cauda."
+        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um contra-ataque de Cauda."
       }
     ]
   },
@@ -421,7 +421,7 @@ const actorsData = [
       {
         "name": "Investida",
         "bonus": 0,
-        "description": "Quando faz uma _**[investida](combat.html#sec:charge)**_, pode avançar 6 metros em linha reta, além do deslocamento normal."
+        "description": "Quando faz uma investida, pode avançar 6 metros em linha reta, além do deslocamento normal."
       }
     ]
   },
@@ -517,7 +517,7 @@ const actorsData = [
       {
         "name": "Constrição",
         "bonus": 2,
-        "description": "A criatura fica _**[agarrada](combat.html#stat:grappled)**_ pela cobra constritora. Criaturas _**[agarradas](combat.html#stat:grappled)**_ por ela não podem evitar o ataque de Constrição da cobra constritora. _**[Teste de](rules.html#sec:skillcheck)**_ _**[Físico](skills.html#skill:physique)**_ para se soltar."
+        "description": "A criatura fica agarrada pela cobra constritora. Criaturas agarradas por ela não podem evitar o ataque de Constrição da cobra constritora. Teste de Físico para se soltar."
       }
     ]
   },
@@ -541,7 +541,7 @@ const actorsData = [
       {
         "name": "Veneno",
         "bonus": 3,
-        "description": "Uma criatura picada sofre efeito de um _**[veneno](combat.html#sec:poison)**_ inoculante de potência 3."
+        "description": "Uma criatura picada sofre efeito de um veneno inoculante de potência 3."
       }
     ]
   },
@@ -565,7 +565,7 @@ const actorsData = [
       {
         "name": "Furtiva",
         "bonus": 4,
-        "description": "_**[Teste de](rules.html#sec:skillcheck)**_ _**[Percepção](skills.html#skill:perception)**_ para notar a aproximação à noite."
+        "description": "Teste de Percepção para notar a aproximação à noite."
       }
     ]
   },
@@ -589,12 +589,12 @@ const actorsData = [
       {
         "name": "Furtividade",
         "bonus": 4,
-        "description": "_**[Teste de](rules.html#sec:skillcheck)**_ _**[Percepção](skills.html#skill:perception)**_ para notar a aproximação em rios e lagos."
+        "description": "Teste de Percepção para notar a aproximação em rios e lagos."
       },
       {
         "name": "Agarrar",
         "bonus": 4,
-        "description": "Uma criatura atingida por um ataque de Mordida fica _**[agarrada](combat.html#stat:grappled)**_ pelo crocodilo. Criaturas _**[agarradas](combat.html#stat:grappled)**_ por ele não podem evitar o ataque de Mordida do crocodilo. _**[Teste de](rules.html#sec:skillcheck)**_ _**[Físico](skills.html#skill:physique)**_ para se soltar."
+        "description": "Uma criatura atingida por um ataque de Mordida fica agarrada pelo crocodilo. Criaturas agarradas por ele não podem evitar o ataque de Mordida do crocodilo. Teste de Físico para se soltar."
       }
     ]
   },
@@ -623,7 +623,7 @@ const actorsData = [
       {
         "name": "Atropelar",
         "bonus": 4,
-        "description": "Qualquer criatura que esteja em seu caminho quando ele se desloca sofre 1d8 de dano. __**[Esquiva](skills.html#skill:dodge)**_ para evitar_."
+        "description": "Qualquer criatura que esteja em seu caminho quando ele se desloca sofre 1d8 de dano. Esquiva para evitar."
       }
     ]
   },
@@ -665,7 +665,7 @@ const actorsData = [
       {
         "name": "Contra-ataque",
         "bonus": 0,
-        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um _**[contra-ataque](combat.html#sec:counterattack)**_."
+        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um contra-ataque."
       }
     ]
   },
@@ -707,7 +707,7 @@ const actorsData = [
       {
         "name": "Investida",
         "bonus": 0,
-        "description": "Quando faz uma _**[investida](combat.html#sec:charge)**_, pode avançar 3 metros em linha reta, além do deslocamento normal."
+        "description": "Quando faz uma investida, pode avançar 3 metros em linha reta, além do deslocamento normal."
       }
     ]
   },
@@ -759,7 +759,7 @@ const actorsData = [
       {
         "name": "Rugido",
         "bonus": 3,
-        "description": "Criaturas a até 9 metros dele ficam _**[abaladas](combat.html#stat:shaken)**_ até o fim do combate. __**[Vontade](skills.html#skill:will)**_ para resistir_."
+        "description": "Criaturas a até 9 metros dele ficam abaladas até o fim do combate. Vontade para resistir."
       }
     ]
   },
@@ -824,7 +824,7 @@ const actorsData = [
       {
         "name": "Atropelar",
         "bonus": 4,
-        "description": "Qualquer criatura que esteja em seu caminho quando ele se desloca sofre 1d10 de dano. __**[Esquiva](skills.html#skill:dodge)**_ para evitar_."
+        "description": "Qualquer criatura que esteja em seu caminho quando ele se desloca sofre 1d10 de dano. Esquiva para evitar."
       },
       {
         "name": "Resistência ao frio",
@@ -853,7 +853,7 @@ const actorsData = [
       {
         "name": "Ecolocalização",
         "bonus": 6,
-        "description": "Pode usar sua ecolocalização para lidar com testes relacionados a _**[Percepção](skills.html#skill:perception)**_."
+        "description": "Pode usar sua ecolocalização para lidar com testes relacionados a Percepção."
       }
     ]
   },
@@ -877,7 +877,7 @@ const actorsData = [
       {
         "name": "Furtiva",
         "bonus": 4,
-        "description": "_**[Teste de](rules.html#sec:skillcheck)**_ _**[Percepção](skills.html#skill:perception)**_ para notar a aproximação em ambientes urbanos."
+        "description": "Teste de Percepção para notar a aproximação em ambientes urbanos."
       }
     ]
   },
@@ -906,7 +906,7 @@ const actorsData = [
       {
         "name": "Furtivo",
         "bonus": 3,
-        "description": "_**[Teste de](rules.html#sec:skillcheck)**_ _**[Percepção](skills.html#skill:perception)**_ para notar a aproximação em ambientes selvagens."
+        "description": "Teste de Percepção para notar a aproximação em ambientes selvagens."
       }
     ]
   },
@@ -935,7 +935,7 @@ const actorsData = [
       {
         "name": "Furtivo",
         "bonus": 3,
-        "description": "_**[Teste de](rules.html#sec:skillcheck)**_ _**[Percepção](skills.html#skill:perception)**_ para notar a aproximação em ambientes selvagens."
+        "description": "Teste de Percepção para notar a aproximação em ambientes selvagens."
       }
     ]
   },
@@ -959,7 +959,7 @@ const actorsData = [
       {
         "name": "Faro para sangue",
         "bonus": 0,
-        "description": "O dano de sua mordida aumenta um passo na _**[escala de dano](equipments.html#sec:damageladder)**_ contra criaturas com _**[ferimentos](combat.html#sec:wounds)**_."
+        "description": "O dano de sua mordida aumenta um passo na escala de dano contra criaturas com ferimentos."
       }
     ]
   },
@@ -988,7 +988,7 @@ const actorsData = [
       {
         "name": "Agarrar",
         "bonus": 4,
-        "description": "Uma criatura atingida por um ataque de Garras fica _**[agarrada](combat.html#stat:grappled)**_ pelo urso. _**[Teste de](rules.html#sec:skillcheck)**_ _**[Físico](skills.html#skill:physique)**_ para se soltar."
+        "description": "Uma criatura atingida por um ataque de Garras fica agarrada pelo urso. Teste de Físico para se soltar."
       }
     ]
   },
@@ -1035,7 +1035,7 @@ const actorsData = [
       {
         "name": "Matraquear",
         "bonus": 3,
-        "description": "Criaturas a até 9 metros dele ficam _**[confusas](combat.html#stat:confused)**_. __**[Vontade](skills.html#skill:will)**_ para resistir_."
+        "description": "Criaturas a até 9 metros dele ficam confusas. Vontade para resistir."
       }
     ]
   },
@@ -1064,7 +1064,7 @@ const actorsData = [
       {
         "name": "Contra-ataque",
         "bonus": 0,
-        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um _**[contra-ataque](combat.html#sec:counterattack)**_ de Tentáculo."
+        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um contra-ataque de Tentáculo."
       },
       {
         "name": "Telepatia",
@@ -1074,7 +1074,7 @@ const actorsData = [
       {
         "name": "Escravizar",
         "bonus": 6,
-        "description": "Pode lançar os feitiços _**[Comando](spells.html#spell:command)**_ e _**[Tomar Controle](spells.html#spell:takecontrol)**_."
+        "description": "Pode lançar os feitiços Comando e Tomar Controle."
       }
     ]
   },
@@ -1098,12 +1098,12 @@ const actorsData = [
       {
         "name": "Veneno",
         "bonus": 2,
-        "description": "Uma criatura mordida sofre efeito de um _**[veneno](combat.html#sec:poison)**_ neurotóxico de potência 2."
+        "description": "Uma criatura mordida sofre efeito de um veneno neurotóxico de potência 2."
       },
       {
         "name": "Teia",
         "bonus": 2,
-        "description": "Pode lançar o feitiço _**[Teia](spells.html#spell:web)**_."
+        "description": "Pode lançar o feitiço Teia."
       },
       {
         "name": "Fotofóbica",
@@ -1132,12 +1132,12 @@ const actorsData = [
       {
         "name": "Veneno",
         "bonus": 6,
-        "description": "Uma criatura mordida sofre efeito de um _**[veneno](combat.html#sec:poison)**_ neurotóxico de potência 6."
+        "description": "Uma criatura mordida sofre efeito de um veneno neurotóxico de potência 6."
       },
       {
         "name": "Teia",
         "bonus": 6,
-        "description": "Pode lançar o feitiço _**[Teia](spells.html#spell:web)**_."
+        "description": "Pode lançar o feitiço Teia."
       },
       {
         "name": "Fotofóbica",
@@ -1200,12 +1200,12 @@ const actorsData = [
       {
         "name": "Toque necrótico",
         "bonus": 0,
-        "description": "Causa 1d4 de _**[dano necrótico](combat.html#sec:necroticdamage)**_."
+        "description": "Causa 1d4 de dano necrótico."
       },
       {
         "name": "Grito aterrador",
         "bonus": 3,
-        "description": "Criaturas a até 9 metros dela perdem todo o _**[Vigor](combat.html#sec:stamina)**_. __**[Vontade](skills.html#skill:will)**_ para resistir_."
+        "description": "Criaturas a até 9 metros dela perdem todo o Vigor. Vontade para resistir."
       }
     ]
   },
@@ -1229,7 +1229,7 @@ const actorsData = [
       {
         "name": "Olhar petrificante",
         "bonus": 4,
-        "description": "Uma criatura que olhe em seus olhos é _**[petrificada](combat.html#stat:paralyzed)**_. __**[Vontade](skills.html#skill:will)**_ para resistir_."
+        "description": "Uma criatura que olhe em seus olhos é petrificada. Vontade para resistir."
       }
     ]
   },
@@ -1258,12 +1258,12 @@ const actorsData = [
       {
         "name": "Realidade Ilusória",
         "bonus": 5,
-        "description": "Uma realidade ilusória envolve permanentemente o entorno do seu covil, fazendo-o parecer um local seguro e convidativo para atrair suas vítimas e ocultar sua verdadeira natureza. _**[Teste de](rules.html#sec:skillcheck)**_ _**[Percepção](skills.html#skill:perception)**_ para ver através da ilusão."
+        "description": "Uma realidade ilusória envolve permanentemente o entorno do seu covil, fazendo-o parecer um local seguro e convidativo para atrair suas vítimas e ocultar sua verdadeira natureza. Teste de Percepção para ver através da ilusão."
       },
       {
         "name": "Feitiçaria",
         "bonus": 6,
-        "description": "Pode lançar os feitiços _**[Invisibilidade](spells.html#spell:invisibility)**_, _**[Invocar Diabretes](spells.html#spell:summoncreature)**_, _**[Mísseis Mágicos](spells.html#spell:magicmissile)**_, _**[Polimorfia](spells.html#spell:polimorph)**_, _**[Sono](spells.html#spell:sleep)**_ e _**[Voo](spells.html#spell:fly)**_."
+        "description": "Pode lançar os feitiços Invisibilidade, Invocar Diabretes, Mísseis Mágicos, Polimorfia, Sono e Voo."
       }
     ]
   },
@@ -1292,12 +1292,12 @@ const actorsData = [
       {
         "name": "Contra-ataque",
         "bonus": 0,
-        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um _**[contra-ataque](combat.html#sec:counterattack)**_."
+        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um contra-ataque."
       },
       {
         "name": "Furtivo",
         "bonus": 2,
-        "description": "_**[Teste de](rules.html#sec:skillcheck)**_ _**[Percepção](skills.html#skill:perception)**_ para notar a aproximação."
+        "description": "Teste de Percepção para notar a aproximação."
       }
     ]
   },
@@ -1326,7 +1326,7 @@ const actorsData = [
       {
         "name": "Derrubar",
         "bonus": 0,
-        "description": "Se acertar um ataque no final de uma _**[investida](combat.html#sec:charge)**_, além de causar dano, também derruba o alvo."
+        "description": "Se acertar um ataque no final de uma investida, além de causar dano, também derruba o alvo."
       }
     ]
   },
@@ -1355,7 +1355,7 @@ const actorsData = [
       {
         "name": "Bafo de chamas",
         "bonus": 2,
-        "description": "Criaturas em um cone de 3 metros sofrem 1 de _**[dano de fogo](combat.html#sec:fire)**_. __**[Esquiva](skills.html#skill:dodge)**_ para evitar_."
+        "description": "Criaturas em um cone de 3 metros sofrem 1 de dano de fogo. Esquiva para evitar."
       },
       {
         "name": "Barreira consagrada",
@@ -1384,7 +1384,7 @@ const actorsData = [
       {
         "name": "Furtivo",
         "bonus": 4,
-        "description": "_**[Teste de](rules.html#sec:skillcheck)**_ _**[Percepção](skills.html#skill:perception)**_ para notar a aproximação."
+        "description": "Teste de Percepção para notar a aproximação."
       },
       {
         "name": "Morto-vivo",
@@ -1394,7 +1394,7 @@ const actorsData = [
       {
         "name": "Paralisia",
         "bonus": 3,
-        "description": "Uma criatura atingida por um ataque de Garras fica _**[paralisada](combat.html#stat:paralyzed)**_ até o fim do combate. __**[Físico](skills.html#skill:physique)**_ para resistir_."
+        "description": "Uma criatura atingida por um ataque de Garras fica paralisada até o fim do combate. Físico para resistir."
       }
     ]
   },
@@ -1418,7 +1418,7 @@ const actorsData = [
       {
         "name": "Contra-ataque",
         "bonus": 0,
-        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um _**[contra-ataque](combat.html#sec:counterattack)**_."
+        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um contra-ataque."
       },
       {
         "name": "Morto-vivo",
@@ -1428,7 +1428,7 @@ const actorsData = [
       {
         "name": "Ferida eterna",
         "bonus": 0,
-        "description": "_**[Ferimentos](combat.html#sec:wounds)**_ causados por um cavaleiro da morte não cicatrizam totalmente."
+        "description": "Ferimentos causados por um cavaleiro da morte não cicatrizam totalmente."
       }
     ]
   },
@@ -1470,7 +1470,7 @@ const actorsData = [
       {
         "name": "Constrição",
         "bonus": 4,
-        "description": "A criatura fica _**[agarrada](combat.html#stat:grappled)**_ pela cobra gigante. Criaturas _**[agarradas](combat.html#stat:grappled)**_ por ela não podem evitar o ataque de Constrição da cobra gigante. _**[Teste de](rules.html#sec:skillcheck)**_ _**[Físico](skills.html#skill:physique)**_ para se soltar."
+        "description": "A criatura fica agarrada pela cobra gigante. Criaturas agarradas por ela não podem evitar o ataque de Constrição da cobra gigante. Teste de Físico para se soltar."
       }
     ]
   },
@@ -1494,7 +1494,7 @@ const actorsData = [
       {
         "name": "Bicada petrificante",
         "bonus": 2,
-        "description": "Uma criatura bicada é _**[petrificada](combat.html#stat:paralyzed)**_. __**[Físico](skills.html#skill:physique)**_ para resistir_."
+        "description": "Uma criatura bicada é petrificada. Físico para resistir."
       }
     ]
   },
@@ -1518,12 +1518,12 @@ const actorsData = [
       {
         "name": "Transparente",
         "bonus": 4,
-        "description": "_**[Teste de](rules.html#sec:skillcheck)**_ _**[Percepção](skills.html#skill:perception)**_ para notar a aproximação."
+        "description": "Teste de Percepção para notar a aproximação."
       },
       {
         "name": "Engolfar",
         "bonus": 4,
-        "description": "Criaturas pelas quais o cubo passa por cima ficam _**[agarradas](combat.html#stat:grappled)**_ dentro dele, ficando impossibilitadas de respirar e sofrendo 1d6 de dano no início dos próximos _**[turnos](combat.html#sec:turn)**_ dele. _**[Teste de](rules.html#sec:skillcheck)**_ _**[Físico](skills.html#skill:physique)**_ para escapar."
+        "description": "Criaturas pelas quais o cubo passa por cima ficam agarradas dentro dele, ficando impossibilitadas de respirar e sofrendo 1d6 de dano no início dos próximos turnos dele. Teste de Físico para escapar."
       }
     ]
   },
@@ -1552,27 +1552,27 @@ const actorsData = [
       {
         "name": "Agarrar",
         "bonus": 4,
-        "description": "Uma criatura atingida por um ataque de Tentáculos fica _**[agarrada](combat.html#stat:grappled)**_ pelo devorador de cérebros. _**[Teste de](rules.html#sec:skillcheck)**_ _**[Físico](skills.html#skill:physique)**_ para se soltar."
+        "description": "Uma criatura atingida por um ataque de Tentáculos fica agarrada pelo devorador de cérebros. Teste de Físico para se soltar."
       },
       {
         "name": "Extrair Cérebro",
         "bonus": 0,
-        "description": "Se o _**[Vigor](combat.html#sec:stamina)**_ de uma criatura _**[agarrada](combat.html#stat:grappled)**_ pelo devorador de cérebros tiver sido reduzida a zero, o cérebro dela é devorado e ela morre instantaneamente."
+        "description": "Se o Vigor de uma criatura agarrada pelo devorador de cérebros tiver sido reduzida a zero, o cérebro dela é devorado e ela morre instantaneamente."
       },
       {
         "name": "Telepatia",
         "bonus": 3,
-        "description": "Ouve os pensamentos de qualquer criatura a até 9 metros dele. __**[Vontade](skills.html#skill:will)**_ para resistir_."
+        "description": "Ouve os pensamentos de qualquer criatura a até 9 metros dele. Vontade para resistir."
       },
       {
         "name": "Invadir a Mente",
         "bonus": 4,
-        "description": "Pode lançar os feitiços _**[Comando](spells.html#spell:command)**_, _**Explosão Mental**_ e _**[Tomar Controle](spells.html#spell:takecontrol)**_."
+        "description": "Pode lançar os feitiços Comando, Explosão Mental e Tomar Controle."
       },
       {
         "name": "Explosão Mental",
         "bonus": 0,
-        "description": "Feitiço. Uma criatura a até 9 metros de distância que o devorador de cérebros consiga ver sofre dano mental _**[de acordo com o NP](spells.html#sec:spelldamageperPL)**_."
+        "description": "Feitiço. Uma criatura a até 9 metros de distância que o devorador de cérebros consiga ver sofre dano mental de acordo com o NP."
       }
     ]
   },
@@ -1640,17 +1640,17 @@ const actorsData = [
       {
         "name": "À prova de fogo",
         "bonus": 0,
-        "description": "Imune a _**[fogo](combat.html#sec:fire)**_."
+        "description": "Imune a fogo."
       },
       {
         "name": "Presença ameaçadora",
         "bonus": 6,
-        "description": "Criaturas a até 12 metros dele ficam _**[abaladas](combat.html#stat:shaken)**_ até o fim do combate. __**[Vontade](skills.html#skill:will)**_ para resistir_."
+        "description": "Criaturas a até 12 metros dele ficam abaladas até o fim do combate. Vontade para resistir."
       },
       {
         "name": "Bafo de chamas",
         "bonus": 8,
-        "description": "Criaturas em um cone de 18 metros sofrem 3d6 de _**[dano de fogo](combat.html#sec:fire)**_. __**[Esquiva](skills.html#skill:dodge)**_ para evitar_."
+        "description": "Criaturas em um cone de 18 metros sofrem 3d6 de dano de fogo. Esquiva para evitar."
       }
     ]
   },
@@ -1674,7 +1674,7 @@ const actorsData = [
       {
         "name": "Enfeitiçar",
         "bonus": 3,
-        "description": "Pode lançar o feitiço _**[Tomar Controle](spells.html#spell:takecontrol)**_."
+        "description": "Pode lançar o feitiço Tomar Controle."
       },
       {
         "name": "Passo da natureza",
@@ -1703,12 +1703,12 @@ const actorsData = [
       {
         "name": "Veneno",
         "bonus": 4,
-        "description": "Uma criatura picada sofre efeito de um _**[veneno](combat.html#sec:poison)**_ neurotóxico de potência 4."
+        "description": "Uma criatura picada sofre efeito de um veneno neurotóxico de potência 4."
       },
       {
         "name": "Teia",
         "bonus": 4,
-        "description": "Pode lançar o feitiço _**[Teia](spells.html#spell:web)**_."
+        "description": "Pode lançar o feitiço Teia."
       },
       {
         "name": "Fotofóbica",
@@ -1737,7 +1737,7 @@ const actorsData = [
       {
         "name": "Engolfar",
         "bonus": 3,
-        "description": "Criaturas em alcance corpo a corpo ficam _**[agarradas](combat.html#stat:grappled)**_ dentro do elemental. _**[Teste de](rules.html#sec:skillcheck)**_ _**[Físico](skills.html#skill:physique)**_ para escapar."
+        "description": "Criaturas em alcance corpo a corpo ficam agarradas dentro do elemental. Teste de Físico para escapar."
       }
     ]
   },
@@ -1761,7 +1761,7 @@ const actorsData = [
       {
         "name": "Moldar terra",
         "bonus": 3,
-        "description": "Criaturas a menos de 9 metros ficam _**[presas](combat.html#stat:restrained)**_ no chão. _**[Teste de](rules.html#sec:skillcheck)**_ _**[Físico](skills.html#skill:physique)**_ para se soltar."
+        "description": "Criaturas a menos de 9 metros ficam presas no chão. Teste de Físico para se soltar."
       }
     ]
   },
@@ -1790,7 +1790,7 @@ const actorsData = [
       {
         "name": "Furacão",
         "bonus": 0,
-        "description": "Criaturas a menos de 9 metros ficam _**[lentas](combat.html#stat:slow)**_."
+        "description": "Criaturas a menos de 9 metros ficam lentas."
       }
     ]
   },
@@ -1819,7 +1819,7 @@ const actorsData = [
       {
         "name": "Incêndio",
         "bonus": 3,
-        "description": "Criaturas a até 9 metros sofrem 1d6 de _**[dano de fogo](combat.html#sec:fire)**_. __**[Esquiva](skills.html#skill:dodge)**_ para evitar_."
+        "description": "Criaturas a até 9 metros sofrem 1d6 de dano de fogo. Esquiva para evitar."
       }
     ]
   },
@@ -1848,12 +1848,12 @@ const actorsData = [
       {
         "name": "Rugido",
         "bonus": 4,
-        "description": "Criaturas a até 18 metros dela que possam escutá-la ficam _**[paralisadas](combat.html#stat:paralyzed)**_ até o fim do combate. __**[Vontade](skills.html#skill:will)**_ para resistir_."
+        "description": "Criaturas a até 18 metros dela que possam escutá-la ficam paralisadas até o fim do combate. Vontade para resistir."
       },
       {
         "name": "Controle da realidade",
         "bonus": 6,
-        "description": "Pode lançar os feitiços _**[Comando](spells.html#spell:command)**_, _**[Dissipar Magia](spells.html#spell:dispelmagic)**_, _**[Imobilizar Criatura](spells.html#spell:holdperson)**_, _**[Lentidão](spells.html#spell:slow)**_, _**[Passo Nebuloso](spells.html#spell:mistystep)**_, _**[Silêncio](spells.html#spell:silence)**_ e _**[Tomar Controle](spells.html#spell:takecontrol)**_."
+        "description": "Pode lançar os feitiços Comando, Dissipar Magia, Imobilizar Criatura, Lentidão, Passo Nebuloso, Silêncio e Tomar Controle."
       }
     ]
   },
@@ -1901,7 +1901,7 @@ const actorsData = [
       {
         "name": "Camuflagem",
         "bonus": 4,
-        "description": "_**[Teste de](rules.html#sec:skillcheck)**_ _**[Percepção](skills.html#skill:perception)**_ para notar a aproximação em pântanos."
+        "description": "Teste de Percepção para notar a aproximação em pântanos."
       }
     ]
   },
@@ -2007,7 +2007,7 @@ const actorsData = [
       {
         "name": "Contra-ataque",
         "bonus": 0,
-        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um _**[contra-ataque](combat.html#sec:counterattack)**_."
+        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um contra-ataque."
       }
     ]
   },
@@ -2054,7 +2054,7 @@ const actorsData = [
       {
         "name": "Pancada",
         "bonus": 2,
-        "description": "Criaturas atingidas por uma pancada ficam _**[lentas](combat.html#stat:slow)**_. __**[Físico](skills.html#skill:physique)**_ para resistir_."
+        "description": "Criaturas atingidas por uma pancada ficam lentas. Físico para resistir."
       }
     ]
   },
@@ -2078,12 +2078,12 @@ const actorsData = [
       {
         "name": "Investida",
         "bonus": 0,
-        "description": "Quando faz uma _**[investida](combat.html#sec:charge)**_, pode avançar 9 metros em linha reta, além do deslocamento normal."
+        "description": "Quando faz uma investida, pode avançar 9 metros em linha reta, além do deslocamento normal."
       },
       {
         "name": "Bafo petrificante",
         "bonus": 4,
-        "description": "Criaturas a até 9 metros dela são _**[petrificadas](combat.html#stat:paralyzed)**_. __**[Físico](skills.html#skill:physique)**_ para resistir_."
+        "description": "Criaturas a até 9 metros dela são petrificadas. Físico para resistir."
       }
     ]
   },
@@ -2112,7 +2112,7 @@ const actorsData = [
       {
         "name": "Agarrar",
         "bonus": 4,
-        "description": "Uma criatura atingida por um ataque de Garras durante uma _**[investida](combat.html#sec:charge)**_ aérea fica _**[agarrada](combat.html#stat:grappled)**_ pelo grifo. _**[Teste de](rules.html#sec:skillcheck)**_ _**[Físico](skills.html#skill:physique)**_ para se soltar."
+        "description": "Uma criatura atingida por um ataque de Garras durante uma investida aérea fica agarrada pelo grifo. Teste de Físico para se soltar."
       }
     ]
   },
@@ -2146,7 +2146,7 @@ const actorsData = [
       {
         "name": "Veneno",
         "bonus": 4,
-        "description": "Uma criatura mordida sofre efeito de um _**[veneno](combat.html#sec:poison)**_ neurotóxico de potência 4."
+        "description": "Uma criatura mordida sofre efeito de um veneno neurotóxico de potência 4."
       }
     ]
   },
@@ -2170,7 +2170,7 @@ const actorsData = [
       {
         "name": "Canto",
         "bonus": 3,
-        "description": "Criaturas a até 18 metros dela ficam enfeitiçadas e são magicamente atraídas para ela. __**[Vontade](skills.html#skill:will)**_ para resistir_."
+        "description": "Criaturas a até 18 metros dela ficam enfeitiçadas e são magicamente atraídas para ela. Vontade para resistir."
       }
     ]
   },
@@ -2194,7 +2194,7 @@ const actorsData = [
       {
         "name": "Agarrar",
         "bonus": 2,
-        "description": "Uma criatura atingida por um ataque de Garras durante uma _**[investida](combat.html#sec:charge)**_ aérea fica _**[agarrada](combat.html#stat:grappled)**_ pelo hipogrifo. _**[Teste de](rules.html#sec:skillcheck)**_ _**[Físico](skills.html#skill:physique)**_ para se soltar."
+        "description": "Uma criatura atingida por um ataque de Garras durante uma investida aérea fica agarrada pelo hipogrifo. Teste de Físico para se soltar."
       }
     ]
   },
@@ -2259,12 +2259,12 @@ const actorsData = [
       {
         "name": "Contra-ataque",
         "bonus": 0,
-        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um _**[contra-ataque](combat.html#sec:counterattack)**_ de Tentáculo que causa 1d8 de dano."
+        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um contra-ataque de Tentáculo que causa 1d8 de dano."
       },
       {
         "name": "Constrição",
         "bonus": 6,
-        "description": "Uma criatura atingida por um ataque de Tentáculos fica _**[agarrada](combat.html#stat:grappled)**_ pelo kraken. Criaturas _**[agarradas](combat.html#stat:grappled)**_ por ele não podem evitar o ataque de Constrição do kraken. _**[Teste de](rules.html#sec:skillcheck)**_ _**[Físico](skills.html#skill:physique)**_ para se soltar."
+        "description": "Uma criatura atingida por um ataque de Tentáculos fica agarrada pelo kraken. Criaturas agarradas por ele não podem evitar o ataque de Constrição do kraken. Teste de Físico para se soltar."
       }
     ]
   },
@@ -2293,22 +2293,22 @@ const actorsData = [
       {
         "name": "Contra-ataque",
         "bonus": 0,
-        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um _**[contra-ataque](combat.html#sec:counterattack)**_ de _**Toque necrótico**_."
+        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um contra-ataque de Toque necrótico."
       },
       {
         "name": "Toque necrótico",
         "bonus": 0,
-        "description": "Causa 1d6 de _**[dano necrótico](combat.html#sec:necroticdamage)**_."
+        "description": "Causa 1d6 de dano necrótico."
       },
       {
         "name": "Dedo da morte",
         "bonus": 6,
-        "description": "Uma criatura a até 9 metros dele morre instantaneamente. __**[Vontade](skills.html#skill:will)**_ para resistir_."
+        "description": "Uma criatura a até 9 metros dele morre instantaneamente. Vontade para resistir."
       },
       {
         "name": "Necromancia",
         "bonus": 8,
-        "description": "Pode lançar os feitiços _**[Cone de Frio](spells.html#spell:coneoffrost)**_, _**[Escuridão](spells.html#spell:darkness)**_, _**[Globo de Invulnerabilidade](spells.html#spell:orbofinvulnerability)**_, _**[Imobilizar Criatura](spells.html#spell:holdperson)**_, _**[Passo Nebuloso](spells.html#spell:mistystep)**_, _**[Silêncio](spells.html#spell:silence)**_, _**[Toque Vampírico](spells.html#spell:vampirictouch)**_ e _**[Voo](spells.html#spell:fly)**_."
+        "description": "Pode lançar os feitiços Cone de Frio, Escuridão, Globo de Invulnerabilidade, Imobilizar Criatura, Passo Nebuloso, Silêncio, Toque Vampírico e Voo."
       },
       {
         "name": "Filactério",
@@ -2342,7 +2342,7 @@ const actorsData = [
       {
         "name": "Contra-ataque",
         "bonus": 0,
-        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um _**[contra-ataque](combat.html#sec:counterattack)**_ de Garras."
+        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um contra-ataque de Garras."
       },
       {
         "name": "Lua cheia",
@@ -2386,7 +2386,7 @@ const actorsData = [
       {
         "name": "Alcateia",
         "bonus": 0,
-        "description": "Qualquer lobo a até 9 metros do lobo atroz tem uma _**[chance positiva](rules.html#sec:positivechance)**_ para atacar e oponentes tem uma _**[chance negativa](rules.html#sec:negativechance)**_ para atacá-lo."
+        "description": "Qualquer lobo a até 9 metros do lobo atroz tem uma chance positiva para atacar e oponentes tem uma chance negativa para atacá-lo."
       }
     ]
   },
@@ -2415,7 +2415,7 @@ const actorsData = [
       {
         "name": "Contra-ataque",
         "bonus": 0,
-        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um _**[contra-ataque](combat.html#sec:counterattack)**_ de Espinhos."
+        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um contra-ataque de Espinhos."
       },
       {
         "name": "Espinhos",
@@ -2444,7 +2444,7 @@ const actorsData = [
       {
         "name": "Grudar",
         "bonus": 0,
-        "description": "Uma criatura atingida por um ataque de Mordida fica _**[agarrada](combat.html#stat:grappled)**_ pelo mímico. Criaturas _**[agarradas](combat.html#stat:grappled)**_ por ele não podem evitar o ataque de Mordida do mímico. _**[Teste de](rules.html#sec:skillcheck)**_ _**[Físico](skills.html#skill:physique)**_ para se soltar."
+        "description": "Uma criatura atingida por um ataque de Mordida fica agarrada pelo mímico. Criaturas agarradas por ele não podem evitar o ataque de Mordida do mímico. Teste de Físico para se soltar."
       }
     ]
   },
@@ -2473,7 +2473,7 @@ const actorsData = [
       {
         "name": "Investida",
         "bonus": 0,
-        "description": "Se fizer uma _**[investida](combat.html#sec:charge)**_ com os chifres, pode avançar 9 metros em linha reta, além do deslocamento normal."
+        "description": "Se fizer uma investida com os chifres, pode avançar 9 metros em linha reta, além do deslocamento normal."
       }
     ]
   },
@@ -2502,7 +2502,7 @@ const actorsData = [
       {
         "name": "Corrosão",
         "bonus": 0,
-        "description": "Reduz permanentemente o dano de uma arma de metal em um passo na _**[escala de dano](equipments.html#sec:damageladder)**_ ou a _**[Proteção](combat.html#sec:protection)**_ de uma armadura de metal em 1d6. Corrói completamente outros objetos de metal."
+        "description": "Reduz permanentemente o dano de uma arma de metal em um passo na escala de dano ou a Proteção de uma armadura de metal em 1d6. Corrói completamente outros objetos de metal."
       }
     ]
   },
@@ -2526,7 +2526,7 @@ const actorsData = [
       {
         "name": "Toque de podridão",
         "bonus": 0,
-        "description": "Ao tocar um alvo, causa um _**[ferimento](combat.html#sec:wounds)**_ com severidade 1d4. Esse _**[ferimento](combat.html#sec:wounds)**_ é considerado _**[moderado](combat.html#sec:moderatewounds)**_ independente de sua severidade."
+        "description": "Ao tocar um alvo, causa um ferimento com severidade 1d4. Esse ferimento é considerado moderado independente de sua severidade."
       }
     ]
   },
@@ -2550,12 +2550,12 @@ const actorsData = [
       {
         "name": "Veneno",
         "bonus": 4,
-        "description": "Uma criatura mordida sofre efeito de um _**[veneno](combat.html#sec:poison)**_ neurotóxico de potência 4."
+        "description": "Uma criatura mordida sofre efeito de um veneno neurotóxico de potência 4."
       },
       {
         "name": "Língua de cobra",
         "bonus": 3,
-        "description": "Pode lançar os feitiços _**[Comando](spells.html#spell:command)**_, _**[Imobilizar Criatura](spells.html#spell:holdperson)**_ e _**[Tomar Controle](spells.html#spell:takecontrol)**_."
+        "description": "Pode lançar os feitiços Comando, Imobilizar Criatura e Tomar Controle."
       }
     ]
   },
@@ -2589,22 +2589,22 @@ const actorsData = [
       {
         "name": "Confusão",
         "bonus": 0,
-        "description": "_Feitiço_. O alvo fica _**[confuso](combat.html#stat:confused)**_."
+        "description": "Feitiço. O alvo fica confuso."
       },
       {
         "name": "Petrificar",
         "bonus": 0,
-        "description": "_Feitiço_. O alvo é _**[petrificado](combat.html#stat:paralyzed)**_."
+        "description": "Feitiço. O alvo é petrificado."
       },
       {
         "name": "Desintegrar",
         "bonus": 0,
-        "description": "_Feitiço_. O alvo sofre _**[dano](spells.html#sec:spelldamageperPL)**_ de um feitiço de _**[NP](spells.html#sec:castingspells)**_ + 3."
+        "description": "Feitiço. O alvo sofre dano de um feitiço de NP + 3."
       },
       {
         "name": "Raio da morte",
         "bonus": 0,
-        "description": "_Feitiço_. O alvo morre instantaneamente."
+        "description": "Feitiço. O alvo morre instantaneamente."
       }
     ]
   },
@@ -2646,7 +2646,7 @@ const actorsData = [
       {
         "name": "Contra-ataque",
         "bonus": 0,
-        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um _**[contra-ataque](combat.html#sec:counterattack)**_."
+        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um contra-ataque."
       }
     ]
   },
@@ -2670,7 +2670,7 @@ const actorsData = [
       {
         "name": "Agarrar",
         "bonus": 6,
-        "description": "Uma criatura atingida por um ataque de Garras durante uma _**[investida](combat.html#sec:charge)**_ aérea fica _**[agarrada](combat.html#stat:grappled)**_ pelo pássaro roca. _**[Teste de](rules.html#sec:skillcheck)**_ _**[Físico](skills.html#skill:physique)**_ para se soltar."
+        "description": "Uma criatura atingida por um ataque de Garras durante uma investida aérea fica agarrada pelo pássaro roca. Teste de Físico para se soltar."
       }
     ]
   },
@@ -2712,7 +2712,7 @@ const actorsData = [
       {
         "name": "Esporos soníferos",
         "bonus": 1,
-        "description": "Criaturas a até 9 metros dele ficam adormecidas. __**[Físico](skills.html#skill:physique)**_ para resistir_."
+        "description": "Criaturas a até 9 metros dele ficam adormecidas. Físico para resistir."
       }
     ]
   },
@@ -2754,12 +2754,12 @@ const actorsData = [
       {
         "name": "Corrosão",
         "bonus": 0,
-        "description": "Ao ser acertado por uma arma não-mágica, reduz permanentemente o dano dela em um passo na _**[escala de dano](equipments.html#sec:damageladder)**_."
+        "description": "Ao ser acertado por uma arma não-mágica, reduz permanentemente o dano dela em um passo na escala de dano."
       },
       {
         "name": "Dividir-se",
         "bonus": 0,
-        "description": "Quando reduzido a 0 pontos de _**[Vitalidade](npc_sheets_intro.html#sec:vitality)**_, ele se divide em dois, cada um com metade da _**[Vitalidade](npc_sheets_intro.html#sec:vitality)**_ total do original. Um pudim negro que tenha 1 de _**[Vitalidade](npc_sheets_intro.html#sec:vitality)**_ não consegue se dividir."
+        "description": "Quando reduzido a 0 pontos de Vitalidade, ele se divide em dois, cada um com metade da Vitalidade total do original. Um pudim negro que tenha 1 de Vitalidade não consegue se dividir."
       }
     ]
   },
@@ -2788,7 +2788,7 @@ const actorsData = [
       {
         "name": "Peste",
         "bonus": 0,
-        "description": "_**[Ferimentos](combat.html#sec:wounds)**_ causados por um rato gigante são considerados _**[moderados](combat.html#sec:moderatewounds)**_ independente de sua severidade."
+        "description": "Ferimentos causados por um rato gigante são considerados moderados independente de sua severidade."
       }
     ]
   },
@@ -2822,12 +2822,12 @@ const actorsData = [
       {
         "name": "Contra-ataque",
         "bonus": 0,
-        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um _**[contra-ataque](combat.html#sec:counterattack)**_ que ela ainda não usou desde a última vez que teve a _**[iniciativa](combat.html#sec:initiative)**_."
+        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um contra-ataque que ela ainda não usou desde a última vez que teve a iniciativa."
       },
       {
         "name": "Bafo de chamas",
         "bonus": 3,
-        "description": "Criaturas em um cone de 6 metros sofrem 1d6 de _**[dano de fogo](combat.html#sec:fire)**_. __**[Esquiva](skills.html#skill:dodge)**_ para evitar_."
+        "description": "Criaturas em um cone de 6 metros sofrem 1d6 de dano de fogo. Esquiva para evitar."
       }
     ]
   },
@@ -2851,7 +2851,7 @@ const actorsData = [
       {
         "name": "Cheiro de sangue",
         "bonus": 0,
-        "description": "O dano do Tridente aumenta em um passo na _**[escala de dano](equipments.html#sec:damageladder)**_ contra criaturas com _**[ferimentos](combat.html#sec:wounds)**_."
+        "description": "O dano do Tridente aumenta em um passo na escala de dano contra criaturas com ferimentos."
       },
       {
         "name": "Meio-peixe",
@@ -2880,7 +2880,7 @@ const actorsData = [
       {
         "name": "Língua",
         "bonus": 2,
-        "description": "Uma criatura a até 9 metros dele é puxada para alcance corpo a corpo. __**[Esquiva](skills.html#skill:dodge)**_ para evitar_."
+        "description": "Uma criatura a até 9 metros dele é puxada para alcance corpo a corpo. Esquiva para evitar."
       }
     ]
   },
@@ -2904,7 +2904,7 @@ const actorsData = [
       {
         "name": "Flauta de Pã",
         "bonus": 3,
-        "description": "Pode lançar os feitiços _**[Ilusão](spells.html#spell:illusion)**_, _**[Sono](spells.html#spell:sleep)**_ e _**[Tomar Controle](spells.html#spell:takecontrol)**_."
+        "description": "Pode lançar os feitiços Ilusão, Sono e Tomar Controle."
       }
     ]
   },
@@ -2938,7 +2938,7 @@ const actorsData = [
       {
         "name": "Toque necrótico",
         "bonus": 0,
-        "description": "Causa 1d4 de _**[dano necrótico](combat.html#sec:necroticdamage)**_."
+        "description": "Causa 1d4 de dano necrótico."
       }
     ]
   },
@@ -2962,7 +2962,7 @@ const actorsData = [
       {
         "name": "Sugar sangue",
         "bonus": 2,
-        "description": "O stirge se fixa em uma criatura picada causando 1d4 de dano no início dos próximos _**[turnos](combat.html#sec:turn)**_ dele. Um stirge que esteja fixado em uma criatura não pode atacar. _**[Teste de](rules.html#sec:skillcheck)**_ _**[Físico](skills.html#skill:physique)**_ para remover."
+        "description": "O stirge se fixa em uma criatura picada causando 1d4 de dano no início dos próximos turnos dele. Um stirge que esteja fixado em uma criatura não pode atacar. Teste de Físico para remover."
       }
     ]
   },
@@ -2991,12 +2991,12 @@ const actorsData = [
       {
         "name": "Beijo da morte",
         "bonus": 0,
-        "description": "Ao beijar um alvo, causa 1d6 de _**[dano necrótico](combat.html#sec:necroticdamage)**_."
+        "description": "Ao beijar um alvo, causa 1d6 de dano necrótico."
       },
       {
         "name": "Encanto",
         "bonus": 4,
-        "description": "Pode lançar os feitiços _**[Sono](spells.html#spell:sleep)**_ e _**[Tomar Controle](spells.html#spell:takecontrol)**_."
+        "description": "Pode lançar os feitiços Sono e Tomar Controle."
       }
     ]
   },
@@ -3049,7 +3049,7 @@ const actorsData = [
       {
         "name": "Canto",
         "bonus": 3,
-        "description": "Criaturas a até 18 metros de uma sereia ficam enfeitiçadas e são magicamente atraídas para ela. __**[Vontade](skills.html#skill:will)**_ para resistir_."
+        "description": "Criaturas a até 18 metros de uma sereia ficam enfeitiçadas e são magicamente atraídas para ela. Vontade para resistir."
       }
     ]
   },
@@ -3078,7 +3078,7 @@ const actorsData = [
       {
         "name": "Regeneração",
         "bonus": 0,
-        "description": "Recupera 1d12+4 pontos de _**[Vitalidade](npc_sheets_intro.html#sec:vitality)**_."
+        "description": "Recupera 1d12+4 pontos de Vitalidade."
       },
       {
         "name": "Sono de pedra",
@@ -3112,7 +3112,7 @@ const actorsData = [
       {
         "name": "Toque de cura",
         "bonus": 0,
-        "description": "Cura completamente um _**[ferimento](combat.html#sec:wounds)**_."
+        "description": "Cura completamente um ferimento."
       },
       {
         "name": "Teletransporte",
@@ -3146,12 +3146,12 @@ const actorsData = [
       {
         "name": "Contra-ataque",
         "bonus": 0,
-        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um _**[contra-ataque](combat.html#sec:counterattack)**_."
+        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um contra-ataque."
       },
       {
         "name": "Agarrar",
         "bonus": 4,
-        "description": "Uma criatura atingida por um ataque de Bicada fica _**[agarrada](combat.html#stat:grappled)**_ pelo urso-coruja. _**[Teste de](rules.html#sec:skillcheck)**_ _**[Físico](skills.html#skill:physique)**_ para se soltar."
+        "description": "Uma criatura atingida por um ataque de Bicada fica agarrada pelo urso-coruja. Teste de Físico para se soltar."
       }
     ]
   },
@@ -3185,22 +3185,22 @@ const actorsData = [
       {
         "name": "Contra-ataque",
         "bonus": 0,
-        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um _**[contra-ataque](combat.html#sec:counterattack)**_ de Garras."
+        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um contra-ataque de Garras."
       },
       {
         "name": "Beber sangue",
         "bonus": 0,
-        "description": "Recupera pontos de _**[Vitalidade](npc_sheets_intro.html#sec:vitality)**_ igual ao dano de Mordida."
+        "description": "Recupera pontos de Vitalidade igual ao dano de Mordida."
       },
       {
         "name": "Encanto",
         "bonus": 6,
-        "description": "Pode lançar o feitiço _**[Tomar Controle](spells.html#spell:takecontrol)**_."
+        "description": "Pode lançar o feitiço Tomar Controle."
       },
       {
         "name": "Alterar forma",
         "bonus": 0,
-        "description": "Com uma _**[ação menor](combat.html#sec:minoraction)**_, ele pode alterar sua forma para a de um morcego, lobo ou névoa."
+        "description": "Com uma ação menor, ele pode alterar sua forma para a de um morcego, lobo ou névoa."
       },
       {
         "name": "Intangível",
@@ -3210,7 +3210,7 @@ const actorsData = [
       {
         "name": "Vampiro",
         "bonus": 0,
-        "description": "Vira pó ao ser exposto ao sol. Fica _**[paralisado](combat.html#stat:paralyzed)**_ se receber uma estaca de madeira no coração. Tem uma _**[chance negativa](rules.html#sec:negativechance)**_ em todos os testes se estiver exposto ao cheiro de alho. Não pode atravessar fluxos de água e não pode entrar em uma casa sem ser convidado."
+        "description": "Vira pó ao ser exposto ao sol. Fica paralisado se receber uma estaca de madeira no coração. Tem uma chance negativa em todos os testes se estiver exposto ao cheiro de alho. Não pode atravessar fluxos de água e não pode entrar em uma casa sem ser convidado."
       }
     ]
   },
@@ -3234,7 +3234,7 @@ const actorsData = [
       {
         "name": "Engolir",
         "bonus": 4,
-        "description": "Uma criatura mordida é engolida por ele. __**[Esquiva](skills.html#skill:dodge)**_ para evitar_. Criaturas engolidas sofrem 1d8 de dano sempre que a iniciativa volta para o lado delas. Se o verme sofrer pelo menos 12 de dano de um único golpe, ele regurgita todas as criaturas que engoliu."
+        "description": "Uma criatura mordida é engolida por ele. Esquiva para evitar. Criaturas engolidas sofrem 1d8 de dano sempre que a iniciativa volta para o lado delas. Se o verme sofrer pelo menos 12 de dano de um único golpe, ele regurgita todas as criaturas que engoliu."
       }
     ]
   },
@@ -3258,17 +3258,17 @@ const actorsData = [
       {
         "name": "Contra-ataque",
         "bonus": 0,
-        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um _**[contra-ataque](combat.html#sec:counterattack)**_."
+        "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um contra-ataque."
       },
       {
         "name": "Camuflagem",
         "bonus": 3,
-        "description": "_**[Teste de](rules.html#sec:skillcheck)**_ _**[Percepção](skills.html#skill:perception)**_ para notar a aproximação em ambientes nevados."
+        "description": "Teste de Percepção para notar a aproximação em ambientes nevados."
       },
       {
         "name": "Medo de fogo",
         "bonus": 0,
-        "description": "Tem uma _**[chance negativa](rules.html#sec:negativechance)**_ para atacar se estiver vendo fogo."
+        "description": "Tem uma chance negativa para atacar se estiver vendo fogo."
       }
     ]
   },
@@ -3297,7 +3297,7 @@ const actorsData = [
       {
         "name": "Incansável",
         "bonus": 0,
-        "description": "Se for reduzido a 0 de _**[Vitalidade](npc_sheets_intro.html#sec:vitality)**_ por meios não mágicos, recupera 1d4 – 1 de _**[Vitalidade](npc_sheets_intro.html#sec:vitality)**_."
+        "description": "Se for reduzido a 0 de Vitalidade por meios não mágicos, recupera 1d4 – 1 de Vitalidade."
       }
     ]
   }
