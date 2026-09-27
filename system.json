@@ -42,14 +42,14 @@
   "packs": [
     {
       "name": "items",
-      "label": "Items",
+      "label": "Recursos Básicos",
       "path": "packs/items",
       "type": "Item",
       "system": "trilhamarga"
     },
     {
       "name": "foes-sheets",
-      "label": "Foes Sheets",
+      "label": "Fichas de Inimigos",
       "path": "packs/foes-sheets",
       "type": "Actor",
       "system": "trilhamarga"
