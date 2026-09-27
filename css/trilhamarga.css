@@ -69,6 +69,7 @@ body.game .sheet.app header.sheet-header {
 .trilhamarga .charname input {
   height: 45px;
   font-size: 28px;
+  font-family: "Modesto Condensed", "Signika", sans-serif;
   border: none;
   border-bottom: 1px solid #aaa;
   width: 100%;
@@ -193,7 +194,7 @@ body.game .sheet.app header.sheet-header {
 .trilhamarga .counter-large label {
   display: block;
   font-weight: bold;
-  font-size: 14px;
+  font-size:  20px;
   margin-bottom: 5px;
   border-bottom: 1px solid #ccc;
 }
@@ -212,6 +213,7 @@ body.game .sheet.app header.sheet-header {
   field-sizing: content;
   padding: 0;
   font-size: 24px;
+  font-family: "Modesto Condensed", "Signika", sans-serif;
   text-align: center;
   background: none;
   border: none;
@@ -241,14 +243,17 @@ body.game .sheet.app header.sheet-header {
 }
 
 .trilhamarga .sheet-tabs .item {
+  background: #000;
+  color: #fff;
+  margin: 0 2px;
   padding: 8px;
   font-weight: bold;
   font-size: 13px;
 }
 
 .trilhamarga .sheet-tabs .item.active {
-  background: #333;
-  color: #fff;
+  background: #fff;
+  color: #000;
   text-shadow: none;
 }
 
@@ -313,10 +318,10 @@ body.game .sheet.app header.sheet-header {
 }
 
 .trilhamarga .item {
-  background: #000;
-  color: #fff;
+  background: #fff;
+  color: #000;
   padding: 5px;
-  border-bottom: 1px solid #333;
+  border-bottom: 1px solid #ddd;
 }
 
 .trilhamarga .item.flexcol {
@@ -500,7 +505,8 @@ body.game .sheet.app header.sheet-header {
 .trilhamarga .descriptor-field label {
   font-weight: bold;
   display: block;
-  background: #eee;
+  background: #000;
+  color: #fff;
   padding: 3px 8px;
 }
 
@@ -717,30 +723,30 @@ body.game .sheet.app header.sheet-header {
   border-radius: 0 !important;
 }
 
-/* Adjust table-like text colors to be visible on black background */
+
+/* Adjust item descriptions */
 .trilhamarga .items-list .item-description,
 .trilhamarga .items-list .item-slots {
-  color: #aaa;
+  color: #666;
 }
-
 .trilhamarga .items-list .item-qty-adjust {
-  color: #bbb;
+  color: #444;
 }
-
 .trilhamarga .items-list .item-qty-adjust:hover {
-  color: #fff;
-  text-shadow: 0 0 3px rgba(255,255,255,0.5);
+  color: #000;
 }
-
 .trilhamarga .items-list .item-name.item-clickable:hover {
-  color: #ccc;
+  color: #333;
 }
-
-.trilhamarga .items-list .item-controls a,
-.trilhamarga .items-list .item-qty-adjust {
-  color: #ccc;
+.trilhamarga .items-list .item-controls a {
+  color: #444;
 }
-
 .trilhamarga .items-list .item-controls a:hover {
-  color: #fff;
+  color: #000;
+}
+
+/* 7 & 10. Labels font (Inventory, Divine Domains, etc.) */
+.trilhamarga .tab h3,
+.trilhamarga .load-capacity-label {
+  font-family: "Modesto Condensed", "Signika", sans-serif;
 }
