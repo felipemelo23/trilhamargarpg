@@ -530,6 +530,7 @@ body.game .sheet.app header.sheet-header {
   field-sizing: content;
   min-height: 2em;
   font-family: "Amiri", serif;
+  line-height: 1.1;
 }
 
 .trilhamarga input,
