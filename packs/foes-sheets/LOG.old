@@ -1,15 +1,5 @@
-2026/09/27-11:11:45.365929 17240b000 Recovering log #3
-2026/09/27-11:11:45.368635 17240b000 Level-0 table #5: started
-2026/09/27-11:11:45.370886 17240b000 Level-0 table #5: 342926 bytes OK
-2026/09/27-11:11:45.371473 17240b000 Delete type=0 #3
-2026/09/27-11:11:45.371905 17240b000 Delete type=3 #2
-2026/09/27-11:14:21.223859 16afa3000 Level-0 table #8: started
-2026/09/27-11:14:21.223991 16afa3000 Level-0 table #8: 0 bytes OK
-2026/09/27-11:14:21.224293 16afa3000 Delete type=0 #6
-2026/09/27-11:14:21.225585 16afa3000 Manual compaction at level-0 from '!actors!05PoTrKjC4XMQDGu' @ 72057594037927935 : 1 .. '!folders!u3MYVXPH3FxE9fh9' @ 0 : 0; will stop at '!folders!u3MYVXPH3FxE9fh9' @ 2 : 1
-2026/09/27-11:14:21.225593 16afa3000 Compacting 1@0 + 0@1 files
-2026/09/27-11:14:21.228618 16afa3000 Generated table #9@0: 502 keys, 174077 bytes
-2026/09/27-11:14:21.228629 16afa3000 Compacted 1@0 + 0@1 files => 174077 bytes
-2026/09/27-11:14:21.228710 16afa3000 compacted to: files[ 0 1 0 0 0 0 0 ]
-2026/09/27-11:14:21.228785 16afa3000 Delete type=2 #5
-2026/09/27-11:14:21.231705 16afa3000 Manual compaction at level-0 from '!folders!u3MYVXPH3FxE9fh9' @ 2 : 1 .. '!folders!u3MYVXPH3FxE9fh9' @ 0 : 0; will stop at (end)
+2026/09/27-13:47:21.027399 171bff000 Log #12: 0 ops saved to Table #15 OK
+2026/09/27-13:47:21.027534 171bff000 Archiving /Users/felipemelo/Library/Application Support/FoundryVTT/Data/systems/trilhamarga/packs/foes-sheets/000012.log: OK
+2026/09/27-13:47:21.027918 171bff000 Table #14: 502 entries OK
+2026/09/27-13:47:21.028071 171bff000 Archiving /Users/felipemelo/Library/Application Support/FoundryVTT/Data/systems/trilhamarga/packs/foes-sheets/MANIFEST-000010: OK
+2026/09/27-13:47:21.028306 171bff000 **** Repaired leveldb /Users/felipemelo/Library/Application Support/FoundryVTT/Data/systems/trilhamarga/packs/foes-sheets; recovered 1 files; 175473 bytes. Some data may have been lost. ****
