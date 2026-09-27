@@ -533,11 +533,13 @@ body.game .sheet.app header.sheet-header {
 
 .trilhamarga input,
 .trilhamarga textarea,
-.trilhamarga select,
+.trilhamarga select {
+  font-family: "Signika", sans-serif;
+}
+
 .trilhamarga input:focus,
 .trilhamarga textarea:focus,
 .trilhamarga select:focus {
-  font-family: "Signika", sans-serif;
   box-shadow: none !important;
   transition: none !important;
 }
