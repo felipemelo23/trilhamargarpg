@@ -11,4 +11,14 @@ export class TrilhamargaItem extends Item {
       this.system.stackable = false;
     }
   }
+  /**
+   * Enforce constraints before updating.
+   */
+  async _preUpdate(changed, options, user) {
+    await super._preUpdate(changed, options, user);
+    
+    if (changed.system && changed.system.quantity !== undefined) {
+      changed.system.quantity = Math.max(0, changed.system.quantity);
+    }
+  }
 }

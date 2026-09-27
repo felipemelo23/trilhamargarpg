@@ -77,6 +77,7 @@ export class TrilhamargaActor extends Actor {
 
     // Favor
     system.favor.max = will;
+    system.favor.value = Math.min(system.favor.value, system.favor.max);
 
     // Load Capacity
     const hasBackpack = actorData.items.some(i => 
@@ -353,10 +354,10 @@ export class TrilhamargaActor extends Actor {
     
     if (weaponName.includes("bow") || weaponName.includes("arco")) {
       ammoRegex = /^(arrow|flecha)s?$/i;
-      ammoLabel = game.i18n.lang === "pt-BR" ? "flechas" : "arrows";
+      ammoLabel = game.i18n.localize("TRILHAMARGA.Arrows");
     } else if (weaponName.includes("crossbow") || weaponName.includes("besta")) {
       ammoRegex = /^(bolt|virote)s?$/i;
-      ammoLabel = game.i18n.lang === "pt-BR" ? "virotes" : "bolts";
+      ammoLabel = game.i18n.localize("TRILHAMARGA.Bolts");
     }
 
     let ammoItem = null;
@@ -368,17 +369,7 @@ export class TrilhamargaActor extends Actor {
 
       if (!ammoItem || (ammoItem.system.quantity || 0) <= 0) {
         const message = game.i18n.format("TRILHAMARGA.RunOutOfAmmo", {ammo: ammoLabel});
-        const chatData = {
-          actor: this,
-          message: message
-        };
-        const content = await renderTemplate("systems/trilhamarga/templates/chat/out-of-ammo.hbs", chatData);
-        
-        ChatMessage.create({
-          speaker: ChatMessage.getSpeaker({ actor: this }),
-          content: content,
-          style: CONST.CHAT_MESSAGE_STYLES.OTHER
-        });
+        ui.notifications.warn(message);
         return;
       }
     }
@@ -415,20 +406,25 @@ export class TrilhamargaActor extends Actor {
 
     // Damage Roll Formula
     let dmgFormula = weapon.system.damage || "1d2";
-    const dmgSkillName = weapon.system.bonusDamageSkill;
-    if (dmgSkillName) {
-      const dmgSkill = this.items.find(i => i.type === 'skill' && i.name === dmgSkillName);
-      const bonusDamage = dmgSkill?.system.level || 0;
-      if (bonusDamage !== 0) {
-        dmgFormula += bonusDamage > 0 ? ` + ${bonusDamage}` : ` - ${Math.abs(bonusDamage)}`;
-      }
-    }
-
     const roll = new Roll(atkFormula);
-    const dmgRoll = new Roll(dmgFormula);
-
     await roll.evaluate();
-    await dmgRoll.evaluate();
+    let dmgRollHtml = "";
+    let rolls = [roll];
+
+    if (dmgFormula !== "Nenhum" && dmgFormula !== "none") {
+      const dmgSkillName = weapon.system.bonusDamageSkill;
+      if (dmgSkillName) {
+        const dmgSkill = this.items.find(i => i.type === 'skill' && i.name === dmgSkillName);
+        const bonusDamage = dmgSkill?.system.level || 0;
+        if (bonusDamage !== 0) {
+          dmgFormula += bonusDamage > 0 ? ` + ${bonusDamage}` : ` - ${Math.abs(bonusDamage)}`;
+        }
+      }
+      const dmgRoll = new Roll(dmgFormula);
+      await dmgRoll.evaluate();
+      dmgRollHtml = await dmgRoll.render();
+      rolls.push(dmgRoll);
+    }
 
     const flavorParts = [];
     if (woundPenalty > 0) flavorParts.push(`(${game.i18n.localize("TRILHAMARGA.WoundPenalty")}: ${woundPenalty})`);
@@ -449,13 +445,13 @@ export class TrilhamargaActor extends Actor {
     const chatData = {
       actor: this,
       weapon: weapon,
-      weaponName: weapon.name,
+      item: weapon, weaponName: weapon.name,
       skillName: skill ? skill.name : null,
       flavorText: flavorText,
       atkRollHtml: await roll.render(),
       atkResultLabel: atkResultLabel,
       resultClass: resultClass,
-      dmgRollHtml: await dmgRoll.render(),
+      dmgRollHtml: dmgRollHtml,
       initiativeMessage: roll.dice[0].total % 2 === 0 ? "TRILHAMARGA.KeepInitiative" : "TRILHAMARGA.LoseInitiative"
     };
 
@@ -465,7 +461,7 @@ export class TrilhamargaActor extends Actor {
       speaker: ChatMessage.getSpeaker({ actor: this }),
       content: content,
       style: CONST.CHAT_MESSAGE_STYLES.ROLL,
-      rolls: [roll, dmgRoll]
+      rolls: rolls
     });
   }
 
@@ -488,12 +484,17 @@ export class TrilhamargaActor extends Actor {
 
     // Damage Roll Formula
     const dmgFormula = attack.system.damage || "1d2";
-
     const atkRoll = new Roll(atkFormula);
-    const dmgRoll = new Roll(dmgFormula);
-
     await atkRoll.evaluate();
-    await dmgRoll.evaluate();
+    let dmgRollHtml = "";
+    let rolls = [atkRoll];
+
+    if (dmgFormula !== "Nenhum" && dmgFormula !== "none") {
+      const dmgRoll = new Roll(dmgFormula);
+      await dmgRoll.evaluate();
+      dmgRollHtml = await dmgRoll.render();
+      rolls.push(dmgRoll);
+    }
 
     // Check for critical success/failure
     const dieValue = atkRoll.dice[0].total;
@@ -509,12 +510,13 @@ export class TrilhamargaActor extends Actor {
 
     const chatData = {
       actor: this,
+      item: attack,
       attackName: attack.name,
       description: attack.system.description,
       atkRollHtml: await atkRoll.render(),
       critLabel: critLabel,
       resultClass: resultClass,
-      dmgRollHtml: await dmgRoll.render(),
+      dmgRollHtml: dmgRollHtml,
       initiativeMessage: atkRoll.dice[0].total % 2 === 0 ? "TRILHAMARGA.KeepInitiative" : "TRILHAMARGA.LoseInitiative"
     };
 
@@ -524,7 +526,7 @@ export class TrilhamargaActor extends Actor {
       speaker: ChatMessage.getSpeaker({ actor: this }),
       content: content,
       style: CONST.CHAT_MESSAGE_STYLES.ROLL,
-      rolls: [atkRoll, dmgRoll]
+      rolls: rolls
     });
   }
 
@@ -534,6 +536,7 @@ export class TrilhamargaActor extends Actor {
   async useNpcAbility(ability) {
     const chatData = {
       actor: this,
+      item: ability,
       abilityName: ability.name,
       description: ability.system.description
     };
@@ -642,6 +645,7 @@ export class TrilhamargaActor extends Actor {
 
     const chatData = {
       actor: this,
+      item: skill,
       skillName: skill.name,
       flavorText: flavorText,
       rollHtml: await roll.render(),
@@ -712,6 +716,7 @@ export class TrilhamargaActor extends Actor {
 
     const chatData = {
       actor: this,
+      item: wound,
       skillName: physiqueSkill ? physiqueSkill.name : game.i18n.localize("TRILHAMARGA.Normal"),
       flavorText: flavorText,
       rollHtml: await roll.render(),
@@ -812,7 +817,8 @@ export class TrilhamargaActor extends Actor {
 
     const chatData = {
       actor: this,
-      spell: spell,
+      item: spell,
+      spellName: spell.name,
       skillName: skillName,
       flavorText: flavorText,
       rollHtml: await roll.render(),

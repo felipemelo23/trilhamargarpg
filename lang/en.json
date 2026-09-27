@@ -14,8 +14,8 @@
     "Description": "Description",
     "Details": "Details",
     "Vocation": "Vocation",
-    "Goal": "Goal",
-    "Motivation": "Motivation",
+    "Distinction": "Distinction",
+    "Drive": "Drive",
     "Complication": "Complication",
     "Bonds": "Bonds",
     "Skills": "Skills",
@@ -72,6 +72,7 @@
     "MiracleMajor": "Major Miracle",
     "Taboo": "Taboo",
     "Favor": "Favor",
+    "NotEnoughFavor": "Not enough Favor to perform this miracle.",
     "Spells": "Spells",
     "Spell": "Spell",
     "Sustained": "Sustained",
@@ -127,6 +128,8 @@
     "TransferRequested": "Item transfer requested to GM...",
     "ItemTransferred": "{item} transferred from {source} to {target}.",
     "KeepInitiative": "You keep the initiative",
-    "LoseInitiative": "You lose the initiative"
+    "LoseInitiative": "You lose the initiative",
+    "Arrows": "arrows",
+    "Bolts": "bolts"
   }
 }

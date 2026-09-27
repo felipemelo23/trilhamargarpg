@@ -14,8 +14,8 @@
     "Description": "Descrição",
     "Details": "Detalhes",
     "Vocation": "Vocação",
-    "Goal": "Objetivo",
-    "Motivation": "Motivação",
+    "Distinction": "Distinção",
+    "Drive": "Ímpeto",
     "Complication": "Complicação",
     "Bonds": "Vínculos",
     "Skills": "Perícias",
@@ -72,6 +72,7 @@
     "MiracleMajor": "Milagre Maior",
     "Taboo": "Tabu",
     "Favor": "Favor",
+    "NotEnoughFavor": "Favor insuficiente para realizar este milagre.",
     "Spells": "Feitiços",
     "Spell": "Feitiço",
     "Sustained": "Sustentada",
@@ -127,6 +128,8 @@
     "TransferRequested": "Transferência de item solicitada ao Mestre...",
     "ItemTransferred": "{item} transferido de {source} para {target}.",
     "KeepInitiative": "Você mantém a iniciativa",
-    "LoseInitiative": "Você perde a iniciativa"
+    "LoseInitiative": "Você perde a iniciativa",
+    "Arrows": "flechas",
+    "Bolts": "virotes"
   }
 }

@@ -28,7 +28,7 @@ export class TrilhamargaItemSheet extends ItemSheet {
 
     // Damage options for weapons
     data.damageOptions = [
-      "1d2", "1d4", "1d6", "1d8", "1d10", "1d12",
+      "Nenhum", "1d2", "1d4", "1d6", "1d8", "1d10", "1d12",
       "1d12 + 1", "1d12 + 2", "1d12 + 3", "1d12 + 4", "1d12 + 5", "1d12 + 6"
     ];
 

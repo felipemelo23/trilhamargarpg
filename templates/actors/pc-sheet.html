@@ -14,11 +14,11 @@
             <input type="text" name="system.ancestry" value="{{system.ancestry}}" />
           </div>
           <div class="resource resource-xp">
-            <label>{{localize "TRILHAMARGA.XP"}}</label>
-            <div class="xp-controls flexrow">
-              <a class="xp-control xp-minus" title="-1"><i class="fas fa-minus"></i></a>
+            <label class="resource-label">{{localize "TRILHAMARGA.XP"}}</label>
+            <div class="resource-controls flexrow">
+              <a class="resource-control resource-minus" data-action="minus" data-resource="system.xp" title="-1"><i class="fas fa-minus"></i></a>
               <input type="number" name="system.xp" value="{{system.xp}}" />
-              <a class="xp-control xp-plus" title="+1"><i class="fas fa-plus"></i></a>
+              <a class="resource-control resource-plus" data-action="plus" data-resource="system.xp" title="+1"><i class="fas fa-plus"></i></a>
             </div>
           </div>
         </div>
@@ -38,19 +38,25 @@
       <div class="footer">{{localize "TRILHAMARGA.WoundPenalty"}}: {{system.woundPenalty}}</div>
     </div>
     <div class="counter-large stamina">
+      <a class="resource-reset" data-resource="system.stamina" title="Reset"><i class="fas fa-sync-alt"></i></a>
       <label>{{localize "TRILHAMARGA.Stamina"}}</label>
-      <div class="value-group">
-        <input type="number" name="system.stamina.value" value="{{system.stamina.value}}" min="0" />
+      <div class="value-group resource-controls">
+        <a class="resource-control resource-minus" data-action="minus" data-resource="system.stamina.value" title="-1"><i class="fas fa-minus"></i></a>
+        <input type="number" name="system.stamina.value" value="{{system.stamina.value}}" min="0" max="{{system.stamina.max}}" />
         <span class="sep">/</span>
         <span class="max">{{system.stamina.max}}</span>
+        <a class="resource-control resource-plus" data-action="plus" data-resource="system.stamina.value" title="+1"><i class="fas fa-plus"></i></a>
       </div>
     </div>
     <div class="counter-large protection">
+      <a class="resource-reset" data-resource="system.protection" title="Reset"><i class="fas fa-sync-alt"></i></a>
       <label>{{localize "TRILHAMARGA.Protection"}}</label>
-      <div class="value-group">
-        <input type="number" name="system.protection.value" value="{{system.protection.value}}" min="0" />
+      <div class="value-group resource-controls">
+        <a class="resource-control resource-minus" data-action="minus" data-resource="system.protection.value" title="-1"><i class="fas fa-minus"></i></a>
+        <input type="number" name="system.protection.value" value="{{system.protection.value}}" min="0" max="{{system.protection.max}}" />
         <span class="sep">/</span>
         <span class="max">{{system.protection.max}}</span>
+        <a class="resource-control resource-plus" data-action="plus" data-resource="system.protection.value" title="+1"><i class="fas fa-plus"></i></a>
       </div>
       <div class="footer">{{localize "TRILHAMARGA.ProtectionPenalty"}}: {{system.protectionPenalty}}</div>
     </div>
@@ -77,12 +83,12 @@
         <input type="text" name="system.vocation" value="{{system.vocation}}" />
       </div>
       <div class="descriptor-field">
-        <label>{{localize "TRILHAMARGA.Goal"}}</label>
-        <input type="text" name="system.goal" value="{{system.goal}}" />
+        <label>{{localize "TRILHAMARGA.Distinction"}}</label>
+        <input type="text" name="system.distinction" value="{{system.distinction}}" />
       </div>
       <div class="descriptor-field">
-        <label>{{localize "TRILHAMARGA.Motivation"}}</label>
-        <input type="text" name="system.motivation" value="{{system.motivation}}" />
+        <label>{{localize "TRILHAMARGA.Drive"}}</label>
+        <input type="text" name="system.drive" value="{{system.drive}}" />
       </div>
       <div class="descriptor-field">
         <label>{{localize "TRILHAMARGA.Complication"}}</label>
@@ -150,7 +156,7 @@
               <i class="fas fa-dice-d12 weapon-roll-icon"></i>
             </div>
             <div class="item-name">
-              {{item.name}}{{#if (and item.system.stackable (gt item.system.quantity 1))}} ({{item.system.quantity}}){{/if}}{{#if (eq item.type 'weapon')}} ({{item.displayDamage}}){{/if}}
+              {{item.name}}{{#if (and (eq item.type 'weapon') item.system.enchantment)}} {{item.system.enchantment}}{{/if}}{{#if (eq item.type 'weapon')}} ({{item.displayDamage}}){{/if}}
               {{#if item.system.description}}
               <span class="item-description"> - {{{item.system.description}}}</span>
               {{/if}}
@@ -159,6 +165,13 @@
               {{/if}}
             </div>
             <div class="item-controls">
+              {{#if item.system.stackable}} 
+              <span class="item-quantity-controls">
+                <a class="item-qty-adjust" data-action="minus"><i class="fas fa-minus"></i></a>
+                <span class="qty-number">x{{item.system.quantity}}</span>
+                <a class="item-qty-adjust" data-action="plus"><i class="fas fa-plus"></i></a>
+              </span>
+              {{/if}}
               <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
               <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
             </div>
@@ -190,7 +203,7 @@
               <i class="fas fa-dice-d12 weapon-roll-icon"></i>
             </div>
             <div class="item-name">
-              {{item.name}}{{#if (and item.system.stackable (gt item.system.quantity 1))}} ({{item.system.quantity}}){{/if}}{{#if (eq item.type 'weapon')}} ({{item.displayDamage}}){{/if}}
+              {{item.name}}{{#if (and (eq item.type 'weapon') item.system.enchantment)}} {{item.system.enchantment}}{{/if}}{{#if (eq item.type 'weapon')}} ({{item.displayDamage}}){{/if}}
               {{#if item.system.description}}
               <span class="item-description"> - {{{item.system.description}}}</span>
               {{/if}}
@@ -199,6 +212,13 @@
               {{/if}}
             </div>
             <div class="item-controls">
+              {{#if item.system.stackable}} 
+              <span class="item-quantity-controls">
+                <a class="item-qty-adjust" data-action="minus"><i class="fas fa-minus"></i></a>
+                <span class="qty-number">x{{item.system.quantity}}</span>
+                <a class="item-qty-adjust" data-action="plus"><i class="fas fa-plus"></i></a>
+              </span>
+              {{/if}}
               <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
               <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
             </div>
@@ -217,8 +237,15 @@
               <i class="fas fa-dice-d12 weapon-roll-icon"></i>
             </div>
             <div class="item-name">
-               {{item.name}}{{#if (and item.system.stackable (gt item.system.quantity 1))}} ({{item.system.quantity}}){{/if}}{{#if (eq item.type 'weapon')}} ({{item.displayDamage}}){{/if}}
+               {{item.name}}{{#if (and (eq item.type 'weapon') item.system.enchantment)}} {{item.system.enchantment}}{{/if}}{{#if (eq item.type 'weapon')}} ({{item.displayDamage}}){{/if}}
             </div>          <div class="item-controls">
+              {{#if item.system.stackable}} 
+              <span class="item-quantity-controls">
+                <a class="item-qty-adjust" data-action="minus"><i class="fas fa-minus"></i></a>
+                <span class="qty-number">x{{item.system.quantity}}</span>
+                <a class="item-qty-adjust" data-action="plus"><i class="fas fa-plus"></i></a>
+              </span>
+              {{/if}}
               <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
               <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
             </div>
@@ -258,7 +285,13 @@
             {{/if}}
           </div>
           <div class="item-prop">{{localize (concat "TRILHAMARGA." (capitalize item.system.category))}}</div>
-          <div class="item-prop">{{item.system.severity}}</div>
+          <div class="item-prop">
+            <span class="item-quantity-controls" style="margin-right: 0;">
+              <a class="item-qty-adjust" data-action="minus" data-prop="system.severity"><i class="fas fa-minus"></i></a>
+              <span class="qty-number">{{item.system.severity}}</span>
+              <a class="item-qty-adjust" data-action="plus" data-prop="system.severity"><i class="fas fa-plus"></i></a>
+            </span>
+          </div>
           <div class="item-controls">
             <a class="item-control item-edit" title="Edit Item"><i class="fas fa-edit"></i></a>
             <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
@@ -272,10 +305,12 @@
     <div class="tab devotion" data-group="primary" data-tab="devotion">
       <div class="counter-large favor">
         <label>{{localize "TRILHAMARGA.Favor"}}</label>
-        <div class="value-group">
-          <input type="number" name="system.favor.value" value="{{system.favor.value}}" min="0" />
+        <div class="value-group resource-controls">
+          <a class="resource-control resource-minus" data-action="minus" data-resource="system.favor.value" title="-1"><i class="fas fa-minus"></i></a>
+          <input type="number" name="system.favor.value" value="{{system.favor.value}}" min="0" max="{{system.favor.max}}" />
           <span class="sep">/</span>
           <span class="max">{{system.favor.max}}</span>
+          <a class="resource-control resource-plus" data-action="plus" data-resource="system.favor.value" title="+1"><i class="fas fa-plus"></i></a>
         </div>
       </div>
 
@@ -284,9 +319,8 @@
         {{#each divineDomains as |item id|}}
         <li class="item flexcol" data-item-id="{{item._id}}">
           <div class="flexrow">
-            <div class="item-image item-clickable">
+            <div class="item-image">
               <img class="item-icon" src="{{item.img}}" title="{{item.name}}" width="30" height="30"/>
-              <i class="fas fa-dice-d12 weapon-roll-icon"></i>
             </div>
             <div class="item-name">
               {{item.name}}
@@ -357,8 +391,10 @@
     <div class="tab spells" data-group="primary" data-tab="spells">
       <div class="counter-large arcane_fatigue">
         <label>{{localize "TRILHAMARGA.ArcaneFatigue"}}</label>
-        <div class="value-group">
+        <div class="value-group resource-controls flexrow">
+          <a class="resource-control resource-minus" data-action="minus" data-resource="system.arcane_fatigue.value" title="-1"><i class="fas fa-minus"></i></a>
           <input type="number" name="system.arcane_fatigue.value" value="{{system.arcane_fatigue.value}}" min="0" />
+          <a class="resource-control resource-plus" data-action="plus" data-resource="system.arcane_fatigue.value" title="+1"><i class="fas fa-plus"></i></a>
         </div>
       </div>
       <ol class="items-list">

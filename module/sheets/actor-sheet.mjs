@@ -293,19 +293,61 @@ export class TrilhamargaActorSheet extends ActorSheet {
     // Item clicks (Icon or Name)
     html.find('.item-clickable').click(this._onItemClick.bind(this));
 
-    // XP Adjustment
-    html.find('.xp-control').click(this._onXpAdjust.bind(this));
+    // Resource Adjustment
+    html.find('.resource-control').click(this._onResourceAdjust.bind(this));
+
+    // Resource Reset
+    html.find('.resource-reset').click(async ev => {
+      ev.preventDefault();
+      const resourceBase = ev.currentTarget.dataset.resource;
+      const maxVal = foundry.utils.getProperty(this.actor, `${resourceBase}.max`);
+      if (maxVal !== undefined) {
+        await this.actor.update({ [`${resourceBase}.value`]: maxVal });
+      }
+    });
+
+    // Item Quantity Adjustment
+    html.find('.item-qty-adjust').click(async ev => {
+      ev.preventDefault();
+      const li = $(ev.currentTarget).parents(".item");
+      const item = this.actor.items.get(li.data("itemId"));
+      if (!item) return;
+
+      const action = ev.currentTarget.dataset.action;
+      const propPath = ev.currentTarget.dataset.prop || "system.quantity";
+      const currentVal = foundry.utils.getProperty(item, propPath) || 0;
+      let newVal = currentVal;
+
+      if (action === 'plus') {
+        newVal++;
+      } else if (action === 'minus') {
+        newVal = Math.max(0, currentVal - 1);
+      }
+
+      if (newVal !== currentVal) {
+        await item.update({ [propPath]: newVal });
+      }
+    });
   }
 
-  async _onXpAdjust(event) {
+  async _onResourceAdjust(event) {
     event.preventDefault();
     const button = event.currentTarget;
-    const isPlus = button.classList.contains('xp-plus');
+    const isPlus = button.dataset.action === 'plus';
     const amount = isPlus ? 1 : -1;
-    const currentXp = this.actor.system.xp || 0;
-    const newXp = Math.max(0, currentXp + amount);
+    const resource = button.dataset.resource;
+    const currentVal = foundry.utils.getProperty(this.actor, resource) || 0;
+    let newVal = Math.max(0, currentVal + amount);
     
-    await this.actor.update({ "system.xp": newXp });
+    if (resource.endsWith('.value') && !resource.includes('arcane_fatigue')) {
+      const maxPath = resource.replace('.value', '.max');
+      const maxVal = foundry.utils.getProperty(this.actor, maxPath);
+      if (typeof maxVal === 'number') {
+        newVal = Math.min(newVal, maxVal);
+      }
+    }
+    
+    await this.actor.update({ [resource]: newVal });
   }
 
   async _onItemClick(event) {
@@ -358,19 +400,19 @@ export class TrilhamargaActorSheet extends ActorSheet {
     if (miracles.minor) {
       buttons.minor = {
         label: game.i18n.localize("TRILHAMARGA.MiracleMinor"),
-        callback: () => this._shareMiracleToChat(item, miracles.minor)
+        callback: () => this._shareMiracleToChat(item, miracles.minor, 1)
       };
     }
     if (miracles.mid) {
       buttons.mid = {
         label: game.i18n.localize("TRILHAMARGA.MiracleMid"),
-        callback: () => this._shareMiracleToChat(item, miracles.mid)
+        callback: () => this._shareMiracleToChat(item, miracles.mid, 3)
       };
     }
     if (miracles.major) {
       buttons.major = {
         label: game.i18n.localize("TRILHAMARGA.MiracleMajor"),
-        callback: () => this._shareMiracleToChat(item, miracles.major)
+        callback: () => this._shareMiracleToChat(item, miracles.major, 6)
       };
     }
 
@@ -384,7 +426,16 @@ export class TrilhamargaActorSheet extends ActorSheet {
     }).render(true);
   }
 
-  async _shareMiracleToChat(item, description) {
+  async _shareMiracleToChat(item, description, cost) {
+    const currentFavor = Number(this.actor.system.favor?.value || 0);
+    
+    if (currentFavor < cost) {
+      ui.notifications.warn(game.i18n.localize("TRILHAMARGA.NotEnoughFavor"));
+      return;
+    }
+
+    await this.actor.update({ "system.favor.value": currentFavor - cost });
+
     const chatData = {
       actor: this.actor,
       item: item,

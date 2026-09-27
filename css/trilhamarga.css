@@ -94,12 +94,12 @@ body.game .sheet.app header.sheet-header {
   flex: 0 0 90px;
 }
 
-.trilhamarga .xp-controls {
+.trilhamarga .resource-controls {
   position: relative;
   align-items: center;
 }
 
-.trilhamarga .xp-controls .xp-control {
+.trilhamarga .resource-controls .resource-control {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -115,21 +115,39 @@ body.game .sheet.app header.sheet-header {
   padding: 0 5px;
 }
 
-.trilhamarga .xp-controls:hover .xp-control {
+.trilhamarga .resource-controls:hover .resource-control {
   opacity: 1;
 }
 
-.trilhamarga .xp-controls .xp-minus {
+.trilhamarga .resource-controls .resource-minus {
   left: 2px;
 }
 
-.trilhamarga .xp-controls .xp-plus {
+.trilhamarga .resource-controls .resource-plus {
   right: 2px;
 }
 
-.trilhamarga .header-basics .resource-xp input {
+.trilhamarga .resource-controls input {
   text-align: center;
-  padding: 0 15px; /* Add space for buttons */
+}
+
+.trilhamarga .resource-controls > :nth-child(2) {
+  padding-left: 15px !important; /* Space for minus button */
+}
+
+.trilhamarga .resource-controls > :nth-last-child(2) {
+  padding-right: 15px !important; /* Space for plus button */
+}
+
+/* Value groups use field-sizing, so padding affects centering. Use margin instead. */
+.trilhamarga .value-group.resource-controls > :nth-child(2) {
+  padding-left: 0 !important;
+  margin-left: 15px !important;
+}
+
+.trilhamarga .value-group.resource-controls > :nth-last-child(2) {
+  padding-right: 0 !important;
+  margin-right: 15px !important;
 }
 
 .trilhamarga .header-basics input {
@@ -150,12 +168,28 @@ body.game .sheet.app header.sheet-header {
 }
 
 .trilhamarga .counter-large {
+  position: relative;
   background: #f4f4f4;
   border: 2px solid #333;
   border-radius: 10px;
   padding: 10px;
   text-align: center;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+}
+
+.trilhamarga .counter-large .resource-reset {
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  font-size: 12px;
+  color: #777;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.trilhamarga .counter-large .resource-reset:hover {
+  color: #333;
+  transform: rotate(90deg);
 }
 
 .trilhamarga .counter-large label {
@@ -360,6 +394,30 @@ body.game .sheet.app header.sheet-header {
   flex: 3;
 }
 
+.trilhamarga .item-quantity-controls {
+  font-size: 1em;
+  color: #000;
+  white-space: nowrap;
+  margin-right: 10px;
+}
+
+.trilhamarga .item-qty-adjust {
+  cursor: pointer;
+  color: #444;
+  padding: 0 2px;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.trilhamarga .item:hover .item-qty-adjust {
+  opacity: 1;
+}
+
+.trilhamarga .item-qty-adjust:hover {
+  color: #000;
+  text-shadow: 0 0 3px rgba(0,0,0,0.2);
+}
+
 .trilhamarga .item-description,
 .trilhamarga .item-slots {
   font-style: italic;
@@ -373,8 +431,12 @@ body.game .sheet.app header.sheet-header {
 }
 
 .trilhamarga .item-controls {
-  flex: 0 0 60px;
-  text-align: right;
+  flex: 0 0 auto;
+  min-width: 60px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 5px;
 }
 
 .trilhamarga .form-group.stacked {
@@ -387,13 +449,19 @@ body.game .sheet.app header.sheet-header {
   margin-bottom: 5px;
 }
 
-.trilhamarga .sheet-body textarea {
+.trilhamarga .sheet-body .form-group textarea {
   width: 100%;
-  resize: vertical;
+  resize: vertical !important;
   padding: 5px;
   border: 1px solid #aaa;
   border-radius: 3px;
-  min-height: auto;
+  min-height: 2em;
+  field-sizing: content;
+  height: auto;
+  max-height: none;
+  overflow: auto;
+  box-sizing: border-box;
+  flex: none;
   font-family: "Signika", sans-serif;
 }
 
