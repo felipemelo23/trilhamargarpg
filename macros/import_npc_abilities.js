@@ -5,31 +5,31 @@ const abilitiesData = [
     "name": "À prova de fogo",
     "bonus": 0,
     "description": "Imune a fogo.",
-    "img": "icons/magic/fire/projectile-fireball-red-yellow.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Agarrar",
     "bonus": 4,
     "description": "Uma criatura atingida por um ataque de Mordida fica agarrada pelo crocodilo. Criaturas agarradas por ele não podem evitar o ataque de Mordida do crocodilo. Teste de Físico para se soltar.",
-    "img": "icons/creatures/tentacles/tentacle-eyes-yellow-pink.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Alcateia",
     "bonus": 0,
     "description": "Qualquer lobo a até 9 metros do lobo atroz tem uma chance positiva para atacar e oponentes tem uma chance negativa para atacá-lo.",
-    "img": "icons/creatures/tentacles/tentacle-eyes-yellow-pink.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Alterar aparência",
     "bonus": 0,
     "description": "Pode modificar sua aparência para assumir a forma de uma mulher humanoide.",
-    "img": "icons/magic/control/fear-fright-white.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Alterar forma",
     "bonus": 0,
     "description": "Com uma ação menor, ele pode alterar sua forma para a de um morcego, lobo ou névoa.",
-    "img": "icons/magic/control/silhouette-grow-shrink-blue.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Animar árvores",
@@ -65,7 +65,7 @@ const abilitiesData = [
     "name": "Bafo de chamas",
     "bonus": 2,
     "description": "Criaturas em um cone de 3 metros sofrem 1 de dano de fogo. Esquiva para evitar.",
-    "img": "icons/magic/fire/projectile-fireball-red-yellow.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Bafo petrificante",
@@ -83,13 +83,13 @@ const abilitiesData = [
     "name": "Beber sangue",
     "bonus": 0,
     "description": "Recupera pontos de Vitalidade igual ao dano de Mordida.",
-    "img": "icons/magic/life/heart-cross-strong-red.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Beijo da morte",
     "bonus": 0,
     "description": "Ao beijar um alvo, causa 1d6 de dano necrótico.",
-    "img": "icons/magic/death/skull-horned-worn-fire-blue.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Bicada petrificante",
@@ -119,7 +119,7 @@ const abilitiesData = [
     "name": "Cheiro de sangue",
     "bonus": 0,
     "description": "O dano do Tridente aumenta em um passo na escala de dano contra criaturas com ferimentos.",
-    "img": "icons/magic/life/heart-cross-strong-red.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Confusão",
@@ -137,7 +137,7 @@ const abilitiesData = [
     "name": "Contra-ataque",
     "bonus": 0,
     "description": "Se sofrer dano por um ataque corpo a corpo, pode fazer um contra-ataque.",
-    "img": "icons/skills/melee/strike-sword-steel-light.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Controle da realidade",
@@ -155,7 +155,7 @@ const abilitiesData = [
     "name": "Dedo da morte",
     "bonus": 6,
     "description": "Uma criatura a até 9 metros dele morre instantaneamente. Vontade para resistir.",
-    "img": "icons/magic/death/skull-horned-worn-fire-blue.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Derrubar",
@@ -191,7 +191,7 @@ const abilitiesData = [
     "name": "Encanto",
     "bonus": 4,
     "description": "Pode lançar os feitiços Sono e Tomar Controle.",
-    "img": "icons/magic/control/hypnosis-mesmerism-swirl.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Enfeitiçar",
@@ -209,7 +209,7 @@ const abilitiesData = [
     "name": "Engolir",
     "bonus": 4,
     "description": "Uma criatura mordida é engolida por ele. Esquiva para evitar. Criaturas engolidas sofrem 1d8 de dano sempre que a iniciativa volta para o lado delas. Se o verme sofrer pelo menos 12 de dano de um único golpe, ele regurgita todas as criaturas que engoliu.",
-    "img": "icons/creatures/tentacles/tentacle-eyes-yellow-pink.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Escravizar",
@@ -221,7 +221,7 @@ const abilitiesData = [
     "name": "Escudo",
     "bonus": 0,
     "description": "Possui cobertura parcial enquanto estiver carregando um escudo.",
-    "img": "icons/magic/defensive/shield-barrier-blue.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Espinhos",
@@ -251,13 +251,13 @@ const abilitiesData = [
     "name": "Falsa aparência",
     "bonus": 0,
     "description": "Enquanto estiver imóvel, é indistinguível de uma armadura normal.",
-    "img": "icons/magic/control/fear-fright-white.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Faro para sangue",
     "bonus": 0,
     "description": "O dano de sua mordida aumenta um passo na escala de dano contra criaturas com ferimentos.",
-    "img": "icons/magic/life/heart-cross-strong-red.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Feitiçaria",
@@ -317,7 +317,7 @@ const abilitiesData = [
     "name": "Grito aterrador",
     "bonus": 3,
     "description": "Criaturas a até 9 metros dela perdem todo o Vigor. Vontade para resistir.",
-    "img": "icons/magic/earth/projectile-stone-generic.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Grudar",
@@ -329,7 +329,7 @@ const abilitiesData = [
     "name": "Imunidade",
     "bonus": 0,
     "description": "Imune a ataques físicos não mágicos, exceto por armas de prata, quando em forma monstruosa.",
-    "img": "icons/magic/defensive/shield-barrier-blue.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Inalterável",
@@ -365,7 +365,7 @@ const abilitiesData = [
     "name": "Invadir a Mente",
     "bonus": 4,
     "description": "Pode lançar os feitiços Comando, Explosão Mental e Tomar Controle.",
-    "img": "icons/magic/control/hypnosis-mesmerism-swirl.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Investida",
@@ -419,7 +419,7 @@ const abilitiesData = [
     "name": "Medo de fogo",
     "bonus": 0,
     "description": "Tem uma chance negativa para atacar se estiver vendo fogo.",
-    "img": "icons/magic/fire/projectile-fireball-red-yellow.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Meio-peixe",
@@ -437,13 +437,13 @@ const abilitiesData = [
     "name": "Moldar terra",
     "bonus": 3,
     "description": "Criaturas a menos de 9 metros ficam presas no chão. Teste de Físico para se soltar.",
-    "img": "icons/magic/earth/projectile-stone-generic.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Morto-vivo",
     "bonus": 0,
     "description": "Imune a efeitos que afetam criaturas vivas e efeitos de controle mental.",
-    "img": "icons/magic/death/skull-horned-worn-fire-blue.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Necromancia",
@@ -461,7 +461,7 @@ const abilitiesData = [
     "name": "Olhos",
     "bonus": 6,
     "description": "Pode lançar aleatoriamente um feitiço da lista abaixo com alcance de 9 metros (role 1d6 e retire os resultados que já saíram):",
-    "img": "icons/magic/perception/eye-ringed-green.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Pancada",
@@ -485,7 +485,7 @@ const abilitiesData = [
     "name": "Pedra",
     "bonus": 0,
     "description": "18 metros de alcance.",
-    "img": "icons/magic/earth/projectile-stone-generic.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Peste",
@@ -515,7 +515,7 @@ const abilitiesData = [
     "name": "Raio da morte",
     "bonus": 0,
     "description": "Feitiço. O alvo morre instantaneamente.",
-    "img": "icons/magic/death/skull-horned-worn-fire-blue.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Realidade Ilusória",
@@ -527,19 +527,19 @@ const abilitiesData = [
     "name": "Regeneração",
     "bonus": 0,
     "description": "Recupera 1d12+4 pontos de Vitalidade.",
-    "img": "icons/magic/life/cross-yellow-green.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Resistência ao frio",
     "bonus": 0,
     "description": "Todo dano de frio é reduzido à metade, arredondado para cima.",
-    "img": "icons/magic/defensive/shield-barrier-blue.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Rugido",
     "bonus": 3,
     "description": "Criaturas a até 9 metros dele ficam abaladas até o fim do combate. Vontade para resistir.",
-    "img": "icons/magic/control/fear-fright-white.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Salto",
@@ -551,13 +551,13 @@ const abilitiesData = [
     "name": "Sono de pedra",
     "bonus": 0,
     "description": "Vira estátua sob a luz do sol.",
-    "img": "icons/magic/earth/projectile-stone-generic.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Sugar sangue",
     "bonus": 2,
     "description": "O stirge se fixa em uma criatura picada causando 1d4 de dano no início dos próximos turnos dele. Um stirge que esteja fixado em uma criatura não pode atacar. Teste de Físico para remover.",
-    "img": "icons/magic/life/heart-cross-strong-red.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Tática de Combate",
@@ -569,7 +569,7 @@ const abilitiesData = [
     "name": "Teia",
     "bonus": 2,
     "description": "Pode lançar o feitiço Teia.",
-    "img": "icons/creatures/tentacles/tentacle-eyes-yellow-pink.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Telepatia",
@@ -599,7 +599,7 @@ const abilitiesData = [
     "name": "Toque necrótico",
     "bonus": 0,
     "description": "Causa 1d4 de dano necrótico.",
-    "img": "icons/magic/death/skull-horned-worn-fire-blue.webp"
+    "img": "icons/svg/aura.svg"
   },
   {
     "name": "Transparente",
@@ -617,7 +617,7 @@ const abilitiesData = [
     "name": "Veneno",
     "bonus": 3,
     "description": "Uma criatura atingida por sua adaga sofre efeito de um veneno neurotóxico de potência 3.",
-    "img": "icons/skills/toxins/poison-drop-green.webp"
+    "img": "icons/svg/aura.svg"
   }
 ];
 

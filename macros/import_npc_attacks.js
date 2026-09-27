@@ -271,6 +271,7 @@ const attacksData = [
 const itemData = attacksData.map(a => ({
   name: a.name,
   type: "npc_attack",
+  img: "icons/svg/dice-target.svg",
   system: {
     bonus: a.bonus,
     damage: a.damage,

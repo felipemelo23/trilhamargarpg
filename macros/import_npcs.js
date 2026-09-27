@@ -3303,33 +3303,6 @@ const actorsData = [
   }
 ];
 
-function guessIcon(name, description) {
-  const n = name.toLowerCase();
-  const d = description.toLowerCase();
-  if (n.includes('contra-ataque')) return 'icons/skills/melee/strike-sword-steel-light.webp';
-  if (n.includes('fogo') || n.includes('chamas')) return 'icons/magic/fire/projectile-fireball-red-yellow.webp';
-  if (n.includes('veneno') || n.includes('peçonha') || d.includes('veneno')) return 'icons/skills/toxins/poison-drop-green.webp';
-  if (n.includes('gelo') || n.includes('congelar')) return 'icons/magic/water/projectile-ice-snowball.webp';
-  if (n.includes('necrótico') || n.includes('morto-vivo') || n.includes('zumbi') || n.includes('morto')) return 'icons/magic/death/skull-horned-worn-fire-blue.webp';
-  if (n.includes('agarrar') || n.includes('engolir') || n.includes('teia') || n.includes('alcateia')) return 'icons/creatures/tentacles/tentacle-eyes-yellow-pink.webp';
-  if (n.includes('sangue')) return 'icons/magic/life/heart-cross-strong-red.webp';
-  if (n.includes('medo') || n.includes('terror') || n.includes('uivo') || n.includes('rugido') || n.includes('aparência') || n.includes('aterrorizante')) return 'icons/magic/control/fear-fright-white.webp';
-  if (n.includes('encanto') || n.includes('mente') || n.includes('canção')) return 'icons/magic/control/hypnosis-mesmerism-swirl.webp';
-  if (n.includes('regeneração') || n.includes('curar')) return 'icons/magic/life/cross-yellow-green.webp';
-  if (n.includes('voo') || n.includes('voador') || n.includes('asas')) return 'icons/commodities/biological/wing-bird-white.webp';
-  if (n.includes('visão') || n.includes('olhos') || n.includes('percepção')) return 'icons/magic/perception/eye-ringed-green.webp';
-  if (n.includes('imunidade') || n.includes('resistência') || n.includes('imune') || n.includes('armadura') || n.includes('escudo')) return 'icons/magic/defensive/shield-barrier-blue.webp';
-  if (n.includes('forma') || n.includes('transformar') || n.includes('alterar')) return 'icons/magic/control/silhouette-grow-shrink-blue.webp';
-  if (n.includes('invisibilidade') || n.includes('invisível')) return 'icons/magic/perception/shadow-stealth-eyes-purple.webp';
-  if (n.includes('magia') || n.includes('feitiço')) return 'icons/magic/symbols/star-solid-blue.webp';
-  if (n.includes('morte') || n.includes('matar')) return 'icons/magic/death/skull-horned-worn-fire-blue.webp';
-  if (n.includes('relâmpago') || n.includes('elétrico') || n.includes('choque')) return 'icons/magic/lightning/bolt-strike-blue.webp';
-  if (n.includes('ácido') || n.includes('corrosivo')) return 'icons/magic/acid/projectile-faceted-glob.webp';
-  if (n.includes('terra') || n.includes('pedra')) return 'icons/magic/earth/projectile-stone-generic.webp';
-  if (n.includes('água') || n.includes('aquático') || n.includes('nadar')) return 'icons/magic/water/wave-water-blue.webp';
-  return 'icons/svg/aura.svg';
-}
-
 async function importNPCs() {
   // Main Folder
   let rootFolder = game.folders.find(f => f.name === "Fichas de PdMs" && f.type === "Actor");
@@ -3349,6 +3322,7 @@ async function importNPCs() {
       items.push({
         name: atk.name,
         type: "npc_attack",
+        img: "icons/svg/dice-target.svg",
         system: {
           bonus: atk.bonus,
           damage: atk.damage,
@@ -3361,7 +3335,7 @@ async function importNPCs() {
       items.push({
         name: ab.name,
         type: "npc_ability",
-        img: guessIcon(ab.name, ab.description),
+        img: "icons/svg/aura.svg",
         system: {
           bonus: ab.bonus,
           description: ab.description
