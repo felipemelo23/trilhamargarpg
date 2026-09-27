@@ -100,6 +100,7 @@
         </div>
         <div class="item-name">
            {{item.name}}{{#if (ne item.system.bonus 0)}} ({{formatBonus item.system.bonus}}){{/if}}
+           {{#if item.system.requireDoom}}<span class="require-doom" style="font-weight: bold; color: #8b0000; font-size: 0.9em; margin-left: 5px;">[{{localize "TRILHAMARGA.RequireDoom"}}]</span>{{/if}}
            {{#if item.system.description}}
            <span class="item-description">{{{item.system.description}}}</span>
            {{/if}}
