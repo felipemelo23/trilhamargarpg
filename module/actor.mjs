@@ -35,10 +35,8 @@ export class TrilhamargaActor extends Actor {
       const pct = (system.capacity.value / system.capacity.max) * 100;
       system.capacity.pct = Math.min(pct, 100);
       
-      if (pct > 100) system.capacity.color = "black";
-      else if (pct <= 50) system.capacity.color = "green";
-      else if (pct <= 75) system.capacity.color = "yellow";
-      else system.capacity.color = "red";
+      const colorVal = Math.max(0, Math.floor(255 - (Math.min(pct, 100) * 2.55)));
+      system.capacity.color = `rgb(${colorVal}, ${colorVal}, ${colorVal})`;
     } else {
       system.capacity.pct = 0;
       system.capacity.color = "";
@@ -128,10 +126,8 @@ export class TrilhamargaActor extends Actor {
         const pct = (cap.current / cap.max) * 100;
         cap.pct = Math.min(pct, 100);
         
-        if (pct > 100) cap.color = "black";
-        else if (pct <= 50) cap.color = "green";
-        else if (pct <= 75) cap.color = "yellow";
-        else cap.color = "red";
+        const colorVal = Math.max(0, Math.floor(255 - (Math.min(pct, 100) * 2.55)));
+        cap.color = `rgb(${colorVal}, ${colorVal}, ${colorVal})`;
       } else {
         cap.pct = 0;
         cap.color = "";
