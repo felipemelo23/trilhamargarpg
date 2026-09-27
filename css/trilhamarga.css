@@ -156,7 +156,7 @@ body.game .sheet.app header.sheet-header {
   font-family: "Modesto Condensed", "Signika", sans-serif;
 }
 
-.trilhamarga .header-basics label {
+.trilhamarga .header-fields label {
   font-size: 12px;
   font-weight: bold;
   text-transform: uppercase;
@@ -773,8 +773,13 @@ body.game .sheet.app header.sheet-header {
 }
 
 /* NPC Sheet specific fonts */
+.trilhamarga .npc-description textarea {
+  line-height: 1.1;
+}
+
 .trilhamarga .npc-description textarea,
-.trilhamarga input[name="system.movement"] {
+.trilhamarga input[name="system.movement"],
+.trilhamarga select[name="system.castingAbility"] {
   font-family: "Amiri", serif !important;
   font-size: 14px;
 }
