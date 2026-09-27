@@ -134,7 +134,8 @@
     },
     "npc_ability": {
       "templates": ["base"],
-      "bonus": 0
+      "bonus": 0,
+      "requireDoom": false
     }
   }
 }

@@ -96,6 +96,7 @@
     "Movement": "Movement",
     "Abilities": "Abilities",
     "NPCAbility": "NPC Ability",
+    "RequireDoom": "Require Doom",
     "CastingAbility": "Casting Ability",
     "Destiny": "Boon",
     "Doom": "Bane",

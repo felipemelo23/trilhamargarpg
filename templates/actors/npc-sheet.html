@@ -10,7 +10,7 @@
         </h1>
         <div class="npc-description" style="margin-bottom: 10px;">
            <label style="font-weight: bold; font-size: 12px; display: block; margin-bottom: 2px;">{{localize "TRILHAMARGA.Description"}}</label>
-           <textarea name="system.description" rows="2" style="width: 100%; resize: vertical; padding: 5px; font-family: inherit;">{{system.description}}</textarea>
+           <textarea name="system.description" style="width: 100%; field-sizing: content; min-height: 2em; padding: 5px; font-family: inherit;">{{system.description}}</textarea>
         </div>
         <div class="resource">
           <label>{{localize "TRILHAMARGA.Movement"}}</label>
@@ -100,6 +100,7 @@
         </div>
         <div class="item-name">
            {{item.name}}{{#if (ne item.system.bonus 0)}} ({{formatBonus item.system.bonus}}){{/if}}
+           {{#if item.system.requireDoom}}<span class="require-doom" style="font-weight: bold; color: #8b0000; font-size: 0.9em; margin-left: 5px;">[{{localize "TRILHAMARGA.RequireDoom"}}]</span>{{/if}}
            {{#if item.system.description}}
            <span class="item-description">{{{item.system.description}}}</span>
            {{/if}}
