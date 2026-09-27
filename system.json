@@ -46,6 +46,13 @@
       "path": "packs/items",
       "type": "Item",
       "system": "trilhamarga"
+    },
+    {
+      "name": "foes-sheets",
+      "label": "Foes Sheets",
+      "path": "packs/foes-sheets",
+      "type": "Actor",
+      "system": "trilhamarga"
     }
   ]
 }
