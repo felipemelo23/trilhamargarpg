@@ -76,6 +76,7 @@ Hooks.once("init", async function() {
     }
   });
 
+  /*
   game.settings.register("trilhamarga", "doom", {
     name: "TRILHAMARGA.Doom",
     scope: "world",
@@ -86,6 +87,7 @@ Hooks.once("init", async function() {
       if (ui.destinyTracker) ui.destinyTracker.render();
     }
   });
+  */
 
   // Default Token settings
   CONFIG.Token.objectClass.DEFAULT_CONFIG.displayBars = CONST.TOKEN_DISPLAY_MODES.HOVER;
@@ -248,7 +250,7 @@ class DestinyTracker extends Application {
   getData() {
     return {
       destiny: game.settings.get("trilhamarga", "destiny"),
-      doom: game.settings.get("trilhamarga", "doom"),
+      // doom: game.settings.get("trilhamarga", "doom"),
       isGM: game.user.isGM
     };
   }
@@ -257,8 +259,8 @@ class DestinyTracker extends Application {
     super.activateListeners(html);
     html.find(".destiny-up").click(() => this._updateCurrency("destiny", 1));
     html.find(".destiny-down").click(() => this._updateCurrency("destiny", -1));
-    html.find(".doom-up").click(() => this._updateCurrency("doom", 1));
-    html.find(".doom-down").click(() => this._updateCurrency("doom", -1));
+    // html.find(".doom-up").click(() => this._updateCurrency("doom", 1));
+    // html.find(".doom-down").click(() => this._updateCurrency("doom", -1));
   }
 
   async _updateCurrency(type, delta) {
