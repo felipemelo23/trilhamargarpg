@@ -75,8 +75,8 @@ export class TrilhamargaActor extends Actor {
     system.protection.max = protectionItems.reduce((acc, a) => acc + Number(a.system.protection || 0), 0);
     system.protection.value = Math.min(system.protection.value, system.protection.max);
 
-    // Protection Penalty (1 for every 4 points of max protection)
-    system.protectionPenalty = Math.floor(system.protection.max / 4);
+    // Protection Penalty (1 for every 6 points of max protection)
+    system.protectionPenalty = Math.floor(system.protection.max / 6);
 
     // Favor
     system.favor.max = will;
