@@ -184,12 +184,29 @@ export class TrilhamargaActorSheet extends ActorSheet {
 
       // Handle existing items on the same actor
       if (item.actor?.uuid === this.actor.uuid && isPhysical) {
+        const currentLoc = item.system.location || "body";
         // Check capacity if changing location
-        if (item.system.location !== targetLocation) {
+        if (currentLoc !== targetLocation) {
           if (!this.actor.checkCapacity(item, targetLocation, {excludeItems: [item]})) {
             const locLabel = game.i18n.localize(`TRILHAMARGA.${targetLocation.capitalize()}`);
             ui.notifications.warn(game.i18n.format("TRILHAMARGA.InventoryFull", {location: locLabel}));
             return false;
+          }
+
+          // Stack with existing item in the target location if stackable
+          if (item.system?.stackable) {
+            const existingItem = this.actor.items.find(i =>
+              i.id !== item.id &&
+              i.name === item.name &&
+              i.type === item.type &&
+              (i.system.location || "body") === targetLocation
+            );
+            if (existingItem) {
+              const qty = Number(item.system.quantity || 1);
+              await existingItem.update({ "system.quantity": Number(existingItem.system.quantity || 0) + qty });
+              await item.delete();
+              return false;
+            }
           }
         }
         
@@ -228,13 +245,17 @@ export class TrilhamargaActorSheet extends ActorSheet {
         continue;
       }
 
-      // Check if item is stackable and already exists
+      // Check if item is stackable and already exists in the target location
       const isStackable = item.system?.stackable;
-      const existingItem = isStackable ? this.actor.items.find(i => i.name === item.name && i.type === item.type) : null;
+      const existingItem = isStackable ? this.actor.items.find(i =>
+        i.name === item.name &&
+        i.type === item.type &&
+        (!isPhysical || (i.system.location || 'body') === targetLoc)
+      ) : null;
 
       if (existingItem) {
-        const qty = item.system.quantity || 1;
-        await existingItem.update({ "system.quantity": existingItem.system.quantity + qty });
+        const qty = Number(item.system.quantity || 1);
+        await existingItem.update({ "system.quantity": Number(existingItem.system.quantity || 0) + qty });
       } else {
         itemsToCreate.push(item);
       }
